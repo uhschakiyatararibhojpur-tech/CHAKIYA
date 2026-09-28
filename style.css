@@ -920,44 +920,63 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
     animation: floatingMove 6s ease-in-out infinite;
 }
+/* FLOATING SCHOOL IMAGES */
 
-/* Image positions */
+.floating-images {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 100px);
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.floating-images img {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    animation: floatingMove 6s ease-in-out infinite;
+}
 
 .floating-images img:nth-child(1) {
-    top: 18%;
-    left: 2%;
+    top: 15%;
+    left: 10px;
 }
 
 .floating-images img:nth-child(2) {
-    top: 38%;
-    right: 2%;
+    top: 35%;
+    right: 10px;
     animation-delay: 1.5s;
 }
 
 .floating-images img:nth-child(3) {
-    bottom: 20%;
-    left: 3%;
+    top: 60%;
+    left: 10px;
     animation-delay: 3s;
 }
 
 .floating-images img:nth-child(4) {
-    bottom: 10%;
-    right: 3%;
+    top: 80%;
+    right: 10px;
     animation-delay: 4.5s;
 }
 
-/* Floating movement */
-
 @keyframes floatingMove {
     0% {
-        transform: translateY(0px);
+        transform: translateY(0);
     }
 
     50% {
-        transform: translateY(-20px);
+        transform: translateY(-15px);
     }
 
     100% {
-        transform: translateY(0px);
+        transform: translateY(0);
     }
 }
+
