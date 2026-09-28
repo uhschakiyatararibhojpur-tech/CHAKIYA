@@ -861,63 +861,70 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
-/* FIX HERO TEXT POSITION */
+/* ============================= */
+/* HOME AUTOMATIC IMAGE SLIDER */
+/* ============================= */
 
-.hero-content {
-    display: flex;
-    align-items: center;
-    min-height: 500px;
-}
-
-.hero-text {
-    max-width: 650px;
-    text-align: left;
-    margin-left: 0;
-    margin-right: auto;
-}
-
-.hero-text h2 {
-    margin-left: 0;
-}
-
-.hero-text p {
-    margin-left: 0;
-}
-
-.hero-buttons {
-    justify-content: flex-start;
-}
-.hero img {
-    position: relative;
-    display: block;
-    max-width: 100%;
-    height: auto;
-    z-index: 1;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-}
-.staff-photo {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
-    overflow: hidden;
-    border-radius: 50%;
-}
-
-.staff-photo img {
+.home-slider {
     width: 100%;
+    max-width: 900px;
+    height: 350px;
+    margin: 30px auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 15px;
+}
+
+.slider-track {
+    display: flex;
+    width: 400%;
+    height: 100%;
+    animation: slideImages 16s infinite;
+}
+
+.slider-track img {
+    width: 25%;
     height: 100%;
     object-fit: cover;
-    display: block;
+    flex-shrink: 0;
 }
-<div class="home-slider">
 
-    <img src="SCHOOL2.jpg" alt="UHS Chakiya Tarari">
-    <img src="SCHOOL3.jpg" alt="UHS Chakiya Tarari">
-    <img src="SCHOOL4.jpg" alt="UHS Chakiya Tarari">
-    <img src="SCHOOL5.jpg" alt="UHS Chakiya Tarari">
+@keyframes slideImages {
 
-</div>
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-25%);
+    }
+
+    45% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    70% {
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translateX(-75%);
+    }
+
+    95% {
+        transform: translateX(-75%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+
+}
