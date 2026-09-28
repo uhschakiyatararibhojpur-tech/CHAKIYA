@@ -1,3 +1,14 @@
+body {
+    position: relative;
+}
+
+header,
+main,
+section,
+footer {
+    position: relative;
+    z-index: 1;
+}
 * {
     margin: 0;
     padding: 0;
@@ -906,28 +917,10 @@ body {
 
 .floating-images {
     position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 5;
-}
-
-.floating-images img {
-    position: absolute;
-    width: 90px;
-    height: 90px;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-    animation: floatingMove 6s ease-in-out infinite;
-}
-/* FLOATING SCHOOL IMAGES */
-
-.floating-images {
-    position: fixed;
-    top: 100px;
+    top: 110px;
     left: 0;
     width: 100%;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 110px);
     pointer-events: none;
     z-index: 0;
     overflow: hidden;
@@ -935,36 +928,42 @@ body {
 
 .floating-images img {
     position: absolute;
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     object-fit: cover;
     border-radius: 50%;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.20);
     animation: floatingMove 6s ease-in-out infinite;
 }
 
+/* IMAGE 1 - LEFT */
 .floating-images img:nth-child(1) {
     top: 15%;
     left: 10px;
 }
 
+/* IMAGE 2 - RIGHT */
 .floating-images img:nth-child(2) {
     top: 35%;
     right: 10px;
     animation-delay: 1.5s;
 }
 
+/* IMAGE 3 - LEFT */
 .floating-images img:nth-child(3) {
     top: 60%;
     left: 10px;
     animation-delay: 3s;
 }
 
+/* IMAGE 4 - RIGHT */
 .floating-images img:nth-child(4) {
     top: 80%;
     right: 10px;
     animation-delay: 4.5s;
 }
+
+/* FLOATING ANIMATION */
 
 @keyframes floatingMove {
     0% {
@@ -979,4 +978,3 @@ body {
         transform: translateY(0);
     }
 }
-
