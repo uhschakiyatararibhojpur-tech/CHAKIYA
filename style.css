@@ -838,7 +838,7 @@ body {
 /* SCHOOL HERO PHOTO */
 
 .hero {
-    background-image: url("images/school.jpg");
+    background-image: url("school.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
