@@ -861,10 +861,6 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
-/* ============================= */
-/* HOME AUTOMATIC IMAGE SLIDER */
-/* ============================= */
-
 .home-slider {
     width: 100%;
     max-width: 900px;
@@ -891,40 +887,23 @@ body {
 
 @keyframes slideImages {
 
-    0% {
+    0%, 20% {
         transform: translateX(0);
     }
 
-    20% {
-        transform: translateX(0);
-    }
-
-    25% {
+    25%, 45% {
         transform: translateX(-25%);
     }
 
-    45% {
-        transform: translateX(-25%);
-    }
-
-    50% {
+    50%, 70% {
         transform: translateX(-50%);
     }
 
-    70% {
-        transform: translateX(-50%);
-    }
-
-    75% {
-        transform: translateX(-75%);
-    }
-
-    95% {
+    75%, 95% {
         transform: translateX(-75%);
     }
 
     100% {
         transform: translateX(0);
     }
-
 }
