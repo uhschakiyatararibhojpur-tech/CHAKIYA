@@ -902,3 +902,62 @@ body {
     object-fit: cover;
     display: block;
 }
+/* FLOATING SCHOOL IMAGES */
+
+.floating-images {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.floating-images img {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    animation: floatingMove 6s ease-in-out infinite;
+}
+
+/* Image positions */
+
+.floating-images img:nth-child(1) {
+    top: 18%;
+    left: 2%;
+}
+
+.floating-images img:nth-child(2) {
+    top: 38%;
+    right: 2%;
+    animation-delay: 1.5s;
+}
+
+.floating-images img:nth-child(3) {
+    bottom: 20%;
+    left: 3%;
+    animation-delay: 3s;
+}
+
+.floating-images img:nth-child(4) {
+    bottom: 10%;
+    right: 3%;
+    animation-delay: 4.5s;
+}
+
+/* Floating movement */
+
+@keyframes floatingMove {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
