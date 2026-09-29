@@ -855,31 +855,32 @@ body {
 }
 /* SCHOOL HERO PHOTO */
 
-.hero {
-    background-image: url("./school.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 500px;
+    gap: 40px;
 }
-/* =========================================
-   FULL SCREEN HOME IMAGE SLIDER
-   ========================================= */
 
-.hero {
-    width: 100%;
-    height: 100vh;
-    min-height: 600px;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    overflow: hidden;
+.hero-text {
+    width: 50%;
+    text-align: left;
 }
 
 .home-slider {
+    width: 45%;
+    height: 350px;
     position: relative;
-    width: 100%;
-    height: 100%;
     overflow: hidden;
+    margin-left: auto;
+}
+
+.home-slider img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
 }
 
 .slider-track {
