@@ -1010,3 +1010,12 @@ body {
         opacity: 0;
     }
 }
+.home-slider {
+    background: white;
+    opacity: 1;
+}
+
+.home-slider img {
+    opacity: 1 !important;
+    filter: brightness(1.2) contrast(1.05) saturate(1.2) !important;
+}
