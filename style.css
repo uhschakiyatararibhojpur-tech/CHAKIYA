@@ -150,15 +150,6 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
-        linear-gradient(
-            120deg,
-            #1e6295,
-            #0b2943
-        );
-
-    background-size: cover;
-    background-position: center;
-}
 
 .hero-overlay {
     min-height: 550px;
@@ -864,9 +855,9 @@ body {
 .hero-content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    min-height: 500px;
-    gap: 40px;
+    justify-content: center;
+    min-height: 550px;
+    gap: 50px;
 }
 
 .hero-text {
