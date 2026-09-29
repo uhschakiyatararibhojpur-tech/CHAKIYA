@@ -854,7 +854,12 @@ body {
 
 }
 /* ================= RIGHT SIDE BRIGHT FADE SLIDER ================= */
-
+.hero {
+    min-height: 550px;
+    background:
+        linear-gradient(...),
+        linear-gradient(...);
+}
 .hero-content {
     display: flex;
     align-items: center;
