@@ -853,7 +853,7 @@ body {
     }
 
 }
-/* SCHOOL HERO PHOTO */
+/* ================= RIGHT SIDE BRIGHT FADE SLIDER ================= */
 
 .hero-content {
     display: flex;
@@ -869,83 +869,13 @@ body {
 }
 
 .home-slider {
+    position: relative;
     width: 45%;
     height: 350px;
-    position: relative;
     overflow: hidden;
     margin-left: auto;
-}
-
-.home-slider img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-    display: block;
-    opacity: 1;
-    filter: brightness(1.35) contrast(1.08) saturate(1.08);
-}
-
-.slider-track {
-    display: flex;
-    width: 400%;
-    height: 100%;
-    animation: slideImages 16s infinite;
-}
-
-.slider-track img {
-    width: 25%;
-    height: 100%;
-    flex: 0 0 25%;
-    object-fit: cover;
-    display: block;
-}
-
-/* DARK OVERLAY + TEXT */
-
-.slider-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-
-    padding-left: 8%;
-
-    background: rgba(0, 0, 0, 0.40);
-
-    z-index: 5;
-}
-
-.slider-overlay .hero-text {
-    max-width: 750px;
-    color: white;
-}
-
-.slider-overlay .hero-text h2 {
-    color: white;
-    font-size: 60px;
-    line-height: 1.1;
-    margin: 15px 0;
-}
-
-.slider-overlay .hero-text p {
-    color: white;
-    font-size: 20px;
-}
-
-/* =================================
-   FULL SCREEN FADE SLIDER
-   ================================= */
-
-.home-slider {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+    background: white;
+    border-radius: 10px;
 }
 
 .slider-track {
@@ -966,10 +896,12 @@ body {
 
     opacity: 0;
 
+    filter: brightness(1.35) contrast(1.08) saturate(1.08);
+
     animation: fadeSlider 16s infinite;
 }
 
-/* 4 photos */
+/* IMAGE TIMING */
 
 .slider-track img:nth-child(1) {
     animation-delay: 0s;
@@ -987,11 +919,9 @@ body {
     animation-delay: 12s;
 }
 
-
-/* FADE IN → STAY → FADE OUT */
+/* SMOOTH DISAPPEAR + APPEAR */
 
 @keyframes fadeSlider {
-
     0% {
         opacity: 0;
     }
@@ -1011,13 +941,4 @@ body {
     100% {
         opacity: 0;
     }
-}
-.home-slider {
-    background: white;
-    opacity: 1;
-}
-
-.home-slider img {
-    opacity: 1 !important;
-    filter: brightness(1.2) contrast(1.05) saturate(1.2) !important;
 }
