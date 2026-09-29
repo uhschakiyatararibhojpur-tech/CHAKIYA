@@ -881,6 +881,8 @@ body {
     height: 350px;
     object-fit: cover;
     display: block;
+    opacity: 1;
+    filter: brightness(1.35) contrast(1.08) saturate(1.08);
 }
 
 .slider-track {
