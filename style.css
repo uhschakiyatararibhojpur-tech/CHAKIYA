@@ -141,8 +141,8 @@ body {
 
     background-image:
         linear-gradient(
-            rgba(10, 39, 67, 0.55),
-            rgba(10, 39, 67, 0.55)
+            rgba(10, 39, 67, 0.25),
+            rgba(10, 39, 67, 0.25)
         ),
         url("school.jpg");
 
