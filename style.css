@@ -139,11 +139,17 @@ body {
 .hero {
     min-height: 550px;
 
-    background:
+    background-image:
         linear-gradient(
-            rgba(10, 39, 67, 0.80),
-            rgba(10, 39, 67, 0.80)
+            rgba(10, 39, 67, 0.55),
+            rgba(10, 39, 67, 0.55)
         ),
+        url("school.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
         linear-gradient(
             120deg,
             #1e6295,
