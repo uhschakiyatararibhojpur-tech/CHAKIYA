@@ -861,61 +861,25 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
-.home-slider {
-    width: 100%;
-    max-width: 900px;
-    height: 350px;
-    margin: 30px auto;
-    overflow: hidden;
-    position: relative;
-    border-radius: 15px;
-}
+/* =========================================
+   FULL SCREEN HOME IMAGE SLIDER
+   ========================================= */
 
-.slider-track {
-    display: flex;
-    width: 400%;
-    height: 100%;
-    animation: slideImages 16s infinite;
-}
-
-.slider-track img {
-    width: 25%;
-    height: 100%;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-@keyframes slideImages {
-
-    0%, 20% {
-        transform: translateX(0);
-    }
-
-    25%, 45% {
-        transform: translateX(-25%);
-    }
-
-    50%, 70% {
-        transform: translateX(-50%);
-    }
-
-    75%, 95% {
-        transform: translateX(-75%);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
-/* FULL FRAME HOME SLIDER */
-
-.home-slider {
+.hero {
     width: 100%;
     height: 100vh;
+    min-height: 600px;
+    padding: 0;
     margin: 0;
-    overflow: hidden;
     position: relative;
-    border-radius: 0;
+    overflow: hidden;
+}
+
+.home-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .slider-track {
@@ -928,11 +892,50 @@ body {
 .slider-track img {
     width: 25%;
     height: 100%;
+    flex: 0 0 25%;
     object-fit: cover;
-    flex-shrink: 0;
     display: block;
 }
 
+/* DARK OVERLAY + TEXT */
+
+.slider-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding-left: 8%;
+
+    background: rgba(0, 0, 0, 0.40);
+
+    z-index: 5;
+}
+
+.slider-overlay .hero-text {
+    max-width: 750px;
+    color: white;
+}
+
+.slider-overlay .hero-text h2 {
+    color: white;
+    font-size: 60px;
+    line-height: 1.1;
+    margin: 15px 0;
+}
+
+.slider-overlay .hero-text p {
+    color: white;
+    font-size: 20px;
+}
+
+/* AUTOMATIC SLIDING */
+
 @keyframes slideImages {
 
     0%, 20% {
@@ -954,4 +957,28 @@ body {
     100% {
         transform: translateX(0);
     }
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .hero {
+        height: 100vh;
+        min-height: 550px;
+    }
+
+    .slider-overlay {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .slider-overlay .hero-text h2 {
+        font-size: 40px;
+    }
+
+    .slider-overlay .hero-text p {
+        font-size: 16px;
+    }
+
 }
