@@ -980,3 +980,37 @@ body {
     font-size: 30px;
     margin-right: 10px;
 }
+.registration-slide {
+    position: absolute;
+    top: 45%;
+    left: 100%;
+    z-index: 10;
+
+    white-space: nowrap;
+
+    font-size: 42px;
+    font-weight: 900;
+
+    color: #ffff00;
+    text-shadow:
+        3px 3px 0 #000,
+        -2px -2px 0 #000;
+
+    animation: registrationMove 12s linear infinite;
+}
+
+.registration-slide span {
+    color: #00ffea;
+}
+
+@keyframes registrationMove {
+
+    0% {
+        left: 100%;
+    }
+
+    100% {
+        left: -100%;
+    }
+
+}
