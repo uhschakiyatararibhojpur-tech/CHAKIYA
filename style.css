@@ -961,3 +961,22 @@ body {
         height: 300px;
     }
 }
+.top-registration-notice {
+    background: linear-gradient(90deg, #ff9800, #e91e63, #673ab7);
+    color: white;
+    text-align: center;
+    padding: 18px 15px;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.top-registration-notice strong {
+    color: #fff700;
+    font-size: 27px;
+}
+
+.notice-icon {
+    font-size: 30px;
+    margin-right: 10px;
+}
