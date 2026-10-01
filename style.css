@@ -995,7 +995,7 @@ body {
     width: max-content;
     z-index: 50;
 
-    font-size: 60px;
+    font-size: 42px;
     font-weight: 900;
     line-height: 1.2;
 
@@ -1016,7 +1016,7 @@ body {
 
 .registration-slide span {
     color: #00ffff;
-    font-size: 60px;
+    font-size: 42px;
 }
 
 @keyframes bigRegistrationMove {
