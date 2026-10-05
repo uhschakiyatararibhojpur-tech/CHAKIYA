@@ -175,8 +175,8 @@ document
 
     });
 // =====================================================
-// MASHAL SPORTS 2026
-// RELIABLE SUBMISSION SYSTEM
+// MASHAAL FORM 2026
+// FRESH GOOGLE SHEET SUBMISSION
 // =====================================================
 
 const MASHAL_SCRIPT_URL =
@@ -194,465 +194,276 @@ const mashaalSubmit =
 
 
 // =====================================================
+// SUBMIT
+// =====================================================
+
+if (mashaalForm) {
+
+    mashaalForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const studentName =
+            document.getElementById("studentName")
+            .value.trim();
+
+        const fatherName =
+            document.getElementById("fatherName")
+            .value.trim();
+
+        const motherName =
+            document.getElementById("motherName")
+            .value.trim();
+
+        const className =
+            document.getElementById("className")
+            .value;
+
+        const mobile =
+            document.getElementById("mobile")
+            .value.trim();
+
+        const activity =
+            document.getElementById("activity")
+            .value;
+
+        const details =
+            document.getElementById("details")
+            .value.trim();
+
+        const date =
+            document.getElementById("date")
+            .value;
+
+
+        // ==========================================
+        // VALIDATION
+        // ==========================================
+
+        if (
+            !studentName ||
+            !fatherName ||
+            !motherName ||
+            !className ||
+            !mobile ||
+            !activity ||
+            !date
+        ) {
+
+            showMashaalMessage(
+                "❌ कृपया सभी आवश्यक जानकारी भरें।",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if (!/^[0-9]{10}$/.test(mobile)) {
+
+            showMashaalMessage(
+                "❌ कृपया सही 10 अंकों का मोबाइल नंबर दर्ज करें।",
+                "error"
+            );
+
+            return;
+        }
+
+
+        // ==========================================
+        // BUTTON
+        // ==========================================
+
+        mashaalSubmit.disabled = true;
+
+        mashaalSubmit.textContent =
+            "⏳ जानकारी जमा हो रही है...";
+
+
+        // ==========================================
+        // HIDDEN IFRAME
+        // ==========================================
+
+        const iframe =
+            document.createElement("iframe");
+
+        iframe.name =
+            "mashaalSubmitFrame";
+
+        iframe.style.display =
+            "none";
+
+        document.body.appendChild(iframe);
+
+
+        // ==========================================
+        // FORM
+        // ==========================================
+
+        const submitForm =
+            document.createElement("form");
+
+        submitForm.method =
+            "POST";
+
+        submitForm.action =
+            MASHAL_SCRIPT_URL;
+
+        submitForm.target =
+            "mashaalSubmitFrame";
+
+        submitForm.style.display =
+            "none";
+
+
+        // ==========================================
+        // ADD FIELD
+        // ==========================================
+
+        function addField(name, value) {
+
+            const input =
+                document.createElement("input");
+
+            input.type =
+                "hidden";
+
+            input.name =
+                name;
+
+            input.value =
+                value || "";
+
+            submitForm.appendChild(input);
+        }
+
+
+        // ==========================================
+        // ADD DATA
+        // ==========================================
+
+        addField(
+            "studentName",
+            studentName
+        );
+
+        addField(
+            "fatherName",
+            fatherName
+        );
+
+        addField(
+            "motherName",
+            motherName
+        );
+
+        addField(
+            "className",
+            className
+        );
+
+        addField(
+            "mobile",
+            mobile
+        );
+
+        addField(
+            "activity",
+            activity
+        );
+
+        addField(
+            "details",
+            details
+        );
+
+        addField(
+            "date",
+            date
+        );
+
+
+        document.body.appendChild(
+            submitForm
+        );
+
+
+        // ==========================================
+        // SEND
+        // ==========================================
+
+        submitForm.submit();
+
+
+        // ==========================================
+        // SUCCESS
+        // ==========================================
+
+        setTimeout(function() {
+
+            showMashaalMessage(
+                "✅ आपका MASHAAL फॉर्म सफलतापूर्वक जमा हो गया है।",
+                "success"
+            );
+
+
+            mashaalForm.reset();
+
+
+            mashaalSubmit.disabled =
+                false;
+
+            mashaalSubmit.textContent =
+                "🔥 मशाल फॉर्म जमा करें";
+
+
+            setTimeout(function() {
+
+                submitForm.remove();
+
+                iframe.remove();
+
+            }, 3000);
+
+
+        }, 3000);
+
+    });
+
+}
+
+
+// =====================================================
 // MESSAGE
 // =====================================================
 
-function showMashalMessage(message, type) {
+function showMashaalMessage(
+    message,
+    type
+) {
 
-    if (!mashaalMessage) return;
+    if (!mashaalMessage)
+        return;
 
-    mashaalMessage.textContent = message;
+
+    mashaalMessage.textContent =
+        message;
+
 
     mashaalMessage.className =
         type === "success"
             ? "mashaal-success"
             : "mashaal-error";
 
-    mashaalMessage.style.display = "block";
+
+    mashaalMessage.style.display =
+        "block";
+
 
     mashaalMessage.scrollIntoView({
         behavior: "smooth",
         block: "center"
     });
+
 }
-
-
-// =====================================================
-// COMPRESS IMAGE
-// =====================================================
-
-function compressMashalImage(file) {
-
-    return new Promise(function(resolve, reject) {
-
-        if (!file) {
-            reject("फोटो आवश्यक है।");
-            return;
-        }
-
-        const reader = new FileReader();
-
-        reader.onload = function(event) {
-
-            const img = new Image();
-
-            img.onload = function() {
-
-                const maxSize = 900;
-
-                let width = img.width;
-                let height = img.height;
-
-                if (width > maxSize || height > maxSize) {
-
-                    if (width > height) {
-
-                        height =
-                            Math.round(
-                                height * maxSize / width
-                            );
-
-                        width = maxSize;
-
-                    } else {
-
-                        width =
-                            Math.round(
-                                width * maxSize / height
-                            );
-
-                        height = maxSize;
-                    }
-                }
-
-                const canvas =
-                    document.createElement("canvas");
-
-                canvas.width = width;
-                canvas.height = height;
-
-                const ctx =
-                    canvas.getContext("2d");
-
-                ctx.drawImage(
-                    img,
-                    0,
-                    0,
-                    width,
-                    height
-                );
-
-                resolve(
-                    canvas.toDataURL(
-                        "image/jpeg",
-                        0.55
-                    )
-                );
-            };
-
-            img.onerror = function() {
-                reject("फोटो पढ़ी नहीं जा सकी।");
-            };
-
-            img.src = event.target.result;
-        };
-
-        reader.onerror = function() {
-            reject("फोटो पढ़ी नहीं जा सकी।");
-        };
-
-        reader.readAsDataURL(file);
-    });
-}
-
-
-// =====================================================
-// MASHAL FORM
-// =====================================================
-
-if (mashaalForm) {
-
-    mashaalForm.addEventListener(
-        "submit",
-        async function(event) {
-
-            event.preventDefault();
-
-            // -----------------------------------------
-            // BUTTON
-            // -----------------------------------------
-
-            if (mashaalSubmit) {
-
-                mashaalSubmit.disabled = true;
-
-                mashaalSubmit.textContent =
-                    "⏳ फोटो तैयार हो रही है...";
-            }
-
-            if (mashaalMessage) {
-                mashaalMessage.style.display = "none";
-            }
-
-
-            try {
-
-                // -------------------------------------
-                // GET FORM VALUES
-                // -------------------------------------
-
-                const studentName =
-                    document
-                        .getElementById("studentName")
-                        .value
-                        .trim();
-
-                const motherName =
-                    document
-                        .getElementById("motherName")
-                        .value
-                        .trim();
-
-                const fatherName =
-                    document
-                        .getElementById("fatherName")
-                        .value
-                        .trim();
-
-                const mobile =
-                    document
-                        .getElementById("mobile")
-                        .value
-                        .trim();
-
-                const email =
-                    document
-                        .getElementById("email")
-                        .value
-                        .trim();
-
-                const accountNo =
-                    document
-                        .getElementById("accountNo")
-                        .value
-                        .trim();
-
-                const ifsc =
-                    document
-                        .getElementById("ifsc")
-                        .value
-                        .trim()
-                        .toUpperCase();
-
-
-                // -------------------------------------
-                // GET PHOTOS
-                // -------------------------------------
-
-                const studentPhoto =
-                    document
-                        .getElementById("studentPhoto")
-                        .files[0];
-
-                const aadhaarFront =
-                    document
-                        .getElementById("aadhaarFront")
-                        .files[0];
-
-                const aadhaarBack =
-                    document
-                        .getElementById("aadhaarBack")
-                        .files[0];
-
-
-                if (
-                    !studentName ||
-                    !motherName ||
-                    !fatherName ||
-                    !mobile ||
-                    !accountNo ||
-                    !ifsc
-                ) {
-
-                    throw new Error(
-                        "कृपया सभी आवश्यक जानकारी भरें।"
-                    );
-                }
-
-
-                if (
-                    !studentPhoto ||
-                    !aadhaarFront ||
-                    !aadhaarBack
-                ) {
-
-                    throw new Error(
-                        "कृपया तीनों फोटो अपलोड करें।"
-                    );
-                }
-
-
-                // -------------------------------------
-                // PHOTO PROCESSING
-                // -------------------------------------
-
-                if (mashaalSubmit) {
-                    mashaalSubmit.textContent =
-                        "⏳ फोटो तैयार हो रही है...";
-                }
-
-                const studentPhotoData =
-                    await compressMashalImage(
-                        studentPhoto
-                    );
-
-                const aadhaarFrontData =
-                    await compressMashalImage(
-                        aadhaarFront
-                    );
-
-                const aadhaarBackData =
-                    await compressMashalImage(
-                        aadhaarBack
-                    );
-
-
-                // -------------------------------------
-                // CREATE POST FORM
-                // -------------------------------------
-
-                const submitFrame =
-                    document.createElement("iframe");
-
-                submitFrame.name =
-                    "mashalHiddenFrame";
-
-                submitFrame.style.display = "none";
-
-                document.body.appendChild(
-                    submitFrame
-                );
-
-
-                const submitForm =
-                    document.createElement("form");
-
-                submitForm.method = "POST";
-
-                submitForm.action =
-                    MASHAL_SCRIPT_URL;
-
-                submitForm.target =
-                    "mashalHiddenFrame";
-
-                submitForm.style.display = "none";
-
-
-                // -------------------------------------
-                // ADD FIELD FUNCTION
-                // -------------------------------------
-
-                function addMashalField(
-                    name,
-                    value
-                ) {
-
-                    const input =
-                        document.createElement("input");
-
-                    input.type = "hidden";
-
-                    input.name = name;
-
-                    input.value = value || "";
-
-                    submitForm.appendChild(
-                        input
-                    );
-                }
-
-
-                // -------------------------------------
-                // TEXT FIELDS
-                // -------------------------------------
-
-                addMashalField(
-                    "studentName",
-                    studentName
-                );
-
-                addMashalField(
-                    "motherName",
-                    motherName
-                );
-
-                addMashalField(
-                    "fatherName",
-                    fatherName
-                );
-
-                addMashalField(
-                    "mobile",
-                    mobile
-                );
-
-                addMashalField(
-                    "email",
-                    email
-                );
-
-                addMashalField(
-                    "accountNo",
-                    accountNo
-                );
-
-                addMashalField(
-                    "ifsc",
-                    ifsc
-                );
-
-
-                // -------------------------------------
-                // PHOTO FIELDS
-                // -------------------------------------
-
-                addMashalField(
-                    "studentPhoto",
-                    studentPhotoData
-                );
-
-                addMashalField(
-                    "aadhaarFront",
-                    aadhaarFrontData
-                );
-
-                addMashalField(
-                    "aadhaarBack",
-                    aadhaarBackData
-                );
-
-
-                document.body.appendChild(
-                    submitForm
-                );
-
-
-                // -------------------------------------
-                // SUBMIT
-                // -------------------------------------
-
-                if (mashaalSubmit) {
-                    mashaalSubmit.textContent =
-                        "⏳ जानकारी जमा हो रही है...";
-                }
-
-                submitForm.submit();
-
-
-                // -------------------------------------
-                // WAIT FOR GOOGLE
-                // -------------------------------------
-
-                setTimeout(function() {
-
-                    showMashalMessage(
-                        "✅ आपका फॉर्म Google Server पर भेज दिया गया है। कृपया कुछ क्षण प्रतीक्षा करें।",
-                        "success"
-                    );
-
-                    mashaalForm.reset();
-
-
-                    if (mashaalSubmit) {
-
-                        mashaalSubmit.disabled =
-                            false;
-
-                        mashaalSubmit.textContent =
-                            "🏆 MASHAL SPORTS 2026 — जमा करें";
-                    }
-
-
-                    setTimeout(function() {
-
-                        submitForm.remove();
-
-                        submitFrame.remove();
-
-                    }, 5000);
-
-                }, 6000);
-
-
-            } catch (error) {
-
-                console.error(
-                    "MASHAL ERROR:",
-                    error
-                );
-
-
-                showMashalMessage(
-                    "❌ " +
-                    (
-                        error.message ||
-                        error ||
-                        "फॉर्म जमा नहीं हो सका।"
-                    ),
-                    "error"
-                );
-
-
-                if (mashaalSubmit) {
-
-                    mashaalSubmit.disabled =
-                        false;
-
-                    mashaalSubmit.textContent =
-                        "🏆 MASHAL SPORTS 2026 — जमा करें";
-                }
-            }
-        }
-    );
-}
-
