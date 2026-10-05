@@ -328,7 +328,7 @@ if (mashaalForm) {
                 {
                     method: "POST",
                     mode: "no-cors",
-                    body: formData.toString()
+                    body: formData
                 }
             );
 
