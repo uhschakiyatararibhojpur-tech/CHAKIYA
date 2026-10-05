@@ -323,15 +323,15 @@ if (mashaalForm) {
 
 
             // SEND TO GOOGLE APPS SCRIPT
-            await fetch(
-                MASHAL_SCRIPT_URL,
-                {
-                    method: "POST",
-                    mode: "no-cors",
-                    body: formData
-                }
-            );
+            const response = await fetch(
+    MASHAL_SCRIPT_URL,
+    {
+        method: "POST",
+        body: formData
+    }
+);
 
+console.log("MASHAL response:", await response.text());
 
             // SUCCESS
             showMashaalMessage(
