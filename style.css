@@ -1341,3 +1341,47 @@ body {
     }
 
 }
+/* ================================
+   REGISTRATION BACKGROUND IMAGE
+   ================================ */
+
+.registration-hero {
+    position: relative;
+    min-height: 650px;
+
+    background-image:
+        linear-gradient(
+            rgba(10, 39, 67, 0.35),
+            rgba(10, 39, 67, 0.35)
+        ),
+        url("./school.jpg");
+
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 20px;
+    box-sizing: border-box;
+}
+
+.registration-overlay {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registration-card {
+    width: 100%;
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+    border-top: 6px solid #f4a300;
+    box-sizing: border-box;
+}
