@@ -1573,3 +1573,26 @@ body {
     }
 
 }
+/* MASHAL FORM - TWO COLUMNS */
+
+#mashaalForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+}
+
+#mashaalForm .form-group {
+    margin-bottom: 0;
+}
+
+#mashaalForm button,
+#mashaalForm #mashaalMessage {
+    grid-column: 1 / -1;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    #mashaalForm {
+        grid-template-columns: 1fr;
+    }
+}
