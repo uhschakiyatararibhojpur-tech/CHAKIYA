@@ -177,15 +177,12 @@ document
 
 
 // =====================================================
-// MASHAL SPORTS 2026 FORM
+// MASHAL SPORTS 2026
+// NEW SIMPLE SUBMISSION SYSTEM
 // =====================================================
 
-// IMPORTANT:
-// After deploying your Google Apps Script,
-// paste the Web App URL between the quotation marks.
-
 const MASHAL_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbyq6W259-KIC2gu6zQLl3w264avFRO9RIo6FRCAoEibMPxkZNwghEuCXHoNK3KwUhEM/exec";
+    "https://script.google.com/macros/s/AKfycbxcxbzLfekECbnLRX6uM83dHCD8moXV4bwvMDgkEWjoJPBZN7skJz1OQd8S47NyxITf/exec";
 
 
 const mashaalForm =
@@ -198,29 +195,92 @@ const mashaalSubmit =
     document.getElementById("mashaalSubmit");
 
 
-// ===============================
-// READ IMAGE
-// ===============================
+// =====================================================
+// COMPRESS IMAGE
+// =====================================================
 
-function readImage(file) {
+function compressImage(file) {
 
     return new Promise(function(resolve, reject) {
 
-        const reader =
-            new FileReader();
+        if (!file) {
+            reject("Photo is required.");
+            return;
+        }
 
-        reader.onload = function() {
+        const reader = new FileReader();
 
-            resolve(reader.result);
+        reader.onload = function(event) {
+
+            const img = new Image();
+
+            img.onload = function() {
+
+                const maxSize = 1200;
+
+                let width = img.width;
+                let height = img.height;
+
+                if (width > maxSize || height > maxSize) {
+
+                    if (width > height) {
+
+                        height =
+                            Math.round(
+                                height * maxSize / width
+                            );
+
+                        width = maxSize;
+
+                    } else {
+
+                        width =
+                            Math.round(
+                                width * maxSize / height
+                            );
+
+                        height = maxSize;
+
+                    }
+
+                }
+
+                const canvas =
+                    document.createElement("canvas");
+
+                canvas.width = width;
+                canvas.height = height;
+
+                const ctx =
+                    canvas.getContext("2d");
+
+                ctx.drawImage(
+                    img,
+                    0,
+                    0,
+                    width,
+                    height
+                );
+
+                resolve(
+                    canvas.toDataURL(
+                        "image/jpeg",
+                        0.70
+                    )
+                );
+
+            };
+
+            img.onerror = function() {
+                reject("Image could not be processed.");
+            };
+
+            img.src = event.target.result;
 
         };
 
         reader.onerror = function() {
-
-            reject(
-                "Image could not be read."
-            );
-
+            reject("Image could not be read.");
         };
 
         reader.readAsDataURL(file);
@@ -230,9 +290,36 @@ function readImage(file) {
 }
 
 
-// ===============================
-// MASHAL FORM SUBMIT
-// ===============================
+// =====================================================
+// SHOW MESSAGE
+// =====================================================
+
+function showMashalMessage(message, type) {
+
+    if (!mashaalMessage) {
+        return;
+    }
+
+    mashaalMessage.textContent = message;
+
+    mashaalMessage.className =
+        type === "success"
+            ? "mashaal-success"
+            : "mashaal-error";
+
+    mashaalMessage.style.display = "block";
+
+    mashaalMessage.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+}
+
+
+// =====================================================
+// MASHAL FORM
+// =====================================================
 
 if (mashaalForm) {
 
@@ -243,25 +330,9 @@ if (mashaalForm) {
             event.preventDefault();
 
 
-            // Check URL
-
-            if (
-                !MASHAL_SCRIPT_URL ||
-                MASHAL_SCRIPT_URL.includes(
-                    "PASTE_YOUR"
-                )
-            ) {
-
-                alert(
-                    "पहले Google Apps Script Web App URL डालें।"
-                );
-
-                return;
-
-            }
-
-
-            // Disable button
+            // -----------------------------------------
+            // DISABLE BUTTON
+            // -----------------------------------------
 
             if (mashaalSubmit) {
 
@@ -283,334 +354,251 @@ if (mashaalForm) {
 
             try {
 
-                // =========================
+                // -------------------------------------
                 // GET FILES
-                // =========================
+                // -------------------------------------
 
                 const studentPhoto =
                     document
-                        .getElementById(
-                            "studentPhoto"
-                        )
+                        .getElementById("studentPhoto")
                         .files[0];
-
 
                 const aadhaarFront =
                     document
-                        .getElementById(
-                            "aadhaarFront"
-                        )
+                        .getElementById("aadhaarFront")
                         .files[0];
-
 
                 const aadhaarBack =
                     document
-                        .getElementById(
-                            "aadhaarBack"
-                        )
+                        .getElementById("aadhaarBack")
                         .files[0];
 
 
-                // =========================
-                // READ FILES
-                // =========================
+                if (
+                    !studentPhoto ||
+                    !aadhaarFront ||
+                    !aadhaarBack
+                ) {
+
+                    throw new Error(
+                        "कृपया तीनों फोटो अपलोड करें।"
+                    );
+
+                }
+
+
+                // -------------------------------------
+                // COMPRESS PHOTOS
+                // -------------------------------------
 
                 const studentPhotoData =
-                    await readImage(
+                    await compressImage(
                         studentPhoto
                     );
 
-
                 const aadhaarFrontData =
-                    await readImage(
+                    await compressImage(
                         aadhaarFront
                     );
 
-
                 const aadhaarBackData =
-                    await readImage(
+                    await compressImage(
                         aadhaarBack
                     );
 
 
-                // =========================
-                // COLLECT FORM DATA
-                // =========================
-
-                const data = {
-
-                    studentName:
-                        document
-                            .getElementById(
-                                "studentName"
-                            )
-                            .value
-                            .trim(),
-
-                    motherName:
-                        document
-                            .getElementById(
-                                "motherName"
-                            )
-                            .value
-                            .trim(),
-
-                    fatherName:
-                        document
-                            .getElementById(
-                                "fatherName"
-                            )
-                            .value
-                            .trim(),
-
-                    mobile:
-                        document
-                            .getElementById(
-                                "mobile"
-                            )
-                            .value
-                            .trim(),
-
-                    email:
-                        document
-                            .getElementById(
-                                "email"
-                            )
-                            .value
-                            .trim(),
+                // -------------------------------------
+                // CREATE HIDDEN IFRAME
+                // -------------------------------------
 
-                    accountNo:
-                        document
-                            .getElementById(
-                                "accountNo"
-                            )
-                            .value
-                            .trim(),
+                const frame =
+                    document.createElement("iframe");
 
-                    ifsc:
-                        document
-                            .getElementById(
-                                "ifsc"
-                            )
-                            .value
-                            .trim()
-                            .toUpperCase(),
+                frame.name =
+                    "mashalSubmitFrame";
 
-                    studentPhoto:
-                        studentPhotoData,
+                frame.style.display = "none";
 
-                    aadhaarFront:
-                        aadhaarFrontData,
+                document.body.appendChild(frame);
 
-                    aadhaarBack:
-                        aadhaarBackData
 
-                };
+                // -------------------------------------
+                // CREATE FORM
+                // -------------------------------------
 
+                const form =
+                    document.createElement("form");
 
-               // =========================
-// SEND TO GOOGLE APPS SCRIPT
-// =========================
+                form.method = "POST";
 
-const formData = new URLSearchParams();
+                form.action =
+                    MASHAL_SCRIPT_URL;
 
-formData.append("studentName", data.studentName);
-formData.append("motherName", data.motherName);
-formData.append("fatherName", data.fatherName);
-formData.append("mobile", data.mobile);
-formData.append("email", data.email);
-formData.append("accountNo", data.accountNo);
-formData.append("ifsc", data.ifsc);
-formData.append("studentPhoto", data.studentPhoto);
-formData.append("aadhaarFront", data.aadhaarFront);
-formData.append("aadhaarBack", data.aadhaarBack);
+                form.target =
+                    "mashalSubmitFrame";
 
+                form.style.display = "none";
 
-// =========================
-// SEND TO GOOGLE APPS SCRIPT
-// =========================
 
-const hiddenFrame = document.createElement("iframe");
+                // -------------------------------------
+                // ADD FIELD
+                // -------------------------------------
 
-hiddenFrame.name = "mashalHiddenFrame";
-hiddenFrame.style.display = "none";
+                function addField(name, value) {
 
-document.body.appendChild(hiddenFrame);
+                    const input =
+                        document.createElement("input");
 
+                    input.type = "hidden";
 
-const submitForm = document.createElement("form");
+                    input.name = name;
 
-submitForm.method = "POST";
-submitForm.action = MASHAL_SCRIPT_URL;
-submitForm.target = "mashalHiddenFrame";
-submitForm.style.display = "none";
+                    input.value = value || "";
 
+                    form.appendChild(input);
 
-function addHiddenField(name, value) {
+                }
 
-    const input = document.createElement("input");
 
-    input.type = "hidden";
-    input.name = name;
-    input.value = value || "";
+                // -------------------------------------
+                // TEXT DATA
+                // -------------------------------------
 
-    submitForm.appendChild(input);
+                addField(
+                    "studentName",
+                    document
+                        .getElementById("studentName")
+                        .value
+                        .trim()
+                );
 
-}
+                addField(
+                    "motherName",
+                    document
+                        .getElementById("motherName")
+                        .value
+                        .trim()
+                );
 
+                addField(
+                    "fatherName",
+                    document
+                        .getElementById("fatherName")
+                        .value
+                        .trim()
+                );
 
-addHiddenField("studentName", data.studentName);
-addHiddenField("motherName", data.motherName);
-addHiddenField("fatherName", data.fatherName);
-addHiddenField("mobile", data.mobile);
-addHiddenField("email", data.email);
-addHiddenField("accountNo", data.accountNo);
-addHiddenField("ifsc", data.ifsc);
+                addField(
+                    "mobile",
+                    document
+                        .getElementById("mobile")
+                        .value
+                        .trim()
+                );
 
-addHiddenField("studentPhoto", data.studentPhoto);
-addHiddenField("aadhaarFront", data.aadhaarFront);
-addHiddenField("aadhaarBack", data.aadhaarBack);
+                addField(
+                    "email",
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim()
+                );
 
+                addField(
+                    "accountNo",
+                    document
+                        .getElementById("accountNo")
+                        .value
+                        .trim()
+                );
 
-document.body.appendChild(submitForm);
+                addField(
+                    "ifsc",
+                    document
+                        .getElementById("ifsc")
+                        .value
+                        .trim()
+                        .toUpperCase()
+                );
 
 
-// Wait for Google Apps Script response
-window.addEventListener("message", function mashalResponse(event) {
+                // -------------------------------------
+                // PHOTO DATA
+                // -------------------------------------
 
-    if (!event.data || !event.data.status) {
-        return;
-    }
+                addField(
+                    "studentPhoto",
+                    studentPhotoData
+                );
 
-    const result = event.data;
+                addField(
+                    "aadhaarFront",
+                    aadhaarFrontData
+                );
 
+                addField(
+                    "aadhaarBack",
+                    aadhaarBackData
+                );
 
-    // =========================
-    // SUCCESS
-    // =========================
 
-    if (result.status === "success") {
+                document.body.appendChild(form);
 
-        if (mashaalMessage) {
 
-            mashaalMessage.textContent =
-                "✅ " + result.message;
+                // -------------------------------------
+                // SUBMIT
+                // -------------------------------------
 
-            mashaalMessage.className =
-                "mashaal-success";
+                form.submit();
 
-            mashaalMessage.style.display =
-                "block";
 
-        }
+                // -------------------------------------
+                // SHOW SUCCESS
+                // -------------------------------------
 
-        mashaalForm.reset();
+                setTimeout(function() {
 
-    }
+                    showMashalMessage(
+                        "✅ MASHAL SPORTS 2026 का विवरण सफलतापूर्वक जमा कर दिया गया है।",
+                        "success"
+                    );
 
+                    mashaalForm.reset();
 
-    // =========================
-    // DUPLICATE
-    // =========================
+                    if (mashaalSubmit) {
 
-    else if (result.status === "duplicate") {
+                        mashaalSubmit.disabled =
+                            false;
 
-        if (mashaalMessage) {
+                        mashaalSubmit.textContent =
+                            "🏆 MASHAL SPORTS 2026 — जमा करें";
 
-            mashaalMessage.textContent =
-                "⚠️ " + result.message;
+                    }
 
-            mashaalMessage.className =
-                "mashaal-error";
+                    setTimeout(function() {
 
-            mashaalMessage.style.display =
-                "block";
+                        form.remove();
+                        frame.remove();
 
-        }
+                    }, 3000);
 
-    }
+                }, 4000);
 
 
-    // =========================
-    // ERROR
-    // =========================
-
-    else if (result.status === "error") {
-
-        if (mashaalMessage) {
-
-            mashaalMessage.textContent =
-                "❌ " + result.message;
-
-            mashaalMessage.className =
-                "mashaal-error";
-
-            mashaalMessage.style.display =
-                "block";
-
-        }
-
-    }
-
-
-    // Remove temporary elements
-
-    setTimeout(function() {
-
-        if (hiddenFrame) {
-            hiddenFrame.remove();
-        }
-
-        if (submitForm) {
-            submitForm.remove();
-        }
-
-    }, 1000);
-
-
-    if (mashaalMessage) {
-
-        mashaalMessage.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-    }
-
-});
-
-
-// Submit the hidden form
-
-submitForm.submit();
-
-
-
-            }
-
-
-            catch (error) {
+            } catch (error) {
 
                 console.error(error);
 
 
-                if (mashaalMessage) {
+                showMashalMessage(
+                    "❌ " +
+                    (
+                        error.message ||
+                        "जानकारी जमा नहीं हो सकी। कृपया पुनः प्रयास करें।"
+                    ),
+                    "error"
+                );
 
-                    mashaalMessage.textContent =
-                        "❌ जानकारी जमा नहीं हो सकी। कृपया पुनः प्रयास करें।";
-
-                    mashaalMessage.className =
-                        "mashaal-error";
-
-                    mashaalMessage.style.display =
-                        "block";
-
-                }
-
-            }
-
-
-            finally {
 
                 if (mashaalSubmit) {
 
@@ -625,7 +613,6 @@ submitForm.submit();
             }
 
         }
-
     );
 
 }
