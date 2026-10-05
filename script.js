@@ -6,7 +6,9 @@ function toggleMenu() {
 
     const navbar = document.getElementById("navbar");
 
-    navbar.classList.toggle("active");
+    if (navbar) {
+        navbar.classList.toggle("active");
+    }
 
 }
 
@@ -174,9 +176,12 @@ document
         observer.observe(element);
 
     });
+
+
 // =====================================================
-// MASHAAL FORM 2026
-// GOOGLE APPS SCRIPT SUBMISSION
+// MASHAL SPORTS 2026
+// SIMPLE TEXT-ONLY REGISTRATION
+// GOOGLE APPS SCRIPT
 // =====================================================
 
 const MASHAL_SCRIPT_URL =
@@ -186,102 +191,46 @@ const MASHAL_SCRIPT_URL =
 const mashaalForm =
     document.getElementById("mashaalForm");
 
+
 const mashaalMessage =
     document.getElementById("mashaalMessage");
+
 
 const mashaalSubmit =
     document.getElementById("mashaalSubmit");
 
 
 // =====================================================
-// COMPRESS IMAGE
+// SHOW MESSAGE
 // =====================================================
 
-function compressImage(file, maxSize = 1600, quality = 0.75) {
+function showMashaalMessage(message, type) {
 
-    return new Promise(function(resolve, reject) {
+    if (!mashaalMessage) {
+        return;
+    }
 
-        if (!file) {
-            reject(new Error("Image file not selected."));
-            return;
-        }
+    mashaalMessage.textContent =
+        message;
 
-        const reader = new FileReader();
+    mashaalMessage.className =
+        type === "success"
+            ? "mashaal-success"
+            : "mashaal-error";
 
-        reader.onload = function(event) {
+    mashaalMessage.style.display =
+        "block";
 
-            const img = new Image();
-
-            img.onload = function() {
-
-                let width = img.width;
-                let height = img.height;
-
-                if (width > maxSize || height > maxSize) {
-
-                    if (width > height) {
-
-                        height =
-                            Math.round(
-                                height * maxSize / width
-                            );
-
-                        width = maxSize;
-
-                    } else {
-
-                        width =
-                            Math.round(
-                                width * maxSize / height
-                            );
-
-                        height = maxSize;
-                    }
-                }
-
-                const canvas =
-                    document.createElement("canvas");
-
-                canvas.width = width;
-                canvas.height = height;
-
-                const ctx =
-                    canvas.getContext("2d");
-
-                ctx.drawImage(
-                    img,
-                    0,
-                    0,
-                    width,
-                    height
-                );
-
-                resolve(
-                    canvas.toDataURL(
-                        "image/jpeg",
-                        quality
-                    )
-                );
-            };
-
-            img.onerror = function() {
-                reject(new Error("Unable to read image."));
-            };
-
-            img.src = event.target.result;
-        };
-
-        reader.onerror = function() {
-            reject(new Error("Unable to read selected file."));
-        };
-
-        reader.readAsDataURL(file);
+    mashaalMessage.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
     });
+
 }
 
 
 // =====================================================
-// SUBMIT MASHAL FORM
+// MASHAL FORM SUBMISSION
 // =====================================================
 
 if (mashaalForm) {
@@ -292,59 +241,68 @@ if (mashaalForm) {
 
             event.preventDefault();
 
+
+            // -----------------------------------------
+            // GET FORM VALUES
+            // -----------------------------------------
+
             const studentName =
-                document.getElementById("studentName")
-                .value.trim();
+                document
+                    .getElementById("studentName")
+                    .value
+                    .trim();
+
 
             const fatherName =
-                document.getElementById("fatherName")
-                .value.trim();
+                document
+                    .getElementById("fatherName")
+                    .value
+                    .trim();
+
 
             const motherName =
-                document.getElementById("motherName")
-                .value.trim();
+                document
+                    .getElementById("motherName")
+                    .value
+                    .trim();
+
 
             const className =
-                document.getElementById("className")
-                .value;
+                document
+                    .getElementById("className")
+                    .value;
+
 
             const mobile =
-                document.getElementById("mobile")
-                .value.trim();
+                document
+                    .getElementById("mobile")
+                    .value
+                    .trim();
+
 
             const activity =
-                document.getElementById("activity")
-                .value;
+                document
+                    .getElementById("activity")
+                    .value
+                    .trim();
+
 
             const details =
-                document.getElementById("details")
-                .value.trim();
+                document
+                    .getElementById("details")
+                    .value
+                    .trim();
+
 
             const date =
-                document.getElementById("date")
-                .value;
+                document
+                    .getElementById("date")
+                    .value;
 
 
-            // ==========================================
-            // FILES
-            // ==========================================
-
-            const studentPhotoFile =
-                document.getElementById("studentPhoto")
-                .files[0];
-
-            const aadhaarFrontFile =
-                document.getElementById("aadhaarFront")
-                .files[0];
-
-            const aadhaarBackFile =
-                document.getElementById("aadhaarBack")
-                .files[0];
-
-
-            // ==========================================
+            // -----------------------------------------
             // VALIDATION
-            // ==========================================
+            // -----------------------------------------
 
             if (
                 !studentName ||
@@ -362,8 +320,13 @@ if (mashaalForm) {
                 );
 
                 return;
+
             }
 
+
+            // -----------------------------------------
+            // MOBILE VALIDATION
+            // -----------------------------------------
 
             if (!/^[0-9]{10}$/.test(mobile)) {
 
@@ -373,69 +336,29 @@ if (mashaalForm) {
                 );
 
                 return;
+
             }
 
 
-            if (
-                !studentPhotoFile ||
-                !aadhaarFrontFile ||
-                !aadhaarBackFile
-            ) {
-
-                showMashaalMessage(
-                    "❌ Student Photo, Aadhaar Front और Aadhaar Back तीनों आवश्यक हैं।",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            // ==========================================
+            // -----------------------------------------
             // DISABLE BUTTON
-            // ==========================================
+            // -----------------------------------------
 
-            mashaalSubmit.disabled = true;
+            if (mashaalSubmit) {
 
-            mashaalSubmit.textContent =
-                "⏳ फोटो तैयार हो रही है...";
+                mashaalSubmit.disabled = true;
+
+                mashaalSubmit.textContent =
+                    "⏳ Registration जमा हो रहा है...";
+
+            }
 
 
             try {
 
-                // ======================================
-                // COMPRESS IMAGES
-                // ======================================
-
-                const studentPhoto =
-                    await compressImage(
-                        studentPhotoFile,
-                        1400,
-                        0.70
-                    );
-
-                const aadhaarFront =
-                    await compressImage(
-                        aadhaarFrontFile,
-                        1600,
-                        0.75
-                    );
-
-                const aadhaarBack =
-                    await compressImage(
-                        aadhaarBackFile,
-                        1600,
-                        0.75
-                    );
-
-
-                mashaalSubmit.textContent =
-                    "⏳ फॉर्म जमा हो रहा है...";
-
-
-                // ======================================
+                // -------------------------------------
                 // CREATE FORM DATA
-                // ======================================
+                // -------------------------------------
 
                 const formData =
                     new URLSearchParams();
@@ -446,35 +369,42 @@ if (mashaalForm) {
                     studentName
                 );
 
+
                 formData.append(
                     "fatherName",
                     fatherName
                 );
+
 
                 formData.append(
                     "motherName",
                     motherName
                 );
 
+
                 formData.append(
                     "className",
                     className
                 );
+
 
                 formData.append(
                     "mobile",
                     mobile
                 );
 
+
                 formData.append(
                     "activity",
                     activity
                 );
 
+
                 formData.append(
                     "details",
                     details
                 );
+
 
                 formData.append(
                     "date",
@@ -482,62 +412,33 @@ if (mashaalForm) {
                 );
 
 
-                // ======================================
-                // IMAGES
-                // ======================================
-
-                formData.append(
-                    "studentPhoto",
-                    studentPhoto
-                );
-
-                formData.append(
-                    "aadhaarFront",
-                    aadhaarFront
-                );
-
-                formData.append(
-                    "aadhaarBack",
-                    aadhaarBack
-                );
-
-
-                // ======================================
+                // -------------------------------------
                 // SEND TO GOOGLE APPS SCRIPT
-                // ======================================
+                // -------------------------------------
 
                 await fetch(
                     MASHAL_SCRIPT_URL,
                     {
                         method: "POST",
                         mode: "no-cors",
-                        headers: {
-                            "Content-Type":
-                                "application/x-www-form-urlencoded"
-                        },
                         body: formData.toString()
                     }
                 );
 
 
-                // ======================================
-                // SUCCESS MESSAGE
-                // ======================================
+                // -------------------------------------
+                // SUCCESS
+                // -------------------------------------
 
                 showMashaalMessage(
-                    "✅ आपका MASHAAL फॉर्म जमा कर दिया गया है।",
+                    "✅ आपका MASHAL SPORTS 2026 Registration सफलतापूर्वक जमा हो गया है।",
                     "success"
                 );
 
 
+                // Clear form
+
                 mashaalForm.reset();
-
-
-                mashaalSubmit.disabled =
-                    false;
-
-                mashaalSubmit.textContent =
-                    "🔥 मशाल फॉर्म जमा करें";
 
 
             } catch (error) {
@@ -549,86 +450,27 @@ if (mashaalForm) {
 
 
                 showMashaalMessage(
-                    "❌ फॉर्म जमा नहीं हो पाया। कृपया दोबारा प्रयास करें।",
+                    "❌ Registration जमा नहीं हो पाया। कृपया दोबारा प्रयास करें।",
                     "error"
                 );
 
+            }
 
-                mashaalSubmit.disabled =
-                    false;
+
+            // -----------------------------------------
+            // ENABLE BUTTON AGAIN
+            // -----------------------------------------
+
+            if (mashaalSubmit) {
+
+                mashaalSubmit.disabled = false;
 
                 mashaalSubmit.textContent =
-                    "🔥 मशाल फॉर्म जमा करें";
+                    "🏆 Submit MASHAL Registration";
+
             }
 
         }
     );
-}
-
-
-// =====================================================
-// MESSAGE
-// =====================================================
-
-function showMashaalMessage(
-    message,
-    type
-) {
-
-    if (!mashaalMessage)
-        return;
-
-
-    mashaalMessage.textContent =
-        message;
-
-
-    mashaalMessage.className =
-        type === "success"
-            ? "mashaal-success"
-            : "mashaal-error";
-
-
-    mashaalMessage.style.display =
-        "block";
-
-
-    mashaalMessage.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
-
-}
-// =====================================================
-// MESSAGE
-// =====================================================
-
-function showMashaalMessage(
-    message,
-    type
-) {
-
-    if (!mashaalMessage)
-        return;
-
-
-    mashaalMessage.textContent =
-        message;
-
-
-    mashaalMessage.className =
-        type === "success"
-            ? "mashaal-success"
-            : "mashaal-error";
-
-
-    mashaalMessage.style.display =
-        "block";
-
-
-    mashaalMessage.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
 
 }
