@@ -185,7 +185,7 @@ document
 // paste the Web App URL between the quotation marks.
 
 const MASHAL_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbwloqAXNqZ99nbVun6alk_EvvMHgHOiX99BJvyU4X0oUVIdLDLsUgXGXdWfm2PS7PYA/exec";
+    "https://script.google.com/macros/s/AKfycbyq6W259-KIC2gu6zQLl3w264avFRO9RIo6FRCAoEibMPxkZNwghEuCXHoNK3KwUhEM/exec";
 
 
 const mashaalForm =
