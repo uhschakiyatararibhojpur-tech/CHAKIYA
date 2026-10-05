@@ -1385,3 +1385,191 @@ body {
     border-top: 6px solid #f4a300;
     box-sizing: border-box;
 }
+/* =========================================
+   MASHAL SPORTS 2026
+   ========================================= */
+
+.mashaal-section {
+    padding: 60px 20px;
+    background: #f3f6fa;
+}
+
+.mashaal-card {
+    width: 100%;
+    max-width: 750px;
+    margin: 0 auto;
+
+    background: #ffffff;
+
+    padding: 35px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,0.15);
+
+    border-top: 6px solid #f4a300;
+
+    box-sizing: border-box;
+}
+
+.mashaal-card .form-group {
+    margin-bottom: 20px;
+}
+
+.mashaal-card label {
+    display: block;
+
+    font-weight: 600;
+
+    color: #123c69;
+
+    margin-bottom: 8px;
+
+    font-size: 16px;
+}
+
+.mashaal-card input[type="text"],
+.mashaal-card input[type="tel"],
+.mashaal-card input[type="email"],
+.mashaal-card input[type="file"] {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #ccd5df;
+
+    border-radius: 7px;
+
+    box-sizing: border-box;
+
+    font-size: 16px;
+
+    background: #ffffff;
+}
+
+.mashaal-card input:focus {
+
+    outline: none;
+
+    border-color: #123c69;
+
+    box-shadow:
+        0 0 0 2px rgba(18,60,105,0.12);
+}
+
+.mashaal-confirmation {
+
+    margin: 25px 0;
+
+    padding: 15px;
+
+    background: #f5f8fb;
+
+    border-left: 4px solid #f4a300;
+
+    border-radius: 6px;
+}
+
+.mashaal-confirmation label {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: flex-start;
+
+    color: #333;
+
+    font-weight: normal;
+}
+
+.mashaal-confirmation input {
+
+    margin-top: 4px;
+
+    width: auto;
+}
+
+#mashaalSubmit {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #123c69;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+#mashaalSubmit:hover {
+
+    background: #0d2d4f;
+}
+
+#mashaalSubmit:disabled {
+
+    opacity: 0.7;
+
+    cursor: not-allowed;
+}
+
+#mashaalMessage {
+
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    text-align: center;
+
+    border-radius: 7px;
+
+    font-weight: bold;
+}
+
+.mashaal-success {
+
+    display: block !important;
+
+    background: #e8f7ed;
+
+    color: #146c2e;
+}
+
+.mashaal-error {
+
+    display: block !important;
+
+    background: #fdecec;
+
+    color: #a30000;
+}
+
+@media (max-width: 600px) {
+
+    .mashaal-section {
+
+        padding: 40px 12px;
+    }
+
+    .mashaal-card {
+
+        padding: 22px 18px;
+    }
+
+}
