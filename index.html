@@ -1164,7 +1164,86 @@
 </section>
 
 
+<!-- REGISTRATION CONFIRMATION -->
+<section id="registration-confirmation" class="registration-confirmation">
+    <div class="container">
 
+        <div class="section-title">
+            <h2>पंजीकरण पुष्टि</h2>
+            <p>जिन विद्यार्थियों ने कक्षा 9 एवं 11 का पंजीकरण फॉर्म भर दिया है, वे नीचे अपनी जानकारी दर्ज करें।</p>
+        </div>
+
+        <div class="registration-card">
+
+            <form id="registrationConfirmationForm"
+                  action="https://script.google.com/macros/s/AKfycbzYsaI86pbYjz-PcwUBLl_kn6vtIJAN-NKDH2XrHA8t8D9MjBfEYBIuAHFE2Kmddwh4/exec"
+                  method="POST"
+                  target="registrationFrame">
+
+                <div class="form-group">
+                    <label>विद्यार्थी का नाम *</label>
+                    <input type="text" name="studentName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>पिता का नाम *</label>
+                    <input type="text" name="fatherName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>माता का नाम *</label>
+                    <input type="text" name="motherName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>मोबाइल नंबर *</label>
+                    <input type="tel"
+                           name="mobile"
+                           pattern="[0-9]{10}"
+                           maxlength="10"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>कक्षा *</label>
+                    <select name="studentClass" required>
+                        <option value="">कक्षा चुनें</option>
+                        <option value="9">कक्षा 9</option>
+                        <option value="11">कक्षा 11</option>
+                    </select>
+                </div>
+
+                <div class="confirmation-box">
+                    <label>
+                        <input type="checkbox"
+                               name="registrationFilled"
+                               value="YES"
+                               required>
+                        <strong>
+                            हाँ, मैंने अपना पंजीकरण फॉर्म भर दिया है।
+                        </strong>
+                    </label>
+                </div>
+
+                <button type="submit" class="registration-submit">
+                    ✅ पुष्टि जमा करें
+                </button>
+
+            </form>
+
+            <iframe
+                name="registrationFrame"
+                id="registrationFrame"
+                style="display:none;">
+            </iframe>
+
+            <div id="registrationSuccess" class="registration-success">
+                ✅ आपकी पंजीकरण पुष्टि सफलतापूर्वक जमा हो गई है।
+            </div>
+
+        </div>
+    </div>
+</section>
 <!-- ADMISSION -->
 
 <section
