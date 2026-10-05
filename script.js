@@ -235,242 +235,140 @@ function showMashaalMessage(message, type) {
 
 if (mashaalForm) {
 
-    mashaalForm.addEventListener(
-        "submit",
-        async function(event) {
+    mashaalForm.addEventListener("submit", async function(event) {
 
-            event.preventDefault();
+        event.preventDefault();
 
+        const studentName =
+            document.getElementById("studentName").value.trim();
 
-            // -----------------------------------------
-            // GET FORM VALUES
-            // -----------------------------------------
+        const fatherName =
+            document.getElementById("fatherName").value.trim();
 
-            const studentName =
-                document
-                    .getElementById("studentName")
-                    .value
-                    .trim();
+        const motherName =
+            document.getElementById("motherName").value.trim();
 
+        const className =
+            document.getElementById("className").value.trim();
 
-            const fatherName =
-                document
-                    .getElementById("fatherName")
-                    .value
-                    .trim();
+        const mobile =
+            document.getElementById("mobile").value.trim();
 
+        const activity =
+            document.getElementById("activity").value.trim();
 
-            const motherName =
-                document
-                    .getElementById("motherName")
-                    .value
-                    .trim();
+        const accountNumber =
+            document.getElementById("accountNumber").value.trim();
 
+        const ifsc =
+            document.getElementById("ifsc").value.trim();
 
-            const className =
-                document
-                    .getElementById("className")
-                    .value;
 
+        // VALIDATION
+        if (
+            !studentName ||
+            !fatherName ||
+            !motherName ||
+            !className ||
+            !mobile ||
+            !activity ||
+            !accountNumber ||
+            !ifsc
+        ) {
 
-            const mobile =
-                document
-                    .getElementById("mobile")
-                    .value
-                    .trim();
+            showMashaalMessage(
+                "❌ कृपया सभी जानकारी भरें।",
+                "error"
+            );
 
+            return;
+        }
 
-            const activity =
-                document
-                    .getElementById("activity")
-                    .value
-                    .trim();
 
+        // MOBILE VALIDATION
+        if (!/^[0-9]{10}$/.test(mobile)) {
 
-            const details =
-                document
-                    .getElementById("details")
-                    .value
-                    .trim();
+            showMashaalMessage(
+                "❌ कृपया सही 10 अंकों का मोबाइल नंबर दर्ज करें।",
+                "error"
+            );
 
+            return;
+        }
 
-            const date =
-                document
-                    .getElementById("date")
-                    .value;
 
+        // DISABLE BUTTON
+        if (mashaalSubmit) {
 
-            // -----------------------------------------
-            // VALIDATION
-            // -----------------------------------------
+            mashaalSubmit.disabled = true;
 
-            if (
-                !studentName ||
-                !fatherName ||
-                !motherName ||
-                !className ||
-                !mobile ||
-                !activity ||
-                !date
-            ) {
-
-                showMashaalMessage(
-                    "❌ कृपया सभी आवश्यक जानकारी भरें।",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            // -----------------------------------------
-            // MOBILE VALIDATION
-            // -----------------------------------------
-
-            if (!/^[0-9]{10}$/.test(mobile)) {
-
-                showMashaalMessage(
-                    "❌ कृपया सही 10 अंकों का मोबाइल नंबर दर्ज करें।",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            // -----------------------------------------
-            // DISABLE BUTTON
-            // -----------------------------------------
-
-            if (mashaalSubmit) {
-
-                mashaalSubmit.disabled = true;
-
-                mashaalSubmit.textContent =
-                    "⏳ Registration जमा हो रहा है...";
-
-            }
-
-
-            try {
-
-                // -------------------------------------
-                // CREATE FORM DATA
-                // -------------------------------------
-
-                const formData =
-                    new URLSearchParams();
-
-
-                formData.append(
-                    "studentName",
-                    studentName
-                );
-
-
-                formData.append(
-                    "fatherName",
-                    fatherName
-                );
-
-
-                formData.append(
-                    "motherName",
-                    motherName
-                );
-
-
-                formData.append(
-                    "className",
-                    className
-                );
-
-
-                formData.append(
-                    "mobile",
-                    mobile
-                );
-
-
-                formData.append(
-                    "activity",
-                    activity
-                );
-
-
-                formData.append(
-                    "details",
-                    details
-                );
-
-
-                formData.append(
-                    "date",
-                    date
-                );
-
-
-                // -------------------------------------
-                // SEND TO GOOGLE APPS SCRIPT
-                // -------------------------------------
-
-                await fetch(
-                    MASHAL_SCRIPT_URL,
-                    {
-                        method: "POST",
-                        mode: "no-cors",
-                        body: formData.toString()
-                    }
-                );
-
-
-                // -------------------------------------
-                // SUCCESS
-                // -------------------------------------
-
-                showMashaalMessage(
-                    "✅ आपका MASHAL SPORTS 2026 Registration सफलतापूर्वक जमा हो गया है।",
-                    "success"
-                );
-
-
-                // Clear form
-
-                mashaalForm.reset();
-
-
-            } catch (error) {
-
-                console.error(
-                    "MASHAL ERROR:",
-                    error
-                );
-
-
-                showMashaalMessage(
-                    "❌ Registration जमा नहीं हो पाया। कृपया दोबारा प्रयास करें।",
-                    "error"
-                );
-
-            }
-
-
-            // -----------------------------------------
-            // ENABLE BUTTON AGAIN
-            // -----------------------------------------
-
-            if (mashaalSubmit) {
-
-                mashaalSubmit.disabled = false;
-
-                mashaalSubmit.textContent =
-                    "🏆 Submit MASHAL Registration";
-
-            }
+            mashaalSubmit.textContent =
+                "⏳ Registration जमा हो रहा है...";
 
         }
-    );
+
+
+        try {
+
+            const formData = new URLSearchParams();
+
+            formData.append("studentName", studentName);
+            formData.append("fatherName", fatherName);
+            formData.append("motherName", motherName);
+            formData.append("className", className);
+            formData.append("mobile", mobile);
+            formData.append("activity", activity);
+            formData.append("accountNumber", accountNumber);
+            formData.append("ifsc", ifsc);
+
+
+            // SEND TO GOOGLE APPS SCRIPT
+            await fetch(
+                MASHAL_SCRIPT_URL,
+                {
+                    method: "POST",
+                    mode: "no-cors",
+                    body: formData.toString()
+                }
+            );
+
+
+            // SUCCESS
+            showMashaalMessage(
+                "✅ आपका MASHAL SPORTS 2026 Registration सफलतापूर्वक जमा हो गया है।",
+                "success"
+            );
+
+
+            // CLEAR FORM
+            mashaalForm.reset();
+
+
+        } catch (error) {
+
+            console.error(
+                "MASHAL ERROR:",
+                error
+            );
+
+            showMashaalMessage(
+                "❌ Registration जमा नहीं हो पाया। कृपया दोबारा प्रयास करें।",
+                "error"
+            );
+
+        }
+
+
+        // ENABLE BUTTON AGAIN
+        if (mashaalSubmit) {
+
+            mashaalSubmit.disabled = false;
+
+            mashaalSubmit.textContent =
+                "🏆 Submit MASHAL Registration";
+
+        }
+
+    });
 
 }
