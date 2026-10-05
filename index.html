@@ -75,8 +75,8 @@
         <a href="#home">
             Home 
         </a>
-<a href="#registration-confirmation">
-    📝 पंजीकरण पुष्टि
+<a href="#mashaal-sports">
+    🏆 MASHAL SPORTS 2026
 </a>
 
         <a href="#about">
@@ -124,101 +124,246 @@
 </nav>
 
 
-   <!-- REGISTRATION CONFIRMATION -->
+   <!-- ================================
+     MASHAL SPORTS 2026
+     ================================ -->
 
-<section id="registration-confirmation" class="registration-hero">
+<section id="mashaal-sports" class="mashaal-section">
 
-    <div class="registration-overlay">
+    <div class="container">
 
-        <div class="registration-card">
+        <div class="section-title">
 
-            <div class="registration-heading">
+            <h2>🏆 MASHAL SPORTS 2026</h2>
 
-                <h2>पंजीकरण पुष्टि</h2>
+            <p>
+                विद्यार्थियों के खेल संबंधी विवरण एवं आवश्यक दस्तावेज
+                जमा करने हेतु फॉर्म
+            </p>
 
-                <p>
-                    जिन विद्यार्थियों ने कक्षा 9 एवं 11 का पंजीकरण फॉर्म भर दिया है,
-                    वे नीचे अपनी जानकारी दर्ज करें।
-                </p>
+        </div>
 
-            </div>
 
-            <form
-                id="registrationConfirmationForm"
-                action="https://script.google.com/macros/s/AKfycbzYsaI86pbYjz-PcwUBLl_kn6vtIJAN-NKDH2XrHA8t8D9MjBfEYBIuAHFE2Kmddwh4/exec"
-                method="POST"
-                target="registrationFrame">
+        <div class="mashaal-card">
+
+            <form id="mashaalForm">
+
+
+                <!-- STUDENT NAME -->
 
                 <div class="form-group">
-                    <label>विद्यार्थी का नाम *</label>
-                    <input type="text" name="studentName" required>
+
+                    <label>
+                        विद्यार्थी का नाम *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studentName"
+                        required
+                    >
+
                 </div>
 
-                <div class="form-group">
-                    <label>पिता का नाम *</label>
-                    <input type="text" name="fatherName" required>
-                </div>
+
+                <!-- MOTHER NAME -->
 
                 <div class="form-group">
-                    <label>माता का नाम *</label>
-                    <input type="text" name="motherName" required>
+
+                    <label>
+                        माता का नाम *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="motherName"
+                        required
+                    >
+
                 </div>
 
+
+                <!-- FATHER NAME -->
+
                 <div class="form-group">
-                    <label>मोबाइल नंबर *</label>
+
+                    <label>
+                        पिता का नाम *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fatherName"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- MOBILE -->
+
+                <div class="form-group">
+
+                    <label>
+                        मोबाइल नंबर *
+                    </label>
+
                     <input
                         type="tel"
-                        name="mobile"
+                        id="mobile"
                         pattern="[0-9]{10}"
                         maxlength="10"
-                        required>
+                        required
+                    >
+
                 </div>
+
+
+                <!-- EMAIL -->
 
                 <div class="form-group">
-                    <label>कक्षा *</label>
 
-                    <select name="studentClass" required>
-                        <option value="">कक्षा चुनें</option>
-                        <option value="9">कक्षा 9</option>
-                        <option value="11">कक्षा 11</option>
-                    </select>
+                    <label>
+                        Email ID
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                    >
+
                 </div>
 
-                <div class="confirmation-box">
+
+                <!-- ACCOUNT NUMBER -->
+
+                <div class="form-group">
+
                     <label>
+                        बैंक खाता संख्या *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="accountNo"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- IFSC -->
+
+                <div class="form-group">
+
+                    <label>
+                        IFSC Code *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="ifsc"
+                        maxlength="11"
+                        style="text-transform:uppercase;"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- STUDENT PHOTO -->
+
+                <div class="form-group">
+
+                    <label>
+                        विद्यार्थी का फोटो *
+                    </label>
+
+                    <input
+                        type="file"
+                        id="studentPhoto"
+                        accept="image/*"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- AADHAAR FRONT -->
+
+                <div class="form-group">
+
+                    <label>
+                        आधार कार्ड – Front Photo *
+                    </label>
+
+                    <input
+                        type="file"
+                        id="aadhaarFront"
+                        accept="image/*"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- AADHAAR BACK -->
+
+                <div class="form-group">
+
+                    <label>
+                        आधार कार्ड – Back Photo *
+                    </label>
+
+                    <input
+                        type="file"
+                        id="aadhaarBack"
+                        accept="image/*"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- DECLARATION -->
+
+                <div class="mashaal-confirmation">
+
+                    <label>
+
                         <input
                             type="checkbox"
-                            name="registrationFilled"
-                            value="YES"
-                            required>
+                            id="declaration"
+                            required
+                        >
 
-                        <strong>
-                            हाँ, मैंने अपना पंजीकरण फॉर्म भर दिया है।
-                        </strong>
+                        <span>
+                            मैं प्रमाणित करता/करती हूँ कि
+                            मेरे द्वारा दी गई सभी जानकारी सही है।
+                        </span>
+
                     </label>
+
                 </div>
+
+
+                <!-- SUBMIT -->
 
                 <button
                     type="submit"
-                    class="registration-submit">
-                    ✅ पुष्टि जमा करें
+                    id="mashaalSubmit">
+
+                    🏆 MASHAL SPORTS 2026 — जमा करें
+
                 </button>
 
+
+                <!-- MESSAGE -->
+
+                <div id="mashaalMessage"></div>
+
+
             </form>
-
-            <iframe
-                name="registrationFrame"
-                id="registrationFrame"
-                style="display:none;">
-            </iframe>
-
-            <div
-                id="registrationSuccess"
-                class="registration-success">
-
-                ✅ आपकी पंजीकरण पुष्टि सफलतापूर्वक जमा हो गई है।
-
-            </div>
 
         </div>
 
