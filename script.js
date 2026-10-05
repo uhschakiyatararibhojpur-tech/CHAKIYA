@@ -426,18 +426,163 @@ formData.append("aadhaarFront", data.aadhaarFront);
 formData.append("aadhaarBack", data.aadhaarBack);
 
 
-const response =
-    await fetch(
-        MASHAL_SCRIPT_URL,
-        {
-            method: "POST",
-            body: formData
+// =========================
+// SEND TO GOOGLE APPS SCRIPT
+// =========================
+
+const hiddenFrame = document.createElement("iframe");
+
+hiddenFrame.name = "mashalHiddenFrame";
+hiddenFrame.style.display = "none";
+
+document.body.appendChild(hiddenFrame);
+
+
+const submitForm = document.createElement("form");
+
+submitForm.method = "POST";
+submitForm.action = MASHAL_SCRIPT_URL;
+submitForm.target = "mashalHiddenFrame";
+submitForm.style.display = "none";
+
+
+function addHiddenField(name, value) {
+
+    const input = document.createElement("input");
+
+    input.type = "hidden";
+    input.name = name;
+    input.value = value || "";
+
+    submitForm.appendChild(input);
+
+}
+
+
+addHiddenField("studentName", data.studentName);
+addHiddenField("motherName", data.motherName);
+addHiddenField("fatherName", data.fatherName);
+addHiddenField("mobile", data.mobile);
+addHiddenField("email", data.email);
+addHiddenField("accountNo", data.accountNo);
+addHiddenField("ifsc", data.ifsc);
+
+addHiddenField("studentPhoto", data.studentPhoto);
+addHiddenField("aadhaarFront", data.aadhaarFront);
+addHiddenField("aadhaarBack", data.aadhaarBack);
+
+
+document.body.appendChild(submitForm);
+
+
+// Wait for Google Apps Script response
+window.addEventListener("message", function mashalResponse(event) {
+
+    if (!event.data || !event.data.status) {
+        return;
+    }
+
+    const result = event.data;
+
+
+    // =========================
+    // SUCCESS
+    // =========================
+
+    if (result.status === "success") {
+
+        if (mashaalMessage) {
+
+            mashaalMessage.textContent =
+                "✅ " + result.message;
+
+            mashaalMessage.className =
+                "mashaal-success";
+
+            mashaalMessage.style.display =
+                "block";
+
         }
-    );
+
+        mashaalForm.reset();
+
+    }
 
 
-const result =
-    await response.json();
+    // =========================
+    // DUPLICATE
+    // =========================
+
+    else if (result.status === "duplicate") {
+
+        if (mashaalMessage) {
+
+            mashaalMessage.textContent =
+                "⚠️ " + result.message;
+
+            mashaalMessage.className =
+                "mashaal-error";
+
+            mashaalMessage.style.display =
+                "block";
+
+        }
+
+    }
+
+
+    // =========================
+    // ERROR
+    // =========================
+
+    else if (result.status === "error") {
+
+        if (mashaalMessage) {
+
+            mashaalMessage.textContent =
+                "❌ " + result.message;
+
+            mashaalMessage.className =
+                "mashaal-error";
+
+            mashaalMessage.style.display =
+                "block";
+
+        }
+
+    }
+
+
+    // Remove temporary elements
+
+    setTimeout(function() {
+
+        if (hiddenFrame) {
+            hiddenFrame.remove();
+        }
+
+        if (submitForm) {
+            submitForm.remove();
+        }
+
+    }, 1000);
+
+
+    if (mashaalMessage) {
+
+        mashaalMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }
+
+});
+
+
+// Submit the hidden form
+
+submitForm.submit();
 
 
                 // =========================
