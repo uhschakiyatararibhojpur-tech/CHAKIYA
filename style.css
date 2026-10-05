@@ -1573,27 +1573,3 @@ body {
     }
 
 }
-/* MASHAL FORM - TWO COLUMN */
-
-#mashaalForm {
-    max-width: 700px;
-    margin: 20px auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-#mashaalForm .form-group {
-    margin: 0;
-}
-
-#mashaalForm .submit-btn,
-#mashaalForm #mashaalMessage {
-    grid-column: 1 / -1;
-}
-
-@media (max-width: 600px) {
-    #mashaalForm {
-        grid-template-columns: 1fr;
-    }
-}
