@@ -180,7 +180,7 @@ document
 // =====================================================
 
 const MASHAL_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbxcxbzLfekECbnLRX6uM83dHCD8moXV4bwvMDgkEWjoJPBZN7skJz1OQd8S47NyxITf/exec";
+    "https://script.google.com/macros/s/AKfycbxBmQIFEEfr-f__420Sw4W7yRfuyih7O73A8hQ2immtbCfa32C64anAZiDYIYC16l3g/exec";
 
 
 const mashaalForm =
