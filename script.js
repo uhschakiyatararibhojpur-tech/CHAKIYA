@@ -408,26 +408,36 @@ if (mashaalForm) {
                 };
 
 
-                // =========================
-                // SEND TO GOOGLE APPS SCRIPT
-                // =========================
+               // =========================
+// SEND TO GOOGLE APPS SCRIPT
+// =========================
 
-                const response =
-                    await fetch(
-                        MASHAL_SCRIPT_URL,
-                        {
+const formData = new URLSearchParams();
 
-                            method: "POST",
+formData.append("studentName", data.studentName);
+formData.append("motherName", data.motherName);
+formData.append("fatherName", data.fatherName);
+formData.append("mobile", data.mobile);
+formData.append("email", data.email);
+formData.append("accountNo", data.accountNo);
+formData.append("ifsc", data.ifsc);
+formData.append("studentPhoto", data.studentPhoto);
+formData.append("aadhaarFront", data.aadhaarFront);
+formData.append("aadhaarBack", data.aadhaarBack);
 
-                            body:
-                                JSON.stringify(data)
 
-                        }
-                    );
+const response =
+    await fetch(
+        MASHAL_SCRIPT_URL,
+        {
+            method: "POST",
+            body: formData
+        }
+    );
 
 
-                const result =
-                    await response.json();
+const result =
+    await response.json();
 
 
                 // =========================
