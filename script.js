@@ -130,3 +130,21 @@ document.querySelectorAll(
     observer.observe(element);
 
 });
+// REGISTRATION CONFIRMATION FORM
+const registrationForm = document.getElementById("registrationConfirmationForm");
+const registrationSuccess = document.getElementById("registrationSuccess");
+
+if (registrationForm) {
+
+    registrationForm.addEventListener("submit", function () {
+
+        registrationSuccess.style.display = "block";
+
+        registrationSuccess.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    });
+
+}
