@@ -1126,3 +1126,218 @@ body {
     text-align: center;
     font-weight: bold;
 }
+/* =========================================
+   REGISTRATION HERO - SCHOOL BACKGROUND
+========================================= */
+
+.registration-hero {
+    position: relative;
+    min-height: 650px;
+
+    background-image:
+        linear-gradient(
+            rgba(10, 39, 67, 0.48),
+            rgba(10, 39, 67, 0.48)
+        ),
+        url("school.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 20px;
+    box-sizing: border-box;
+}
+
+.registration-overlay {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registration-card {
+    width: 100%;
+    max-width: 700px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    padding: 35px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.30);
+
+    border-top: 6px solid #f4a300;
+
+    box-sizing: border-box;
+}
+
+.registration-heading {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.registration-heading h2 {
+    margin: 0 0 10px;
+
+    color: #123c69;
+
+    font-size: 34px;
+
+    font-weight: 700;
+}
+
+.registration-heading p {
+    margin: 0;
+
+    color: #444;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+.registration-card .form-group {
+    margin-bottom: 18px;
+}
+
+.registration-card .form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #123c69;
+
+    font-weight: bold;
+}
+
+.registration-card input,
+.registration-card select {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    font-size: 16px;
+
+    font-family:
+        Arial,
+        "Noto Sans Devanagari",
+        sans-serif;
+}
+
+.registration-card input:focus,
+.registration-card select:focus {
+    outline: none;
+
+    border-color: #123c69;
+
+    box-shadow:
+        0 0 0 3px rgba(18, 60, 105, 0.12);
+}
+
+.confirmation-box {
+    margin: 22px 0;
+
+    padding: 15px;
+
+    background: #fff8e6;
+
+    border: 1px solid #f4a300;
+
+    border-radius: 8px;
+}
+
+.confirmation-box label {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #123c69;
+
+    cursor: pointer;
+}
+
+.confirmation-box input {
+    width: 20px;
+
+    height: 20px;
+}
+
+.registration-submit {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #123c69;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.registration-submit:hover {
+    background: #0d2c4d;
+}
+
+.registration-success {
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    background: #e8f7ed;
+
+    border: 1px solid #62b87a;
+
+    border-radius: 8px;
+
+    color: #176b35;
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .registration-hero {
+        min-height: auto;
+
+        padding: 30px 12px;
+    }
+
+    .registration-card {
+        padding: 22px 16px;
+    }
+
+    .registration-heading h2 {
+        font-size: 27px;
+    }
+
+}
