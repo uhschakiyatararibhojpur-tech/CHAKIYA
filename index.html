@@ -206,18 +206,54 @@
             </div>
 
             <div class="form-group">
-                <label>Program Date *</label>
-                <input type="date"
-                       name="date"
-                       required>
-            </div>
+    <label>Program Date *</label>
+    <input type="date"
+           name="date"
+           required>
+</div>
 
-            <div class="form-group">
-                <label>
-                    <input type="checkbox" required>
-                    I confirm that the information provided above is correct.
-                </label>
-            </div>
+<!-- STUDENT PHOTO -->
+<div class="form-group">
+    <label>📷 Student Photo *</label>
+    <input type="file"
+           id="studentPhoto"
+           name="studentPhoto"
+           accept="image/*"
+           capture="environment"
+           required>
+    <small>Take or select student's photo</small>
+</div>
+
+<!-- AADHAAR FRONT -->
+<div class="form-group">
+    <label>🪪 Aadhaar Card Front *</label>
+    <input type="file"
+           id="aadhaarFront"
+           name="aadhaarFront"
+           accept="image/*"
+           capture="environment"
+           required>
+    <small>Take or select Aadhaar front photo</small>
+</div>
+
+<!-- AADHAAR BACK -->
+<div class="form-group">
+    <label>🪪 Aadhaar Card Back *</label>
+    <input type="file"
+           id="aadhaarBack"
+           name="aadhaarBack"
+           accept="image/*"
+           capture="environment"
+           required>
+    <small>Take or select Aadhaar back photo</small>
+</div>
+
+<div class="form-group">
+    <label>
+        <input type="checkbox" required>
+        I confirm that the information provided above is correct.
+    </label>
+</div>
 
             <button type="submit" class="submit-btn">
                 🏆 Submit MASHAL Registration
