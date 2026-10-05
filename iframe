@@ -137,11 +137,7 @@
             MASHAL SPORTS 2026 Registration Form
         </p>
 
-        <form id="mashalForm"
-              action="https://script.google.com/macros/s/AKfycbxcxbzLfekECbnLRX6uM83dHCD8moXV4bwvMDgkEWjoJPBZN7skJz1OQd8S47NyxITf/exec"
-              method="POST"
-              target="mashalSubmitFrame">
-
+        <form id="mashalForm">
             <div class="form-group">
                 <label>Student Name *</label>
                 <input type="text"
@@ -262,11 +258,6 @@
             <p id="mashalMessage"></p>
 
         </form>
-
-        <iframe name="mashalSubmitFrame"
-                id="mashalSubmitFrame"
-                style="display:none;">
-        </iframe>
 
     </div>
 
