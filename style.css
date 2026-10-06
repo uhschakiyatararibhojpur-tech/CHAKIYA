@@ -1391,7 +1391,17 @@ body {
 
 .mashaal-section {
     padding: 60px 20px;
-    background: #f3f6fa;
+
+    background-image:
+        linear-gradient(
+            rgba(10, 39, 67, 0.35),
+            rgba(10, 39, 67, 0.35)
+        ),
+        url("school.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .mashaal-card {
