@@ -342,6 +342,19 @@ const aadhaarFrontBase64 =
 
 const aadhaarBackBase64 =
     await fileToBase64(aadhaarBack);
+            const requestData = {
+    studentName: studentName,
+    fatherName: fatherName,
+    motherName: motherName,
+    className: className,
+    mobile: mobile,
+    activity: activity,
+    accountNumber: accountNumber,
+    ifsc: ifsc,
+    studentPhoto: studentPhotoBase64,
+    aadhaarFront: aadhaarFrontBase64,
+    aadhaarBack: aadhaarBackBase64
+};
 
 
 const formData = new URLSearchParams();
