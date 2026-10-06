@@ -124,6 +124,7 @@
             }
         }
     </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -195,6 +196,29 @@
 </main>
 
 <script>
+    const SUPABASE_URL =
+    "https://hnejcrhoqgpyrghpfprm.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_qPpO0FVsvdJRWtHP3nl0EA_E_akMgI4";
+
+const supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+async function checkLogin() {
+
+    const { data } =
+        await supabaseClient.auth.getSession();
+
+    if (!data.session) {
+        window.location.href = "login.html";
+    }
+}
+
+checkLogin();
 
 const API_URL = "https://chakiya.onrender.com/api/students";
 
