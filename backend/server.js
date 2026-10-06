@@ -136,7 +136,7 @@ app.post("/api/students", async (req, res) => {
                     mother_name: student.mother_name,
                     class_name: student.class_name,
                     mobile: student.mobile,
-                    admission_number: student.admission_number
+                    admission_number: student.admission_number,
                     student_photo_path: studentPhotoPath
                 })
             }
