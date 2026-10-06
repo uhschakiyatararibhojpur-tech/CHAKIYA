@@ -15,7 +15,54 @@ app.get("/", (req, res) => {
         status: "online"
     });
 });
+// Add a new student
+app.post("/api/students", async (req, res) => {
+    try {
+        const student = req.body;
 
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/students`,
+            {
+                method: "POST",
+                headers: {
+                    apikey: SUPABASE_KEY,
+                    Authorization: `Bearer ${SUPABASE_KEY}`,
+                    "Content-Type": "application/json",
+                    Prefer: "return=representation"
+                },
+                body: JSON.stringify({
+                    student_name: student.student_name,
+                    father_name: student.father_name,
+                    mother_name: student.mother_name,
+                    class_name: student.class_name,
+                    mobile: student.mobile,
+                    admission_number: student.admission_number
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            return res.status(response.status).json({
+                success: false,
+                error: data
+            });
+        }
+
+        res.json({
+            success: true,
+            message: "Student added successfully.",
+            student: data
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
 // Test Supabase connection
 app.get("/api/test-db", async (req, res) => {
     try {
