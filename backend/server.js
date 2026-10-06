@@ -169,23 +169,16 @@ app.post("/api/students", async (req, res) => {
         const data = await response.json();
 
         if (!response.ok) {
-
             return res.status(response.status).json({
                 success: false,
                 error: data
             });
-
         }
 
         return res.json({
-
             success: true,
-
-            message:
-                "Student added successfully.",
-
+            message: "Student added successfully.",
             student: data
-
         });
 
     } catch (error) {
@@ -196,13 +189,11 @@ app.post("/api/students", async (req, res) => {
         );
 
         return res.status(500).json({
-
             success: false,
-
-            error:
-                error.message
-
+            error: error.message
         });
-
     }
+});
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
