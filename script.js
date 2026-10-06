@@ -399,21 +399,6 @@ const aadhaarBack =
             mashaalForm.reset();
 
 
-        } catch (error) {
-
-            console.error(
-                "MASHAL ERROR:",
-                error
-            );
-
-            showMashaalMessage(
-                "❌ Registration जमा नहीं हो पाया। कृपया दोबारा प्रयास करें।",
-                "error"
-            );
-
-        }
-
-
         // ENABLE BUTTON AGAIN
         if (mashaalSubmit) {
 
