@@ -18,6 +18,41 @@ app.get("/", (req, res) => {
         status: "online"
     });
 });
+// Get all students
+app.get("/api/students", async (req, res) => {
+    try {
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/students?select=*&order=id.desc`,
+            {
+                method: "GET",
+                headers: {
+                    apikey: SUPABASE_KEY,
+                    Authorization: `Bearer ${SUPABASE_KEY}`
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            return res.status(response.status).json({
+                success: false,
+                error: data
+            });
+        }
+
+        res.json({
+            success: true,
+            students: data
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
 // Add a new student
 app.post("/api/students", async (req, res) => {
     try {
