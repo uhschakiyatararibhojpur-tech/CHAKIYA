@@ -310,7 +310,7 @@ if (mashaalForm) {
 
         try {
 
-            const formData = new URLSearchParams();
+            const formData = new FormData();
 
             formData.append("studentName", studentName);
             formData.append("fatherName", fatherName);
