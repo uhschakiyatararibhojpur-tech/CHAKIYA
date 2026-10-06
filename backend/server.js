@@ -114,6 +114,11 @@ async function uploadStudentPhoto(base64Data, studentName) {
 app.post("/api/students", async (req, res) => {
     try {
         const student = req.body;
+        const studentPhotoPath =
+    await uploadStudentPhoto(
+        student.student_photo,
+        student.student_name
+    );
 
         const response = await fetch(
             `${SUPABASE_URL}/rest/v1/students`,
@@ -132,6 +137,7 @@ app.post("/api/students", async (req, res) => {
                     class_name: student.class_name,
                     mobile: student.mobile,
                     admission_number: student.admission_number
+                    student_photo_path: studentPhotoPath
                 })
             }
         );
