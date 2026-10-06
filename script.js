@@ -198,6 +198,22 @@ const mashaalMessage =
 
 const mashaalSubmit =
     document.getElementById("mashaalSubmit");
+function fileToBase64(file) {
+    return new Promise(function(resolve, reject) {
+
+        const reader = new FileReader();
+
+        reader.onload = function() {
+            resolve(reader.result);
+        };
+
+        reader.onerror = function(error) {
+            reject(error);
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
 
 
 // =====================================================
@@ -262,6 +278,14 @@ if (mashaalForm) {
 
         const ifsc =
             document.getElementById("ifsc").value.trim();
+        const studentPhoto =
+    document.getElementById("studentPhoto").files[0];
+
+const aadhaarFront =
+    document.getElementById("aadhaarFront").files[0];
+
+const aadhaarBack =
+    document.getElementById("aadhaarBack").files[0];
 
 
         // VALIDATION
@@ -320,6 +344,9 @@ if (mashaalForm) {
             formData.append("activity", activity);
             formData.append("accountNumber", accountNumber);
             formData.append("ifsc", ifsc);
+            formData.append("studentPhoto", await fileToBase64(studentPhoto));
+formData.append("aadhaarFront", await fileToBase64(aadhaarFront));
+formData.append("aadhaarBack", await fileToBase64(aadhaarBack));
 
 
             // SEND TO GOOGLE APPS SCRIPT
