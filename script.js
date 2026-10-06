@@ -334,19 +334,30 @@ const aadhaarBack =
 
         try {
 
-            const formData = new FormData();
+            const studentPhotoBase64 =
+    await fileToBase64(studentPhoto);
 
-            formData.append("studentName", studentName);
-            formData.append("fatherName", fatherName);
-            formData.append("motherName", motherName);
-            formData.append("className", className);
-            formData.append("mobile", mobile);
-            formData.append("activity", activity);
-            formData.append("accountNumber", accountNumber);
-            formData.append("ifsc", ifsc);
-            formData.append("studentPhoto", await fileToBase64(studentPhoto));
-formData.append("aadhaarFront", await fileToBase64(aadhaarFront));
-formData.append("aadhaarBack", await fileToBase64(aadhaarBack));
+const aadhaarFrontBase64 =
+    await fileToBase64(aadhaarFront);
+
+const aadhaarBackBase64 =
+    await fileToBase64(aadhaarBack);
+
+
+const formData = new URLSearchParams();
+
+formData.append("studentName", studentName);
+formData.append("fatherName", fatherName);
+formData.append("motherName", motherName);
+formData.append("className", className);
+formData.append("mobile", mobile);
+formData.append("activity", activity);
+formData.append("accountNumber", accountNumber);
+formData.append("ifsc", ifsc);
+
+formData.append("studentPhoto", studentPhotoBase64);
+formData.append("aadhaarFront", aadhaarFrontBase64);
+formData.append("aadhaarBack", aadhaarBackBase64);
 
 
             // SEND TO GOOGLE APPS SCRIPT
