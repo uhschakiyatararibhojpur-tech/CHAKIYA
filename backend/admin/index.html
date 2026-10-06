@@ -132,6 +132,17 @@
 <header class="header">
     <h1>UHS Chakiya Tarari</h1>
     <p>Admin Dashboard</p>
+
+    <button onclick="logout()" style="
+        margin-top:12px;
+        padding:10px 18px;
+        border:0;
+        border-radius:7px;
+        cursor:pointer;
+        font-weight:bold;
+    ">
+        LOGOUT
+    </button>
 </header>
 
 <main class="container">
@@ -219,6 +230,12 @@ async function checkLogin() {
 }
 
 checkLogin();
+    async function logout() {
+
+    await supabaseClient.auth.signOut();
+
+    window.location.href = "login.html";
+}
 
 const API_URL = "https://chakiya.onrender.com/api/students";
 
