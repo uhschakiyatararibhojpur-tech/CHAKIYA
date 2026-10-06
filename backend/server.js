@@ -113,31 +113,55 @@ async function uploadStudentPhoto(base64Data, studentName) {
 // Add a new student
 app.post("/api/students", async (req, res) => {
     try {
+
         const student = req.body;
+
         const studentPhotoPath =
-    await uploadStudentPhoto(
-        student.student_photo,
-        student.student_name
-    );
+            await uploadStudentPhoto(
+                student.student_photo,
+                student.student_name
+            );
 
         const response = await fetch(
             `${SUPABASE_URL}/rest/v1/students`,
             {
                 method: "POST",
+
                 headers: {
                     apikey: SUPABASE_KEY,
                     Authorization: `Bearer ${SUPABASE_KEY}`,
                     "Content-Type": "application/json",
                     Prefer: "return=representation"
                 },
+
                 body: JSON.stringify({
-                    student_name: student.student_name,
-                    father_name: student.father_name,
-                    mother_name: student.mother_name,
-                    class_name: student.class_name,
-                    mobile: student.mobile,
-                    admission_number: student.admission_number,
-                    student_photo_path: studentPhotoPath
+
+                    student_name:
+                        student.student_name,
+
+                    father_name:
+                        student.father_name,
+
+                    mother_name:
+                        student.mother_name,
+
+                    class_name:
+                        student.class_name,
+
+                    mobile:
+                        student.mobile,
+
+                    date_of_birth:
+                        student.date_of_birth,
+
+                    gender:
+                        student.gender,
+
+                    admission_number:
+                        student.admission_number,
+
+                    student_photo_path:
+                        studentPhotoPath
                 })
             }
         );
@@ -145,61 +169,40 @@ app.post("/api/students", async (req, res) => {
         const data = await response.json();
 
         if (!response.ok) {
+
             return res.status(response.status).json({
                 success: false,
                 error: data
             });
+
         }
 
-        res.json({
+        return res.json({
+
             success: true,
-            message: "Student added successfully.",
+
+            message:
+                "Student added successfully.",
+
             student: data
+
         });
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
-    }
-});
-// Test Supabase connection
-app.get("/api/test-db", async (req, res) => {
-    try {
-        const response = await fetch(
-            `${SUPABASE_URL}/rest/v1/students?select=id&limit=1`,
-            {
-                headers: {
-                    apikey: SUPABASE_KEY,
-                    Authorization: `Bearer ${SUPABASE_KEY}`
-                }
-            }
+
+        console.error(
+            "STUDENT REGISTRATION ERROR:",
+            error
         );
 
-        const data = await response.json();
+        return res.status(500).json({
 
-        if (!response.ok) {
-            return res.status(response.status).json({
-                success: false,
-                error: data
-            });
-        }
-
-        res.json({
-            success: true,
-            message: "Supabase database connection is working.",
-            data: data
-        });
-
-    } catch (error) {
-        res.status(500).json({
             success: false,
-            error: error.message
-        });
-    }
-});
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+            error:
+                error.message
+
+        });
+
+    }
 });
