@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CHAKIYA Admin Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        .header {
+            background: #0a2743;
+            color: white;
+            padding: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .header p {
+            margin: 6px 0 0;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat h2 {
+            margin: 0;
+            font-size: 34px;
+            color: #0a2743;
+        }
+
+        .stat p {
+            margin: 5px 0 0;
+            color: #666;
+        }
+
+        .search {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        th {
+            background: #0a2743;
+            color: white;
+        }
+
+        .status {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background: #eef6ff;
+        }
+
+        @media (max-width: 700px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 21px;
+            }
+
+            th,
+            td {
+                padding: 9px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <h1>UHS Chakiya Tarari</h1>
+    <p>Admin Dashboard</p>
+</header>
+
+<main class="container">
+
+    <div class="stats">
+
+        <div class="card stat">
+            <h2 id="totalStudents">0</h2>
+            <p>Total Students</p>
+        </div>
+
+        <div class="card stat">
+            <h2 id="class9">0</h2>
+            <p>Class 9</p>
+        </div>
+
+        <div class="card stat">
+            <h2 id="class10">0</h2>
+            <p>Class 10</p>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div id="status" class="status">
+            Loading students...
+        </div>
+
+        <input
+            type="text"
+            id="search"
+            class="search"
+            placeholder="Search student name..."
+        >
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Student Name</th>
+                        <th>Father Name</th>
+                        <th>Mother Name</th>
+                        <th>Class</th>
+                        <th>Mobile</th>
+                        <th>Admission No.</th>
+                    </tr>
+                </thead>
+
+                <tbody id="studentTable">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+
+const API_URL = "https://chakiya.onrender.com/api/students";
+
+let students = [];
+
+async function loadStudents() {
+
+    try {
+
+        const response = await fetch(API_URL);
+
+        const result = await response.json();
+
+        if (!result.success) {
+            throw new Error("Unable to load students");
+        }
+
+        students = result.students;
+
+        updateDashboard();
+
+        document.getElementById("status").textContent =
+            "Students loaded successfully.";
+
+    } catch (error) {
+
+        document.getElementById("status").textContent =
+            "ERROR: " + error.message;
+
+    }
+}
+
+function updateDashboard() {
+
+    document.getElementById("totalStudents").textContent =
+        students.length;
+
+    document.getElementById("class9").textContent =
+        students.filter(s => s.class_name === "9").length;
+
+    document.getElementById("class10").textContent =
+        students.filter(s => s.class_name === "10").length;
+
+    displayStudents(students);
+}
+
+function displayStudents(list) {
+
+    const table = document.getElementById("studentTable");
+
+    table.innerHTML = "";
+
+    list.forEach(student => {
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${student.id}</td>
+            <td>${student.student_name || ""}</td>
+            <td>${student.father_name || ""}</td>
+            <td>${student.mother_name || ""}</td>
+            <td>${student.class_name || ""}</td>
+            <td>${student.mobile || ""}</td>
+            <td>${student.admission_number || ""}</td>
+        `;
+
+        table.appendChild(row);
+    });
+}
+
+document.getElementById("search").addEventListener("input", function () {
+
+    const searchText = this.value.toLowerCase();
+
+    const filtered = students.filter(student =>
+        (student.student_name || "")
+            .toLowerCase()
+            .includes(searchText)
+    );
+
+    displayStudents(filtered);
+});
+
+loadStudents();
+
+</script>
+
+</body>
+</html>
