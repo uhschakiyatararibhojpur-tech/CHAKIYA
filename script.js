@@ -332,16 +332,60 @@ const aadhaarBack =
         }
 
 
-        try {
+       try {
 
-            const studentPhotoBase64 =
-    await fileToBase64(studentPhoto);
+    const studentPhotoBase64 =
+        await fileToBase64(studentPhoto);
 
-const aadhaarFrontBase64 =
-    await fileToBase64(aadhaarFront);
+    const aadhaarFrontBase64 =
+        await fileToBase64(aadhaarFront);
 
-const aadhaarBackBase64 =
-    await fileToBase64(aadhaarBack);
+    const aadhaarBackBase64 =
+        await fileToBase64(aadhaarBack);
+
+    const requestData = {
+        studentName: studentName,
+        fatherName: fatherName,
+        motherName: motherName,
+        className: className,
+        mobile: mobile,
+        activity: activity,
+        accountNumber: accountNumber,
+        ifsc: ifsc,
+        studentPhoto: studentPhotoBase64,
+        aadhaarFront: aadhaarFrontBase64,
+        aadhaarBack: aadhaarBackBase64
+    };
+
+    await fetch(
+        MASHAL_SCRIPT_URL,
+        {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(requestData)
+        }
+    );
+
+    showMashaalMessage(
+        "✅ आपका MASHAL SPORTS 2026 Registration सफलतापूर्वक जमा हो गया है।",
+        "success"
+    );
+
+    mashaalForm.reset();
+
+} catch (error) {
+
+    console.error(
+        "MASHAL ERROR:",
+        error
+    );
+
+    showMashaalMessage(
+        "❌ Registration जमा नहीं हो पाया। कृपया दोबारा प्रयास करें।",
+        "error"
+    );
+
+}
             
 
             // SUCCESS
