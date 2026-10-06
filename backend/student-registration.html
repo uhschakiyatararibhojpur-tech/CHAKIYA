@@ -1,1 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Student Registration - UHS Chakiya Tarari</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        .header {
+            background: #0a2743;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .header p {
+            margin: 8px 0 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+        }
+
+        .form-card h2 {
+            text-align: center;
+            color: #0a2743;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field label {
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            border: 0;
+            border-radius: 8px;
+            background: #0a2743;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .form-card {
+                padding: 18px;
+            }
+
+            .header h1 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <h1>UHS Chakiya Tarari</h1>
+    <p>Student Registration</p>
+</header>
+
+<main class="container">
+
+    <div class="form-card">
+
+        <h2>Student Registration Form</h2>
+
+        <form id="studentForm">
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Student Name</label>
+                    <input
+                        type="text"
+                        id="studentName"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label>Father / Guardian Name</label>
+                    <input
+                        type="text"
+                        id="fatherName"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label>Mother Name</label>
+                    <input
+                        type="text"
+                        id="motherName"
+                    >
+                </div>
+
+                <div class="field">
+                    <label>Class</label>
+                    <select id="className" required>
+                        <option value="">Select Class</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Mobile Number</label>
+                    <input
+                        type="tel"
+                        id="mobile"
+                        maxlength="10"
+                        pattern="[0-9]{10}"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label>Admission Number</label>
+                    <input
+                        type="text"
+                        id="admissionNumber"
+                    >
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="submitBtn"
+            >
+                SUBMIT REGISTRATION
+            </button>
+
+            <div id="message"></div>
+
+        </form>
+
+    </div>
+
+</main>
+
+<script>
+
+const API_URL =
+    "https://chakiya.onrender.com/api/students";
+
+document
+.getElementById("studentForm")
+.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const submitBtn =
+        document.getElementById("submitBtn");
+
+    const message =
+        document.getElementById("message");
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+
+    const student = {
+
+        student_name:
+            document.getElementById("studentName").value.trim(),
+
+        father_name:
+            document.getElementById("fatherName").value.trim(),
+
+        mother_name:
+            document.getElementById("motherName").value.trim(),
+
+        class_name:
+            document.getElementById("className").value,
+
+        mobile:
+            document.getElementById("mobile").value.trim(),
+
+        admission_number:
+            document.getElementById("admissionNumber").value.trim()
+    };
+
+    try {
+
+        const response = await fetch(API_URL, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(student)
+
+        });
+
+        const result =
+            await response.json();
+
+        if (!response.ok || !result.success) {
+
+            throw new Error(
+                result.error?.message ||
+                "Registration failed"
+            );
+        }
+
+        message.style.color = "green";
+
+        message.textContent =
+            "Registration submitted successfully.";
+
+        document
+            .getElementById("studentForm")
+            .reset();
+
+    } catch (error) {
+
+        message.style.color = "red";
+
+        message.textContent =
+            "ERROR: " + error.message;
+
+    } finally {
+
+        submitBtn.disabled = false;
+        submitBtn.textContent =
+            "SUBMIT REGISTRATION";
+    }
+
+});
+
+</script>
+
+</body>
+</html>
