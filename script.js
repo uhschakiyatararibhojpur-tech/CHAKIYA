@@ -388,11 +388,7 @@ const aadhaarBack =
 }
             
 
-            // SUCCESS
-            showMashaalMessage(
-                "✅ आपका MASHAL SPORTS 2026 Registration सफलतापूर्वक जमा हो गया है।",
-                "success"
-            );
+            
 
 
             // CLEAR FORM
