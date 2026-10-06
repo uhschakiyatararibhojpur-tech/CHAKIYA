@@ -53,6 +53,63 @@ app.get("/api/students", async (req, res) => {
         });
     }
 });
+// Upload student photo to Supabase Storage
+async function uploadStudentPhoto(base64Data, studentName) {
+
+    if (!base64Data) {
+        return "";
+    }
+
+    const parts = base64Data.split(",");
+
+    if (parts.length !== 2) {
+        throw new Error("Invalid student photo data");
+    }
+
+    const mimeMatch = parts[0].match(/data:(.*);base64/);
+
+    if (!mimeMatch) {
+        throw new Error("Invalid student photo format");
+    }
+
+    const contentType = mimeMatch[1];
+
+    const extension =
+        contentType === "image/png" ? "png" : "jpg";
+
+    const safeName =
+        (studentName || "student")
+        .replace(/[^a-zA-Z0-9]/g, "_");
+
+    const filePath =
+        safeName + "_" + Date.now() + "." + extension;
+
+    const fileBytes =
+        Buffer.from(parts[1], "base64");
+
+    const response = await fetch(
+        `${SUPABASE_URL}/storage/v1/object/student-photos/${filePath}`,
+        {
+            method: "POST",
+            headers: {
+                apikey: SUPABASE_KEY,
+                Authorization: `Bearer ${SUPABASE_KEY}`,
+                "Content-Type": contentType
+            },
+            body: fileBytes
+        }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            result.message || "Student photo upload failed"
+        );
+    }
+
+    return filePath;
+}
 // Add a new student
 app.post("/api/students", async (req, res) => {
     try {
