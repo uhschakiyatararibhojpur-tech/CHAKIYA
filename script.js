@@ -408,3 +408,12 @@ const aadhaarBack =
     });
 
 }
+// CHAKIYA BACKEND TEST
+fetch("https://chakiya.onrender.com/api/test")
+    .then(response => response.json())
+    .then(data => {
+        console.log("CHAKIYA BACKEND:", data);
+    })
+    .catch(error => {
+        console.error("CHAKIYA BACKEND ERROR:", error);
+    });
