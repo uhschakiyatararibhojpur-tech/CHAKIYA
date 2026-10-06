@@ -220,6 +220,15 @@
                         id="admissionNumber"
                     >
                 </div>
+                <div class="field full">
+    <label>Student Photo</label>
+    <input
+        type="file"
+        id="studentPhoto"
+        accept="image/*"
+        required
+    >
+</div>
 
             </div>
 
@@ -243,6 +252,18 @@
 
 const API_URL =
     "https://chakiya.onrender.com/api/students";
+    function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+
+        const reader = new FileReader();
+
+        reader.onload = () => resolve(reader.result);
+
+        reader.onerror = error => reject(error);
+
+        reader.readAsDataURL(file);
+    });
+}
 
 document
 .getElementById("studentForm")
@@ -258,7 +279,19 @@ document
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting...";
+const photoFile =
+    document.getElementById("studentPhoto").files[0];
 
+if (!photoFile) {
+    message.style.color = "red";
+    message.textContent = "Please select a student photo.";
+    submitBtn.disabled = false;
+    submitBtn.textContent = "SUBMIT REGISTRATION";
+    return;
+}
+
+const studentPhoto =
+    await fileToBase64(photoFile);
     const student = {
 
         student_name:
@@ -283,7 +316,7 @@ gender:
     document.getElementById("gender").value,
 
 admission_number:
-    document.getElementById("admissionNumber").value.trim()
+    document.getElementById("admissionNumber").value.trim(),
     };
 
     try {
