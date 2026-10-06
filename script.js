@@ -342,46 +342,7 @@ const aadhaarFrontBase64 =
 
 const aadhaarBackBase64 =
     await fileToBase64(aadhaarBack);
-            const requestData = {
-    studentName: studentName,
-    fatherName: fatherName,
-    motherName: motherName,
-    className: className,
-    mobile: mobile,
-    activity: activity,
-    accountNumber: accountNumber,
-    ifsc: ifsc,
-    studentPhoto: studentPhotoBase64,
-    aadhaarFront: aadhaarFrontBase64,
-    aadhaarBack: aadhaarBackBase64
-};
-
-
-const formData = new URLSearchParams();
-
-formData.append("studentName", studentName);
-formData.append("fatherName", fatherName);
-formData.append("motherName", motherName);
-formData.append("className", className);
-formData.append("mobile", mobile);
-formData.append("activity", activity);
-formData.append("accountNumber", accountNumber);
-formData.append("ifsc", ifsc);
-
-formData.append("studentPhoto", studentPhotoBase64);
-formData.append("aadhaarFront", aadhaarFrontBase64);
-formData.append("aadhaarBack", aadhaarBackBase64);
-
-
-            // SEND TO GOOGLE APPS SCRIPT
-           await fetch(
-    MASHAL_SCRIPT_URL,
-    {
-        method: "POST",
-        mode: "no-cors",
-        body: JSON.stringify(requestData)
-    }
-);
+            
 
             // SUCCESS
             showMashaalMessage(
