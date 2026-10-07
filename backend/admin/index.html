@@ -1404,6 +1404,80 @@ function openAttendance() {
     overlay.appendChild(card);
 
     document.body.appendChild(overlay);
+    document
+    .getElementById("attendanceClass")
+    .addEventListener("change", function () {
+
+        const selectedClass = this.value;
+
+        const studentList =
+            document.getElementById("attendanceStudentList");
+
+        if (!selectedClass) {
+            studentList.innerHTML = "";
+            return;
+        }
+
+        const classStudents = students.filter(student =>
+            String(student.class_name) === String(selectedClass)
+        );
+
+        if (classStudents.length === 0) {
+
+            studentList.innerHTML = `
+                <div style="
+                    text-align:center;
+                    padding:20px;
+                    color:#777;
+                    font-size:16px;
+                ">
+                    No students found in Class ${selectedClass}.
+                </div>
+            `;
+
+            return;
+        }
+
+        studentList.innerHTML = `
+            <h3 style="
+                color:#0a2743;
+                margin-bottom:15px;
+            ">
+                Class ${selectedClass} Students
+            </h3>
+
+            ${classStudents.map(student => `
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    justify-content:space-between;
+                    gap:15px;
+                    padding:12px;
+                    margin-bottom:8px;
+                    border:1px solid #ddd;
+                    border-radius:8px;
+                    background:#f8f9fa;
+                ">
+
+                    <div>
+                        <strong>
+                            ${student.student_name || ""}
+                        </strong>
+
+                        <div style="
+                            font-size:13px;
+                            color:#777;
+                            margin-top:3px;
+                        ">
+                            Admission No:
+                            ${student.admission_number || "-"}
+                        </div>
+                    </div>
+
+                </div>
+            `).join("")}
+        `;
+    });
 }
     function openAttendance() {
 
