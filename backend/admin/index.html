@@ -363,19 +363,7 @@ row.innerHTML = `
             margin-left:5px;
         "
     >EDIT</button>
-    <button
-    onclick="deleteStudent(${student.id})"
-    style="
-        padding:7px 12px;
-        border:0;
-        border-radius:6px;
-        background:#dc3545;
-        color:white;
-        cursor:pointer;
-        font-weight:bold;
-        margin-left:5px;
-    "
->DELETE</button>
+    
     <button
     onclick="deleteStudent(${student.id})"
     style="
@@ -720,27 +708,22 @@ function openStudentPhoto(studentId) {
     card.innerHTML = `
 
         <button
-            const editOverlay = document.getElementById("editStudentOverlay");
-
-if (editOverlay) {
-    editOverlay.remove();
-}
-            style="
-                position:absolute;
-                top:12px;
-                right:12px;
-                border:0;
-                background:#e74c3c;
-                color:white;
-                width:32px;
-                height:32px;
-                border-radius:50%;
-                cursor:pointer;
-                font-size:18px;
-                font-weight:bold;
-            "
-        >×</button>
-
+    onclick="document.getElementById('editStudentOverlay').remove()"
+    style="
+        position:absolute;
+        top:12px;
+        right:12px;
+        border:0;
+        background:#e74c3c;
+        color:white;
+        width:32px;
+        height:32px;
+        border-radius:50%;
+        cursor:pointer;
+        font-size:18px;
+        font-weight:bold;
+    "
+>×</button>
         <h2 style="
             text-align:center;
             color:#0a2743;
@@ -903,7 +886,11 @@ if (editOverlay) {
 
         alert("Student updated successfully.");
 
-        document.getElementById("editStudentOverlay").remove();
+        const editOverlay = document.getElementById("editStudentOverlay");
+
+if (editOverlay) {
+    editOverlay.remove();
+}
 
         await loadStudents();
 
