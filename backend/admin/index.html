@@ -1517,7 +1517,7 @@ attendanceClass.addEventListener("change", function () {
                         padding:7px 12px;
                         border:0;
                         border-radius:6px;
-                        background:#198754;
+                        background:${currentStatus === "Present" ? "#146c43" : "#198754"};
                         color:white;
                         cursor:pointer;
                         margin-right:5px;
@@ -1531,7 +1531,7 @@ attendanceClass.addEventListener("change", function () {
                         padding:7px 12px;
                         border:0;
                         border-radius:6px;
-                        background:#dc3545;
+                        background:${currentStatus === "Absent" ? "#b02a37" : "#dc3545"};
                         color:white;
                         cursor:pointer;
                         margin-right:5px;
@@ -1545,7 +1545,7 @@ attendanceClass.addEventListener("change", function () {
                         padding:7px 12px;
                         border:0;
                         border-radius:6px;
-                        background:#ffc107;
+                        background:${currentStatus === "Leave" ? "#d39e00" : "#ffc107"};
                         color:#222;
                         cursor:pointer;
                     "
