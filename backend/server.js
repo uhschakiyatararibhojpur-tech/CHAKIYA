@@ -249,6 +249,66 @@ app.get("/api/student-photo", async (req, res) => {
         });
     }
 });
+// Update student
+app.put("/api/students/:id", async (req, res) => {
+    try {
+
+        const studentId = req.params.id;
+        const student = req.body;
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/students?id=eq.${studentId}`,
+            {
+                method: "PATCH",
+
+                headers: {
+                    apikey: SUPABASE_KEY,
+                    Authorization: `Bearer ${SUPABASE_KEY}`,
+                    "Content-Type": "application/json",
+                    Prefer: "return=representation"
+                },
+
+                body: JSON.stringify({
+                    student_name: student.student_name,
+                    father_name: student.father_name,
+                    mother_name: student.mother_name,
+                    class_name: student.class_name,
+                    date_of_birth: student.date_of_birth,
+                    gender: student.gender,
+                    mobile: student.mobile,
+                    admission_number: student.admission_number
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            return res.status(response.status).json({
+                success: false,
+                error: data
+            });
+        }
+
+        return res.json({
+            success: true,
+            message: "Student updated successfully.",
+            student: data
+        });
+
+    } catch (error) {
+
+        console.error(
+            "STUDENT UPDATE ERROR:",
+            error
+        );
+
+        return res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
