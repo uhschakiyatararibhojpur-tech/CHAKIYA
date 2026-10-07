@@ -302,17 +302,19 @@ row.innerHTML = `
     ${
         student.student_photo_path
         ? `<img
-            id="student-photo-${student.id}"
-            src=""
-            alt="Student Photo"
-            style="
-                width:60px;
-                height:60px;
-                object-fit:cover;
-                border-radius:50%;
-                border:2px solid #0a2743;
-            "
-        >`
+    id="student-photo-${student.id}"
+    src=""
+    alt="Student Photo"
+    onclick="openStudentPhoto('${student.id}')"
+    style="
+        width:60px;
+        height:60px;
+        object-fit:cover;
+        border-radius:50%;
+        border:2px solid #0a2743;
+        cursor:pointer;
+    "
+>`
         : `<span style="color:red;">No Photo</span>`
     }
 </td>
@@ -375,7 +377,59 @@ document.getElementById("search").addEventListener("input", function () {
 
     displayStudents(filtered);
 });
+function openStudentPhoto(studentId) {
 
+    const photo =
+        document.getElementById(
+            `student-photo-${studentId}`
+        );
+
+    if (!photo || !photo.src) {
+        return;
+    }
+
+    const overlay =
+        document.createElement("div");
+
+    overlay.id = "photoOverlay";
+
+    overlay.style.cssText = `
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.85);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        z-index:9999;
+        cursor:pointer;
+    `;
+
+    const largePhoto =
+        document.createElement("img");
+
+    largePhoto.src = photo.src;
+
+    largePhoto.style.cssText = `
+        max-width:90%;
+        max-height:90%;
+        object-fit:contain;
+        border-radius:10px;
+        box-shadow:0 0 25px rgba(255,255,255,0.3);
+        cursor:default;
+    `;
+
+    overlay.appendChild(largePhoto);
+
+    overlay.addEventListener("click", function(event) {
+
+        if (event.target === overlay) {
+            overlay.remove();
+        }
+
+    });
+
+    document.body.appendChild(overlay);
+}
 loadStudents();
 
 </script>
