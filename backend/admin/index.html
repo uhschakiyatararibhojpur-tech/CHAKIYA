@@ -1459,9 +1459,104 @@ loadStudents();
 </div>
     `;
 
-    overlay.appendChild(card);
+   overlay.appendChild(card);
 
-    document.body.appendChild(overlay);
+document.body.appendChild(overlay);
+
+const attendanceClass =
+    document.getElementById("attendanceClass");
+
+const attendanceStudentList =
+    document.getElementById("attendanceStudentList");
+
+attendanceClass.addEventListener("change", function () {
+
+    const selectedClass = this.value;
+
+    attendanceStudentList.innerHTML = "";
+
+    if (!selectedClass) {
+        return;
+    }
+
+    const classStudents = students.filter(student =>
+        student.class_name === selectedClass
+    );
+
+    if (classStudents.length === 0) {
+        attendanceStudentList.innerHTML =
+            "<p style='text-align:center;color:#777;'>No students found in this class.</p>";
+        return;
+    }
+
+    classStudents.forEach(student => {
+
+        const row = document.createElement("div");
+
+        row.style.cssText = `
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:10px;
+            padding:12px;
+            margin-bottom:8px;
+            border:1px solid #ddd;
+            border-radius:8px;
+            background:#f8f9fa;
+        `;
+
+        row.innerHTML = `
+            <strong>
+                ${student.student_name || ""}
+            </strong>
+
+            <div>
+                <button
+                    style="
+                        padding:7px 12px;
+                        border:0;
+                        border-radius:6px;
+                        background:#198754;
+                        color:white;
+                        cursor:pointer;
+                        margin-right:5px;
+                    "
+                >
+                    Present
+                </button>
+
+                <button
+                    style="
+                        padding:7px 12px;
+                        border:0;
+                        border-radius:6px;
+                        background:#dc3545;
+                        color:white;
+                        cursor:pointer;
+                        margin-right:5px;
+                    "
+                >
+                    Absent
+                </button>
+
+                <button
+                    style="
+                        padding:7px 12px;
+                        border:0;
+                        border-radius:6px;
+                        background:#ffc107;
+                        color:#222;
+                        cursor:pointer;
+                    "
+                >
+                    Leave
+                </button>
+            </div>
+        `;
+
+        attendanceStudentList.appendChild(row);
+    });
+});
 }
 </script>
 
