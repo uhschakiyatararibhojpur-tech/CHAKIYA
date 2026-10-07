@@ -1404,54 +1404,64 @@ function openAttendance() {
     overlay.appendChild(card);
 
     document.body.appendChild(overlay);
-    document
-    .getElementById("attendanceClass")
-    .addEventListener("change", function () {
+    const attendanceClass =
+    document.getElementById("attendanceClass");
 
-        const selectedClass = this.value;
+const attendanceStudentList =
+    document.getElementById("attendanceStudentList");
 
-        const studentList =
-            document.getElementById("attendanceStudentList");
+attendanceClass.onchange = function () {
 
-        if (!selectedClass) {
-            studentList.innerHTML = "";
-            return;
-        }
+    const selectedClass = String(this.value).trim();
 
-        const classStudents = students.filter(student =>
-            String(student.class_name) === String(selectedClass)
-        );
+    if (!selectedClass) {
+        attendanceStudentList.innerHTML = "";
+        return;
+    }
 
-        if (classStudents.length === 0) {
+    const classStudents = students.filter(function(student) {
 
-            studentList.innerHTML = `
-                <div style="
-                    text-align:center;
-                    padding:20px;
-                    color:#777;
-                    font-size:16px;
-                ">
-                    No students found in Class ${selectedClass}.
-                </div>
-            `;
+        const studentClass =
+            String(student.class_name || "")
+                .trim()
+                .toLowerCase()
+                .replace("class ", "");
 
-            return;
-        }
+        return studentClass === selectedClass;
+    });
 
-        studentList.innerHTML = `
-            <h3 style="
-                color:#0a2743;
-                margin-bottom:15px;
+    if (classStudents.length === 0) {
+
+        attendanceStudentList.innerHTML = `
+            <div style="
+                padding:20px;
+                text-align:center;
+                background:#f8f9fa;
+                border-radius:8px;
+                color:#777;
             ">
-                Class ${selectedClass} Students
-            </h3>
+                No students found in Class ${selectedClass}.
+            </div>
+        `;
 
-            ${classStudents.map(student => `
+        return;
+    }
+
+    attendanceStudentList.innerHTML = `
+        <h3 style="
+            color:#0a2743;
+            margin:20px 0 12px;
+        ">
+            Class ${selectedClass} Students
+        </h3>
+
+        ${classStudents.map(function(student) {
+
+            return `
                 <div style="
                     display:flex;
-                    align-items:center;
                     justify-content:space-between;
-                    gap:15px;
+                    align-items:center;
                     padding:12px;
                     margin-bottom:8px;
                     border:1px solid #ddd;
@@ -1475,9 +1485,11 @@ function openAttendance() {
                     </div>
 
                 </div>
-            `).join("")}
-        `;
-    });
+            `;
+
+        }).join("")}
+    `;
+};
 }
     function openAttendance() {
 
