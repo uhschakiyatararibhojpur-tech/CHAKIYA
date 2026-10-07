@@ -292,15 +292,29 @@ function displayStudents(list) {
 
         const row = document.createElement("tr");
 
-        row.innerHTML = `
-            <td>${student.id}</td>
-            <td>${student.student_name || ""}</td>
-            <td>${student.father_name || ""}</td>
-            <td>${student.mother_name || ""}</td>
-            <td>${student.class_name || ""}</td>
-            <td>${student.mobile || ""}</td>
-            <td>${student.admission_number || ""}</td>
-        `;
+row.innerHTML = `
+    <td>${student.id}</td>
+
+    <td>
+        ${
+            student.student_photo_path
+            ? `<span style="color:green;font-weight:bold;">PHOTO</span>`
+            : `<span style="color:red;">No Photo</span>`
+        }
+    </td>
+
+    <td>${student.student_name || ""}</td>
+
+    <td>${student.father_name || ""}</td>
+
+    <td>${student.mother_name || ""}</td>
+
+    <td>${student.class_name || ""}</td>
+
+    <td>${student.mobile || ""}</td>
+
+    <td>${student.admission_number || ""}</td>
+`;
 
         table.appendChild(row);
     });
