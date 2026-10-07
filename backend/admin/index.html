@@ -1151,7 +1151,12 @@ if (editOverlay) {
     document.body.appendChild(overlay);
 }
     async function saveNewStudent() {
+const photoInput = document.getElementById("addStudentPhoto");
 
+const photoFile =
+    photoInput && photoInput.files.length > 0
+        ? photoInput.files[0]
+        : null;
     const newStudent = {
         student_name: document.getElementById("addStudentName").value.trim(),
         father_name: document.getElementById("addFatherName").value.trim(),
@@ -1162,7 +1167,22 @@ if (editOverlay) {
         mobile: document.getElementById("addMobile").value.trim(),
         admission_number: document.getElementById("addAdmissionNumber").value.trim()
     };
+let studentPhotoBase64 = "";
 
+if (photoFile) {
+
+    studentPhotoBase64 = await new Promise((resolve, reject) => {
+
+        const reader = new FileReader();
+
+        reader.onload = () => resolve(reader.result);
+
+        reader.onerror = () =>
+            reject(new Error("Unable to read student photo."));
+
+        reader.readAsDataURL(photoFile);
+    });
+}
     if (!newStudent.student_name) {
         alert("Please enter Student Name.");
         return;
@@ -1182,7 +1202,10 @@ if (editOverlay) {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(newStudent)
+                body: JSON.stringify({
+    ...newStudent,
+    student_photo: studentPhotoBase64
+})
             }
         );
 
