@@ -1404,35 +1404,61 @@ function openAttendance() {
     overlay.appendChild(card);
 
     document.body.appendChild(overlay);
-    const attendanceClass =
+    // ATTENDANCE STUDENT LIST
+const classSelect =
     document.getElementById("attendanceClass");
 
-const attendanceStudentList =
+let studentList =
     document.getElementById("attendanceStudentList");
 
-attendanceClass.onchange = function () {
+// Create student list area if it does not already exist
+if (!studentList) {
 
-    const selectedClass = String(this.value).trim();
+    studentList = document.createElement("div");
+
+    studentList.id = "attendanceStudentList";
+
+    studentList.style.cssText = `
+        margin-top:25px;
+    `;
+
+    const attendanceCard =
+        document.querySelector("#attendanceOverlay > div");
+
+    attendanceCard.appendChild(studentList);
+}
+
+
+// When class is selected
+classSelect.addEventListener("change", function () {
+
+    const selectedClass =
+        String(this.value).trim();
+
+    studentList.innerHTML = "";
 
     if (!selectedClass) {
-        attendanceStudentList.innerHTML = "";
         return;
     }
 
+
+    // Find students of selected class
     const classStudents = students.filter(function(student) {
 
         const studentClass =
             String(student.class_name || "")
                 .trim()
-                .toLowerCase()
-                .replace("class ", "");
+                .replace(/^class\s*/i, "");
 
         return studentClass === selectedClass;
+
     });
 
+
+    // No students
     if (classStudents.length === 0) {
 
-        attendanceStudentList.innerHTML = `
+        studentList.innerHTML = `
             <div style="
                 padding:20px;
                 text-align:center;
@@ -1447,7 +1473,10 @@ attendanceClass.onchange = function () {
         return;
     }
 
-    attendanceStudentList.innerHTML = `
+
+    // Show students
+    studentList.innerHTML = `
+
         <h3 style="
             color:#0a2743;
             margin:20px 0 12px;
@@ -1458,11 +1487,12 @@ attendanceClass.onchange = function () {
         ${classStudents.map(function(student) {
 
             return `
+
                 <div style="
                     display:flex;
-                    justify-content:space-between;
                     align-items:center;
-                    padding:12px;
+                    justify-content:space-between;
+                    padding:13px;
                     margin-bottom:8px;
                     border:1px solid #ddd;
                     border-radius:8px;
@@ -1477,7 +1507,7 @@ attendanceClass.onchange = function () {
                         <div style="
                             font-size:13px;
                             color:#777;
-                            margin-top:3px;
+                            margin-top:4px;
                         ">
                             Admission No:
                             ${student.admission_number || "-"}
@@ -1485,11 +1515,14 @@ attendanceClass.onchange = function () {
                     </div>
 
                 </div>
+
             `;
 
         }).join("")}
+
     `;
-};
+
+});
 }
     function openAttendance() {
 
