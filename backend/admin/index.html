@@ -296,12 +296,23 @@ row.innerHTML = `
     <td>${student.id}</td>
 
     <td>
-        ${
-            student.student_photo_path
-            ? `<span style="color:green;font-weight:bold;">PHOTO</span>`
-            : `<span style="color:red;">No Photo</span>`
-        }
-    </td>
+    ${
+        student.student_photo_path
+        ? `<img
+            id="student-photo-${student.id}"
+            src=""
+            alt="Student Photo"
+            style="
+                width:60px;
+                height:60px;
+                object-fit:cover;
+                border-radius:50%;
+                border:2px solid #0a2743;
+            "
+        >`
+        : `<span style="color:red;">No Photo</span>`
+    }
+</td>
 
     <td>${student.student_name || ""}</td>
 
@@ -316,7 +327,32 @@ row.innerHTML = `
     <td>${student.admission_number || ""}</td>
 `;
 
-        table.appendChild(row);
+        table.appendChild(row);if (student.student_photo_path) {
+
+    fetch(
+        `https://chakiya.onrender.com/api/student-photo?path=${encodeURIComponent(student.student_photo_path)}`
+    )
+    .then(response => response.json())
+    .then(result => {
+
+        if (result.success) {
+
+            const photo =
+                document.getElementById(
+                    `student-photo-${student.id}`
+                );
+
+            if (photo) {
+                photo.src = result.url;
+            }
+
+        }
+
+    })
+    .catch(error => {
+        console.error("Photo loading error:", error);
+    });
+}
     });
 }
 
