@@ -1525,7 +1525,7 @@ attendanceClass.addEventListener("change", function () {
                     Present
                 </button>
 
-                <button
+                <button onclick="saveAttendance(${student.id}, 'Absent')"
                     style="
                         padding:7px 12px;
                         border:0;
