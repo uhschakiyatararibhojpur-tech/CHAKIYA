@@ -190,8 +190,10 @@
                         <th>Father Name</th>
                         <th>Mother Name</th>
                         <th>Class</th>
-                        <th>Mobile</th>
-                        <th>Admission No.</th>
+<th>Date of Birth</th>
+<th>Gender</th>
+<th>Mobile</th>
+<th>Admission No.</th>
                     </tr>
                 </thead>
 
@@ -322,9 +324,13 @@ row.innerHTML = `
 
     <td>${student.class_name || ""}</td>
 
-    <td>${student.mobile || ""}</td>
+<td>${student.date_of_birth || ""}</td>
 
-    <td>${student.admission_number || ""}</td>
+<td>${student.gender || ""}</td>
+
+<td>${student.mobile || ""}</td>
+
+<td>${student.admission_number || ""}</td>
 `;
 
         table.appendChild(row);if (student.student_photo_path) {
