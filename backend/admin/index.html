@@ -194,6 +194,20 @@
             class="search"
             placeholder="Search student name..."
         >
+        <select
+    id="classFilter"
+    class="search"
+    style="margin-top:10px;"
+>
+    <option value="">All Classes</option>
+    <option value="6">Class 6</option>
+    <option value="7">Class 7</option>
+    <option value="8">Class 8</option>
+    <option value="9">Class 9</option>
+    <option value="10">Class 10</option>
+    <option value="11">Class 11</option>
+    <option value="12">Class 12</option>
+</select>
 
         <div class="table-wrapper">
 
@@ -425,18 +439,34 @@ row.innerHTML = `
     });
 }
 
-document.getElementById("search").addEventListener("input", function () {
+document.getElementById("search").addEventListener("input", filterStudents);
 
-    const searchText = this.value.toLowerCase();
+document.getElementById("classFilter").addEventListener("change", filterStudents);
 
-    const filtered = students.filter(student =>
-        (student.student_name || "")
-            .toLowerCase()
-            .includes(searchText)
-    );
+function filterStudents() {
+
+    const searchText =
+        document.getElementById("search").value.toLowerCase();
+
+    const selectedClass =
+        document.getElementById("classFilter").value;
+
+    const filtered = students.filter(student => {
+
+        const nameMatch =
+            (student.student_name || "")
+                .toLowerCase()
+                .includes(searchText);
+
+        const classMatch =
+            !selectedClass ||
+            student.class_name === selectedClass;
+
+        return nameMatch && classMatch;
+    });
 
     displayStudents(filtered);
-});
+}
 function openStudentPhoto(studentId) {
 
     const photo =
