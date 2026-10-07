@@ -330,13 +330,28 @@ async function loadStudents() {
 function updateDashboard() {
 
     document.getElementById("totalStudents").textContent =
-        students.length;
+    students.length;
 
-    document.getElementById("class9").textContent =
-        students.filter(s => s.class_name === "9").length;
+document.getElementById("class6").textContent =
+    students.filter(s => s.class_name === "6").length;
 
-    document.getElementById("class10").textContent =
-        students.filter(s => s.class_name === "10").length;
+document.getElementById("class7").textContent =
+    students.filter(s => s.class_name === "7").length;
+
+document.getElementById("class8").textContent =
+    students.filter(s => s.class_name === "8").length;
+
+document.getElementById("class9").textContent =
+    students.filter(s => s.class_name === "9").length;
+
+document.getElementById("class10").textContent =
+    students.filter(s => s.class_name === "10").length;
+
+document.getElementById("class11").textContent =
+    students.filter(s => s.class_name === "11").length;
+
+document.getElementById("class12").textContent =
+    students.filter(s => s.class_name === "12").length;
 
     displayStudents(students);
 }
