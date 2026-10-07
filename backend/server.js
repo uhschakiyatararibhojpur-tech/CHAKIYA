@@ -356,9 +356,9 @@ app.delete("/api/students/:id", async (req, res) => {
     }
 });
 // Save student attendance
+// Save or update student attendance
 app.post("/api/attendance", async (req, res) => {
     try {
-
         const {
             student_id,
             attendance_date,
@@ -380,17 +380,15 @@ app.post("/api/attendance", async (req, res) => {
         }
 
         const response = await fetch(
-            `${SUPABASE_URL}/rest/v1/attendance`,
+            `${SUPABASE_URL}/rest/v1/attendance?on_conflict=student_id,attendance_date`,
             {
                 method: "POST",
-
                 headers: {
                     apikey: SUPABASE_KEY,
                     Authorization: `Bearer ${SUPABASE_KEY}`,
                     "Content-Type": "application/json",
-                    Prefer: "return=representation"
+                    Prefer: "resolution=merge-duplicates,return=representation"
                 },
-
                 body: JSON.stringify({
                     student_id: student_id,
                     attendance_date: attendance_date,
@@ -415,11 +413,7 @@ app.post("/api/attendance", async (req, res) => {
         });
 
     } catch (error) {
-
-        console.error(
-            "ATTENDANCE ERROR:",
-            error
-        );
+        console.error("ATTENDANCE ERROR:", error);
 
         return res.status(500).json({
             success: false,
