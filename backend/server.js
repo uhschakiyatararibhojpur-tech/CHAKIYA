@@ -194,6 +194,61 @@ app.post("/api/students", async (req, res) => {
         });
     }
 });
+// Get temporary secure URL for a student photo
+app.get("/api/student-photo", async (req, res) => {
+    try {
+
+        const filePath = req.query.path;
+
+        if (!filePath) {
+            return res.status(400).json({
+                success: false,
+                error: "Photo path is required"
+            });
+        }
+
+        const response = await fetch(
+            `${SUPABASE_URL}/storage/v1/object/sign/student-photos/${encodeURIComponent(filePath)}`,
+            {
+                method: "POST",
+                headers: {
+                    apikey: SUPABASE_KEY,
+                    Authorization: `Bearer ${SUPABASE_KEY}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    expiresIn: 3600
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            return res.status(response.status).json({
+                success: false,
+                error: data
+            });
+        }
+
+        return res.json({
+            success: true,
+            url: `${SUPABASE_URL}${data.signedURL}`
+        });
+
+    } catch (error) {
+
+        console.error(
+            "PHOTO URL ERROR:",
+            error
+        );
+
+        return res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
