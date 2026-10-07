@@ -195,6 +195,7 @@
 <th>Gender</th>
 <th>Mobile</th>
 <th>Admission No.</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
@@ -334,6 +335,22 @@ row.innerHTML = `
 <td>${student.mobile || ""}</td>
 
 <td>${student.admission_number || ""}</td>
+<td>
+    <button
+        onclick="viewStudent(${student.id})"
+        style="
+            padding:7px 12px;
+            border:0;
+            border-radius:6px;
+            background:#0a2743;
+            color:white;
+            cursor:pointer;
+            font-weight:bold;
+        "
+    >
+        VIEW
+    </button>
+</td>
 `;
 
         table.appendChild(row);if (student.student_photo_path) {
@@ -429,6 +446,201 @@ function openStudentPhoto(studentId) {
     });
 
     document.body.appendChild(overlay);
+}
+    function viewStudent(studentId) {
+
+    const student =
+        students.find(s => s.id == studentId);
+
+    if (!student) {
+        return;
+    }
+
+    const overlay =
+        document.createElement("div");
+
+    overlay.id = "studentDetailsOverlay";
+
+    overlay.style.cssText = `
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.75);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        z-index:9998;
+        padding:20px;
+        overflow:auto;
+    `;
+
+    const card =
+        document.createElement("div");
+
+    card.style.cssText = `
+        background:white;
+        width:100%;
+        max-width:600px;
+        border-radius:15px;
+        padding:25px;
+        box-shadow:0 5px 30px rgba(0,0,0,0.3);
+        position:relative;
+    `;
+
+    card.innerHTML = `
+
+        <button
+            onclick="document.getElementById('studentDetailsOverlay').remove()"
+            style="
+                position:absolute;
+                top:12px;
+                right:12px;
+                border:0;
+                background:#e74c3c;
+                color:white;
+                width:32px;
+                height:32px;
+                border-radius:50%;
+                cursor:pointer;
+                font-size:18px;
+                font-weight:bold;
+            "
+        >
+            ×
+        </button>
+
+        <h2 style="
+            text-align:center;
+            color:#0a2743;
+            margin-top:0;
+        ">
+            Student Details
+        </h2>
+
+        <div style="text-align:center;margin-bottom:20px;">
+
+            ${
+                student.student_photo_path
+                ? `<img
+                    id="detail-photo-${student.id}"
+                    src=""
+                    style="
+                        width:130px;
+                        height:130px;
+                        object-fit:cover;
+                        border-radius:50%;
+                        border:4px solid #0a2743;
+                    "
+                >`
+                : `<div>No Photo</div>`
+            }
+
+        </div>
+
+        <table style="
+            width:100%;
+            border-collapse:collapse;
+        ">
+
+            <tr>
+                <th style="text-align:left;padding:9px;">Student Name</th>
+                <td style="padding:9px;">
+                    ${student.student_name || ""}
+                </td>
+            </tr>
+
+            <tr>
+                <th style="text-align:left;padding:9px;">Father Name</th>
+                <td style="padding:9px;">
+                    ${student.father_name || ""}
+                </td>
+            </tr>
+
+            <tr>
+                <th style="text-align:left;padding:9px;">Mother Name</th>
+                <td style="padding:9px;">
+                    ${student.mother_name || ""}
+                </td>
+            </tr>
+
+            <tr>
+                <th style="text-align:left;padding:9px;">Class</th>
+                <td style="padding:9px;">
+                    ${student.class_name || ""}
+                </td>
+            </tr>
+
+            <tr>
+                <th style="text-align:left;padding:9px;">Date of Birth</th>
+                <td style="padding:9px;">
+                    ${student.date_of_birth || ""}
+                </td>
+            </tr>
+
+            <tr>
+                <th style="text-align:left;padding:9px;">Gender</th>
+                <td style="padding:9px;">
+                    ${student.gender || ""}
+                </td>
+            </tr>
+
+            <tr>
+                <th style="text-align:left;padding:9px;">Mobile</th>
+                <td style="padding:9px;">
+                    ${student.mobile || ""}
+                </td>
+            </tr>
+
+            <tr>
+                <th style="text-align:left;padding:9px;">Admission Number</th>
+                <td style="padding:9px;">
+                    ${student.admission_number || ""}
+                </td>
+            </tr>
+
+        </table>
+    `;
+
+    overlay.appendChild(card);
+
+    overlay.addEventListener("click", function(event) {
+
+        if (event.target === overlay) {
+            overlay.remove();
+        }
+
+    });
+
+    document.body.appendChild(overlay);
+
+    if (student.student_photo_path) {
+
+        fetch(
+            `https://chakiya.onrender.com/api/student-photo?path=${encodeURIComponent(student.student_photo_path)}`
+        )
+        .then(response => response.json())
+        .then(result => {
+
+            if (result.success) {
+
+                const photo =
+                    document.getElementById(
+                        `detail-photo-${student.id}`
+                    );
+
+                if (photo) {
+                    photo.src = result.url;
+                }
+
+            }
+
+        })
+        .catch(error => {
+            console.error(
+                "Detail photo loading error:",
+                error
+            );
+        });
+    }
 }
 loadStudents();
 
