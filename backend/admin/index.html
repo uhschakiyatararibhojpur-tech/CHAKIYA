@@ -454,15 +454,16 @@ function openStudentPhoto(studentId) {
     overlay.id = "photoOverlay";
 
     overlay.style.cssText = `
-        position:fixed;
-        inset:0;
-        background:rgba(0,0,0,0.85);
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        z-index:9999;
-        cursor:pointer;
-    `;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    z-index:9999;
+    padding:20px;
+    overflow-y:auto;
+`;
 
     const largePhoto =
         document.createElement("img");
@@ -520,14 +521,16 @@ function openStudentPhoto(studentId) {
         document.createElement("div");
 
     card.style.cssText = `
-        background:white;
-        width:100%;
-        max-width:600px;
-        border-radius:15px;
-        padding:25px;
-        box-shadow:0 5px 30px rgba(0,0,0,0.3);
-        position:relative;
-    `;
+    background:white;
+    width:100%;
+    max-width:600px;
+    max-height:calc(100vh - 40px);
+    overflow-y:auto;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 5px 30px rgba(0,0,0,0.3);
+    position:relative;
+`;
 
     card.innerHTML = `
 
