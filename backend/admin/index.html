@@ -655,6 +655,180 @@ function openStudentPhoto(studentId) {
         });
     }
 }
+    function editStudent(studentId) {
+
+    const student = students.find(s => s.id == studentId);
+
+    if (!student) {
+        return;
+    }
+
+    const overlay = document.createElement("div");
+
+    overlay.id = "editStudentOverlay";
+
+    overlay.style.cssText = `
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.75);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        z-index:9999;
+        padding:20px;
+        overflow:auto;
+    `;
+
+    const card = document.createElement("div");
+
+    card.style.cssText = `
+        background:white;
+        width:100%;
+        max-width:600px;
+        border-radius:15px;
+        padding:25px;
+        box-shadow:0 5px 30px rgba(0,0,0,0.3);
+        position:relative;
+    `;
+
+    card.innerHTML = `
+
+        <button
+            onclick="document.getElementById('editStudentOverlay').remove()"
+            style="
+                position:absolute;
+                top:12px;
+                right:12px;
+                border:0;
+                background:#e74c3c;
+                color:white;
+                width:32px;
+                height:32px;
+                border-radius:50%;
+                cursor:pointer;
+                font-size:18px;
+                font-weight:bold;
+            "
+        >×</button>
+
+        <h2 style="
+            text-align:center;
+            color:#0a2743;
+            margin-top:0;
+        ">
+            Edit Student
+        </h2>
+
+        <label>Student Name</label>
+        <input id="editStudentName" value="${student.student_name || ""}" style="
+            width:100%;
+            padding:10px;
+            margin:6px 0 12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+        ">
+
+        <label>Father Name</label>
+        <input id="editFatherName" value="${student.father_name || ""}" style="
+            width:100%;
+            padding:10px;
+            margin:6px 0 12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+        ">
+
+        <label>Mother Name</label>
+        <input id="editMotherName" value="${student.mother_name || ""}" style="
+            width:100%;
+            padding:10px;
+            margin:6px 0 12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+        ">
+
+        <label>Class</label>
+        <input id="editClassName" value="${student.class_name || ""}" style="
+            width:100%;
+            padding:10px;
+            margin:6px 0 12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+        ">
+
+        <label>Date of Birth</label>
+        <input
+            type="date"
+            id="editDateOfBirth"
+            value="${student.date_of_birth || ""}"
+            style="
+                width:100%;
+                padding:10px;
+                margin:6px 0 12px;
+                border:1px solid #ccc;
+                border-radius:6px;
+            "
+        >
+
+        <label>Gender</label>
+        <select id="editGender" style="
+            width:100%;
+            padding:10px;
+            margin:6px 0 12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+        ">
+            <option value="">Select Gender</option>
+            <option value="Male" ${student.gender === "Male" ? "selected" : ""}>Male</option>
+            <option value="Female" ${student.gender === "Female" ? "selected" : ""}>Female</option>
+            <option value="Other" ${student.gender === "Other" ? "selected" : ""}>Other</option>
+        </select>
+
+        <label>Mobile</label>
+        <input id="editMobile" value="${student.mobile || ""}" style="
+            width:100%;
+            padding:10px;
+            margin:6px 0 12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+        ">
+
+        <label>Admission Number</label>
+        <input id="editAdmissionNumber" value="${student.admission_number || ""}" style="
+            width:100%;
+            padding:10px;
+            margin:6px 0 15px;
+            border:1px solid #ccc;
+            border-radius:6px;
+        ">
+
+        <button
+            onclick="saveStudentEdit(${student.id})"
+            style="
+                width:100%;
+                padding:12px;
+                border:0;
+                border-radius:7px;
+                background:#198754;
+                color:white;
+                cursor:pointer;
+                font-size:16px;
+                font-weight:bold;
+            "
+        >
+            SAVE CHANGES
+        </button>
+    `;
+
+    overlay.appendChild(card);
+
+    overlay.addEventListener("click", function(event) {
+        if (event.target === overlay) {
+            overlay.remove();
+        }
+    });
+
+    document.body.appendChild(overlay);
+}
 loadStudents();
 
 </script>
