@@ -1136,6 +1136,75 @@ if (editOverlay) {
 
     document.body.appendChild(overlay);
 }
+    async function saveNewStudent() {
+
+    const newStudent = {
+        student_name: document.getElementById("addStudentName").value.trim(),
+        father_name: document.getElementById("addFatherName").value.trim(),
+        mother_name: document.getElementById("addMotherName").value.trim(),
+        class_name: document.getElementById("addClassName").value.trim(),
+        date_of_birth: document.getElementById("addDateOfBirth").value,
+        gender: document.getElementById("addGender").value,
+        mobile: document.getElementById("addMobile").value.trim(),
+        admission_number: document.getElementById("addAdmissionNumber").value.trim()
+    };
+
+    if (!newStudent.student_name) {
+        alert("Please enter Student Name.");
+        return;
+    }
+
+    if (!newStudent.class_name) {
+        alert("Please enter Class.");
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            "https://chakiya.onrender.com/api/students",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newStudent)
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(
+                result.error?.message ||
+                result.error ||
+                "Unable to add student"
+            );
+        }
+
+        alert("Student added successfully.");
+
+        const addOverlay =
+            document.getElementById("addStudentOverlay");
+
+        if (addOverlay) {
+            addOverlay.remove();
+        }
+
+        await loadStudents();
+
+    } catch (error) {
+
+        console.error(
+            "Student registration error:",
+            error
+        );
+
+        alert(
+            "ERROR: " + error.message
+        );
+    }
+}
 loadStudents();
 
 </script>
