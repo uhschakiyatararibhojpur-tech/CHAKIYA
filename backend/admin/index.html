@@ -1405,6 +1405,75 @@ function openAttendance() {
 
     document.body.appendChild(overlay);
 }
+    function openAttendance() {
+
+    const overlay = document.createElement("div");
+
+    overlay.id = "attendanceOverlay";
+
+    overlay.style.cssText = `
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.75);
+        display:flex;
+        align-items:flex-start;
+        justify-content:center;
+        z-index:9999;
+        padding:40px 20px;
+        overflow-y:auto;
+    `;
+
+    const card = document.createElement("div");
+
+    card.style.cssText = `
+        background:white;
+        width:100%;
+        max-width:900px;
+        border-radius:15px;
+        padding:25px;
+        box-shadow:0 5px 30px rgba(0,0,0,0.3);
+        position:relative;
+    `;
+
+    card.innerHTML = `
+        <button
+            onclick="document.getElementById('attendanceOverlay').remove()"
+            style="
+                position:absolute;
+                top:12px;
+                right:12px;
+                border:0;
+                background:#e74c3c;
+                color:white;
+                width:32px;
+                height:32px;
+                border-radius:50%;
+                cursor:pointer;
+                font-size:18px;
+                font-weight:bold;
+            "
+        >×</button>
+
+        <h2 style="
+            text-align:center;
+            color:#0a2743;
+            margin-top:0;
+        ">
+            Attendance Management
+        </h2>
+
+        <p style="
+            text-align:center;
+            color:#666;
+        ">
+            Attendance module
+        </p>
+    `;
+
+    overlay.appendChild(card);
+
+    document.body.appendChild(overlay);
+}
 </script>
 
 </body>
