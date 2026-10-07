@@ -233,7 +233,7 @@ app.get("/api/student-photo", async (req, res) => {
 
         return res.json({
             success: true,
-            url: `${SUPABASE_URL}${data.signedURL}`
+            url: `${SUPABASE_URL}/storage/v1${data.signedURL}`
         });
 
     } catch (error) {
