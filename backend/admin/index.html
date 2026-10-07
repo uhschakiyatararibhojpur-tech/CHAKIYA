@@ -694,7 +694,11 @@ function openStudentPhoto(studentId) {
     card.innerHTML = `
 
         <button
-            onclick="document.getElementById('editStudentOverlay').remove()"
+            const editOverlay = document.getElementById("editStudentOverlay");
+
+if (editOverlay) {
+    editOverlay.remove();
+}
             style="
                 position:absolute;
                 top:12px;
