@@ -309,6 +309,52 @@ app.put("/api/students/:id", async (req, res) => {
         });
     }
 });
+// Delete student
+app.delete("/api/students/:id", async (req, res) => {
+    try {
+
+        const studentId = req.params.id;
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/students?id=eq.${studentId}`,
+            {
+                method: "DELETE",
+                headers: {
+                    apikey: SUPABASE_KEY,
+                    Authorization: `Bearer ${SUPABASE_KEY}`,
+                    Prefer: "return=representation"
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            return res.status(response.status).json({
+                success: false,
+                error: data
+            });
+        }
+
+        return res.json({
+            success: true,
+            message: "Student deleted successfully.",
+            student: data
+        });
+
+    } catch (error) {
+
+        console.error(
+            "STUDENT DELETE ERROR:",
+            error
+        );
+
+        return res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
