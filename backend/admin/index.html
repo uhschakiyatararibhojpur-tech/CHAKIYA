@@ -1492,6 +1492,7 @@ attendanceClass.addEventListener("change", function () {
     classStudents.forEach(student => {
 
         const row = document.createElement("div");
+        let currentStatus = "";
 
         row.style.cssText = `
             display:flex;
