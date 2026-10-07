@@ -903,6 +903,56 @@ if (editOverlay) {
         );
     }
 }
+    async function deleteStudent(studentId) {
+
+    const student = students.find(s => s.id == studentId);
+
+    if (!student) {
+        return;
+    }
+
+    const confirmed = confirm(
+        "Are you sure you want to delete this student?\n\n" +
+        "Student: " + (student.student_name || "") +
+        "\nAdmission No.: " + (student.admission_number || "")
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `https://chakiya.onrender.com/api/students/${studentId}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(
+                result.error?.message ||
+                result.error ||
+                "Unable to delete student"
+            );
+        }
+
+        alert("Student deleted successfully.");
+
+        await loadStudents();
+
+    } catch (error) {
+
+        console.error("Student delete error:", error);
+
+        alert(
+            "ERROR: " + error.message
+        );
+    }
+}
 loadStudents();
 
 </script>
