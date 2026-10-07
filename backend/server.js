@@ -355,6 +355,78 @@ app.delete("/api/students/:id", async (req, res) => {
         });
     }
 });
+// Save student attendance
+app.post("/api/attendance", async (req, res) => {
+    try {
+
+        const {
+            student_id,
+            attendance_date,
+            status
+        } = req.body;
+
+        if (!student_id || !attendance_date || !status) {
+            return res.status(400).json({
+                success: false,
+                error: "Student ID, date and status are required."
+            });
+        }
+
+        if (!["Present", "Absent", "Leave"].includes(status)) {
+            return res.status(400).json({
+                success: false,
+                error: "Invalid attendance status."
+            });
+        }
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/attendance`,
+            {
+                method: "POST",
+
+                headers: {
+                    apikey: SUPABASE_KEY,
+                    Authorization: `Bearer ${SUPABASE_KEY}`,
+                    "Content-Type": "application/json",
+                    Prefer: "return=representation"
+                },
+
+                body: JSON.stringify({
+                    student_id: student_id,
+                    attendance_date: attendance_date,
+                    status: status
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            return res.status(response.status).json({
+                success: false,
+                error: data
+            });
+        }
+
+        return res.json({
+            success: true,
+            message: "Attendance saved successfully.",
+            attendance: data
+        });
+
+    } catch (error) {
+
+        console.error(
+            "ATTENDANCE ERROR:",
+            error
+        );
+
+        return res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
