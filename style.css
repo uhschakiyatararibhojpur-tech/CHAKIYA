@@ -96,10 +96,12 @@ body {
 }
 
 .school-brand p {
-    color: #555555;
+    color: #4b6075;
     font-size: 17px;
+    font-weight: 500;
+    margin-top: 2px;
+    letter-spacing: 0.2px;
 }
-
 .school-brand small {
     color: #df8700;
     font-weight: 700;
