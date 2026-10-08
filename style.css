@@ -1440,6 +1440,9 @@ body {
 
     box-sizing: border-box;
 }
+.mashaal-card h2 {
+    text-shadow: 0 2px 4px rgba(18, 60, 105, 0.12);
+}
 
 .mashaal-card .form-group {
     margin-bottom: 10px;
