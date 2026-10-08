@@ -1523,21 +1523,22 @@ loadStudents();
         </div>
 
         <button
-            style="
-                display:block;
-                margin:25px auto 0;
-                padding:11px 25px;
-                border:0;
-                border-radius:7px;
-                background:#198754;
-                color:white;
-                font-weight:bold;
-                font-size:15px;
-                cursor:pointer;
-            "
-        >
-            GENERATE REPORT
-        </button>
+    onclick="generateAttendanceReport()"
+    style="
+        display:block;
+        margin:25px auto 0;
+        padding:11px 25px;
+        border:0;
+        border-radius:7px;
+        background:#198754;
+        color:white;
+        font-weight:bold;
+        font-size:15px;
+        cursor:pointer;
+    "
+>
+    GENERATE REPORT
+</button>
 
         <div
             id="attendanceReportResult"
