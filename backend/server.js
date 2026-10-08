@@ -466,6 +466,51 @@ app.get("/api/attendance", async (req, res) => {
         });
     }
 });
+app.get("/api/attendance/report", async (req, res) => {
+    try {
+        const { from_date, to_date } = req.query;
+
+        if (!from_date || !to_date) {
+            return res.status(400).json({
+                success: false,
+                error: "From date and To date are required."
+            });
+        }
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/attendance?attendance_date=gte.${encodeURIComponent(from_date)}&attendance_date=lte.${encodeURIComponent(to_date)}&select=id,student_id,attendance_date,status`,
+            {
+                method: "GET",
+                headers: {
+                    apikey: SUPABASE_KEY,
+                    Authorization: `Bearer ${SUPABASE_KEY}`
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            return res.status(response.status).json({
+                success: false,
+                error: data
+            });
+        }
+
+        return res.json({
+            success: true,
+            attendance: data
+        });
+
+    } catch (error) {
+        console.error("ATTENDANCE REPORT ERROR:", error);
+
+        return res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
