@@ -1459,7 +1459,7 @@ body {
 .mashaal-card input[type="email"],
 .mashaal-card input[type="file"] {
     width: 100%;
-    padding: 12px 14px;
+    padding: 9px 14px;
     border: 1px solid #cbd5e1;
     border-radius: 9px;
     box-sizing: border-box;
