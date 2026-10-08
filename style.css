@@ -104,10 +104,11 @@ body {
 /* ================= NAVIGATION ================= */
 
 .navbar {
-    background: #123c69;
+    background: linear-gradient(90deg, #0b3157, #123c69, #174d7d);
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .nav-container {
