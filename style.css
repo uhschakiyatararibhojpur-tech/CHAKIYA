@@ -1483,31 +1483,7 @@ body {
     box-shadow: 0 0 0 3px rgba(18, 60, 105, 0.10);
 }
 
-    width: 100%;
-
-    padding: 13px;
-
-    border: 1px solid #ccd5df;
-
-    border-radius: 7px;
-
-    box-sizing: border-box;
-
-    font-size: 16px;
-
-    background: #ffffff;
-}
-
-.mashaal-card input:focus {
-
-    outline: none;
-
-    border-color: #123c69;
-
-    box-shadow:
-        0 0 0 2px rgba(18,60,105,0.12);
-}
-
+    
 .mashaal-confirmation {
 
     margin: 25px 0;
