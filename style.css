@@ -1624,3 +1624,36 @@ body {
         grid-template-columns: 1fr;
     }
 }
+/* =========================
+   MASHAL COMPACT FORM
+   ========================= */
+
+.mashaal-card {
+    padding: 12px 18px;
+}
+
+.mashaal-card label {
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.mashaal-card .form-group {
+    margin-bottom: 5px;
+}
+
+.mashaal-card input[type="text"],
+.mashaal-card input[type="tel"],
+.mashaal-card input[type="email"],
+.mashaal-card input[type="file"] {
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+#mashaalForm {
+    gap: 7px 14px;
+}
+
+#mashaalSubmit {
+    padding: 10px;
+    font-size: 17px;
+}
