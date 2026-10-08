@@ -1431,7 +1431,8 @@ body {
     border-radius: 15px;
 
     box-shadow:
-        0 8px 30px rgba(0,0,0,0.15);
+        0 15px 40px rgba(0, 0, 0, 0.20),
+        0 4px 12px rgba(18, 60, 105, 0.12);
 
     border-top: 6px solid #f4a300;
 
