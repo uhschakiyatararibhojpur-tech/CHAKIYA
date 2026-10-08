@@ -1527,7 +1527,7 @@ body {
 
     border-radius: 8px;
 
-    background: #123c69;
+    background: linear-gradient(135deg, #123c69, #174d7d);
 
     color: white;
 
