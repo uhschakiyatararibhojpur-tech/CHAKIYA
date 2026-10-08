@@ -1381,6 +1381,215 @@ loadStudents();
         return {};
     }
 }
+    async function generateAttendanceReport() {
+
+    const fromDate =
+        document.getElementById("reportFromDate").value;
+
+    const toDate =
+        document.getElementById("reportToDate").value;
+
+    const selectedClass =
+        document.getElementById("reportClass").value;
+
+    const resultBox =
+        document.getElementById("attendanceReportResult");
+
+    if (!fromDate || !toDate || !selectedClass) {
+        alert("Please select From Date, To Date and Class.");
+        return;
+    }
+
+    if (fromDate > toDate) {
+        alert("From Date cannot be after To Date.");
+        return;
+    }
+
+    resultBox.innerHTML = `
+        <p style="
+            text-align:center;
+            color:#666;
+            padding:20px;
+        ">
+            Loading attendance report...
+        </p>
+    `;
+
+    try {
+
+        const response = await fetch(
+            "https://chakiya.onrender.com/api/attendance/report?from_date="
+            + encodeURIComponent(fromDate)
+            + "&to_date="
+            + encodeURIComponent(toDate)
+        );
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(
+                result.error?.message ||
+                result.error ||
+                "Unable to load attendance report."
+            );
+        }
+
+        const classStudents = students.filter(student =>
+            String(student.class_name).trim() ===
+            String(selectedClass).trim()
+        );
+
+        const attendanceRecords = result.attendance || [];
+
+        const report = classStudents.map(student => {
+
+            const records = attendanceRecords.filter(record =>
+                Number(record.student_id) === Number(student.id)
+            );
+
+            const present = records.filter(
+                record => record.status === "Present"
+            ).length;
+
+            const absent = records.filter(
+                record => record.status === "Absent"
+            ).length;
+
+            const leave = records.filter(
+                record => record.status === "Leave"
+            ).length;
+
+            const total = present + absent + leave;
+
+            const percentage = total > 0
+                ? ((present / total) * 100).toFixed(1)
+                : "0.0";
+
+            return {
+                student,
+                present,
+                absent,
+                leave,
+                total,
+                percentage
+            };
+        });
+
+        resultBox.innerHTML = `
+
+            <h3 style="
+                color:#0a2743;
+                margin-bottom:15px;
+            ">
+                Class ${selectedClass} Attendance Report
+            </h3>
+
+            <div style="
+                overflow-x:auto;
+            ">
+
+                <table style="
+                    width:100%;
+                    border-collapse:collapse;
+                    min-width:700px;
+                ">
+
+                    <thead>
+                        <tr style="
+                            background:#0a2743;
+                            color:white;
+                        ">
+                            <th style="padding:10px;">Student</th>
+                            <th style="padding:10px;">Present</th>
+                            <th style="padding:10px;">Absent</th>
+                            <th style="padding:10px;">Leave</th>
+                            <th style="padding:10px;">Total</th>
+                            <th style="padding:10px;">Attendance %</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        ${report.map(item => `
+
+                            <tr style="
+                                border-bottom:1px solid #ddd;
+                                text-align:center;
+                            ">
+
+                                <td style="
+                                    padding:10px;
+                                    text-align:left;
+                                    font-weight:bold;
+                                ">
+                                    ${item.student.student_name || ""}
+                                </td>
+
+                                <td style="
+                                    padding:10px;
+                                    color:#198754;
+                                    font-weight:bold;
+                                ">
+                                    ${item.present}
+                                </td>
+
+                                <td style="
+                                    padding:10px;
+                                    color:#dc3545;
+                                    font-weight:bold;
+                                ">
+                                    ${item.absent}
+                                </td>
+
+                                <td style="
+                                    padding:10px;
+                                    color:#d39e00;
+                                    font-weight:bold;
+                                ">
+                                    ${item.leave}
+                                </td>
+
+                                <td style="padding:10px;">
+                                    ${item.total}
+                                </td>
+
+                                <td style="
+                                    padding:10px;
+                                    font-weight:bold;
+                                ">
+                                    ${item.percentage}%
+                                </td>
+
+                            </tr>
+
+                        `).join("")}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        `;
+
+    } catch (error) {
+
+        console.error(
+            "Attendance report error:",
+            error
+        );
+
+        resultBox.innerHTML = `
+            <p style="
+                text-align:center;
+                color:#dc3545;
+                padding:20px;
+                font-weight:bold;
+            ">
+                ERROR: ${error.message}
+            </p>
+        `;
+    }
+}
     function openAttendanceReport() {
 
     const overlay = document.createElement("div");
