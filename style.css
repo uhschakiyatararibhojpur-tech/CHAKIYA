@@ -1458,6 +1458,26 @@ body {
 .mashaal-card input[type="tel"],
 .mashaal-card input[type="email"],
 .mashaal-card input[type="file"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    box-sizing: border-box;
+    font-size: 15px;
+    background: #fdfefe;
+    transition: all 0.25s ease;
+}
+
+.mashaal-card input:hover {
+    border-color: #f4a300;
+}
+
+.mashaal-card input:focus {
+    outline: none;
+    border-color: #123c69;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(18, 60, 105, 0.10);
+}
 
     width: 100%;
 
