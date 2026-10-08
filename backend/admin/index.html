@@ -1499,15 +1499,18 @@ const attendanceClass =
 const attendanceStudentList =
     document.getElementById("attendanceStudentList");
 
-attendanceClass.addEventListener("change", function () {
-
+attendanceClass.addEventListener("change", async function () {
     const selectedClass = this.value;
-
     attendanceStudentList.innerHTML = "";
 
-    if (!selectedClass) {
-        return;
-    }
+    if (!selectedClass) return;
+
+    const attendanceDate =
+        document.getElementById("attendanceDate").value;
+
+    const statusMap = attendanceDate
+        ? await getAttendanceStatus(attendanceDate)
+        : {};
 
     const classStudents = students.filter(student =>
         student.class_name === selectedClass
