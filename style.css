@@ -52,8 +52,9 @@ body {
 /* ================= HEADER ================= */
 
 .header {
-    background: #ffffff;
-    border-bottom: 1px solid #eeeeee;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f9ff 100%);
+    border-bottom: 1px solid #dbe5f0;
+    box-shadow: 0 4px 18px rgba(18, 60, 105, 0.08);
 }
 
 .header-content {
