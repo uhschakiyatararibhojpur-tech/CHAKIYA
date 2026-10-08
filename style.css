@@ -103,10 +103,12 @@ body {
     letter-spacing: 0.2px;
 }
 .school-brand small {
-    color: #df8700;
-    font-weight: 700;
+    color: #d98200;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
-
 
 /* ================= NAVIGATION ================= */
 
