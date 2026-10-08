@@ -88,8 +88,11 @@ body {
 
 .school-brand h1 {
     color: #123c69;
-    font-size: 30px;
+    font-size: 32px;
     line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
 }
 
 .school-brand p {
