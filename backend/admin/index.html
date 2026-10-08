@@ -1525,7 +1525,7 @@ attendanceClass.addEventListener("change", async function () {
     classStudents.forEach(student => {
 
         const row = document.createElement("div");
-        let currentStatus = "";
+        let currentStatus = statusMap[student.id] || "";
 
         row.style.cssText = `
             display:flex;
