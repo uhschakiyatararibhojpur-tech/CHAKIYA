@@ -1426,7 +1426,7 @@ body {
 
     background: #ffffff;
 
-    padding: 25px;
+    padding: 18px 22px;
 
     border-radius: 15px;
 
@@ -1439,7 +1439,7 @@ body {
 }
 
 .mashaal-card .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .mashaal-card label {
@@ -1449,7 +1449,7 @@ body {
 
     color: #123c69;
 
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 
     font-size: 16px;
 }
