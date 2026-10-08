@@ -58,12 +58,12 @@ body {
 }
 
 .header-content {
-    min-height: 110px;
+    min-height: 115px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 8px 0;
 }
-
 .school-brand {
     display: flex;
     align-items: center;
