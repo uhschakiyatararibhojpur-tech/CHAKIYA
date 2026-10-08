@@ -1415,8 +1415,8 @@ body {
         ),
         url("school.jpg");
 
-    background-size: contain;
-    background-position: top center;
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
     background-color: #ffffff;
 }
