@@ -122,8 +122,8 @@ body {
 .nav-container a {
     color: white;
     text-decoration: none;
-    padding: 14px 17px;
-    font-size: 15px;
+    padding: 14px 11px;
+    font-size: 14px;
     font-weight: 600;
     transition: all 0.25s ease;
     border-radius: 6px;
