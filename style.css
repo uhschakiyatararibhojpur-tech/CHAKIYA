@@ -1409,14 +1409,15 @@ body {
 
     background-image:
         linear-gradient(
-            rgba(10, 39, 67, 0.35),
-            rgba(10, 39, 67, 0.35)
+            rgba(10, 39, 67, 0.10),
+            rgba(10, 39, 67, 0.10)
         ),
         url("school.jpg");
 
-    background-size: cover;
-    background-position: center 45%;
+    background-size: 100% auto;
+    background-position: top center;
     background-repeat: no-repeat;
+    background-color: #e8dfcf;
 }
 
 .mashaal-card {
