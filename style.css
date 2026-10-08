@@ -1405,7 +1405,7 @@ body {
    ========================================= */
 
 .mashaal-section {
-    padding: 60px 20px;
+    padding: 45px 20px;
 
     background-image:
         linear-gradient(
@@ -1415,7 +1415,7 @@ body {
         url("school.jpg");
 
     background-size: cover;
-    background-position: center;
+    background-position: center 45%;
     background-repeat: no-repeat;
 }
 
