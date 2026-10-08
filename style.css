@@ -131,6 +131,8 @@ body {
 .nav-container a:hover {
     background: #f4a300;
     color: #123c69;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(244, 163, 0, 0.30);
 }
 
 .menu-btn {
