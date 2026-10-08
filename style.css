@@ -123,7 +123,9 @@ body {
     padding: 14px 17px;
     font-size: 15px;
     font-weight: 600;
-    transition: 0.3s;
+    transition: all 0.25s ease;
+    border-radius: 6px;
+    margin: 3px 2px;
 }
 
 .nav-container a:hover {
