@@ -796,8 +796,10 @@ body {
     }
 
     .school-brand h1 {
-        font-size: 19px;
-    }
+    font-size: 16px;
+    line-height: 1.25;
+    margin: 0;
+}
 
     .school-brand p {
         font-size: 12px;
