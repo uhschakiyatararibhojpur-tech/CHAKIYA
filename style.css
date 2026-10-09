@@ -790,10 +790,10 @@ body {
     }
 
     .school-logo {
-        width: 55px;
-        height: 55px;
-        font-size: 15px;
-    }
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+}
 
     .school-brand h1 {
     font-size: 16px;
