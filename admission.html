@@ -122,6 +122,46 @@
     <input id="previousSchool" name="previousSchool" type="text">
 
     <label for="address">Full Address *</label>
+    
+<label for="aadhaarNumber">Aadhaar Number (if required)</label>
+<input
+  id="aadhaarNumber"
+  name="aadhaarNumber"
+  type="text"
+  inputmode="numeric"
+  pattern="[0-9]{12}"
+  maxlength="12"
+  autocomplete="off"
+  placeholder="Enter 12-digit Aadhaar number">
+
+<label for="aadhaarImage">Aadhaar Document (PDF or image, if required)</label>
+<input
+  id="aadhaarImage"
+  name="aadhaarImage"
+  type="file"
+  accept="image/jpeg,image/png,application/pdf">
+
+<label for="passbookImage">Bank Passbook (PDF or image, if required)</label>
+<input
+  id="passbookImage"
+  name="passbookImage"
+  type="file"
+  accept="image/jpeg,image/png,application/pdf">
+
+<label for="tcDocument">Transfer Certificate (PDF or image)</label>
+<input
+  id="tcDocument"
+  name="tcDocument"
+  type="file"
+  accept="image/jpeg,image/png,application/pdf">
+
+<label for="otherDocument">Other Supporting Document (optional)</label>
+<input
+  id="otherDocument"
+  name="otherDocument"
+  type="file"
+  accept="image/jpeg,image/png,application/pdf">
+
     <textarea id="address" name="address" rows="3" required></textarea>
 
     <button type="submit">Submit Admission Form</button>
