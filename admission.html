@@ -133,5 +133,48 @@
 
     <a class="admission-back" href="index.html">← Back to Home</a>
   </main>
+  
+<script>
+const ADMISSION_SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+document.getElementById("admissionForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const form = event.target;
+  const message = document.getElementById("admissionMessage");
+  const button = form.querySelector('button[type="submit"]');
+
+  if (ADMISSION_SCRIPT_URL.includes("PASTE_YOUR")) {
+    message.textContent = "The online submission connection is not configured yet.";
+    return;
+  }
+
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  button.disabled = true;
+  message.textContent = "Submitting application...";
+
+  try {
+    await fetch(ADMISSION_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(data)
+    });
+
+    message.textContent =
+      "Your application was sent. Please contact the school to confirm receipt.";
+    form.reset();
+  } catch (error) {
+    message.textContent =
+      "Submission could not be sent. Please try again or contact the school.";
+  } finally {
+    button.disabled = false;
+  }
+});
+</script>
+  
 </body>
 </html>
