@@ -1644,6 +1644,25 @@ body {
 @media (max-width: 600px) {
     #mashaalForm {
         grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .mashaal-section {
+        padding: 25px 10px;
+    }
+
+    .mashaal-card {
+        width: 100%;
+        padding: 15px 12px;
+    }
+
+    .mashaal-card input[type="text"],
+    .mashaal-card input[type="tel"],
+    .mashaal-card input[type="email"],
+    .mashaal-card input[type="file"] {
+        width: 100%;
+        min-width: 0;
+        font-size: 16px;
     }
 }
 /* =========================
