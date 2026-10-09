@@ -87,6 +87,50 @@
       <p>Admission dates, eligibility, fees and seat availability should be confirmed directly with the school office.</p>
     </section>
 
+<section class="admission-card" id="online-admission">
+  <h2>Online Admission Form</h2>
+  <p>Please fill in the student's details carefully.</p>
+
+  <form id="admissionForm">
+    <label for="studentName">Student's Full Name *</label>
+    <input id="studentName" name="studentName" type="text" required>
+
+    <label for="dob">Date of Birth *</label>
+    <input id="dob" name="dob" type="date" required>
+
+    <label for="classApplying">Class Applying For *</label>
+    <select id="classApplying" name="classApplying" required>
+      <option value="">Select Class</option>
+      <option value="9">Class 9</option>
+      <option value="10">Class 10</option>
+      <option value="11">Class 11</option>
+      <option value="12">Class 12</option>
+    </select>
+
+    <label for="fatherName">Father's / Guardian's Name *</label>
+    <input id="fatherName" name="fatherName" type="text" required>
+
+    <label for="motherName">Mother's Name</label>
+    <input id="motherName" name="motherName" type="text">
+
+    <label for="mobile">Mobile Number *</label>
+    <input id="mobile" name="mobile" type="tel"
+           inputmode="numeric" pattern="[0-9]{10}"
+           maxlength="10" required>
+
+    <label for="previousSchool">Previous School</label>
+    <input id="previousSchool" name="previousSchool" type="text">
+
+    <label for="address">Full Address *</label>
+    <textarea id="address" name="address" rows="3" required></textarea>
+
+    <button type="submit">Submit Admission Form</button>
+    <p id="admissionMessage" role="status">
+      Form preview only. Online submission is not connected yet.
+    </p>
+  </form>
+</section>
+
     <a class="admission-back" href="index.html">← Back to Home</a>
   </main>
 </body>
