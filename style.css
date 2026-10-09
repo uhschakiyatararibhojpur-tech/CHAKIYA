@@ -1375,8 +1375,11 @@ body {
     }
 
     .registration-card {
-        padding: 22px 16px;
-    }
+    width: 100%;
+    max-width: 100%;
+    padding: 18px 12px;
+    box-sizing: border-box;
+}
 
     .registration-heading h2 {
         font-size: 27px;
