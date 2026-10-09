@@ -174,27 +174,65 @@
     <a class="admission-back" href="index.html">← Back to Home</a>
   </main>
   
+
 <script>
 const ADMISSION_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzRJWRKL_c-qSGtrsx1l9tdWMR1m7rcxRpf0HLlbXNyTovWk4VMBdClxext1SSFJ_d-/exec";
 
-document.getElementById("admissionForm").addEventListener("submit", async function(event) {
+const admissionForm = document.getElementById("admissionForm");
+
+admissionForm.addEventListener("submit", async function(event) {
   event.preventDefault();
 
-  const form = event.target;
   const message = document.getElementById("admissionMessage");
-  const button = form.querySelector('button[type="submit"]');
-
-  if (ADMISSION_SCRIPT_URL.includes("PASTE_YOUR")) {
-    message.textContent = "The online submission connection is not configured yet.";
-    return;
-  }
-
-  const data = Object.fromEntries(new FormData(form).entries());
+  const button = admissionForm.querySelector('button[type="submit"]');
 
   button.disabled = true;
-  message.textContent = "Submitting application...";
+  message.textContent = "Preparing application...";
 
   try {
+    const formData = new FormData(admissionForm);
+    const data = {};
+
+    for (const [key, value] of formData.entries()) {
+      if (value instanceof File) {
+        if (!value.name) {
+          data[key] = null;
+          continue;
+        }
+
+        const allowedTypes = [
+          "application/pdf",
+          "image/jpeg",
+          "image/png"
+        ];
+
+        if (!allowedTypes.includes(value.type)) {
+          throw new Error("Please select a PDF, JPG, or PNG file.");
+        }
+
+        if (value.size > 2 * 1024 * 1024) {
+          throw new Error("Each document must be 2 MB or smaller.");
+        }
+
+        const base64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result.split(",")[1]);
+          reader.onerror = () => reject(new Error("Could not read a file."));
+          reader.readAsDataURL(value);
+        });
+
+        data[key] = {
+          name: value.name,
+          mimeType: value.type,
+          base64: base64
+        };
+      } else {
+        data[key] = value;
+      }
+    }
+
+    message.textContent = "Submitting application...";
+
     await fetch(ADMISSION_SCRIPT_URL, {
       method: "POST",
       mode: "no-cors",
@@ -205,16 +243,19 @@ document.getElementById("admissionForm").addEventListener("submit", async functi
     });
 
     message.textContent =
-      "Your application was sent. Please contact the school to confirm receipt.";
-    form.reset();
+      "Submission request sent. The school must verify receipt.";
+    admissionForm.reset();
+
   } catch (error) {
-    message.textContent =
-      "Submission could not be sent. Please try again or contact the school.";
+    message.textContent = error.message ||
+      "Unable to prepare the application. Please try again.";
   } finally {
     button.disabled = false;
   }
 });
 </script>
+</body>
+</html>
   
 </body>
 </html>
