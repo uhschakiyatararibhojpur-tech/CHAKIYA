@@ -417,3 +417,59 @@ fetch("https://chakiya.onrender.com/api/test")
     .catch(error => {
         console.error("CHAKIYA BACKEND ERROR:", error);
     });
+
+/* =========================================
+   CHAKIYA SCROLL REVEAL
+   Add at the bottom of script.js
+   ========================================= */
+
+(function () {
+    function initChakScrollReveal() {
+        const selectors = [
+            ".academic-card",
+            ".staff-card",
+            ".facility-card",
+            ".notice-card",
+            ".gallery-item",
+            ".info-card"
+        ];
+
+        const elements = document.querySelectorAll(selectors.join(","));
+
+        if (!elements.length) return;
+
+        /* Show everything if animation is unsupported
+           or the visitor prefers reduced motion. */
+        if (
+            !("IntersectionObserver" in window) ||
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+            return;
+        }
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("chak-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12
+        });
+
+        elements.forEach(function (element) {
+            element.classList.add("chak-reveal");
+            observer.observe(element);
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            initChakScrollReveal
+        );
+    } else {
+        initChakScrollReveal();
+    }
+})();
