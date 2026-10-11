@@ -10,6 +10,47 @@
           content="Vision, mission and educational objectives of UHS Chakiya Tarari, Bhojpur, Bihar.">
 
     <link rel="stylesheet" href="style.css">
+    <style>
+/* Staff photograph as About page background */
+.about-background {
+    position: relative;
+    background-image:
+        linear-gradient(
+            rgba(5, 35, 30, 0.72),
+            rgba(5, 35, 30, 0.72)
+        ),
+        url("staff.jpeg");
+    background-size: cover;
+    background-position: center 35%;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    padding: 65px 20px;
+}
+
+/* Readable content cards over the photograph */
+.about-background .academic-card {
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 14px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.about-background .academic-card h2 {
+    color: #063f35;
+}
+
+@media (max-width: 600px) {
+    .about-background {
+        padding: 30px 12px;
+        background-position: center;
+    }
+
+    .about-background .academic-card {
+        padding: 20px 16px;
+    }
+}
+</style>
 </head>
 
 <body>
