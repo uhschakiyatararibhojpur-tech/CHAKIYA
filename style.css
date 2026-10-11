@@ -2024,3 +2024,35 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .home-slider { border-radius: 14px; }
   .slider-track img { border-radius: 14px; }
 }
+
+/* Reduce only the Objectives card */
+.academic-card.objectives-card {
+    width: 50%;
+    max-width: 575px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.academic-card.objectives-card h2 {
+    font-size: 20px;
+}
+
+.academic-card.objectives-card h3 {
+    font-size: 18px;
+}
+
+.academic-card.objectives-card li {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 5px;
+}
+
+/* Keep the card readable on mobile */
+@media (max-width: 700px) {
+    .academic-card.objectives-card {
+        width: 100%;
+        padding: 15px;
+    }
+}
