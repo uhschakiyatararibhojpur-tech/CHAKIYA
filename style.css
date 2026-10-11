@@ -2627,3 +2627,126 @@ button:focus-visible,
         transform: none !important;
     }
 }
+
+/* ==========================================
+   CHAKIYA: CONTINUOUS PREMIUM ANIMATION
+   ========================================== */
+
+/* 1. Subtle moving light across school header */
+.header {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -40%;
+    width: 28%;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(244, 163, 0, 0.20),
+        rgba(255, 235, 170, 0.30),
+        transparent
+    );
+    transform: skewX(-20deg);
+    animation: chakHeaderLight 8s ease-in-out infinite;
+}
+
+/* 2. Continuously breathing gold glow on logo */
+.header .school-logo img {
+    animation: chakLogoGlow 3s ease-in-out infinite;
+}
+
+/* 3. Animated underline beneath school name */
+.header .school-brand h1 {
+    position: relative;
+    display: inline-block;
+}
+
+.header .school-brand h1::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    margin-top: 5px;
+    border-radius: 5px;
+    background: linear-gradient(
+        90deg,
+        #075b49,
+        #f4a300,
+        #fff0a6,
+        #f4a300,
+        #075b49
+    );
+    background-size: 200% 100%;
+    animation: chakGoldLine 4s linear infinite;
+}
+
+/* 4. Gentle movement for the notice ticker title */
+.notice-ticker .ticker-title {
+    animation: chakTickerGlow 3s ease-in-out infinite;
+}
+
+/* 5. Gentle gold highlight on the main section headings */
+.section-heading .heading-line {
+    background: linear-gradient(
+        90deg,
+        #075b49,
+        #f4a300,
+        #fff0a6,
+        #f4a300,
+        #075b49
+    );
+    background-size: 200% 100%;
+    animation: chakGoldLine 5s linear infinite;
+}
+
+/* Animation definitions */
+@keyframes chakHeaderLight {
+    0%   { left: -40%; opacity: 0; }
+    15%  { opacity: 1; }
+    55%  { opacity: 0.7; }
+    75%  { left: 120%; opacity: 0; }
+    100% { left: 120%; opacity: 0; }
+}
+
+@keyframes chakLogoGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 2px rgba(244, 163, 0, 0.2));
+    }
+    50% {
+        filter: drop-shadow(0 0 10px rgba(244, 163, 0, 0.65));
+    }
+}
+
+@keyframes chakGoldLine {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+@keyframes chakTickerGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(244, 163, 0, 0);
+    }
+    50% {
+        box-shadow: 0 0 12px rgba(244, 163, 0, 0.25);
+    }
+}
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+    .header::after,
+    .header .school-logo img,
+    .header .school-brand h1::after,
+    .notice-ticker .ticker-title,
+    .section-heading .heading-line {
+        animation: none !important;
+    }
+}
