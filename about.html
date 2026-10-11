@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,86 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Vision, Mission & Objectives | UHS Chakiya Tarari</title>
-
-    <meta name="description"
-          content="Vision, mission and educational objectives of UHS Chakiya Tarari, Bhojpur, Bihar.">
+    <meta name="description" content="Vision, mission and educational objectives of UHS Chakiya Tarari, Bhojpur, Bihar.">
 
     <link rel="stylesheet" href="style.css">
-    <style>
-/* Staff photograph as About page background */
-.about-background {
-    position: relative;
-    background-image:
-        linear-gradient(
-            rgba(5, 35, 30, 0.72),
-            rgba(5, 35, 30, 0.72)
-        ),
-        url("staff.jpeg");
-    background-size: cover;
-    background-position: center 35%;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    padding: 65px 20px;
-}
-
-/* Readable content cards over the photograph */
-.about-background .academic-card {
-    background: rgba(255, 255, 255, 0.96);
-    border-radius: 14px;
-    padding: 30px;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-}
-
-.about-background .academic-card h2 {
-    color: #063f35;
-}
-
-@media (max-width: 600px) {
-    .about-background {
-        padding: 30px 12px;
-        background-position: center;
-    }
-
-    .about-background .academic-card {
-        padding: 20px 16px;
-    }
-}
-</style>
-        <link rel="stylesheet" href="style.css">
 
     <style>
+        /* STAFF PHOTO BACKGROUND: NO DARK GREEN OVERLAY */
         .about-background {
-            background-image:
-                linear-gradient(
-                    rgba(5, 35, 30, 0.55),
-                    rgba(5, 35, 30, 0.55)
-                ),
-                url("staff.jpeg");
+            position: relative;
+            background-image: url("staff.jpeg");
             background-size: cover;
-            background-position: center 35%;
+            background-position: center 30%;
             background-repeat: no-repeat;
+            background-attachment: scroll;
             padding: 45px 20px;
         }
 
+        /* LIGHT, SEMI-TRANSPARENT CARDS */
         .about-background .academic-card {
-            background: rgba(255, 255, 255, 0.96);
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 14px;
             padding: 30px;
             margin-bottom: 25px;
-            border-radius: 14px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-background .academic-card h2,
+        .about-background .academic-card h3 {
+            color: #123c69;
+        }
+
+        .about-background .academic-card p,
+        .about-background .academic-card li {
+            color: #202b35;
+            line-height: 1.8;
+        }
+
+        .about-background .academic-icon {
+            font-size: 42px;
         }
 
         @media (max-width: 600px) {
             .about-background {
                 padding: 25px 12px;
+                background-position: center center;
             }
 
             .about-background .academic-card {
                 padding: 20px 16px;
+                background: rgba(255, 255, 255, 0.86);
             }
         }
     </style>
-</head>
 </head>
 
 <body>
@@ -119,12 +95,12 @@
         </div>
     </nav>
 
-    <!-- PAGE BANNER -->
+    <!-- PAGE TITLE: GREEN COLOR ONLY HERE -->
     <section style="
-        background: linear-gradient(135deg, #063f35, #075b49);
+        background-color: #063f35;
         color: white;
         text-align: center;
-        padding: 65px 20px;
+        padding: 55px 20px;
     ">
         <div class="container">
             <p style="color:#ffdc7a; font-weight:bold; letter-spacing:2px;">
@@ -132,19 +108,19 @@
             </p>
 
             <h2 style="font-size:clamp(30px,5vw,46px); margin:10px 0;">
-                Vision, Mission & Objectives
+                Vision, Mission &amp; Objectives
             </h2>
 
             <p>दृष्टि, मिशन एवं शैक्षणिक उद्देश्य</p>
         </div>
     </section>
 
-    <!-- MAIN CONTENT -->
+    <!-- STAFF PHOTO BACKGROUND BEGINS HERE -->
     <main class="about-background">
         <div class="container">
 
             <!-- VISION -->
-            <section class="academic-card" style="margin-bottom:25px;">
+            <section class="academic-card">
                 <div class="academic-icon">🎯</div>
 
                 <h2>Our Vision | हमारा दृष्टिकोण</h2>
@@ -163,7 +139,7 @@
             </section>
 
             <!-- MISSION -->
-            <section class="academic-card" style="margin-bottom:25px;">
+            <section class="academic-card">
                 <div class="academic-icon">📚</div>
 
                 <h2>Our Mission | हमारा मिशन</h2>
@@ -189,30 +165,12 @@
                 <h2>Our Objectives | हमारे उद्देश्य</h2>
 
                 <ul style="padding-left:25px; margin-top:15px;">
-                    <li>
-                        Promote regular attendance, discipline and
-                        active participation in learning.
-                    </li>
-                    <li>
-                        Strengthen students' reading, writing,
-                        mathematics and problem-solving skills.
-                    </li>
-                    <li>
-                        Encourage practical science education and
-                        responsible use of technology.
-                    </li>
-                    <li>
-                        Develop moral values, respect, teamwork
-                        and social responsibility.
-                    </li>
-                    <li>
-                        Support students in preparing for board
-                        examinations and further education.
-                    </li>
-                    <li>
-                        Encourage sports, creativity and
-                        all-round development.
-                    </li>
+                    <li>Promote regular attendance, discipline and active participation in learning.</li>
+                    <li>Strengthen reading, writing, mathematics and problem-solving skills.</li>
+                    <li>Encourage practical science education and responsible use of technology.</li>
+                    <li>Develop moral values, respect, teamwork and social responsibility.</li>
+                    <li>Prepare students for board examinations and further education.</li>
+                    <li>Encourage sports, creativity and all-round development.</li>
                 </ul>
 
                 <hr style="margin:25px 0;">
@@ -229,16 +187,16 @@
                 </ul>
             </section>
 
-            <!-- BACK BUTTON -->
-            <div style="text-align:center; margin-top:35px;">
-                <a href="index.html"
-                   class="btn primary-btn">
-                    ← Back to Home
+            <!-- BACK TO HOME -->
+            <div style="text-align:center; margin-top:30px;">
+                <a href="index.html" class="btn primary-btn">
+                    &#8592; Back to Home
                 </a>
             </div>
 
         </div>
     </main>
+    <!-- STAFF PHOTO BACKGROUND ENDS HERE -->
 
     <!-- FOOTER -->
     <footer class="footer">
