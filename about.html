@@ -51,6 +51,40 @@
     }
 }
 </style>
+        <link rel="stylesheet" href="style.css">
+
+    <style>
+        .about-background {
+            background-image:
+                linear-gradient(
+                    rgba(5, 35, 30, 0.55),
+                    rgba(5, 35, 30, 0.55)
+                ),
+                url("staff.jpeg");
+            background-size: cover;
+            background-position: center 35%;
+            background-repeat: no-repeat;
+            padding: 45px 20px;
+        }
+
+        .about-background .academic-card {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .about-background {
+                padding: 25px 12px;
+            }
+
+            .about-background .academic-card {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
 </head>
 
 <body>
