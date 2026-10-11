@@ -2056,3 +2056,37 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
         padding: 15px;
     }
 }
+
+/* Bordered background image area */
+.about-page-content {
+    max-width: 1200px;
+    width: 95%;
+    margin: 25px auto;
+    padding: 40px 25px;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.20),
+            rgba(0, 0, 0, 0.20)
+        ),
+        url("staff.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: 5px solid #f4a300;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* Mobile adjustment */
+@media (max-width: 700px) {
+    .about-page-content {
+        width: 96%;
+        padding: 25px 12px;
+        border-width: 3px;
+        border-radius: 12px;
+    }
+}
