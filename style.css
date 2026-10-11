@@ -2486,3 +2486,144 @@ button:focus-visible,
         transition: none !important;
     }
 }
+
+/* =========================================
+   CHAKIYA CATCHY OPENING ANIMATION
+   ========================================= */
+
+/* School header entrance */
+.header .school-brand {
+    animation: chakWelcomeIn 1s ease-out both;
+}
+
+/* Logo zoom with a gold glow */
+.header .school-logo img {
+    animation: chakLogoReveal 1.2s cubic-bezier(.2,.8,.2,1) both;
+    transform-origin: center;
+}
+
+/* School name reveal */
+.header .school-brand h1 {
+    animation: chakNameReveal 1s ease-out 0.25s both;
+}
+
+/* Hindi school name */
+.header .school-brand p {
+    animation: chakNameReveal 1s ease-out 0.45s both;
+}
+
+/* Government school label */
+.header .school-brand small {
+    animation: chakNameReveal 1s ease-out 0.65s both;
+}
+
+/* Navigation appears after the school header */
+.navbar {
+    animation: chakNavReveal 0.8s ease-out 0.35s both;
+}
+
+/* Gold highlight sweeps across the school logo */
+.header .school-logo {
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.header .school-logo::after {
+    content: "";
+    position: absolute;
+    top: -20%;
+    left: -120%;
+    width: 55%;
+    height: 140%;
+    background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255, 215, 100, 0.7),
+        transparent
+    );
+    transform: skewX(-20deg);
+    animation: chakLogoShine 1.4s ease-in-out 0.7s both;
+    pointer-events: none;
+}
+
+/* Animation keyframes */
+@keyframes chakWelcomeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes chakLogoReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.65) rotate(-12deg);
+        filter: drop-shadow(0 0 0 rgba(244, 163, 0, 0));
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.08) rotate(3deg);
+        filter: drop-shadow(0 0 15px rgba(244, 163, 0, 0.5));
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+        filter: drop-shadow(0 0 5px rgba(244, 163, 0, 0.2));
+    }
+}
+
+@keyframes chakNameReveal {
+    from {
+        opacity: 0;
+        transform: translateX(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes chakNavReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes chakLogoShine {
+    0% {
+        left: -120%;
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        left: 150%;
+        opacity: 0;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .header .school-brand,
+    .header .school-logo img,
+    .header .school-brand h1,
+    .header .school-brand p,
+    .header .school-brand small,
+    .navbar,
+    .header .school-logo::after {
+        animation: none !important;
+        filter: none !important;
+        transform: none !important;
+    }
+}
