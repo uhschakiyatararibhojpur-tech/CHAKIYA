@@ -2751,30 +2751,6 @@ button:focus-visible,
     }
 }
 
-/* ANIMATED SCHOOL NAME BACKGROUND */
-.header .school-brand h1 {
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    padding: 10px 18px;
-    color: #ffd700 !important;
-    -webkit-text-fill-color: #ffd700 !important;
-    background: linear-gradient(
-        120deg,
-        #064e3b,
-        #087f5b,
-        #c58b00,
-        #087f5b,
-        #064e3b
-    );
-    background-size: 300% 300%;
-    border-left: 5px solid #ffd700;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    animation:
-        chakNameBackground 6s ease infinite,
-        chakNameGlow 2.5s ease-in-out infinite alternate;
-}
 
 /* Moving background colors */
 @keyframes chakNameBackground {
@@ -2807,5 +2783,40 @@ button:focus-visible,
 @media (prefers-reduced-motion: reduce) {
     .header .school-brand h1 {
         animation: none;
+    }
+}
+
+/* SCHOOL NAME — SIMPLE OFFICIAL STYLE */
+.header .school-brand h1 {
+    display: inline-block;
+    padding: 5px 0;
+    margin-bottom: 8px;
+    background: transparent;
+    color: #075b49 !important;
+    -webkit-text-fill-color: #075b49 !important;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    animation: chakNameReveal 1s ease-out 0.25s both;
+}
+
+/* Thin gold underline */
+.header .school-brand h1::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    margin-top: 5px;
+    background: #d6ad32;
+    border-radius: 2px;
+    animation: none;
+}
+
+@media (max-width: 600px) {
+    .header .school-brand h1 {
+        padding: 3px 0;
+        font-size: clamp(15px, 4vw, 22px);
     }
 }
