@@ -209,6 +209,204 @@ body > section[style*="background-color: #063f35"] .container > *:nth-child(3) {
     }
 }
 
+/* ==========================================
+   PREMIUM SCHOOL TITLE ANIMATION
+   ========================================== */
+
+body > section[style*="background-color: #063f35"] {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: linear-gradient(
+        125deg,
+        #022c29,
+        #075b49,
+        #08745a,
+        #064236,
+        #022c29
+    ) !important;
+    background-size: 400% 400% !important;
+    animation: premiumGreenFlow 12s ease infinite;
+}
+
+/* Moving light beam */
+body > section[style*="background-color: #063f35"]::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -50%;
+    left: -45%;
+    width: 35%;
+    height: 200%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.10),
+        rgba(255, 215, 100, 0.32),
+        transparent
+    );
+    transform: rotate(18deg);
+    animation: premiumLightBeam 7s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Golden ambient glow */
+body > section[style*="background-color: #063f35"]::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 260px;
+    height: 260px;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    background: rgba(244, 163, 0, 0.15);
+    filter: blur(65px);
+    transform: translate(-50%, -50%);
+    animation: goldenPulse 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Main title glow */
+body > section[style*="background-color: #063f35"] h2 {
+    position: relative;
+    color: #fff !important;
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.18),
+        0 0 22px rgba(255, 193, 55, 0.22);
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+/* Animated gold underline below title */
+body > section[style*="background-color: #063f35"] h2::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 4px;
+    margin: 12px auto 0;
+    border-radius: 10px;
+    background: linear-gradient(
+        90deg,
+        #f4a300,
+        #fff0a6,
+        #f4a300
+    );
+    box-shadow: 0 0 12px rgba(244, 163, 0, 0.7);
+    animation: goldUnderline 1.5s ease-out 0.5s forwards;
+}
+
+/* Small gold dot decoration */
+body > section[style*="background-color: #063f35"] .container {
+    position: relative;
+    z-index: 1;
+}
+
+body > section[style*="background-color: #063f35"] .container::before,
+body > section[style*="background-color: #063f35"] .container::after {
+    content: "✦";
+    position: absolute;
+    color: #ffdc7a;
+    font-size: 24px;
+    opacity: 0;
+    pointer-events: none;
+    animation: floatingStar 5s ease-in-out infinite;
+}
+
+body > section[style*="background-color: #063f35"] .container::before {
+    left: 8%;
+    top: 25%;
+}
+
+body > section[style*="background-color: #063f35"] .container::after {
+    right: 8%;
+    bottom: 20%;
+    animation-delay: 2.5s;
+}
+
+/* Animation definitions */
+@keyframes premiumGreenFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes premiumLightBeam {
+    0%   { left: -45%; opacity: 0; }
+    15%  { opacity: 1; }
+    70%  { opacity: 0.8; }
+    100% { left: 120%; opacity: 0; }
+}
+
+@keyframes goldenPulse {
+    0%, 100% {
+        opacity: 0.35;
+        scale: 0.8;
+    }
+    50% {
+        opacity: 1;
+        scale: 1.25;
+    }
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 0 0 5px rgba(255,255,255,0.15);
+    }
+    to {
+        text-shadow:
+            0 0 12px rgba(255,255,255,0.35),
+            0 0 26px rgba(255,193,55,0.45);
+    }
+}
+
+@keyframes goldUnderline {
+    from { width: 0; }
+    to { width: min(75%, 360px); }
+}
+
+@keyframes floatingStar {
+    0% {
+        transform: translateY(15px) rotate(0deg);
+        opacity: 0;
+    }
+    30% { opacity: 0.9; }
+    70% { opacity: 0.7; }
+    100% {
+        transform: translateY(-35px) rotate(90deg);
+        opacity: 0;
+    }
+}
+
+/* Mobile-friendly effects */
+@media (max-width: 600px) {
+    body > section[style*="background-color: #063f35"]::after {
+        width: 160px;
+        height: 160px;
+        filter: blur(45px);
+    }
+
+    body > section[style*="background-color: #063f35"] .container::before {
+        left: 2%;
+    }
+
+    body > section[style*="background-color: #063f35"] .container::after {
+        right: 2%;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    body > section[style*="background-color: #063f35"],
+    body > section[style*="background-color: #063f35"]::before,
+    body > section[style*="background-color: #063f35"]::after,
+    body > section[style*="background-color: #063f35"] h2,
+    body > section[style*="background-color: #063f35"] h2::after,
+    body > section[style*="background-color: #063f35"] .container::before,
+    body > section[style*="background-color: #063f35"] .container::after {
+        animation: none !important;
+    }
+}
+
     </style>
 </head>
 
