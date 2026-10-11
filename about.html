@@ -2,213 +2,335 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Vision, Mission & Objectives | UHS Chakiya Tarari</title>
-    <meta name="description" content="Vision, mission and educational objectives of UHS Chakiya Tarari, Bhojpur, Bihar.">
+  <title>About Us | UHS Chakiya Tarari</title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 
-    <style>
-        /* STAFF PHOTO BACKGROUND: NO DARK GREEN OVERLAY */
-        .about-background {
-            position: relative;
-            background-image: url("staff.jpeg");
-            background-size: cover;
-            background-position: center 30%;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            padding: 45px 20px;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        /* LIGHT, SEMI-TRANSPARENT CARDS */
-        .about-background .academic-card {
-            background: rgba(255, 255, 255, 0.82);
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 14px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #063f35;
+    }
 
-        .about-background .academic-card h2,
-        .about-background .academic-card h3 {
-            color: #123c69;
-        }
+    /* PAGE HEADER */
+    .about-hero {
+      min-height: 230px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 35px 20px;
+      color: white;
+      background: linear-gradient(135deg, #063f35, #08745a);
+    }
 
-        .about-background .academic-card p,
-        .about-background .academic-card li {
-            color: #202b35;
-            line-height: 1.8;
-        }
+    .about-hero h1 {
+      margin: 0 0 12px;
+      color: #f4a300;
+      font-size: clamp(30px, 5vw, 46px);
+    }
 
-        .about-background .academic-icon {
-            font-size: 42px;
-        }
+    .about-hero p {
+      margin: 0;
+      font-size: 17px;
+    }
 
-        @media (max-width: 600px) {
-            .about-background {
-                padding: 25px 12px;
-                background-position: center center;
-            }
+    /* STAFF PHOTO BACKGROUND ONLY BEHIND CONTENT */
+    .about-page-content {
+      padding: 55px 20px 70px;
+      background-image:
+        linear-gradient(
+          rgba(0, 0, 0, 0.20),
+          rgba(0, 0, 0, 0.20)
+        ),
+        url("staff.jpeg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+    }
 
-            .about-background .academic-card {
-                padding: 20px 16px;
-                background: rgba(255, 255, 255, 0.86);
-            }
-        }
-    </style>
+    .about-container {
+      max-width: 1150px;
+      margin: 0 auto;
+    }
+
+    .about-intro {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 35px;
+      color: #fff;
+      text-shadow: 0 2px 6px #000;
+    }
+
+    .about-intro h2 {
+      font-size: clamp(26px, 4vw, 36px);
+      color: #ffe08a;
+      margin: 0 0 16px;
+    }
+
+    .about-intro p {
+      font-size: 17px;
+      line-height: 1.9;
+      margin: 0;
+    }
+
+    /* TRANSPARENT CARDS */
+    .vm-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 25px;
+      margin-bottom: 28px;
+    }
+
+    .vm-card,
+    .objectives-card {
+      background: transparent !important;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-top: 4px solid #f4a300;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: none !important;
+      text-shadow: 0 2px 5px #000;
+    }
+
+    .vm-card h3,
+    .objectives-card h3 {
+      color: #ffe08a;
+      font-size: 25px;
+      margin: 0 0 18px;
+      text-shadow: 0 2px 5px #000;
+    }
+
+    .vm-card p,
+    .objectives-card p {
+      color: #fff;
+      font-size: 16px;
+      line-height: 1.9;
+      margin: 0;
+    }
+
+    .objectives-card ul {
+      margin: 15px 0;
+      padding-left: 23px;
+    }
+
+    .objectives-card li {
+      color: #fff;
+      font-size: 16px;
+      line-height: 1.9;
+      margin-bottom: 9px;
+    }
+
+    .objectives-card hr {
+      border: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.65);
+      margin: 28px 0;
+    }
+
+    .about-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 32px;
+    }
+
+    .about-btn {
+      display: inline-block;
+      padding: 13px 24px;
+      background: #f4a300;
+      color: #092f27;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: 0.25s;
+    }
+
+    .about-btn:hover {
+      background: #ffe08a;
+      transform: translateY(-2px);
+    }
+
+    .about-btn.secondary {
+      background: transparent;
+      color: #fff;
+      border: 1px solid #fff;
+    }
+
+    .about-btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    @media (max-width: 700px) {
+      .vm-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-page-content {
+        padding: 35px 15px 45px;
+        background-position: center center;
+      }
+
+      .vm-card,
+      .objectives-card {
+        padding: 22px;
+      }
+
+      .about-intro p {
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <!-- SCHOOL HEADER -->
-    <header class="header">
-        <div class="container header-content">
-            <div class="school-brand">
-                <div class="school-logo">
-                    <img src="school-logo.png"
-                         alt="UHS Chakiya Tarari School Logo">
-                </div>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <img src="school-logo.png" alt="School Logo">
+        <span>UHS Chakiya Tarari</span>
+      </a>
 
-                <div>
-                    <h1>UHS CHAKIYA TARARI</h1>
-                    <p>उच्च माध्यमिक विद्यालय चकिया तरारी, भोजपुर</p>
-                    <small>Government School • Bihar</small>
-                </div>
-            </div>
-        </div>
-    </header>
+      <button
+        class="menu-toggle"
+        type="button"
+        onclick="toggleMenu()"
+        aria-label="Toggle navigation"
+      >
+        ☰
+      </button>
 
-    <!-- NAVIGATION -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="index.html#academics">Academics</a>
-            <a href="index.html#staff">Staff</a>
-            <a href="index.html#notices">Notices</a>
-            <a href="index.html#contact">Contact</a>
-        </div>
-    </nav>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="index.html#academics">Academics</a>
+        <a href="index.html#staff">Our Teachers</a>
+        <a href="index.html#facilities">Facilities</a>
+        <a href="index.html#notices">Notice Board</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- PAGE TITLE: GREEN COLOR ONLY HERE -->
-    <section style="
-        background-color: #063f35;
-        color: white;
-        text-align: center;
-        padding: 55px 20px;
-    ">
-        <div class="container">
-            <p style="color:#ffdc7a; font-weight:bold; letter-spacing:2px;">
-                ABOUT OUR SCHOOL
-            </p>
+  <!-- PAGE TITLE -->
+  <section class="about-hero">
+    <h1>About Our School</h1>
+    <p>UHS Chakiya Tarari, Bhojpur, Bihar</p>
+  </section>
 
-            <h2 style="font-size:clamp(30px,5vw,46px); margin:10px 0;">
-                Vision, Mission &amp; Objectives
-            </h2>
+  <!-- STAFF PHOTO BACKGROUND AND TRANSPARENT CONTENT -->
+  <main class="about-page-content">
+    <div class="about-container">
 
-            <p>दृष्टि, मिशन एवं शैक्षणिक उद्देश्य</p>
-        </div>
-    </section>
+      <section class="about-intro">
+        <h2>Welcome to Our School</h2>
+        <p>
+          UHS Chakiya Tarari is committed to providing quality education,
+          developing strong values, encouraging creativity, and helping
+          every student achieve their full potential.
+        </p>
+      </section>
 
-    <!-- STAFF PHOTO BACKGROUND BEGINS HERE -->
-    <main class="about-background">
-        <div class="container">
+      <section class="vm-grid">
 
-            <!-- VISION -->
-            <section class="academic-card">
-                <div class="academic-icon">🎯</div>
+        <article class="vm-card">
+          <h3>Our Vision</h3>
+          <p>
+            To develop knowledgeable, confident, responsible and
+            compassionate students who can contribute positively to
+            society. We aspire to create an inclusive learning environment
+            where every child has the opportunity to grow and succeed.
+          </p>
+        </article>
 
-                <h2>Our Vision | हमारा दृष्टिकोण</h2>
+        <article class="vm-card">
+          <h3>Our Mission</h3>
+          <p>
+            To provide meaningful and accessible education through
+            dedicated teaching, practical learning, discipline,
+            innovation and equal opportunities. We aim to nurture curiosity,
+            good character and lifelong learning among our students.
+          </p>
+        </article>
 
-                <p>
-                    To create a learning environment where every student
-                    can develop knowledge, confidence, creativity,
-                    discipline and a sense of responsibility.
-                </p>
+      </section>
 
-                <p>
-                    हमारा उद्देश्य ऐसा शैक्षणिक वातावरण विकसित करना है
-                    जहाँ प्रत्येक विद्यार्थी ज्ञान, आत्मविश्वास, रचनात्मकता,
-                    अनुशासन और जिम्मेदारी की भावना का विकास कर सके।
-                </p>
-            </section>
+      <section class="objectives-card">
+        <h3>Our Objectives</h3>
 
-            <!-- MISSION -->
-            <section class="academic-card">
-                <div class="academic-icon">📚</div>
+        <ul>
+          <li>Provide quality education to every student.</li>
+          <li>Develop discipline, honesty, respect and responsibility.</li>
+          <li>Encourage scientific thinking and practical learning.</li>
+          <li>Improve digital literacy and computer education.</li>
+          <li>Promote sports, creativity and extracurricular activities.</li>
+          <li>Maintain a safe, inclusive and supportive school environment.</li>
+          <li>Build cooperation between teachers, parents and students.</li>
+          <li>Prepare students for higher education and responsible citizenship.</li>
+        </ul>
 
-                <h2>Our Mission | हमारा मिशन</h2>
+        <hr>
 
-                <p>
-                    To provide meaningful and inclusive education,
-                    encourage scientific thinking, strengthen fundamental
-                    skills and help students prepare for future challenges.
-                </p>
+        <h3>हमारा उद्देश्य</h3>
 
-                <p>
-                    गुणवत्तापूर्ण एवं समावेशी शिक्षा प्रदान करना,
-                    वैज्ञानिक सोच को प्रोत्साहित करना, बुनियादी कौशल
-                    मजबूत करना तथा विद्यार्थियों को भविष्य की चुनौतियों
-                    के लिए तैयार करना हमारा लक्ष्य है।
-                </p>
-            </section>
+        <ul>
+          <li>प्रत्येक विद्यार्थी को गुणवत्तापूर्ण शिक्षा प्रदान करना।</li>
+          <li>विद्यार्थियों में अनुशासन, ईमानदारी और जिम्मेदारी विकसित करना।</li>
+          <li>विज्ञान, तकनीकी शिक्षा और व्यावहारिक ज्ञान को बढ़ावा देना।</li>
+          <li>कंप्यूटर शिक्षा और डिजिटल साक्षरता का विकास करना।</li>
+          <li>खेलकूद, रचनात्मकता और सह-पाठ्यक्रम गतिविधियों को प्रोत्साहित करना।</li>
+          <li>विद्यालय में सुरक्षित और सहयोगपूर्ण वातावरण बनाए रखना।</li>
+          <li>विद्यार्थियों को उच्च शिक्षा और जिम्मेदार नागरिकता के लिए तैयार करना।</li>
+        </ul>
+      </section>
 
-            <!-- OBJECTIVES -->
-            <section class="academic-card">
-                <div class="academic-icon">🌱</div>
+      <div class="about-actions">
+        <a href="index.html" class="about-btn">Back to Home</a>
+        <a href="index.html#contact" class="about-btn secondary">
+          Contact School
+        </a>
+      </div>
 
-                <h2>Our Objectives | हमारे उद्देश्य</h2>
+    </div>
+  </main>
 
-                <ul style="padding-left:25px; margin-top:15px;">
-                    <li>Promote regular attendance, discipline and active participation in learning.</li>
-                    <li>Strengthen reading, writing, mathematics and problem-solving skills.</li>
-                    <li>Encourage practical science education and responsible use of technology.</li>
-                    <li>Develop moral values, respect, teamwork and social responsibility.</li>
-                    <li>Prepare students for board examinations and further education.</li>
-                    <li>Encourage sports, creativity and all-round development.</li>
-                </ul>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        © <span id="year"></span> UHS Chakiya Tarari, Bhojpur, Bihar.
+        All Rights Reserved.
+      </p>
+    </div>
+  </footer>
 
-                <hr style="margin:25px 0;">
+  <script src="script.js"></script>
 
-                <h3>हमारे प्रमुख उद्देश्य</h3>
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
 
-                <ul style="padding-left:25px; margin-top:12px;">
-                    <li>नियमित उपस्थिति, अनुशासन और सीखने में सक्रिय भागीदारी को बढ़ावा देना।</li>
-                    <li>पठन, लेखन, गणित और समस्या-समाधान कौशल को मजबूत करना।</li>
-                    <li>प्रयोगात्मक विज्ञान शिक्षा और तकनीक के जिम्मेदार उपयोग को प्रोत्साहित करना।</li>
-                    <li>नैतिक मूल्यों, सम्मान, सहयोग और सामाजिक जिम्मेदारी का विकास करना।</li>
-                    <li>बोर्ड परीक्षाओं और आगे की शिक्षा के लिए विद्यार्थियों को तैयार करना।</li>
-                    <li>खेलकूद, रचनात्मकता और सर्वांगीण विकास को प्रोत्साहित करना।</li>
-                </ul>
-            </section>
-
-            <!-- BACK TO HOME -->
-            <div style="text-align:center; margin-top:30px;">
-                <a href="index.html" class="btn primary-btn">
-                    &#8592; Back to Home
-                </a>
-            </div>
-
-        </div>
-    </main>
-    <!-- STAFF PHOTO BACKGROUND ENDS HERE -->
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container" style="text-align:center; padding:25px 0;">
-            <h3>UHS CHAKIYA TARARI</h3>
-            <p>उच्च माध्यमिक विद्यालय चकिया तरारी, भोजपुर, बिहार</p>
-            <p>शिक्षा • अनुशासन • ज्ञान • विकास</p>
-            <p class="copyright">
-                © UHS Chakiya Tarari, Bhojpur, Bihar.
-            </p>
-        </div>
-    </footer>
+    function toggleMenu() {
+      const nav = document.getElementById("mainNav");
+      if (nav) {
+        nav.classList.toggle("active");
+      }
+    }
+  </script>
 
 </body>
 </html>
