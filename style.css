@@ -2349,3 +2349,140 @@ button:focus-visible,
     border-color: #e9ad24;
     box-shadow: 0 12px 25px rgba(7, 91, 73, 0.16);
 }
+
+/* ==========================================
+   CHAKIYA EXTRA PREMIUM ANIMATIONS
+   Green & Gold Theme
+   ========================================== */
+
+/* 1. Animated section heading underline */
+.section-heading .heading-line {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-heading .heading-line::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 45%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #fff0a6,
+        #f4a300,
+        transparent
+    );
+    animation: chakHeadingShimmer 3s ease-in-out infinite;
+}
+
+@keyframes chakHeadingShimmer {
+    0%   { transform: translateX(-130%); }
+    100% { transform: translateX(260%); }
+}
+
+/* 2. Gentle floating icons */
+.academic-icon,
+.facility-image,
+.stat-icon,
+.card-icon,
+.contact-icon {
+    animation: chakIconFloat 3.5s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes chakIconFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+}
+
+/* 3. Statistics cards */
+.stat-card {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-7px) scale(1.02);
+    border-color: #f4a300;
+    box-shadow: 0 12px 28px rgba(7, 91, 73, 0.18);
+}
+
+/* 4. Staff photo zoom */
+.staff-photo {
+    overflow: hidden;
+}
+
+.staff-photo img {
+    transition: transform 0.5s ease;
+}
+
+.staff-card:hover .staff-photo img {
+    transform: scale(1.07);
+}
+
+/* 5. Gold shimmer on buttons */
+.btn,
+.primary-btn,
+.secondary-btn {
+    background-size: 200% 100%;
+}
+
+.btn:hover,
+.primary-btn:hover,
+.secondary-btn:hover {
+    background-image: linear-gradient(
+        110deg,
+        #f4a300 0%,
+        #ffe08a 45%,
+        #f4a300 70%
+    );
+    background-position: 100% 0;
+}
+
+/* 6. Notice items */
+.notice-item {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.notice-item:hover {
+    transform: translateX(5px);
+    border-color: #f4a300;
+    box-shadow: 0 7px 18px rgba(7, 91, 73, 0.12);
+}
+
+/* 7. Gallery icon zoom */
+.gallery-item > div {
+    transition: transform 0.35s ease;
+}
+
+.gallery-item:hover > div {
+    transform: scale(1.15) rotate(-3deg);
+}
+
+/* 8. Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .section-heading .heading-line::after,
+    .academic-icon,
+    .facility-image,
+    .stat-icon,
+    .card-icon,
+    .contact-icon {
+        animation: none !important;
+    }
+
+    .stat-card,
+    .staff-photo img,
+    .btn,
+    .primary-btn,
+    .secondary-btn,
+    .notice-item,
+    .gallery-item > div {
+        transition: none !important;
+    }
+}
