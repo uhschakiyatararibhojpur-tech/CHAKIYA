@@ -2300,3 +2300,52 @@ button:focus-visible,
         transform: none;
     }
 }
+
+/* CHAKIYA GALLERY — FIX WHITE TEXT */
+#gallery .gallery-item {
+    color: #075b49 !important;
+    background-color: #e5f2ee;
+    border: 1px solid rgba(7, 91, 73, 0.15);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+#gallery .gallery-item span,
+#gallery .gallery-item > div {
+    color: #075b49 !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+}
+
+#gallery .gallery-item:hover {
+    transform: translateY(-6px);
+    border-color: #e9ad24;
+    box-shadow: 0 12px 25px rgba(7, 91, 73, 0.18);
+}
+
+#gallery .gallery-item span {
+    font-weight: 600;
+}
+
+/* CHAKIYA FACILITIES — FIX WHITE TEXT */
+#facilities .facility-card h3,
+#facilities .facility-card p {
+    color: #075b49 !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+}
+
+#facilities .facility-card {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+#facilities .facility-card:hover {
+    transform: translateY(-6px);
+    border-color: #e9ad24;
+    box-shadow: 0 12px 25px rgba(7, 91, 73, 0.16);
+}
