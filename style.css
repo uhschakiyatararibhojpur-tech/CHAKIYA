@@ -2833,7 +2833,6 @@ button:focus-visible,
     border-radius: 12px;
     background: #f2f6fb;
 }
-```
 ```css
 /* DOCUMENT FORM: stable iframe layout */
 #document-submission {
@@ -2872,4 +2871,28 @@ button:focus-visible,
     font-weight: 700;
     text-decoration: underline;
 }
-```
+```css
+/* Mobile document form: open directly in browser */
+.document-mobile-open {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    #document-submission iframe {
+        display: none;
+    }
+
+    .document-mobile-open {
+        display: block;
+        width: 100%;
+        padding: 16px;
+        margin: 20px auto;
+        border-radius: 8px;
+        background: #123c69;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 700;
+        box-sizing: border-box;
+    }
+}
