@@ -1561,6 +1561,32 @@
 
 <script src="script.js"></script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var dropdown = document.getElementById("academicsDropdown");
+    var toggle = document.getElementById("academicsToggle");
+
+    if (!dropdown || !toggle) {
+        return;
+    }
+
+    toggle.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        dropdown.classList.toggle("open");
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!dropdown.contains(event.target)) {
+            dropdown.classList.remove("open");
+        }
+    });
+});
+</script>
+</body>
+</html>
+
 </body>
 
 </html>
