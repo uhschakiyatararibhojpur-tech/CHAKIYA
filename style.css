@@ -2802,6 +2802,7 @@ button:focus-visible,
     animation: chakNameReveal 1s ease-out 0.25s both;
 }
 
+```css
 /* Thin gold underline */
 .header .school-brand h1::after {
     content: "";
@@ -2814,6 +2815,7 @@ button:focus-visible,
     animation: none;
 }
 
+/* School name on mobile */
 @media (max-width: 600px) {
     .header .school-brand h1 {
         padding: 3px 0;
@@ -2821,11 +2823,7 @@ button:focus-visible,
     }
 }
 
-
-
-```css
 /* DOCUMENT SUBMISSION FORM — SAFE BASE STYLING */
-
 #document-submission iframe {
     display: block;
     width: 100%;
@@ -2835,3 +2833,4 @@ button:focus-visible,
     border-radius: 12px;
     background: #f2f6fb;
 }
+```
