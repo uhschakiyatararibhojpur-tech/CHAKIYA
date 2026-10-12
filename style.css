@@ -2976,18 +2976,17 @@ button:focus-visible,
     }
 }
 /* Academics dropdown toggle */
-```css
+
 .nav-dropdown .dropdown-toggle {
     font: inherit;
-    font-weight: 700;
-    color: #fff;
+    font-weight: inherit;
+    color: inherit;
     background: transparent;
     border: 0;
     cursor: pointer;
     text-align: left;
     touch-action: manipulation;
 }
-```
 
 .nav-dropdown.open .dropdown-menu {
     display: block !important;
