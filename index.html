@@ -1559,41 +1559,7 @@
 
 </button>
 
-
-
 <script src="script.js"></script>
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const dropdown = document.getElementById("academicsDropdown");
-    const toggle = document.getElementById("academicsToggle");
-    const menu = document.getElementById("academicsMenu");
-
-    if (!dropdown || !toggle || !menu) return;
-
-    toggle.addEventListener("click", function (event) {
-        // First tap opens the menu instead of jumping to #academics.
-        event.preventDefault();
-        event.stopPropagation();
-
-        const isOpen = dropdown.classList.toggle("open");
-        toggle.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    document.addEventListener("click", function (event) {
-        if (!dropdown.contains(event.target)) {
-            dropdown.classList.remove("open");
-            toggle.setAttribute("aria-expanded", "false");
-        }
-    });
-
-    menu.querySelectorAll("a").forEach(function (link) {
-        link.addEventListener("click", function () {
-            dropdown.classList.remove("open");
-            toggle.setAttribute("aria-expanded", "false");
-        });
-    });
-});
 
 </body>
 
