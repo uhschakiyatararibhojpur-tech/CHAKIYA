@@ -2820,3 +2820,26 @@ button:focus-visible,
         font-size: clamp(15px, 4vw, 22px);
     }
 }
+
+/* FIX: DOCUMENT SUBMISSION FORM NOT ACCEPTING INPUT */
+
+#document-submission {
+    position: relative;
+    z-index: 20;
+    isolation: isolate;
+}
+
+#document-submission .container {
+    position: relative;
+    z-index: 21;
+}
+
+#document-submission iframe {
+    display: block;
+    position: relative;
+    z-index: 22;
+    width: 100%;
+    max-width: 100%;
+    pointer-events: auto;
+    border: 0;
+}
