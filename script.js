@@ -114,28 +114,30 @@ function scrollToTop() {
 
 
 // ===============================
-// CLOSE MOBILE MENU AFTER CLICK
-// ===============================
-
+```javascript
+// CLOSE MOBILE MENU ONLY AFTER A REAL NAVIGATION
 document
     .querySelectorAll(".nav-container a")
-    .forEach(function(link) {
-
-        link.addEventListener("click", function() {
-
-            const navbar =
-                document.getElementById("navbar");
-
-            if (navbar) {
-
-                navbar.classList.remove("active");
-
+    .forEach(function (link) {
+        link.addEventListener("click", function () {
+            // Do not close the menu when Academics is tapped
+            if (link.id === "academicsToggle") {
+                return;
             }
 
+            // Do not close the menu when a dropdown option is tapped
+            if (link.classList.contains("dropdown-option")) {
+                return;
+            }
+
+            const navbar = document.getElementById("navbar");
+
+            if (navbar) {
+                navbar.classList.remove("active");
+            }
         });
-
     });
-
+```
 
 // ===============================
 // FADE-IN ANIMATION
