@@ -1564,28 +1564,33 @@
 
 <script src="script.js"></script>
 
+
+
+```html
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    var dropdown = document.getElementById("academicsDropdown");
-    var toggle = document.getElementById("academicsToggle");
+    const dropdown = document.getElementById("academicsDropdown");
+    const toggle = document.getElementById("academicsToggle");
 
-    if (!dropdown || !toggle) {
-        return;
-    }
+    if (!dropdown || !toggle) return;
 
     toggle.addEventListener("click", function (event) {
         event.preventDefault();
         event.stopPropagation();
 
-        dropdown.classList.toggle("open");
+        const isOpen = dropdown.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
     });
 
     document.addEventListener("click", function (event) {
         if (!dropdown.contains(event.target)) {
             dropdown.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
         }
     });
 });
 </script>
 </body>
 </html>
+```
+
