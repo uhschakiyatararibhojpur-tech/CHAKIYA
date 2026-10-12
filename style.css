@@ -2873,3 +2873,11 @@ button:focus-visible,
         transform: none !important;
     }
 }
+
+/* TEMPORARY TEST: disable animations */
+*,
+*::before,
+*::after {
+    animation: none !important;
+    transition: none !important;
+}
