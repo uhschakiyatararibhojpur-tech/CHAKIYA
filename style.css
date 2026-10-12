@@ -2843,3 +2843,33 @@ button:focus-visible,
     pointer-events: auto;
     border: 0;
 }
+
+/* MOBILE FIX: DOCUMENT SUBMISSION FORM */
+
+@media screen and (max-width: 768px) {
+    #document-submission {
+        position: relative !important;
+        z-index: 100 !important;
+        overflow: visible !important;
+        isolation: isolate;
+        touch-action: auto;
+    }
+
+    #document-submission .container {
+        position: relative !important;
+        z-index: 101 !important;
+        overflow: visible !important;
+    }
+
+    #document-submission iframe {
+        display: block !important;
+        position: relative !important;
+        z-index: 102 !important;
+        width: 100% !important;
+        min-height: 1250px !important;
+        height: 1250px !important;
+        pointer-events: auto !important;
+        touch-action: auto !important;
+        transform: none !important;
+    }
+}
