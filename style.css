@@ -2975,3 +2975,32 @@ button:focus-visible,
         border-top: 1px solid #e2e8f0;
     }
 }
+/* Academics dropdown toggle */
+.nav-dropdown .dropdown-toggle {
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    text-align: left;
+    touch-action: manipulation;
+}
+
+.nav-dropdown.open .dropdown-menu {
+    display: block !important;
+}
+
+@media (max-width: 700px) {
+    .nav-dropdown .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 14px 16px;
+    }
+
+    .nav-dropdown .dropdown-menu {
+        position: static;
+        width: 100%;
+    }
+}
