@@ -113,8 +113,7 @@ function scrollToTop() {
 }
 
 
-// ===============================
-```javascript
+
 // CLOSE MOBILE MENU ONLY AFTER A REAL NAVIGATION
 document
     .querySelectorAll(".nav-container a")
@@ -137,9 +136,7 @@ document
             }
         });
     });
-```
 
-// ===============================
 // FADE-IN ANIMATION
 // ===============================
 
