@@ -3004,3 +3004,99 @@ button:focus-visible,
         width: 100%;
     }
 }
+```css
+/* FIX ACADEMICS DROPDOWN BUTTON APPEARANCE */
+
+.nav-container .nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-container .nav-dropdown > .dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 16px;
+    color: #ffffff !important;
+    background: transparent !important;
+    border: none;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.nav-container .nav-dropdown > .dropdown-toggle:hover,
+.nav-container .nav-dropdown > .dropdown-toggle:focus-visible {
+    color: #ffd166 !important;
+    background: rgba(255, 255, 255, 0.10) !important;
+    outline: none;
+}
+
+.nav-container .nav-dropdown.open > .dropdown-toggle {
+    color: #ffd166 !important;
+}
+
+.nav-container .nav-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 270px;
+    background: #ffffff;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 99999;
+}
+
+.nav-container .nav-dropdown.open > .dropdown-menu {
+    display: block !important;
+}
+
+.nav-container .nav-dropdown .dropdown-menu a {
+    display: block;
+    padding: 14px 18px;
+    color: #123c45 !important;
+    background: #ffffff;
+    text-decoration: none;
+    white-space: normal;
+}
+
+.nav-container .nav-dropdown .dropdown-menu a:hover {
+    background: #edf7f5;
+}
+
+@media (max-width: 700px) {
+    .nav-container .nav-dropdown {
+        display: block;
+        width: 100%;
+    }
+
+    .nav-container .nav-dropdown > .dropdown-toggle {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 14px 16px;
+        text-align: left;
+    }
+
+    .nav-container .nav-dropdown .dropdown-menu {
+        position: static;
+        width: 100%;
+        min-width: 0;
+        box-shadow: none;
+        border-radius: 0;
+        background: #f4f8fb;
+    }
+
+    .nav-container .nav-dropdown .dropdown-menu a {
+        padding: 14px 28px;
+        border-top: 1px solid #e2e8f0;
+    }
+}
+```
