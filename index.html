@@ -78,19 +78,27 @@
         </a>
 
         
+
 <a href="about.html">About</a>
 
-<div class="nav-dropdown">
-    <a href="#academics" class="dropdown-toggle">
-        Academics ▾
+<div class="nav-dropdown" id="academicsDropdown">
+    <a href="#academics"
+       class="dropdown-toggle"
+       id="academicsToggle"
+       aria-expanded="false"
+       aria-controls="academicsMenu">
+        Academics <span>▾</span>
     </a>
 
-    <div class="dropdown-menu">
-        <a href="#academics">Academic Information</a>
+    <div class="dropdown-menu" id="academicsMenu">
+        <a href="#academics" class="dropdown-option">
+            Academic Information
+        </a>
 
         <a href="https://script.google.com/macros/s/AKfycbyC8ACQcUkbPPugH_lzdzBPkThwqipSazmYbnAK-RkBpkU7p1_6-nc8mbKH7jaKiRXilA/exec"
            target="_blank"
-           rel="noopener noreferrer">
+           rel="noopener noreferrer"
+           class="dropdown-option">
             Document / Marksheet / TC Request
         </a>
     </div>
@@ -1555,6 +1563,37 @@
 
 <script src="script.js"></script>
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    const dropdown = document.getElementById("academicsDropdown");
+    const toggle = document.getElementById("academicsToggle");
+    const menu = document.getElementById("academicsMenu");
+
+    if (!dropdown || !toggle || !menu) return;
+
+    toggle.addEventListener("click", function (event) {
+        // First tap opens the menu instead of jumping to #academics.
+        event.preventDefault();
+        event.stopPropagation();
+
+        const isOpen = dropdown.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!dropdown.contains(event.target)) {
+            dropdown.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+        }
+    });
+
+    menu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            dropdown.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+        });
+    });
+});
 
 </body>
 
