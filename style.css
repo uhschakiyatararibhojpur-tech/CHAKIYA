@@ -3109,7 +3109,6 @@ button:focus-visible,
   display: block;
   margin-bottom: 16px;
 }
-```css
 .gallery-item {
   overflow: hidden;
   min-width: 0;
@@ -3139,4 +3138,3 @@ button:focus-visible,
   white-space: normal;
   box-sizing: border-box;
 }
-```
