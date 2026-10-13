@@ -3110,13 +3110,13 @@ button:focus-visible,
   margin-bottom: 16px;
 }
 ```css
-/* FIX SCHOOL GALLERY IMAGES */
 .gallery-item {
   overflow: hidden;
   min-width: 0;
   border-radius: 12px;
   background: #dff2ef;
   text-align: center;
+  height: auto;
 }
 
 .gallery-item img {
@@ -3125,16 +3125,18 @@ button:focus-visible,
   height: 220px;
   object-fit: cover;
   object-position: center;
-  border-radius: 12px 12px 0 0;
   margin: 0;
 }
 
 .gallery-item h3 {
+  display: block;
+  width: 100%;
   margin: 0;
   padding: 16px 10px;
   font-size: 20px;
   line-height: 1.4;
-  overflow-wrap: anywhere;
-  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal;
+  box-sizing: border-box;
 }
 ```
