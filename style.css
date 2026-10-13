@@ -3109,22 +3109,32 @@ button:focus-visible,
   display: block;
   margin-bottom: 16px;
 }
-/* SCHOOL GALLERY PHOTOS */
+```css
+/* FIX SCHOOL GALLERY IMAGES */
+.gallery-item {
+  overflow: hidden;
+  min-width: 0;
+  border-radius: 12px;
+  background: #dff2ef;
+  text-align: center;
+}
+
 .gallery-item img {
+  display: block;
   width: 100%;
   height: 220px;
   object-fit: cover;
   object-position: center;
-  border-radius: 12px;
-  display: block;
-  transition: transform 0.3s ease;
+  border-radius: 12px 12px 0 0;
+  margin: 0;
 }
 
-.gallery-item {
-  overflow: hidden;
-  border-radius: 12px;
+.gallery-item h3 {
+  margin: 0;
+  padding: 16px 10px;
+  font-size: 20px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
-
-.gallery-item:hover img {
-  transform: scale(1.04);
-}
+```
