@@ -3146,8 +3146,8 @@ button:focus-visible,
   padding: 35px 15px;
   background:
     linear-gradient(
-      rgba(255, 255, 255, 0.30),
-      rgba(255, 255, 255, 0.30)
+      rgba(255, 255, 255, 0.35),
+      rgba(255, 255, 255, 0.35)
     ),
     url("school.jpg") center center / cover no-repeat;
 }
