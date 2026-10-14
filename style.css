@@ -3138,3 +3138,138 @@ button:focus-visible,
   white-space: normal;
   box-sizing: border-box;
 }
+
+/* COMPACT NOTICE BOARD */
+#notices {
+  position: relative;
+  padding: 35px 15px;
+  background:
+    linear-gradient(rgba(255,255,255,0.82),
+                    rgba(255,255,255,0.82)),
+    url("school.jpg") center/cover no-repeat;
+}
+
+#notices .section-heading {
+  margin-bottom: 18px;
+}
+
+#noticeBoard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8px 18px;
+  background: rgba(255,255,255,0.90);
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+}
+
+#noticeBoard .notice-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 4px;
+  border-bottom: 1px solid #dedede;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+#noticeBoard .notice-date {
+  min-width: 95px;
+  min-height: auto;
+  height: auto;
+  padding: 6px 9px;
+  background: #d71920;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 700;
+}
+
+#noticeBoard .notice-date strong {
+  font-size: 15px;
+}
+
+#noticeBoard .notice-date span {
+  display: block;
+  font-size: 11px;
+}
+
+#noticeBoard .notice-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 5px 10px;
+}
+
+#noticeBoard .notice-tag {
+  color: #d71920;
+  font-weight: 800;
+  font-size: 13px;
+  background: transparent;
+  padding: 0;
+}
+
+#noticeBoard .notice-content h3 {
+  display: inline;
+  margin: 0;
+  color: #c8171e;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+#noticeBoard .notice-content p {
+  display: inline;
+  margin: 0;
+  color: #171717;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#noticeBoard .notice-content a {
+  color: #d71920;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  #notices {
+    padding: 24px 10px;
+  }
+
+  #noticeBoard {
+    padding: 6px 10px;
+  }
+
+  #noticeBoard .notice-item {
+    gap: 9px;
+    padding: 10px 0;
+  }
+
+  #noticeBoard .notice-date {
+    min-width: 70px;
+    padding: 5px 3px;
+  }
+
+  #noticeBoard .notice-date strong {
+    font-size: 12px;
+  }
+
+  #noticeBoard .notice-date span {
+    font-size: 10px;
+  }
+
+  #noticeBoard .notice-content {
+    gap: 3px 6px;
+  }
+
+  #noticeBoard .notice-content h3 {
+    font-size: 14px;
+  }
+
+  #noticeBoard .notice-content p {
+    font-size: 13px;
+  }
+}
