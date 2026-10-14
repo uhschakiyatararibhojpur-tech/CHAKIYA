@@ -772,183 +772,26 @@
 </section>
 
 
-
 <!-- NOTICES -->
+<section class="section" id="notices">
+  <div class="container">
 
-<section
-    class="section"
-    id="notices">
-
-
-    <div class="container">
-
-
-        <div class="section-heading">
-
-            <span>
-                NOTICE BOARD
-            </span>
-
-            <h2>
-                विद्यालय सूचना पट्ट
-            </h2>
-
-            <div class="heading-line"></div>
-
-        </div>
-
-
-
-      <div class="notice-board">
-
-    <div class="notice-item">
-
-        <div class="notice-date">
-
-            <strong>
-                06
-            </strong>
-
-            <span>
-                OCT
-            </span>
-
-        </div>
-
-        <div class="notice-content">
-
-            <span class="notice-tag">
-                REGISTRATION
-            </span>
-
-            <h3>
-                कक्षा 9 एवं 11 के लिए पंजीकरण सूचना
-            </h3>
-
-            <p>
-                कक्षा 9 एवं 11 के विद्यार्थियों के लिए
-                पंजीकरण प्रक्रिया जारी है। पंजीकरण की
-                अंतिम तिथि <strong>06 अक्टूबर 2026</strong> है।
-                सभी संबंधित विद्यार्थी निर्धारित तिथि तक
-                अपना पंजीकरण पूर्ण कर लें।
-            </p>
-
-        </div>
-
+    <div class="section-heading">
+      <span>NOTICE BOARD</span>
+      <h2>विद्यालय सूचना पट्ट</h2>
+      <div class="heading-line"></div>
     </div>
 
-
-                <div class="notice-content">
-
-                    <span class="notice-tag">
-                        GENERAL
-                    </span>
-
-                    <h3>
-                        विद्यालय की नवीनतम सूचना
-                    </h3>
-
-                    <p>
-
-                        विद्यार्थियों एवं अभिभावकों से
-                        अनुरोध है कि विद्यालय की नवीनतम
-                        सूचनाओं पर ध्यान दें।
-
-                    </p>
-
-                </div>
-
-
-            </div>
-
-
-
-            <div class="notice-item">
-
-
-                <div class="notice-date">
-
-                    <strong>
-                        15
-                    </strong>
-
-                    <span>
-                        AUG
-                    </span>
-
-                </div>
-
-
-                <div class="notice-content">
-
-                    <span class="notice-tag">
-                        EVENT
-                    </span>
-
-                    <h3>
-                        स्वतंत्रता दिवस कार्यक्रम
-                    </h3>
-
-                    <p>
-
-                        विद्यालय में स्वतंत्रता दिवस
-                        कार्यक्रम आयोजित किया गया।
-
-                    </p>
-
-                </div>
-
-
-            </div>
-
-
-
-            <div class="notice-item">
-
-
-                <div class="notice-date">
-
-                    <strong>
-                        05
-                    </strong>
-
-                    <span>
-                        AUG
-                    </span>
-
-                </div>
-
-
-                <div class="notice-content">
-
-                    <span class="notice-tag">
-                        SPORTS
-                    </span>
-
-                    <h3>
-                        खेल सामग्री संबंधी सूचना
-                    </h3>
-
-                    <p>
-
-                        विद्यार्थियों के लिए खेल सामग्री
-                        उपलब्ध कराने की व्यवस्था की गई।
-
-                    </p>
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-
+    <div class="notice-board" id="noticeBoard">
+      <p>विद्यालय की सूचनाएँ लोड हो रही हैं...</p>
     </div>
 
+    <div id="noticeMessage" role="status" aria-live="polite"></div>
 
+  </div>
 </section>
+
+
 
 
 
@@ -1405,7 +1248,153 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+    
+<script>
+(() => {
+  const API_URL = "https://script.google.com/macros/s/AKfycbzVPiOa5gNCsCMx-RYF0yPLhnAlxGJzxBc5tm1KVHOemuDHBYID12o87c_YYCLU71i7/exec";
+
+  const board = document.getElementById("noticeBoard");
+  const message = document.getElementById("noticeMessage");
+
+  if (!board || !message) return;
+
+  function addText(parent, tag, value, className) {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    el.textContent = value;
+    parent.appendChild(el);
+    return el;
+  }
+
+  function formatDate(value) {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || "");
+    if (match) return `${match[3]}/${match[2]}/${match[1]}`;
+
+    const indianDate = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(value || "");
+    if (indianDate) return value;
+
+    return value || "सूचना";
+  }
+
+  function showNotices(data) {
+    if (!data || !data.success || !Array.isArray(data.notices)) {
+      throw new Error(data?.error || "Invalid server response");
+    }
+
+    board.replaceChildren();
+    message.textContent = "";
+
+    if (data.notices.length === 0) {
+      addText(board, "p", "फिलहाल कोई प्रकाशित सूचना उपलब्ध नहीं है।");
+      return;
+    }
+
+    data.notices.forEach(notice => {
+      const item = document.createElement("article");
+      item.className = "notice-item";
+
+      const dateBox = document.createElement("div");
+      dateBox.className = "notice-date";
+
+      const dateText = formatDate(notice.date);
+      const parts = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(dateText);
+
+      if (parts) {
+        addText(dateBox, "strong", parts[1]);
+        addText(dateBox, "span", parts[2] + "/" + parts[3]);
+      } else {
+        addText(dateBox, "strong", dateText);
+      }
+
+      const content = document.createElement("div");
+      content.className = "notice-content";
+
+      addText(content, "span", notice.category || "GENERAL", "notice-tag");
+      addText(content, "h3", notice.title || "विद्यालय सूचना");
+      addText(content, "p", notice.description || "");
+
+      if (notice.pdfUrl) {
+        try {
+          const pdf = new URL(notice.pdfUrl);
+
+          if (
+            pdf.protocol === "https:" &&
+            ["drive.google.com", "docs.google.com"].includes(pdf.hostname)
+          ) {
+            const link = document.createElement("a");
+            link.href = pdf.href;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.textContent = "📄 सूचना PDF देखें";
+            content.appendChild(link);
+          }
+        } catch (error) {
+          console.warn("Invalid notice PDF URL", error);
+        }
+      }
+
+      item.appendChild(dateBox);
+      item.appendChild(content);
+      board.appendChild(item);
+    });
+  }
+
+  function loadNotices() {
+    board.replaceChildren();
+    message.textContent = "";
+    addText(board, "p", "विद्यालय की सूचनाएँ लोड हो रही हैं...");
+
+    const callbackName =
+      "chakiyaNotice_" + Date.now() + "_" +
+      Math.random().toString(36).slice(2);
+
+    const script = document.createElement("script");
+    let finished = false;
+
+    const timeout = setTimeout(() => {
+      finish();
+      board.replaceChildren();
+      message.textContent =
+        "सूचनाएँ लोड नहीं हो सकीं। Apps Script URL और deployment जाँचें।";
+    }, 15000);
+
+    function finish() {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timeout);
+      delete window[callbackName];
+      script.remove();
+    }
+
+    window[callbackName] = data => {
+      finish();
+      try {
+        showNotices(data);
+      } catch (error) {
+        console.error(error);
+        board.replaceChildren();
+        message.textContent = "सूचनाएँ पढ़ने में समस्या हुई।";
+      }
+    };
+
+    script.onerror = () => {
+      finish();
+      board.replaceChildren();
+      message.textContent =
+        "सर्वर से संपर्क नहीं हो सका। Apps Script deployment जाँचें।";
+    };
+
+    script.src = API_URL +
+      (API_URL.includes("?") ? "&" : "?") +
+      "callback=" + encodeURIComponent(callbackName) +
+      "&t=" + Date.now();
+
+    document.head.appendChild(script);
+  }
+
+  loadNotices();
+})();
+</script>
 </body>
 </html>
-```
 
