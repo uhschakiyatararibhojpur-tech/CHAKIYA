@@ -3146,8 +3146,8 @@ button:focus-visible,
   padding: 35px 15px;
   background:
     linear-gradient(
-      rgba(255, 255, 255, 0.35),
-      rgba(255, 255, 255, 0.35)
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.05)
     ),
     url("school.jpg") center center / cover no-repeat;
 }
@@ -3160,7 +3160,7 @@ button:focus-visible,
   max-width: 1200px;
   margin: 0 auto;
   padding: 8px 18px;
-  background: rgba(255,255,255,0.88);
+  background: rgba(255,255,255,0.30);
   border-radius: 8px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.12);
 }
