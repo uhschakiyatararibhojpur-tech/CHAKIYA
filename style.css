@@ -3276,3 +3276,76 @@ button:focus-visible,
     font-size: 13px;
   }
 }
+/* Professional, bold and catchy notice text */
+#noticeBoard .notice-content p {
+  color: #111827;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.7;
+  letter-spacing: 0.15px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+#noticeBoard .notice-content h3 {
+  color: #c00000;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.5;
+  transition: color 0.25s ease;
+}
+
+#noticeBoard .notice-tag {
+  color: #b00000;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+/* Professional notice card styling */
+#noticeBoard .notice-item {
+  padding: 13px 10px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.18);
+  border-radius: 6px;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Subtle hover animation */
+#noticeBoard .notice-item:hover {
+  background: rgba(255, 255, 255, 0.45);
+  transform: translateX(3px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+#noticeBoard .notice-item:hover .notice-content h3 {
+  color: #e00000;
+}
+
+#noticeBoard .notice-content a {
+  display: inline-block;
+  color: #b00000;
+  font-weight: 800;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+#noticeBoard .notice-content a:hover {
+  color: #e00000;
+  transform: translateY(-1px);
+  text-decoration: underline;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  #noticeBoard .notice-item,
+  #noticeBoard .notice-content h3,
+  #noticeBoard .notice-content a {
+    transition: none;
+  }
+
+  #noticeBoard .notice-item:hover,
+  #noticeBoard .notice-content a:hover {
+    transform: none;
+  }
+}
