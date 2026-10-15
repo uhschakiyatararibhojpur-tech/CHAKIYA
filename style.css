@@ -3349,3 +3349,447 @@ button:focus-visible,
     transform: none;
   }
 }
+
+/* ======================================
+   CHAKIYA AI & COMPUTER FUTURE ANIMATION
+====================================== */
+
+.ai-future-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 55px 5% 25px;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 75% 45%,
+      #063f72 0%, transparent 42%),
+    linear-gradient(125deg,
+      #031329, #042b45 55%, #001a32);
+}
+
+.ai-grid-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .20;
+  background-image:
+    linear-gradient(#00d9ff25 1px, transparent 1px),
+    linear-gradient(90deg, #00d9ff25 1px, transparent 1px);
+  background-size: 38px 38px;
+  animation: aiGridMove 18s linear infinite;
+}
+
+.ai-future-container {
+  max-width: 1250px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 35px;
+}
+
+.ai-future-text {
+  position: relative;
+  z-index: 3;
+  animation: aiTextReveal 1s ease both;
+}
+
+.ai-top-label {
+  display: inline-block;
+  color: #66f2ff;
+  border: 1px solid #00d9ff65;
+  border-radius: 30px;
+  padding: 9px 15px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: #00d9ff12;
+}
+
+.ai-future-text h2 {
+  margin: 22px 0 12px;
+  color: #fff;
+  font-size: clamp(32px, 4vw, 53px);
+  line-height: 1.15;
+}
+
+.ai-gradient-text {
+  display: block;
+  margin-top: 8px;
+  background: linear-gradient(
+    90deg, #00eaff, #7f9cff, #ffdf61, #00eaff
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: aiTextShine 5s linear infinite;
+}
+
+.ai-future-text h3 {
+  color: #ffdc61;
+  font-size: clamp(20px, 2.3vw, 29px);
+  margin: 18px 0;
+}
+
+.ai-future-text p {
+  max-width: 570px;
+  color: #d7eafa;
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+.ai-tech-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 25px 0;
+}
+
+.ai-tech-list span {
+  padding: 12px 10px;
+  border-left: 3px solid #00d9ff;
+  border-radius: 5px;
+  color: #e7f9ff;
+  background: #ffffff09;
+  font-size: 13px;
+  transition: .3s;
+}
+
+.ai-tech-list span:hover {
+  background: #00cfff20;
+  transform: translateX(5px);
+}
+
+.ai-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 23px;
+  border-radius: 40px;
+  background: linear-gradient(90deg, #ffe36c, #ffb900);
+  color: #08233b;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 0 25px #ffc40035;
+  transition: .3s;
+}
+
+.ai-explore-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 35px #ffc40080;
+}
+
+.ai-explore-btn span {
+  font-size: 22px;
+}
+
+/* ANIMATED AI VISUAL */
+
+.ai-visual {
+  position: relative;
+  min-height: 390px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 800px;
+}
+
+.ai-brain {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #00dfff;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle, #00dfff30, #061d3a 68%
+  );
+  box-shadow:
+    0 0 25px #00dfff70,
+    inset 0 0 35px #00dfff35;
+  animation: aiBrainPulse 3s ease-in-out infinite;
+}
+
+.brain-core {
+  display: grid;
+  place-items: center;
+  width: 95px;
+  height: 95px;
+  border-radius: 22px;
+  border: 2px solid #7df5ff;
+  background: #053d68;
+  color: #8ffaff;
+  font-size: 45px;
+  font-weight: 900;
+  box-shadow: 0 0 30px #00dfff90;
+  animation: aiCoreGlow 2s ease-in-out infinite alternate;
+}
+
+.brain-ring {
+  position: absolute;
+  inset: -18px;
+  border: 1px solid #00dfff70;
+  border-radius: 50%;
+  animation: aiRingSpin 8s linear infinite;
+}
+
+.ring-two {
+  inset: -38px;
+  border-style: dashed;
+  animation-duration: 14s;
+  animation-direction: reverse;
+}
+
+.ring-three {
+  inset: -58px;
+  border-color: #638cff60;
+  animation-duration: 20s;
+}
+
+.brain-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 15px #00eaff;
+}
+
+.dot-one { top: 12%; left: 25%; }
+.dot-two { top: 28%; right: 8%; }
+.dot-three { bottom: 15%; left: 18%; }
+.dot-four { bottom: 25%; right: 12%; }
+
+.ai-orbit {
+  position: absolute;
+  width: 300px;
+  height: 115px;
+  border: 1px solid #00dfff60;
+  border-radius: 50%;
+  transform: rotate(-30deg);
+}
+
+.orbit-two {
+  width: 340px;
+  height: 150px;
+  transform: rotate(35deg);
+  border-color: #9d8cff60;
+}
+
+.floating-tech {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 15px;
+  border: 1px solid #36dcff80;
+  border-radius: 10px;
+  background: #061c35eF;
+  color: #e5faff;
+  font-size: 12px;
+  font-weight: 800;
+  box-shadow: 0 0 20px #00dfff20;
+  animation: aiFloat 4s ease-in-out infinite;
+}
+
+.floating-tech span {
+  color: #00eaff;
+  font-size: 22px;
+}
+
+.tech-ai {
+  top: 5%;
+  right: 0;
+}
+
+.tech-code {
+  top: 28%;
+  left: -1%;
+  animation-delay: -1s;
+}
+
+.tech-pc {
+  right: 0;
+  bottom: 25%;
+  animation-delay: -2s;
+}
+
+.tech-robot {
+  bottom: 8%;
+  left: 5%;
+  animation-delay: -3s;
+}
+
+.hologram-base {
+  position: absolute;
+  bottom: 3%;
+  width: 75%;
+  height: 25px;
+  border-radius: 50%;
+  background: #00dfff30;
+  filter: blur(12px);
+  border-bottom: 2px solid #00eaff;
+}
+
+.ai-bottom-strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px 35px;
+  max-width: 1200px;
+  margin: 30px auto 0;
+  padding: 18px;
+  border-top: 1px solid #00dfff45;
+  color: #c9f7ff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ai-bottom-strip span {
+  animation: aiBottomGlow 3s ease-in-out infinite alternate;
+}
+
+.ai-bottom-strip span:nth-child(2) {
+  animation-delay: .5s;
+}
+
+.ai-bottom-strip span:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.ai-bottom-strip span:nth-child(4) {
+  animation-delay: 1.5s;
+}
+
+/* ANIMATION KEYFRAMES */
+
+@keyframes aiGridMove {
+  to { background-position: 38px 38px; }
+}
+
+@keyframes aiTextReveal {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes aiTextShine {
+  to { background-position: 250% center; }
+}
+
+@keyframes aiBrainPulse {
+  0%, 100% { transform: scale(.97); }
+  50% { transform: scale(1.04); }
+}
+
+@keyframes aiCoreGlow {
+  from { box-shadow: 0 0 15px #00dfff70; }
+  to { box-shadow: 0 0 38px #00dfff; }
+}
+
+@keyframes aiRingSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes aiFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -12px; }
+}
+
+@keyframes aiBottomGlow {
+  from { opacity: .7; }
+  to { opacity: 1; text-shadow: 0 0 12px #00dfff; }
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 800px) {
+  .ai-future-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .ai-future-text {
+    text-align: center;
+  }
+
+  .ai-future-text p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ai-tech-list {
+    text-align: left;
+  }
+
+  .ai-visual {
+    min-height: 360px;
+  }
+
+  .ai-brain {
+    width: 180px;
+    height: 180px;
+  }
+
+  .brain-core {
+    width: 75px;
+    height: 75px;
+    font-size: 35px;
+  }
+
+  .ai-orbit {
+    width: 250px;
+  }
+
+  .orbit-two {
+    width: 275px;
+  }
+
+  .floating-tech {
+    font-size: 10px;
+    padding: 9px;
+  }
+
+  .tech-code { left: 0; }
+  .tech-ai { right: 0; }
+}
+
+@media (max-width: 420px) {
+  .ai-future-section {
+    padding: 40px 15px 20px;
+  }
+
+  .ai-tech-list {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-visual {
+    min-height: 320px;
+  }
+
+  .floating-tech {
+    max-width: 135px;
+  }
+
+  .ai-bottom-strip {
+    gap: 14px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-grid-bg,
+  .ai-future-text,
+  .ai-gradient-text,
+  .ai-brain,
+  .brain-core,
+  .brain-ring,
+  .ai-orbit,
+  .floating-tech,
+  .ai-bottom-strip span {
+    animation: none !important;
+  }
+}
