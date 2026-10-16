@@ -1,0 +1,983 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>कंप्यूटर एवं AI शिक्षा | UHS Chakiya Tarari</title>
+  <meta name="description"
+        content="UHS Chakiya Tarari Bhojpur में कंप्यूटर, कृत्रिम बुद्धिमत्ता, डिजिटल शिक्षा और प्रोग्रामिंग की जानकारी हिंदी में सीखें।">
+
+  <meta name="theme-color" content="#004b49">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+  <style>
+    :root {
+      --ai-primary: #004b49;
+      --ai-secondary: #087e78;
+      --ai-gold: #d6a52a;
+      --ai-bg: #eff6f3;
+      --ai-white: #ffffff;
+      --ai-text: #254744;
+      --ai-muted: #657c79;
+      --ai-border: #d8e8e2;
+      --ai-shadow: 0 8px 28px rgba(0, 75, 73, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans Devanagari", Mangal, sans-serif;
+      color: var(--ai-text);
+      background: var(--ai-bg);
+      line-height: 1.8;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .ai-container {
+      width: min(1180px, 92%);
+      margin-inline: auto;
+    }
+
+    /* Header */
+    .ai-header {
+      background: var(--ai-primary);
+      color: white;
+      box-shadow: 0 5px 20px rgba(0, 50, 48, 0.12);
+    }
+
+    .ai-nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .ai-brand {
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .ai-brand small {
+      display: block;
+      color: #b9ded6;
+      font-size: 11px;
+      font-weight: 400;
+    }
+
+    .ai-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .ai-nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .ai-nav-links a:hover {
+      color: #f3cb61;
+    }
+
+    .ai-back {
+      padding: 9px 15px;
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: 7px;
+    }
+
+    /* Hero */
+    .ai-hero {
+      padding: 55px 0 35px;
+    }
+
+    .ai-hero-card {
+      background: var(--ai-white);
+      border: 1px solid var(--ai-border);
+      border-radius: 16px;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 34px;
+      box-shadow: var(--ai-shadow);
+    }
+
+    .ai-eyebrow {
+      display: inline-block;
+      color: var(--ai-secondary);
+      background: #e4f3ee;
+      border-radius: 50px;
+      padding: 5px 13px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .ai-hero h1 {
+      color: var(--ai-primary);
+      font-size: clamp(28px, 4vw, 43px);
+      line-height: 1.45;
+      margin: 17px 0;
+    }
+
+    .ai-hero p {
+      color: var(--ai-muted);
+      font-size: 17px;
+      margin: 0 0 22px;
+    }
+
+    .ai-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ai-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 11px 17px;
+      font-weight: 700;
+      border: 1px solid var(--ai-primary);
+      transition: transform .2s, background .2s;
+    }
+
+    .ai-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .ai-btn-primary {
+      background: var(--ai-primary);
+      color: white;
+    }
+
+    .ai-btn-outline {
+      color: var(--ai-primary);
+      background: white;
+    }
+
+    .ai-hero-image {
+      width: 100%;
+      height: 330px;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #dbece7;
+    }
+
+    /* Common sections */
+    .ai-section {
+      padding: 36px 0;
+    }
+
+    .ai-section-heading {
+      text-align: center;
+      margin-bottom: 27px;
+    }
+
+    .ai-section-heading h2 {
+      color: var(--ai-primary);
+      font-size: clamp(24px, 3vw, 32px);
+      margin: 0 0 8px;
+    }
+
+    .ai-section-heading p {
+      margin: 0;
+      color: var(--ai-muted);
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .ai-card {
+      min-width: 0;
+      background: var(--ai-white);
+      border: 1px solid var(--ai-border);
+      border-radius: 13px;
+      overflow: hidden;
+      box-shadow: var(--ai-shadow);
+    }
+
+    .ai-card-image {
+      width: 100%;
+      height: 195px;
+      object-fit: cover;
+      background: #e2efea;
+    }
+
+    .ai-card-body {
+      padding: 20px;
+    }
+
+    .ai-card h3 {
+      color: var(--ai-primary);
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .ai-card p {
+      margin: 0 0 14px;
+      color: var(--ai-muted);
+      font-size: 15px;
+    }
+
+    .ai-card ul {
+      padding-left: 22px;
+      margin: 10px 0 0;
+    }
+
+    .ai-card li {
+      margin: 6px 0;
+    }
+
+    .ai-tag {
+      display: inline-block;
+      background: #fff4d7;
+      color: #795600;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .ai-text-link {
+      display: inline-block;
+      color: var(--ai-secondary);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .ai-text-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Learning steps */
+    .ai-learning-panel {
+      background: var(--ai-primary);
+      color: white;
+      border-radius: 15px;
+      padding: 30px;
+    }
+
+    .ai-learning-panel h2 {
+      margin-top: 0;
+      color: white;
+    }
+
+    .ai-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .ai-step {
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.07);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .ai-step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 37px;
+      height: 37px;
+      border-radius: 50%;
+      background: var(--ai-gold);
+      color: #173b35;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .ai-step h3 {
+      margin: 5px 0;
+      font-size: 17px;
+    }
+
+    .ai-step p {
+      color: #d2e9e2;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* Example */
+    .ai-example {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: center;
+      gap: 25px;
+      padding: 26px;
+      background: white;
+      border: 1px solid var(--ai-border);
+      border-radius: 14px;
+      box-shadow: var(--ai-shadow);
+    }
+
+    .ai-example h3 {
+      color: var(--ai-primary);
+      font-size: 23px;
+      margin: 0 0 10px;
+    }
+
+    .ai-example p {
+      color: var(--ai-muted);
+    }
+
+    .ai-example-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #e2efea;
+    }
+
+    .ai-note {
+      border-left: 4px solid var(--ai-gold);
+      background: #fff8e8;
+      padding: 14px 17px;
+      border-radius: 5px;
+      margin-top: 16px;
+    }
+
+    /* Quiz */
+    .ai-quiz {
+      max-width: 760px;
+      margin: 0 auto;
+      background: white;
+      border: 1px solid var(--ai-border);
+      border-radius: 14px;
+      padding: 26px;
+      box-shadow: var(--ai-shadow);
+    }
+
+    .ai-question {
+      border-bottom: 1px solid var(--ai-border);
+      padding: 16px 0;
+    }
+
+    .ai-question:first-child {
+      padding-top: 0;
+    }
+
+    .ai-question p {
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+
+    .ai-option {
+      display: block;
+      padding: 7px 0;
+      cursor: pointer;
+    }
+
+    .ai-option input {
+      margin-right: 8px;
+      accent-color: var(--ai-secondary);
+    }
+
+    .ai-quiz button {
+      margin-top: 18px;
+      cursor: pointer;
+    }
+
+    .ai-result {
+      margin-top: 18px;
+      padding: 14px;
+      background: #e8f5ee;
+      color: var(--ai-primary);
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .ai-result:empty {
+      display: none;
+    }
+
+    /* Footer */
+    .ai-footer {
+      margin-top: 35px;
+      padding: 28px 0;
+      background: #003c3a;
+      color: #e2f0ec;
+      text-align: center;
+    }
+
+    .ai-footer p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    .ai-footer a {
+      color: white;
+    }
+
+    @media (max-width: 850px) {
+      .ai-hero-card {
+        grid-template-columns: 1fr;
+        padding: 24px;
+      }
+
+      .ai-hero-image {
+        height: 280px;
+      }
+
+      .ai-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .ai-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .ai-example {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .ai-nav {
+        padding: 14px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .ai-nav-links {
+        gap: 12px 16px;
+      }
+
+      .ai-nav-links a {
+        font-size: 13px;
+      }
+
+      .ai-hero {
+        padding-top: 22px;
+      }
+
+      .ai-hero-card {
+        padding: 19px;
+      }
+
+      .ai-hero p {
+        font-size: 15px;
+      }
+
+      .ai-hero-image {
+        height: 220px;
+      }
+
+      .ai-grid,
+      .ai-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-section {
+        padding: 25px 0;
+      }
+
+      .ai-learning-panel,
+      .ai-quiz {
+        padding: 19px;
+      }
+
+      .ai-card-image {
+        height: 210px;
+      }
+
+      .ai-example-image {
+        height: 220px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="ai-header">
+    <nav class="ai-nav ai-container" aria-label="मुख्य नेविगेशन">
+      <a class="ai-brand" href="index.html">
+        UHS CHAKIYA TARARI
+        <small>भोजपुर, बिहार | कंप्यूटर एवं AI शिक्षा</small>
+      </a>
+
+      <div class="ai-nav-links">
+        <a href="index.html">होम</a>
+        <a href="#computer">कंप्यूटर</a>
+        <a href="#ai">AI शिक्षा</a>
+        <a href="#practice">अभ्यास</a>
+        <a class="ai-back" href="index.html">← मुख्य वेबसाइट</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="ai-hero">
+      <div class="ai-container ai-hero-card">
+        <div>
+          <span class="ai-eyebrow">डिजिटल शिक्षा • नई तकनीक</span>
+
+          <h1>तकनीक को समझें,<br>ज्ञान को बढ़ाएँ</h1>
+
+          <p>
+            कंप्यूटर और कृत्रिम बुद्धिमत्ता (AI) आज शिक्षा, विज्ञान
+            और आधुनिक जीवन का महत्वपूर्ण हिस्सा हैं। आइए सरल हिंदी
+            में सीखें कि कंप्यूटर कैसे काम करता है और AI हमारी
+            पढ़ाई में किस प्रकार सहायता कर सकता है।
+          </p>
+
+          <div class="ai-buttons">
+            <a class="ai-btn ai-btn-primary" href="#computer">
+              कंप्यूटर सीखें →
+            </a>
+            <a class="ai-btn ai-btn-outline" href="#ai">
+              AI के बारे में जानें
+            </a>
+          </div>
+        </div>
+
+        <img
+          class="ai-hero-image"
+          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1100&q=85"
+          alt="कंप्यूटर और डिजिटल शिक्षा"
+          fetchpriority="high"
+        >
+      </div>
+    </section>
+
+    <!-- Computer -->
+    <section class="ai-section" id="computer">
+      <div class="ai-container">
+        <div class="ai-section-heading">
+          <h2>01. कंप्यूटर की मूल जानकारी</h2>
+          <p>कंप्यूटर क्या है और इसका उपयोग कहाँ किया जाता है?</p>
+        </div>
+
+        <div class="ai-grid">
+
+          <article class="ai-card">
+            <img
+              class="ai-card-image"
+              src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80"
+              alt="कंप्यूटर कीबोर्ड और डेस्कटॉप"
+              loading="lazy"
+            >
+            <div class="ai-card-body">
+              <span class="ai-tag">कंप्यूटर परिचय</span>
+              <h3>कंप्यूटर क्या है?</h3>
+              <p>
+                कंप्यूटर एक इलेक्ट्रॉनिक मशीन है जो निर्देशों के
+                अनुसार डेटा को संसाधित करके उपयोगी परिणाम देती है।
+              </p>
+              <ul>
+                <li>डेटा स्वीकार करता है।</li>
+                <li>निर्देशों के अनुसार कार्य करता है।</li>
+                <li>परिणाम दिखाता या सुरक्षित करता है।</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="ai-card">
+            <img
+              class="ai-card-image"
+              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80"
+              alt="कंप्यूटर पर डिजिटल कार्य"
+              loading="lazy"
+            >
+            <div class="ai-card-body">
+              <span class="ai-tag">हार्डवेयर और सॉफ्टवेयर</span>
+              <h3>कंप्यूटर के भाग</h3>
+              <p>
+                कंप्यूटर के मुख्य भौतिक भाग हार्डवेयर कहलाते हैं।
+                कार्य करने वाले प्रोग्राम सॉफ्टवेयर कहलाते हैं।
+              </p>
+              <ul>
+                <li>मॉनिटर — जानकारी दिखाता है।</li>
+                <li>कीबोर्ड — अक्षर और संख्याएँ लिखता है।</li>
+                <li>माउस — स्क्रीन पर विकल्प चुनता है।</li>
+                <li>सॉफ्टवेयर — निर्देशों के अनुसार काम करता है।</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="ai-card">
+            <img
+              class="ai-card-image"
+              src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=800&q=80"
+              alt="विद्यार्थियों के लिए डिजिटल अध्ययन"
+              loading="lazy"
+            >
+            <div class="ai-card-body">
+              <span class="ai-tag">डिजिटल कौशल</span>
+              <h3>कंप्यूटर के उपयोग</h3>
+              <p>
+                कंप्यूटर पढ़ाई, विज्ञान, संचार, लेखन और
+                जानकारी को व्यवस्थित करने में सहायता करता है।
+              </p>
+              <ul>
+                <li>MS Word में दस्तावेज बनाना।</li>
+                <li>शैक्षणिक सामग्री पढ़ना।</li>
+                <li>प्रेजेंटेशन और प्रोजेक्ट बनाना।</li>
+                <li>सुरक्षित इंटरनेट का उपयोग करना।</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- AI -->
+    <section class="ai-section" id="ai">
+      <div class="ai-container">
+        <div class="ai-section-heading">
+          <h2>02. कृत्रिम बुद्धिमत्ता (AI)</h2>
+          <p>AI को समझें और जिम्मेदारी से उसका उपयोग करना सीखें।</p>
+        </div>
+
+        <div class="ai-grid">
+
+          <article class="ai-card">
+            <img
+              class="ai-card-image"
+              src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80"
+              alt="कृत्रिम बुद्धिमत्ता और डिजिटल तकनीक"
+              loading="lazy"
+            >
+            <div class="ai-card-body">
+              <span class="ai-tag">AI परिचय</span>
+              <h3>AI क्या है?</h3>
+              <p>
+                कृत्रिम बुद्धिमत्ता ऐसी तकनीकों का समूह है जिनसे
+                कंप्यूटर भाषा समझने, उदाहरणों से पैटर्न पहचानने
+                और कुछ समस्याओं को हल करने जैसे काम कर सकते हैं।
+              </p>
+              <p>
+                उदाहरण: भाषा अनुवाद, आवाज पहचान और तस्वीरों में
+                वस्तुओं की पहचान।
+              </p>
+            </div>
+          </article>
+
+          <article class="ai-card">
+            <img
+              class="ai-card-image"
+              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
+              alt="पढ़ाई और जानकारी पर काम करते विद्यार्थी"
+              loading="lazy"
+            >
+            <div class="ai-card-body">
+              <span class="ai-tag">पढ़ाई में AI</span>
+              <h3>AI हमारी मदद कैसे करता है?</h3>
+              <p>
+                AI कठिन विषयों को सरल भाषा में समझाने, अभ्यास
+                प्रश्न बनाने और नए विचार खोजने में मदद कर सकता है।
+              </p>
+              <ul>
+                <li>विज्ञान के विषयों को सरल करना।</li>
+                <li>हिंदी से अंग्रेजी में अनुवाद करना।</li>
+                <li>प्रोजेक्ट की रूपरेखा बनाना।</li>
+                <li>अभ्यास के लिए प्रश्न तैयार करना।</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="ai-card">
+            <img
+              class="ai-card-image"
+              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80"
+              alt="तकनीक का उपयोग करते विद्यार्थी"
+              loading="lazy"
+            >
+            <div class="ai-card-body">
+              <span class="ai-tag">जिम्मेदार उपयोग</span>
+              <h3>AI का सुरक्षित उपयोग</h3>
+              <p>
+                AI कभी-कभी गलत उत्तर भी दे सकता है। इसलिए
+                उसकी जानकारी को किताब, शिक्षक और विश्वसनीय
+                स्रोतों से जाँचना आवश्यक है।
+              </p>
+              <ul>
+                <li>अपना पासवर्ड साझा न करें।</li>
+                <li>निजी जानकारी अपलोड न करें।</li>
+                <li>उत्तर को समझकर अपने शब्दों में लिखें।</li>
+                <li>महत्वपूर्ण तथ्यों की पुष्टि करें।</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Practical example -->
+    <section class="ai-section">
+      <div class="ai-container">
+        <div class="ai-section-heading">
+          <h2>03. एक आसान उदाहरण</h2>
+          <p>AI की सहायता से विज्ञान का विषय कैसे सीखें?</p>
+        </div>
+
+        <div class="ai-example">
+          <div>
+            <img
+              class="ai-example-image"
+              src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=900&q=85"
+              alt="विज्ञान प्रयोगशाला में अध्ययन"
+              loading="lazy"
+            >
+          </div>
+
+          <div>
+            <span class="ai-tag">विद्यार्थियों के लिए गतिविधि</span>
+            <h3>विषय: जल चक्र (Water Cycle)</h3>
+
+            <p>
+              कल्पना कीजिए कि आपको जल चक्र समझना है। आप AI से
+              कह सकते हैं:
+            </p>
+
+            <div class="ai-note">
+              “जल चक्र को कक्षा 6 के विद्यार्थी के लिए सरल
+              हिंदी में उदाहरण सहित समझाइए और पाँच अभ्यास
+              प्रश्न दीजिए।”
+            </div>
+
+            <p>
+              इसके बाद उत्तर पढ़ें, अपनी पाठ्यपुस्तक से मिलाएँ
+              और शिक्षक की सहायता से कठिन बातों को समझें।
+              AI से मिली जानकारी को बिना जाँचे सही न मानें।
+            </p>
+
+            <a class="ai-btn ai-btn-primary" href="#practice">
+              अब अभ्यास करें →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning path -->
+    <section class="ai-section">
+      <div class="ai-container">
+        <div class="ai-learning-panel">
+          <h2>04. सीखने के चार चरण</h2>
+
+          <div class="ai-steps">
+            <div class="ai-step">
+              <span class="ai-step-number">01</span>
+              <h3>कंप्यूटर पहचानें</h3>
+              <p>मॉनिटर, कीबोर्ड, माउस और CPU के बारे में सीखें।</p>
+            </div>
+
+            <div class="ai-step">
+              <span class="ai-step-number">02</span>
+              <h3>टाइपिंग सीखें</h3>
+              <p>हिंदी और अंग्रेजी में अभ्यास करें।</p>
+            </div>
+
+            <div class="ai-step">
+              <span class="ai-step-number">03</span>
+              <h3>AI समझें</h3>
+              <p>AI के उदाहरण और उसकी सीमाएँ जानें।</p>
+            </div>
+
+            <div class="ai-step">
+              <span class="ai-step-number">04</span>
+              <h3>प्रोजेक्ट बनाएँ</h3>
+              <p>सीखे हुए ज्ञान से एक छोटा शैक्षणिक प्रोजेक्ट बनाएँ।</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz -->
+    <section class="ai-section" id="practice">
+      <div class="ai-container">
+        <div class="ai-section-heading">
+          <h2>05. अपना ज्ञान जाँचें</h2>
+          <p>तीन सरल प्रश्नों के उत्तर चुनें।</p>
+        </div>
+
+        <form class="ai-quiz" id="aiQuiz">
+
+          <div class="ai-question">
+            <p>प्रश्न 1: कंप्यूटर का उपयोग किस काम में होता है?</p>
+
+            <label class="ai-option">
+              <input type="radio" name="q1" value="a" required>
+              केवल खेल खेलने में
+            </label>
+
+            <label class="ai-option">
+              <input type="radio" name="q1" value="b">
+              पढ़ाई, गणना और जानकारी व्यवस्थित करने में
+            </label>
+
+            <label class="ai-option">
+              <input type="radio" name="q1" value="c">
+              किसी काम में नहीं
+            </label>
+          </div>
+
+          <div class="ai-question">
+            <p>प्रश्न 2: AI के बारे में कौन-सी बात सही है?</p>
+
+            <label class="ai-option">
+              <input type="radio" name="q2" value="a" required>
+              AI हमेशा सही उत्तर देता है।
+            </label>
+
+            <label class="ai-option">
+              <input type="radio" name="q2" value="b">
+              AI केवल कैलकुलेटर का दूसरा नाम है।
+            </label>
+
+            <label class="ai-option">
+              <input type="radio" name="q2" value="c">
+              AI मदद कर सकता है, लेकिन उसका उत्तर गलत भी हो सकता है।
+            </label>
+          </div>
+
+          <div class="ai-question">
+            <p>प्रश्न 3: इंटरनेट पर अपना पासवर्ड किसे बताना चाहिए?</p>
+
+            <label class="ai-option">
+              <input type="radio" name="q3" value="a" required>
+              किसी को भी नहीं।
+            </label>
+
+            <label class="ai-option">
+              <input type="radio" name="q3" value="b">
+              हर ऑनलाइन वेबसाइट को।
+            </label>
+
+            <label class="ai-option">
+              <input type="radio" name="q3" value="c">
+              अनजान व्यक्ति को।
+            </label>
+          </div>
+
+          <button class="ai-btn ai-btn-primary" type="submit">
+            उत्तर जाँचें
+          </button>
+
+          <div class="ai-result"
+               id="aiQuizResult"
+               role="status"
+               aria-live="polite"></div>
+
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="ai-footer">
+    <div class="ai-container">
+      <p><strong>UHS Chakiya Tarari, Bhojpur, Bihar</strong></p>
+      <p>शिक्षा • तकनीकी ज्ञान • वैज्ञानिक दृष्टिकोण</p>
+      <p><a href="index.html">← मुख्य वेबसाइट पर वापस जाएँ</a></p>
+      <p>© <span id="aiYear"></span> UHS Chakiya Tarari</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const yearElement = document.getElementById("aiYear");
+
+      if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+      }
+
+      const quiz = document.getElementById("aiQuiz");
+      const result = document.getElementById("aiQuizResult");
+
+      if (!quiz || !result) return;
+
+      quiz.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const answers = {
+          q1: "b",
+          q2: "c",
+          q3: "a"
+        };
+
+        let score = 0;
+
+        for (const question in answers) {
+          const selected = quiz.querySelector(
+            'input[name="' + question + '"]:checked'
+          );
+
+          if (selected && selected.value === answers[question]) {
+            score++;
+          }
+        }
+
+        result.textContent =
+          "आपका स्कोर: " + score + " / 3। " +
+          (score === 3
+            ? "बहुत अच्छा! आपने सभी उत्तर सही दिए।"
+            : "अच्छा प्रयास! ऊपर दिए गए पाठ को दोबारा पढ़ें और फिर अभ्यास करें।");
+      });
+    })();
+  </script>
+
+</body>
+</html>
