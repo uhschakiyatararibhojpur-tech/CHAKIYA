@@ -794,18 +794,29 @@ const icons = [
 "📶","🧭","🚨","📉","🪲","🧯","🔐","🧱","🏫","🏆"
 ];
 
-const levelData = bank.map((q,i) => ({
-  number:i+1,
-  name:levelNames[i],
-  topic:topics[topicByLevel[i]][1],
-  icon:icons[i],
-  difficulty:i<10?"STARTER":i<25?"INTERMEDIATE":i<40?"ADVANCED":"EXPERT",
-  questions:[
-    q,
-    bank[(i+7)%bank.length],
-    bank[(i+19)%bank.length]
-  ]
-}));
+
+const levelData = bank.map((q, i) => {
+  const topicIndex = topicByLevel[i];
+  const topicEntry = topics[topicIndex];
+
+  return {
+    number: i + 1,
+    name: levelNames[i] || `मिशन ${i + 1}`,
+    topic: Array.isArray(topicEntry)
+      ? (topicEntry[1] || topicEntry[0] || "कंप्यूटर ज्ञान")
+      : (topicEntry || "कंप्यूटर ज्ञान"),
+    icon: icons[i] || "💻",
+    difficulty:
+      i < 10 ? "STARTER" :
+      i < 25 ? "INTERMEDIATE" :
+      i < 40 ? "ADVANCED" : "EXPERT",
+    questions: [
+      q,
+      bank[(i + 7) % bank.length],
+      bank[(i + 19) % bank.length]
+    ]
+  };
+});
 
 const storageKey = "chakiyaCyberQuest50_v1";
 
