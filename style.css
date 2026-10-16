@@ -1010,20 +1010,22 @@ body {
     border-radius: 14px;
 }
 }
+
 .top-registration-notice {
-    background: linear-gradient(90deg, #ff9800, #e91e63, #673ab7);
-    color: white;
+    background: #075b49;
+    color: #ffffff;
     text-align: center;
-    padding: 18px 15px;
-    font-size: 24px;
-    font-weight: bold;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    padding: 14px 15px;
+    font-size: 21px;
+    font-weight: 700;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
 
 .top-registration-notice strong {
-    color: #fff700;
-    font-size: 27px;
+    color: #ffdc7a;
+    font-size: 23px;
 }
+
 
 .notice-icon {
     font-size: 30px;
@@ -3671,136 +3673,3 @@ button:focus-visible,
   }
 }
 
-/* ==========================================
-   UHS CHAKIYA TARARI - PROFESSIONAL SCHOOL THEME
-   Add this at the END of your existing CSS
-========================================== */
-
-:root {
-    --school-navy: #12345A;
-    --school-blue: #1D4E89;
-    --school-green: #176B50;
-    --school-gold: #C6A04A;
-    --school-light: #F2F6FA;
-    --school-white: #FFFFFF;
-    --school-text: #25364A;
-}
-
-/* Main page */
-body {
-    background-color: var(--school-light);
-    color: var(--school-text);
-}
-
-/* Header and navigation */
-header,
-.site-header,
-.main-header,
-.navbar,
-nav {
-    background-color: var(--school-navy);
-    color: var(--school-white);
-}
-
-header a,
-.site-header a,
-.main-header a,
-.navbar a,
-nav a {
-    color: var(--school-white);
-}
-
-header a:hover,
-.navbar a:hover,
-nav a:hover {
-    color: #F0D58B;
-}
-
-/* Section backgrounds */
-.section {
-    background-color: var(--school-light);
-}
-
-/* Section headings */
-.section-heading span {
-    color: var(--school-green);
-    font-weight: 700;
-    letter-spacing: 1.5px;
-}
-
-.section-heading h2 {
-    color: var(--school-navy);
-}
-
-.heading-line {
-    background-color: var(--school-gold);
-}
-
-/* Staff cards */
-.staff-card {
-    background-color: var(--school-white);
-    border: 1px solid #DCE5EE;
-    border-top: 4px solid var(--school-green);
-    border-radius: 12px;
-    box-shadow: 0 5px 18px rgba(18, 52, 90, 0.08);
-    transition: transform 0.25s ease,
-                box-shadow 0.25s ease;
-}
-
-.staff-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(18, 52, 90, 0.15);
-}
-
-.staff-card h3 {
-    color: var(--school-navy);
-}
-
-.staff-card p {
-    color: var(--school-green);
-}
-
-/* Buttons */
-button,
-.btn,
-.button,
-a.btn {
-    background-color: var(--school-green);
-    color: var(--school-white);
-    border-radius: 6px;
-}
-
-button:hover,
-.btn:hover,
-.button:hover,
-a.btn:hover {
-    background-color: var(--school-navy);
-    color: var(--school-white);
-}
-
-/* Notice boards and information panels */
-.notice-board,
-.notice-card,
-.facility-card,
-.academic-card {
-    background-color: var(--school-white);
-    border-color: #DCE5EE;
-}
-
-/* Footer */
-footer,
-.site-footer {
-    background-color: var(--school-navy);
-    color: var(--school-white);
-}
-
-footer a,
-.site-footer a {
-    color: #F0D58B;
-}
-
-/* Smooth transitions */
-a,
-button {
-    transition: all 0.2s ease;
-}
