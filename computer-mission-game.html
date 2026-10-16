@@ -1,0 +1,816 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#12366b">
+<title>CHAKIYA Computer Learning Mission</title>
+
+<style>
+/* All game styles are restricted to this container */
+#chakiya-learning-game {
+  --clg-blue: #174ea6;
+  --clg-dark: #12366b;
+  --clg-green: #16834a;
+  --clg-red: #bd2935;
+  --clg-bg: #f3f7fc;
+  --clg-border: #dce5f0;
+  font-family: Arial, "Noto Sans Devanagari", sans-serif;
+  color: #172b4d;
+  background: var(--clg-bg);
+  padding: 16px;
+  border-radius: 18px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+#chakiya-learning-game *,
+#chakiya-learning-game *::before,
+#chakiya-learning-game *::after {
+  box-sizing: border-box;
+}
+
+#chakiya-learning-game button {
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+#chakiya-learning-game button:focus-visible {
+  outline: 3px solid #f2b705;
+  outline-offset: 3px;
+}
+
+#chakiya-learning-game .clg-hero {
+  background: linear-gradient(135deg, #12366b, #2369c9);
+  color: #fff;
+  padding: 24px 18px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+#chakiya-learning-game .clg-hero h2 {
+  margin: 0 0 8px;
+  font-size: clamp(23px, 4vw, 34px);
+  line-height: 1.35;
+}
+
+#chakiya-learning-game .clg-hero p {
+  margin: 5px 0;
+}
+
+#chakiya-learning-game .clg-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 30px;
+  font-size: 13px;
+}
+
+#chakiya-learning-game .clg-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+
+#chakiya-learning-game .clg-stat {
+  text-align: center;
+  padding: 12px 6px;
+  border: 1px solid var(--clg-border);
+  background: #fff;
+  border-radius: 12px;
+}
+
+#chakiya-learning-game .clg-stat strong {
+  display: block;
+  font-size: 22px;
+  color: var(--clg-blue);
+}
+
+#chakiya-learning-game .clg-stat span {
+  font-size: 13px;
+}
+
+#chakiya-learning-game .clg-progress-wrap {
+  height: 10px;
+  background: #dce5f0;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 10px 0 18px;
+}
+
+#chakiya-learning-game .clg-progress {
+  height: 100%;
+  width: 0;
+  background: #16834a;
+  border-radius: inherit;
+  transition: width .25s ease;
+}
+
+#chakiya-learning-game .clg-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.6fr);
+  gap: 14px;
+  align-items: start;
+}
+
+#chakiya-learning-game .clg-panel {
+  background: #fff;
+  border: 1px solid var(--clg-border);
+  border-radius: 14px;
+  padding: 16px;
+  min-width: 0;
+}
+
+#chakiya-learning-game .clg-panel h3 {
+  margin: 0 0 12px;
+  font-size: 19px;
+}
+
+#chakiya-learning-game .clg-mission-list {
+  display: grid;
+  gap: 9px;
+}
+
+#chakiya-learning-game .clg-mission {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  padding: 12px;
+  border: 1px solid var(--clg-border);
+  background: #fff;
+  border-radius: 10px;
+  color: #172b4d;
+}
+
+#chakiya-learning-game .clg-mission.is-current {
+  border: 2px solid var(--clg-blue);
+  background: #edf4ff;
+}
+
+#chakiya-learning-game .clg-mission:disabled {
+  cursor: not-allowed;
+  opacity: .58;
+}
+
+#chakiya-learning-game .clg-mission-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+#chakiya-learning-game .clg-mission-name {
+  display: block;
+  font-weight: 700;
+}
+
+#chakiya-learning-game .clg-mission-status {
+  display: block;
+  font-size: 12px;
+  color: #58677d;
+}
+
+#chakiya-learning-game .clg-question {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 12px 0 16px;
+  line-height: 1.6;
+}
+
+#chakiya-learning-game .clg-kicker {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--clg-blue);
+}
+
+#chakiya-learning-game .clg-options {
+  display: grid;
+  gap: 10px;
+}
+
+#chakiya-learning-game .clg-option {
+  text-align: left;
+  width: 100%;
+  padding: 12px 13px;
+  background: #fff;
+  color: #172b4d;
+  border: 1px solid #cdd8e6;
+  border-radius: 10px;
+  min-height: 48px;
+}
+
+#chakiya-learning-game .clg-option:not(:disabled):hover {
+  background: #edf4ff;
+  border-color: var(--clg-blue);
+}
+
+#chakiya-learning-game .clg-option:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+#chakiya-learning-game .clg-option.is-correct {
+  background: #e8f7ee;
+  border-color: #16834a;
+  color: #12643a;
+}
+
+#chakiya-learning-game .clg-option.is-wrong {
+  background: #fff0f0;
+  border-color: #bd2935;
+  color: #9f1e29;
+}
+
+#chakiya-learning-game .clg-feedback {
+  padding: 12px;
+  margin-top: 13px;
+  border-radius: 10px;
+  background: #edf4ff;
+  border-left: 4px solid var(--clg-blue);
+}
+
+#chakiya-learning-game .clg-feedback.good {
+  background: #e8f7ee;
+  border-color: var(--clg-green);
+}
+
+#chakiya-learning-game .clg-feedback.bad {
+  background: #fff0f0;
+  border-color: var(--clg-red);
+}
+
+#chakiya-learning-game .clg-btn {
+  display: inline-block;
+  padding: 11px 17px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--clg-blue);
+  color: #fff;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+#chakiya-learning-game .clg-btn:hover {
+  filter: brightness(1.08);
+}
+
+#chakiya-learning-game .clg-btn.secondary {
+  background: #e8eef7;
+  color: #17365f;
+  border: 1px solid #d1ddeb;
+}
+
+#chakiya-learning-game .clg-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#chakiya-learning-game .clg-note {
+  color: #58677d;
+  font-size: 13px;
+}
+
+#chakiya-learning-game .clg-hidden {
+  display: none !important;
+}
+
+#chakiya-learning-game .clg-complete {
+  text-align: center;
+  padding: 20px 8px;
+}
+
+#chakiya-learning-game .clg-trophy {
+  font-size: 54px;
+}
+
+#chakiya-learning-game .clg-footer {
+  text-align: center;
+  margin-top: 16px;
+  color: #58677d;
+  font-size: 12px;
+}
+
+@media (max-width: 650px) {
+  #chakiya-learning-game {
+    padding: 10px;
+    border-radius: 12px;
+    margin: 12px auto;
+  }
+
+  #chakiya-learning-game .clg-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #chakiya-learning-game .clg-stats {
+    gap: 6px;
+  }
+
+  #chakiya-learning-game .clg-stat {
+    padding: 9px 4px;
+  }
+
+  #chakiya-learning-game .clg-stat strong {
+    font-size: 19px;
+  }
+
+  #chakiya-learning-game .clg-panel {
+    padding: 13px;
+  }
+
+  #chakiya-learning-game .clg-question {
+    font-size: 17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="chakiya-learning-game">
+  <header class="clg-hero">
+    <span class="clg-tag">कक्षा 9–10 • हिंदी • Learning by Playing</span>
+    <h2>🎮 CHAKIYA Computer Mission</h2>
+    <p>मिशन पूरा करें, कंप्यूटर सीखें और डिजिटल चैंपियन बनें!</p>
+    <p class="clg-note" style="color:#e7efff">
+      हर मिशन में 3 प्रश्न हैं। कम-से-कम 2 सही उत्तर देकर अगला मिशन खोलें।
+    </p>
+  </header>
+
+  <section class="clg-stats" aria-label="गेम स्कोर">
+    <div class="clg-stat">
+      <strong id="clg-score">0</strong>
+      <span>कुल अंक</span>
+    </div>
+    <div class="clg-stat">
+      <strong id="clg-stars">0 ⭐</strong>
+      <span>कमाए गए स्टार</span>
+    </div>
+    <div class="clg-stat">
+      <strong id="clg-unlocked">1/5</strong>
+      <span>खुले मिशन</span>
+    </div>
+  </section>
+
+  <div class="clg-progress-wrap"
+       role="progressbar"
+       aria-label="मिशन प्रगति"
+       aria-valuemin="0"
+       aria-valuemax="5"
+       aria-valuenow="0"
+       id="clg-progress-bar">
+    <div class="clg-progress" id="clg-progress"></div>
+  </div>
+
+  <div class="clg-layout">
+    <aside class="clg-panel">
+      <h3>🗺️ मिशन मैप</h3>
+      <div class="clg-mission-list" id="clg-mission-list"></div>
+      <p class="clg-note">
+        🔒 बंद मिशन खोलने के लिए पिछले मिशन में कम-से-कम 2 सही उत्तर दें।
+      </p>
+    </aside>
+
+    <main class="clg-panel" id="clg-game-panel" aria-live="polite">
+      <div id="clg-question-area"></div>
+      <div id="clg-feedback-area"></div>
+      <div id="clg-actions" class="clg-actions"></div>
+    </main>
+  </div>
+
+  <div class="clg-footer">
+    UHS Chakiya Tarari, Bhojpur • Computer Learning Zone
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const root = document.getElementById("chakiya-learning-game");
+  if (!root || root.dataset.clgInitialized === "true") return;
+  root.dataset.clgInitialized = "true";
+
+  const missions = [
+    {
+      title: "Hardware Hero",
+      icon: "🖥️",
+      subtitle: "कंप्यूटर के मुख्य भाग",
+      questions: [
+        {
+          task: "कंप्यूटर में निर्देशों को प्रोसेस करने वाला मुख्य भाग कौन-सा है?",
+          options: ["Monitor", "CPU", "Keyboard", "Printer"],
+          answer: 1,
+          explain: "CPU निर्देशों को प्रोसेस करता है। इसे अक्सर कंप्यूटर का मस्तिष्क कहा जाता है।"
+        },
+        {
+          task: "आपको कागज पर रिपोर्ट प्रिंट करनी है। कौन-सा उपकरण उपयोग करेंगे?",
+          options: ["Scanner", "Speaker", "Printer", "Mouse"],
+          answer: 2,
+          explain: "Printer डिजिटल दस्तावेज को कागज पर प्रिंट करता है।"
+        },
+        {
+          task: "इनमें से कौन-सा Input Device है?",
+          options: ["Monitor", "Projector", "Speaker", "Keyboard"],
+          answer: 3,
+          explain: "Keyboard से कंप्यूटर में अक्षर, संख्या और निर्देश दर्ज किए जाते हैं।"
+        }
+      ]
+    },
+    {
+      title: "Keyboard Expert",
+      icon: "⌨️",
+      subtitle: "Shortcuts और उत्पादकता",
+      questions: [
+        {
+          task: "MS Word में किसी टेक्स्ट को कॉपी करने का सही shortcut क्या है?",
+          options: ["Ctrl + X", "Ctrl + C", "Ctrl + V", "Ctrl + Z"],
+          answer: 1,
+          explain: "Ctrl + C चयनित टेक्स्ट या वस्तु को कॉपी करता है।"
+        },
+        {
+          task: "गलती से हटाए गए टेक्स्ट को तुरंत वापस लाने के लिए क्या दबाएँगे?",
+          options: ["Ctrl + P", "Ctrl + S", "Ctrl + Z", "Ctrl + A"],
+          answer: 2,
+          explain: "Ctrl + Z Undo है। यह पिछले कार्य को वापस लेने में मदद करता है।"
+        },
+        {
+          task: "दस्तावेज में किए गए बदलाव सुरक्षित करने का shortcut कौन-सा है?",
+          options: ["Ctrl + S", "Ctrl + F", "Ctrl + N", "Ctrl + X"],
+          answer: 0,
+          explain: "Ctrl + S Save करता है। महत्वपूर्ण काम करते समय बार-बार सेव करना अच्छी आदत है।"
+        }
+      ]
+    },
+    {
+      title: "File Manager",
+      icon: "📁",
+      subtitle: "Files और Folders",
+      questions: [
+        {
+          task: "आपको अपनी सभी Science Project फाइलें एक जगह रखनी हैं। सबसे सही तरीका क्या है?",
+          options: [
+            "सभी फाइलों को डेस्कटॉप पर बिखेर दें",
+            "हर फाइल का नाम समान रख दें",
+            "Science Project नाम का Folder बनाएँ",
+            "सभी फाइलें डिलीट कर दें"
+          ],
+          answer: 2,
+          explain: "अलग-अलग विषयों के लिए Folder बनाने से फाइलें व्यवस्थित रहती हैं।"
+        },
+        {
+          task: "आम तौर पर किस फाइल extension का उपयोग PDF दस्तावेज के लिए होता है?",
+          options: [".mp3", ".pdf", ".jpg", ".exe"],
+          answer: 1,
+          explain: ".pdf दस्तावेज साझा करने का सामान्य प्रारूप है।"
+        },
+        {
+          task: "किसी फाइल का नाम बदलना है। कौन-सा विकल्प उपयोगी है?",
+          options: ["Rename", "Refresh", "Print Screen", "Volume"],
+          answer: 0,
+          explain: "Rename से फाइल या Folder का नाम बदला जा सकता है।"
+        }
+      ]
+    },
+    {
+      title: "Coding Challenge",
+      icon: "💻",
+      subtitle: "Logic और Algorithm",
+      questions: [
+        {
+          task: "एक रोबोट को पहले आगे बढ़ना है और फिर दाएँ मुड़ना है। सही निर्देश-क्रम कौन-सा है?",
+          options: [
+            "दाएँ मुड़ो → आगे बढ़ो",
+            "आगे बढ़ो → दाएँ मुड़ो",
+            "रुको → पीछे जाओ",
+            "बाएँ मुड़ो → रुक जाओ"
+          ],
+          answer: 1,
+          explain: "Algorithm निर्देशों का क्रम है। रोबोट को वही क्रम देना चाहिए जो लक्ष्य पूरा करे।"
+        },
+        {
+          task: "किसी समस्या को हल करने के लिए चरणबद्ध निर्देशों के समूह को क्या कहते हैं?",
+          options: ["Wallpaper", "Algorithm", "Monitor", "Folder"],
+          answer: 1,
+          explain: "Algorithm किसी समस्या को हल करने के लिए स्पष्ट और क्रमबद्ध चरण बताता है।"
+        },
+        {
+          task: "यदि एक ही निर्देश को कई बार चलाना हो, तो प्रोग्रामिंग में कौन-सी अवधारणा उपयोगी है?",
+          options: ["Loop", "Delete", "Rename", "Print"],
+          answer: 0,
+          explain: "Loop किसी निर्देश या निर्देशों के समूह को बार-बार चलाने में मदद करता है।"
+        }
+      ]
+    },
+    {
+      title: "Cyber Safety",
+      icon: "🛡️",
+      subtitle: "सुरक्षित इंटरनेट",
+      questions: [
+        {
+          task: "आपको ईमेल में अनजान लिंक मिला है जो बैंक का पासवर्ड माँगता है। क्या करना चाहिए?",
+          options: [
+            "तुरंत पासवर्ड डाल दें",
+            "ईमेल सभी मित्रों को भेज दें",
+            "लिंक न खोलें और संदेश की जाँच करें",
+            "अपना OTP भेज दें"
+          ],
+          answer: 2,
+          explain: "यह phishing का प्रयास हो सकता है। अनजान लिंक पर संवेदनशील जानकारी न दें।"
+        },
+        {
+          task: "इनमें से कौन-सा पासवर्ड बनाने का बेहतर तरीका है?",
+          options: [
+            "12345678",
+            "अपना नाम और जन्म-वर्ष",
+            "हर वेबसाइट पर एक ही पासवर्ड",
+            "लंबा, अनोखा पासवर्ड या पासफ्रेज"
+          ],
+          answer: 3,
+          explain: "हर खाते के लिए लंबा और अलग पासवर्ड रखें। जहाँ संभव हो, MFA भी चालू करें।"
+        },
+        {
+          task: "कोई व्यक्ति फोन पर आपका OTP माँगता है। आपको क्या करना चाहिए?",
+          options: [
+            "OTP किसी से साझा न करें",
+            "उसे OTP बता दें",
+            "सोशल मीडिया पर OTP पोस्ट करें",
+            "OTP सबको भेज दें"
+          ],
+          answer: 0,
+          explain: "OTP और अन्य सुरक्षा कोड किसी के साथ साझा न करें, भले ही वह बैंक या अधिकारी होने का दावा करे।"
+        }
+      ]
+    }
+  ];
+
+  const state = {
+    current: 0,
+    unlocked: 1,
+    score: 0,
+    stars: 0,
+    results: missions.map(() => null),
+    questionIndex: 0,
+    questionScore: 0,
+    answered: false
+  };
+
+  const el = (id) => root.querySelector("#" + id);
+
+  function makeButton(text, className, callback) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = className;
+    button.textContent = text;
+    button.addEventListener("click", callback);
+    return button;
+  }
+
+  function updateStats() {
+    el("clg-score").textContent = state.score;
+    el("clg-stars").textContent = state.stars + " ⭐";
+    el("clg-unlocked").textContent = state.unlocked + "/5";
+
+    const completed = state.results.filter(Boolean).length;
+    el("clg-progress").style.width = (completed / missions.length * 100) + "%";
+    el("clg-progress-bar").setAttribute("aria-valuenow", completed);
+  }
+
+  function renderMissionList() {
+    const list = el("clg-mission-list");
+    list.replaceChildren();
+
+    missions.forEach((mission, index) => {
+      const result = state.results[index];
+      const locked = index >= state.unlocked;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "clg-mission" +
+        (index === state.current ? " is-current" : "");
+      button.disabled = locked;
+
+      const icon = document.createElement("span");
+      icon.className = "clg-mission-icon";
+      icon.textContent = locked ? "🔒" : mission.icon;
+
+      const textWrap = document.createElement("span");
+      const name = document.createElement("span");
+      name.className = "clg-mission-name";
+      name.textContent = "मिशन " + (index + 1) + ": " + mission.title;
+
+      const status = document.createElement("span");
+      status.className = "clg-mission-status";
+
+      if (locked) {
+        status.textContent = "पहले पिछला मिशन पूरा करें";
+      } else if (result) {
+        status.textContent = result.passed
+          ? "पूरा • " + result.correct + "/3 सही • " + result.stars + " ⭐"
+          : "फिर से प्रयास करें • " + result.correct + "/3 सही";
+      } else {
+        status.textContent = mission.subtitle;
+      }
+
+      textWrap.append(name, status);
+      button.append(icon, textWrap);
+      button.addEventListener("click", () => startMission(index));
+      list.append(button);
+    });
+  }
+
+  function startMission(index) {
+    if (index >= state.unlocked) return;
+
+    state.current = index;
+    state.questionIndex = 0;
+    state.questionScore = 0;
+    state.answered = false;
+
+    el("clg-feedback-area").replaceChildren();
+    el("clg-actions").replaceChildren();
+    renderMissionList();
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const mission = missions[state.current];
+    const q = mission.questions[state.questionIndex];
+    const area = el("clg-question-area");
+    area.replaceChildren();
+    el("clg-feedback-area").replaceChildren();
+    el("clg-actions").replaceChildren();
+    state.answered = false;
+
+    const kicker = document.createElement("div");
+    kicker.className = "clg-kicker";
+    kicker.textContent = mission.icon + " मिशन " + (state.current + 1) +
+      " • प्रश्न " + (state.questionIndex + 1) + " / 3";
+
+    const title = document.createElement("h3");
+    title.textContent = mission.title;
+
+    const task = document.createElement("p");
+    task.className = "clg-question";
+    task.textContent = q.task;
+
+    const options = document.createElement("div");
+    options.className = "clg-options";
+
+    q.options.forEach((option, index) => {
+      const button = makeButton(option, "clg-option", () => chooseAnswer(index));
+      button.dataset.option = String(index);
+      options.append(button);
+    });
+
+    area.append(kicker, title, task, options);
+  }
+
+  function chooseAnswer(selected) {
+    if (state.answered) return;
+    state.answered = true;
+
+    const mission = missions[state.current];
+    const q = mission.questions[state.questionIndex];
+    const correct = selected === q.answer;
+
+    root.querySelectorAll(".clg-option").forEach((button) => {
+      button.disabled = true;
+      const index = Number(button.dataset.option);
+
+      if (index === q.answer) button.classList.add("is-correct");
+      if (index === selected && !correct) button.classList.add("is-wrong");
+    });
+
+    const feedback = document.createElement("div");
+    feedback.className = "clg-feedback " + (correct ? "good" : "bad");
+
+    const heading = document.createElement("strong");
+    heading.textContent = correct ? "✅ बिल्कुल सही! +10 अंक" : "❌ अभी सही नहीं।";
+
+    const explanation = document.createElement("p");
+    explanation.textContent = q.explain;
+
+    feedback.append(heading, explanation);
+    el("clg-feedback-area").replaceChildren(feedback);
+
+    if (correct) {
+      state.score += 10;
+      state.questionScore++;
+    }
+
+    updateStats();
+
+    const actions = el("clg-actions");
+    actions.replaceChildren();
+
+    const label = state.questionIndex < 2
+      ? "अगला प्रश्न →"
+      : "मिशन का परिणाम देखें";
+
+    actions.append(makeButton(label, "clg-btn", () => {
+      if (state.questionIndex < 2) {
+        state.questionIndex++;
+        renderQuestion();
+      } else {
+        finishMission();
+      }
+    }));
+  }
+
+  function finishMission() {
+    const index = state.current;
+    const correct = state.questionScore;
+    const passed = correct >= 2;
+    const stars = correct === 3 ? 3 : (correct === 2 ? 2 : 0);
+
+    const previous = state.results[index];
+
+    // Best result is retained if a student retries a mission.
+    if (!previous || correct > previous.correct) {
+      if (previous) state.stars -= previous.stars;
+      state.results[index] = { correct, passed, stars };
+      state.stars += stars;
+    }
+
+    if (passed && state.unlocked < index + 2) {
+      state.unlocked = Math.min(missions.length, index + 2);
+    }
+
+    updateStats();
+    renderMissionList();
+
+    const area = el("clg-question-area");
+    area.replaceChildren();
+
+    const complete = document.createElement("div");
+    complete.className = "clg-complete";
+
+    const trophy = document.createElement("div");
+    trophy.className = "clg-trophy";
+    trophy.textContent = passed ? "🏆" : "💪";
+
+    const title = document.createElement("h3");
+    title.textContent = passed ? "मिशन सफल!" : "एक और प्रयास करें";
+
+    const summary = document.createElement("p");
+    summary.textContent = "आपके सही उत्तर: " + correct + "/3";
+
+    const starLine = document.createElement("p");
+    starLine.textContent = passed
+      ? "इस प्रयास में " + stars + " स्टार मिले!"
+      : "अगला मिशन खोलने के लिए कम-से-कम 2 उत्तर सही करें।";
+
+    const note = document.createElement("p");
+    note.className = "clg-note";
+    note.textContent = passed
+      ? "शानदार! आपने इस विषय में अपनी समझ का अभ्यास किया।"
+      : "गलत उत्तरों की व्याख्या पढ़ें और फिर से कोशिश करें।";
+
+    complete.append(trophy, title, summary, starLine, note);
+    area.append(complete);
+    el("clg-feedback-area").replaceChildren();
+
+    const actions = el("clg-actions");
+    actions.replaceChildren();
+
+    if (!passed) {
+      actions.append(makeButton("🔁 फिर से खेलें", "clg-btn", () => {
+        startMission(index);
+      }));
+    } else if (state.unlocked < missions.length) {
+      actions.append(makeButton("अगला मिशन खोलें →", "clg-btn", () => {
+        startMission(state.unlocked - 1);
+      }));
+    } else {
+      const finalMessage = document.createElement("p");
+      finalMessage.textContent =
+        "🎉 सभी मिशन अनलॉक हो चुके हैं! आप CHAKIYA Computer Champion हैं।";
+      finalMessage.className = "clg-feedback good";
+      actions.append(finalMessage);
+    }
+
+    if (passed) {
+      actions.append(makeButton("इस मिशन का अभ्यास दोबारा करें", "clg-btn secondary",
+        () => startMission(index)));
+    }
+
+    updateStats();
+  }
+
+  // Initial screen
+  renderMissionList();
+  updateStats();
+  startMission(0);
+})();
+</script>
+
+</body>
+</html>
