@@ -536,6 +536,329 @@
         transition: none !important;
       }
     }
+    
+/* =========================================
+   CHAKIYA FUN ZONE - ISOLATED GAME STYLES
+   ========================================= */
+
+#chakiya-fun-zone {
+  --fun-primary: #00534f;
+  --fun-accent: #eab308;
+  --fun-bg: #f0f8f5;
+  --fun-border: #d8e9e2;
+  color: #244844;
+  padding: 35px 0;
+}
+
+#chakiya-fun-zone * {
+  box-sizing: border-box;
+}
+
+#chakiya-fun-zone .fun-heading {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+#chakiya-fun-zone .fun-heading h2 {
+  color: var(--fun-primary);
+  font-size: clamp(26px, 4vw, 36px);
+  margin: 0 0 8px;
+}
+
+#chakiya-fun-zone .fun-heading p {
+  color: #657c79;
+  margin: 0;
+}
+
+#chakiya-fun-zone .fun-scoreboard {
+  background: linear-gradient(120deg, #004b49, #087e78);
+  color: white;
+  padding: 22px;
+  border-radius: 16px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#chakiya-fun-zone .fun-stat {
+  text-align: center;
+  min-width: 85px;
+}
+
+#chakiya-fun-zone .fun-stat strong {
+  display: block;
+  font-size: 27px;
+  line-height: 1.4;
+  color: #ffdc71;
+}
+
+#chakiya-fun-zone .fun-stat span {
+  font-size: 13px;
+}
+
+#chakiya-fun-zone .fun-progress {
+  height: 8px;
+  width: 100%;
+  background: rgba(255,255,255,.22);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+#chakiya-fun-zone .fun-progress-bar {
+  width: 0;
+  height: 100%;
+  background: #ffdc71;
+  transition: width .3s ease;
+}
+
+#chakiya-fun-zone .fun-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+#chakiya-fun-zone .fun-card {
+  background: white;
+  border: 1px solid var(--fun-border);
+  border-radius: 15px;
+  padding: 22px;
+  box-shadow: 0 5px 20px rgba(0,75,73,.06);
+  min-width: 0;
+}
+
+#chakiya-fun-zone .fun-card h3 {
+  color: var(--fun-primary);
+  margin: 0 0 8px;
+  font-size: 21px;
+}
+
+#chakiya-fun-zone .fun-description {
+  color: #657c79;
+  font-size: 14px;
+  margin: 0 0 17px;
+}
+
+#chakiya-fun-zone .fun-question {
+  font-weight: 700;
+  margin: 14px 0;
+}
+
+#chakiya-fun-zone .fun-options {
+  display: grid;
+  gap: 9px;
+}
+
+#chakiya-fun-zone .fun-btn {
+  font: inherit;
+  border: 1px solid #cbded7;
+  border-radius: 9px;
+  background: #fff;
+  color: #244844;
+  padding: 11px 13px;
+  cursor: pointer;
+  text-align: left;
+  transition: background .15s, border-color .15s, transform .15s;
+}
+
+#chakiya-fun-zone .fun-btn:hover:not(:disabled) {
+  border-color: #087e78;
+  background: #eff9f5;
+  transform: translateY(-1px);
+}
+
+#chakiya-fun-zone .fun-btn:focus-visible {
+  outline: 3px solid #eab308;
+  outline-offset: 2px;
+}
+
+#chakiya-fun-zone .fun-btn:disabled {
+  cursor: default;
+  opacity: .8;
+}
+
+#chakiya-fun-zone .fun-btn.fun-correct {
+  background: #e2f7e9;
+  border-color: #239451;
+  color: #155d34;
+}
+
+#chakiya-fun-zone .fun-btn.fun-wrong {
+  background: #fff0ed;
+  border-color: #d65b4b;
+  color: #8c3025;
+}
+
+#chakiya-fun-zone .fun-action {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  border-radius: 9px;
+  background: var(--fun-primary);
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  padding: 11px 17px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+#chakiya-fun-zone .fun-action:hover {
+  background: #087e78;
+}
+
+#chakiya-fun-zone .fun-action:disabled {
+  opacity: .55;
+  cursor: default;
+}
+
+#chakiya-fun-zone .fun-feedback {
+  margin-top: 12px;
+  padding: 11px;
+  border-radius: 8px;
+  background: #edf6f2;
+  min-height: 42px;
+  font-size: 14px;
+}
+
+#chakiya-fun-zone .fun-feedback:empty {
+  display: none;
+}
+
+#chakiya-fun-zone .fun-muted {
+  color: #657c79;
+  font-size: 13px;
+}
+
+#chakiya-fun-zone .fun-sequence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+#chakiya-fun-zone .fun-sequence .fun-btn {
+  text-align: center;
+  flex: 1 1 100px;
+}
+
+#chakiya-fun-zone .fun-memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 15px;
+}
+
+#chakiya-fun-zone .fun-memory-card {
+  min-width: 0;
+  aspect-ratio: 1;
+  border: 1px solid #cbded7;
+  border-radius: 10px;
+  background: #eaf5f0;
+  color: #00534f;
+  font-size: clamp(19px, 3vw, 30px);
+  font-weight: 700;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  padding: 4px;
+}
+
+#chakiya-fun-zone .fun-memory-card span {
+  display: block;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+#chakiya-fun-zone .fun-memory-card.is-open,
+#chakiya-fun-zone .fun-memory-card.is-matched {
+  background: #fff7d9;
+  border-color: #eab308;
+}
+
+#chakiya-fun-zone .fun-memory-card.is-matched {
+  background: #e2f7e9;
+  border-color: #239451;
+  cursor: default;
+}
+
+#chakiya-fun-zone .fun-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+#chakiya-fun-zone .fun-badge {
+  border: 1px solid #d8e9e2;
+  border-radius: 10px;
+  background: #f3f7f5;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+#chakiya-fun-zone .fun-badge.is-earned {
+  border-color: #eab308;
+  background: #fff5d5;
+}
+
+#chakiya-fun-zone .fun-final {
+  margin-top: 24px;
+  padding: 24px;
+  border: 2px solid #eab308;
+  border-radius: 15px;
+  background: #fffaf0;
+  text-align: center;
+}
+
+#chakiya-fun-zone .fun-final h3 {
+  color: #00534f;
+  margin-top: 0;
+}
+
+#chakiya-fun-zone .fun-final-score {
+  color: #00534f;
+  font-size: 35px;
+  font-weight: 800;
+}
+
+#chakiya-fun-zone .fun-hidden {
+  display: none !important;
+}
+
+@media (max-width: 650px) {
+  #chakiya-fun-zone .fun-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #chakiya-fun-zone .fun-card {
+    padding: 17px;
+  }
+
+  #chakiya-fun-zone .fun-scoreboard {
+    justify-content: center;
+  }
+
+  #chakiya-fun-zone .fun-stat {
+    flex: 1 1 28%;
+  }
+
+  #chakiya-fun-zone .fun-memory-grid {
+    gap: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #chakiya-fun-zone *,
+  #chakiya-fun-zone *::before,
+  #chakiya-fun-zone *::after {
+    transition: none !important;
+  }
+}
+
   </style>
 </head>
 
@@ -923,6 +1246,205 @@
     </section>
 
   </main>
+
+<!-- ==========================================
+     CHAKIYA STUDENT FUN ZONE
+     Insert before the existing Footer
+     ========================================== -->
+
+<section id="chakiya-fun-zone">
+  <div class="ai-container">
+
+    <div class="fun-heading">
+      <h2>🎮 CHAKIYA Fun Zone</h2>
+      <p>खेलो, सीखो, सितारे कमाओ और बनो टेक्नोलॉजी चैंपियन!</p>
+    </div>
+
+    <!-- Scoreboard -->
+    <div class="fun-scoreboard">
+      <div class="fun-stat">
+        <strong id="funTotalScore">0</strong>
+        <span>कुल अंक / 15</span>
+      </div>
+      <div class="fun-stat">
+        <strong id="funStars">0 ⭐</strong>
+        <span>कमाए गए सितारे</span>
+      </div>
+      <div class="fun-stat">
+        <strong id="funCompleted">0 / 4</strong>
+        <span>पूरे किए खेल</span>
+      </div>
+      <div class="fun-stat">
+        <strong id="funRank">शुरुआत</strong>
+        <span>आपका स्तर</span>
+      </div>
+      <div style="width:100%">
+        <div style="font-size:12px">आपकी प्रगति</div>
+        <div class="fun-progress">
+          <div class="fun-progress-bar" id="funProgressBar"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fun-grid">
+
+      <!-- GAME 1: COMPUTER QUIZ -->
+      <article class="fun-card" id="funQuizGame">
+        <h3>🧠 1. Computer Quiz Battle</h3>
+        <p class="fun-description">
+          चार सवालों के जवाब दें। हर सही जवाब पर एक अंक!
+        </p>
+
+        <div id="funQuizQuestion" class="fun-question"></div>
+        <div id="funQuizOptions" class="fun-options"></div>
+        <div id="funQuizFeedback" class="fun-feedback"
+             aria-live="polite"></div>
+
+        <p class="fun-muted" id="funQuizCounter">सवाल 1 / 4</p>
+        <button type="button" class="fun-action"
+                id="funQuizNext" disabled>
+          अगला सवाल →
+        </button>
+      </article>
+
+      <!-- GAME 2: AI OR HUMAN -->
+      <article class="fun-card" id="funAiGame">
+        <h3>🤖 2. AI या इंसान?</h3>
+        <p class="fun-description">
+          पहचानिए कि यह काम AI, इंसान या दोनों कर सकते हैं।
+        </p>
+
+        <div id="funAiQuestion" class="fun-question"></div>
+        <div id="funAiOptions" class="fun-options"></div>
+        <div id="funAiFeedback" class="fun-feedback"
+             aria-live="polite"></div>
+
+        <p class="fun-muted" id="funAiCounter">चुनौती 1 / 4</p>
+        <button type="button" class="fun-action"
+                id="funAiNext" disabled>
+          अगली चुनौती →
+        </button>
+      </article>
+
+      <!-- GAME 3: CODING PUZZLE -->
+      <article class="fun-card" id="funCodingGame">
+        <h3>💻 3. Coding Sequence Puzzle</h3>
+        <p class="fun-description">
+          एक कंप्यूटर को सही क्रम में निर्देश देना सीखें।
+        </p>
+
+        <div class="fun-question">
+          रोबोट को किताब उठाकर मेज पर रखनी है।
+          नीचे दिए गए निर्देशों को सही क्रम में चुनें।
+        </div>
+
+        <p class="fun-muted">
+          निर्देशों पर क्रम से क्लिक करें। चुना हुआ क्रम नीचे दिखेगा।
+        </p>
+
+        <div class="fun-options" id="funCodingOptions">
+          <button type="button" class="fun-btn" data-step="2">
+            3. किताब उठाओ
+          </button>
+          <button type="button" class="fun-btn" data-step="0">
+            1. किताब के पास जाओ
+          </button>
+          <button type="button" class="fun-btn" data-step="3">
+            4. मेज पर रखो
+          </button>
+          <button type="button" class="fun-btn" data-step="1">
+            2. किताब को पहचानो
+          </button>
+        </div>
+
+        <p class="fun-question">आपका चुना हुआ क्रम:</p>
+        <div id="funCodingSequence" class="fun-sequence">
+          <span class="fun-muted">अभी कोई निर्देश नहीं चुना है।</span>
+        </div>
+
+        <div id="funCodingFeedback" class="fun-feedback"
+             aria-live="polite"></div>
+
+        <button type="button" class="fun-action"
+                id="funCodingCheck">
+          क्रम जाँचें
+        </button>
+        <button type="button" class="fun-action"
+                id="funCodingReset">
+          फिर से चुनें
+        </button>
+      </article>
+
+      <!-- GAME 4: MEMORY MATCH -->
+      <article class="fun-card" id="funMemoryGame">
+        <h3>🃏 4. Computer Memory Match</h3>
+        <p class="fun-description">
+          कार्ड खोलें और कंप्यूटर के भागों के अंग्रेजी
+          तथा हिंदी नामों का मिलान करें।
+        </p>
+
+        <div class="fun-question">
+          सही जोड़ी खोजें। कुल चार जोड़ियाँ हैं।
+        </div>
+
+        <div id="funMemoryGrid" class="fun-memory-grid"></div>
+
+        <p class="fun-muted" id="funMemoryCounter">
+          मिलान: 0 / 4
+        </p>
+
+        <div id="funMemoryFeedback" class="fun-feedback"
+             aria-live="polite"></div>
+      </article>
+
+    </div>
+
+    <!-- Badges -->
+    <div class="fun-card" style="margin-top:22px">
+      <h3>🏅 आपकी Achievement Badges</h3>
+      <p class="fun-description">
+        खेल पूरे करें और नई उपलब्धियाँ हासिल करें।
+      </p>
+
+      <div class="fun-badges" id="funBadges">
+        <div class="fun-badge" data-badge="first">
+          🔒 पहला कदम
+        </div>
+        <div class="fun-badge" data-badge="quiz">
+          🔒 Quiz Master
+        </div>
+        <div class="fun-badge" data-badge="memory">
+          🔒 Memory Champion
+        </div>
+        <div class="fun-badge" data-badge="coding">
+          🔒 Coding Star
+        </div>
+        <div class="fun-badge" data-badge="perfect">
+          🔒 Tech Champion
+        </div>
+      </div>
+    </div>
+
+    <!-- Final result -->
+    <div class="fun-final fun-hidden" id="funFinalResult"
+         aria-live="polite">
+      <h3>🎉 आपकी Fun Zone रिपोर्ट</h3>
+      <div class="fun-final-score" id="funFinalScore">0 / 15</div>
+      <p id="funFinalMessage"></p>
+      <p id="funFinalBadges"></p>
+      <button type="button" class="fun-action"
+              id="funPlayAgain">
+        🔄 सभी खेल फिर से खेलें
+      </button>
+    </div>
+
+    <p class="fun-muted" style="text-align:center;margin-top:18px">
+      यह अभ्यास खेल शैक्षणिक मनोरंजन के लिए है।
+      अंक इसी ब्राउज़र पेज पर रखे जाते हैं।
+    </p>
+
+  </div>
+</section>
 
   <!-- Footer -->
   <footer class="ai-footer">
