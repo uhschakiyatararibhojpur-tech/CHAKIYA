@@ -177,15 +177,13 @@ document
     });
 
 
-// CHAKIYA BACKEND TEST
-fetch("https://chakiya.onrender.com/api/test")
-    .then(response => response.json())
-    .then(data => {
-        console.log("CHAKIYA BACKEND:", data);
-    })
-    .catch(error => {
-        console.error("CHAKIYA BACKEND ERROR:", error);
-    });
+
+/* CHAKIYA BACKEND TEST
+   Disabled because /api/test currently returns 404.
+   This test is not required to display website notices.
+*/
+
+// Re-enable after confirming the backend test route exists.
 
 /* =========================================
    CHAKIYA SCROLL REVEAL
