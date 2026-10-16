@@ -1501,5 +1501,649 @@
     })();
   </script>
 
+<script>
+(function () {
+  "use strict";
+
+  const root = document.getElementById("chakiya-fun-zone");
+  if (!root || root.dataset.funInitialized === "true") return;
+  root.dataset.funInitialized = "true";
+
+  const $ = id => document.getElementById(id);
+
+  const state = {
+    score: 0,
+    completed: new Set(),
+    badges: new Set(),
+    quizIndex: 0,
+    aiIndex: 0,
+    quizAnswered: false,
+    aiAnswered: false,
+    codingOrder: [],
+    codingFinished: false,
+    memoryOpen: [],
+    memoryMatched: new Set(),
+    memoryFinished: false
+  };
+
+  const MAX_SCORE = 15;
+
+  const quizQuestions = [
+    {
+      q: "कंप्यूटर में टाइप करने के लिए किसका उपयोग होता है?",
+      options: ["मॉनिटर", "कीबोर्ड", "स्पीकर", "प्रिंटर"],
+      answer: 1,
+      why: "कीबोर्ड से अक्षर, संख्या और निर्देश टाइप किए जाते हैं।"
+    },
+    {
+      q: "कंप्यूटर का कौन-सा भाग जानकारी स्क्रीन पर दिखाता है?",
+      options: ["माउस", "माइक्रोफोन", "मॉनिटर", "स्कैनर"],
+      answer: 2,
+      why: "मॉनिटर कंप्यूटर की दृश्य जानकारी दिखाता है।"
+    },
+    {
+      q: "इनमें से कौन-सा AI का उपयोग है?",
+      options: [
+        "भाषा का अनुवाद करना",
+        "कागज को अपने आप पानी में बदलना",
+        "बिना ऊर्जा के चलना",
+        "हर प्रश्न का हमेशा सही उत्तर देना"
+      ],
+      answer: 0,
+      why: "AI भाषा अनुवाद में सहायता कर सकता है, लेकिन गलती भी कर सकता है।"
+    },
+    {
+      q: "अपना पासवर्ड सुरक्षित रखने का सही तरीका क्या है?",
+      options: [
+        "सभी दोस्तों को बताना",
+        "सोशल मीडिया पर लिखना",
+        "अनजान व्यक्ति को भेजना",
+        "इसे निजी रखना और साझा न करना"
+      ],
+      answer: 3,
+      why: "पासवर्ड निजी रखना खाते की सुरक्षा के लिए जरूरी है।"
+    }
+  ];
+
+  const aiQuestions = [
+    {
+      q: "कंप्यूटर पर किसी भाषा का अनुवाद करना।",
+      options: ["AI", "इंसान", "दोनों"],
+      answer: 2,
+      why: "AI अनुवाद कर सकता है और इंसान भी भाषा का अनुवाद कर सकता है।"
+    },
+    {
+      q: "कक्षा में विद्यार्थी के वास्तविक अनुभव से कहानी सुनाना।",
+      options: ["AI", "इंसान", "दोनों"],
+      answer: 1,
+      why: "इंसान अपने निजी अनुभवों और यादों से कहानी सुना सकता है।"
+    },
+    {
+      q: "तस्वीरों में बिल्ली की पहचान करना।",
+      options: ["AI", "इंसान", "दोनों"],
+      answer: 2,
+      why: "AI तस्वीरों में पैटर्न पहचान सकता है और इंसान भी बिल्ली पहचान सकता है।"
+    },
+    {
+      q: "अपने मित्र को आमने-सामने गले लगाना।",
+      options: ["AI", "इंसान", "दोनों"],
+      answer: 1,
+      why: "यहाँ सामान्य अर्थ में वास्तविक शारीरिक संपर्क की बात है।"
+    }
+  ];
+
+  const codingSteps = [
+    "किताब के पास जाओ",
+    "किताब को पहचानो",
+    "किताब उठाओ",
+    "मेज पर रखो"
+  ];
+
+  const memoryPairs = [
+    { id: "keyboard", icon: "⌨️", en: "Keyboard", hi: "कीबोर्ड" },
+    { id: "mouse", icon: "🖱️", en: "Mouse", hi: "माउस" },
+    { id: "monitor", icon: "🖥️", en: "Monitor", hi: "मॉनिटर" },
+    { id: "printer", icon: "🖨️", en: "Printer", hi: "प्रिंटर" }
+  ];
+
+  // Shuffle a new array without modifying the original.
+  function shuffle(items) {
+    const result = items.slice();
+
+    for (let i = result.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [result[i], result[j]] = [result[j], result[i]];
+    }
+
+    return result;
+  }
+
+  function addPoints(amount) {
+    state.score = Math.min(MAX_SCORE, state.score + amount);
+    renderScore();
+  }
+
+  function finishGame(name) {
+    state.completed.add(name);
+    renderScore();
+    renderBadges();
+
+    if (state.completed.size === 4) {
+      showFinalResult();
+    }
+  }
+
+  function renderScore() {
+    $("funTotalScore").textContent = state.score;
+    $("funStars").textContent = state.score + " ⭐";
+    $("funCompleted").textContent = state.completed.size + " / 4";
+
+    const percent = Math.round(
+      (state.score / MAX_SCORE) * 100
+    );
+
+    $("funProgressBar").style.width = percent + "%";
+
+    let rank = "शुरुआत";
+
+    if (state.score >= 12) rank = "चैंपियन";
+    else if (state.score >= 8) rank = "स्टार";
+    else if (state.score >= 4) rank = "खिलाड़ी";
+
+    $("funRank").textContent = rank;
+  }
+
+  function renderBadges() {
+    if (state.score > 0) state.badges.add("first");
+    if (state.completed.has("quiz")) state.badges.add("quiz");
+    if (state.completed.has("memory")) state.badges.add("memory");
+    if (state.completed.has("coding")) state.badges.add("coding");
+    if (state.score === MAX_SCORE) state.badges.add("perfect");
+
+    root.querySelectorAll("[data-badge]").forEach(el => {
+      const key = el.dataset.badge;
+      const earned = state.badges.has(key);
+
+      el.classList.toggle("is-earned", earned);
+
+      const labels = {
+        first: "🌱 पहला कदम",
+        quiz: "🧠 Quiz Master",
+        memory: "🃏 Memory Champion",
+        coding: "💻 Coding Star",
+        perfect: "🏆 Tech Champion"
+      };
+
+      el.textContent =
+        (earned ? "🏅 " : "🔒 ") + labels[key];
+    });
+  }
+
+  function showFinalResult() {
+    $("funFinalResult").classList.remove("fun-hidden");
+    $("funFinalScore").textContent =
+      state.score + " / " + MAX_SCORE;
+
+    let message;
+
+    if (state.score === MAX_SCORE) {
+      message = "शानदार! आपने सभी अंक हासिल किए। आप Tech Champion हैं!";
+    } else if (state.score >= 11) {
+      message = "बहुत बढ़िया! आपकी तकनीकी समझ मजबूत हो रही है।";
+    } else if (state.score >= 7) {
+      message = "अच्छा प्रयास! अभ्यास जारी रखें और नए सितारे कमाएँ।";
+    } else {
+      message = "शाबाश! आपने सभी खेल पूरे किए। फिर अभ्यास करके बेहतर स्कोर पाएँ।";
+    }
+
+    $("funFinalMessage").textContent = message;
+
+    const badgeNames = {
+      first: "पहला कदम",
+      quiz: "Quiz Master",
+      memory: "Memory Champion",
+      coding: "Coding Star",
+      perfect: "Tech Champion"
+    };
+
+    $("funFinalBadges").textContent =
+      "आपके बैज: " +
+      (state.badges.size
+        ? Array.from(state.badges).map(b => badgeNames[b]).join(" • ")
+        : "अभी कोई बैज नहीं");
+
+    $("funFinalResult").scrollIntoView({
+      behavior: "smooth",
+      block: "nearest"
+    });
+  }
+
+  // =========================================
+  // GAME 1: COMPUTER QUIZ BATTLE
+  // =========================================
+
+  function renderQuiz() {
+    const item = quizQuestions[state.quizIndex];
+
+    $("funQuizQuestion").textContent =
+      "प्रश्न " + (state.quizIndex + 1) + ": " + item.q;
+
+    $("funQuizCounter").textContent =
+      "सवाल " + (state.quizIndex + 1) + " / " +
+      quizQuestions.length;
+
+    $("funQuizFeedback").textContent = "";
+    $("funQuizOptions").replaceChildren();
+
+    item.options.forEach((label, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "fun-btn";
+      button.textContent = label;
+
+      button.addEventListener("click", () => {
+        if (state.quizAnswered) return;
+
+        state.quizAnswered = true;
+
+        const correct = index === item.answer;
+
+        if (correct) {
+          addPoints(1);
+          button.classList.add("fun-correct");
+          $("funQuizFeedback").textContent =
+            "✅ सही जवाब! +1 अंक। " + item.why;
+        } else {
+          button.classList.add("fun-wrong");
+          $("funQuizFeedback").textContent =
+            "💡 सही उत्तर: " + item.options[item.answer] +
+            "। " + item.why;
+        }
+
+        Array.from($("funQuizOptions").children)
+          .forEach((other, i) => {
+            other.disabled = true;
+
+            if (i === item.answer) {
+              other.classList.add("fun-correct");
+            }
+          });
+
+        $("funQuizNext").disabled = false;
+        $("funQuizNext").textContent =
+          state.quizIndex === quizQuestions.length - 1
+            ? "क्विज पूरा करें ✓"
+            : "अगला सवाल →";
+      });
+
+      $("funQuizOptions").appendChild(button);
+    });
+
+    $("funQuizNext").disabled = true;
+    state.quizAnswered = false;
+  }
+
+  $("funQuizNext").addEventListener("click", () => {
+    if (!state.quizAnswered) return;
+
+    if (state.quizIndex < quizQuestions.length - 1) {
+      state.quizIndex++;
+      renderQuiz();
+    } else {
+      $("funQuizQuestion").textContent =
+        "🎉 Computer Quiz Battle पूरा हुआ!";
+      $("funQuizOptions").replaceChildren();
+      $("funQuizFeedback").textContent =
+        "आपने क्विज पूरा कर लिया। आपके सही उत्तरों के अंक जुड़ गए हैं।";
+      $("funQuizNext").disabled = true;
+      finishGame("quiz");
+    }
+  });
+
+  // =========================================
+  // GAME 2: AI OR HUMAN
+  // =========================================
+
+  function renderAiGame() {
+    const item = aiQuestions[state.aiIndex];
+
+    $("funAiQuestion").textContent =
+      "चुनौती " + (state.aiIndex + 1) + ": " + item.q;
+
+    $("funAiCounter").textContent =
+      "चुनौती " + (state.aiIndex + 1) + " / " +
+      aiQuestions.length;
+
+    $("funAiFeedback").textContent = "";
+    $("funAiOptions").replaceChildren();
+
+    item.options.forEach((label, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "fun-btn";
+      button.textContent = label;
+
+      button.addEventListener("click", () => {
+        if (state.aiAnswered) return;
+
+        state.aiAnswered = true;
+
+        if (index === item.answer) {
+          addPoints(1);
+          button.classList.add("fun-correct");
+          $("funAiFeedback").textContent =
+            "⭐ सही! +1 अंक। " + item.why;
+        } else {
+          button.classList.add("fun-wrong");
+          $("funAiFeedback").textContent =
+            "💡 बेहतर उत्तर: " + item.options[item.answer] +
+            "। " + item.why;
+        }
+
+        Array.from($("funAiOptions").children)
+          .forEach((other, i) => {
+            other.disabled = true;
+
+            if (i === item.answer) {
+              other.classList.add("fun-correct");
+            }
+          });
+
+        $("funAiNext").disabled = false;
+        $("funAiNext").textContent =
+          state.aiIndex === aiQuestions.length - 1
+            ? "चुनौती पूरी करें ✓"
+            : "अगली चुनौती →";
+      });
+
+      $("funAiOptions").appendChild(button);
+    });
+
+    $("funAiNext").disabled = true;
+    state.aiAnswered = false;
+  }
+
+  $("funAiNext").addEventListener("click", () => {
+    if (!state.aiAnswered) return;
+
+    if (state.aiIndex < aiQuestions.length - 1) {
+      state.aiIndex++;
+      renderAiGame();
+    } else {
+      $("funAiQuestion").textContent = "🎉 AI या इंसान? पूरा हुआ!";
+      $("funAiOptions").replaceChildren();
+      $("funAiFeedback").textContent =
+        "आपने सभी चुनौतियाँ पूरी कर लीं!";
+      $("funAiNext").disabled = true;
+      finishGame("ai");
+    }
+  });
+
+  // =========================================
+  // GAME 3: CODING SEQUENCE PUZZLE
+  // =========================================
+
+  const codingOptions = $("funCodingOptions");
+
+  codingOptions.addEventListener("click", event => {
+    const button = event.target.closest("[data-step]");
+
+    if (!button || state.codingFinished) return;
+
+    const step = Number(button.dataset.step);
+
+    if (state.codingOrder.includes(step)) return;
+
+    state.codingOrder.push(step);
+    button.disabled = true;
+    button.classList.add("fun-correct");
+
+    renderCodingSequence();
+    $("funCodingFeedback").textContent = "";
+  });
+
+  function renderCodingSequence() {
+    const container = $("funCodingSequence");
+    container.replaceChildren();
+
+    if (!state.codingOrder.length) {
+      const hint = document.createElement("span");
+      hint.className = "fun-muted";
+      hint.textContent = "अभी कोई निर्देश नहीं चुना है।";
+      container.appendChild(hint);
+      return;
+    }
+
+    state.codingOrder.forEach((step, index) => {
+      const item = document.createElement("span");
+      item.className = "fun-btn";
+      item.textContent =
+        (index + 1) + ". " + codingSteps[step];
+      container.appendChild(item);
+    });
+  }
+
+  $("funCodingCheck").addEventListener("click", () => {
+    if (state.codingFinished) return;
+
+    if (state.codingOrder.length !== codingSteps.length) {
+      $("funCodingFeedback").textContent =
+        "पहले सभी चार निर्देश चुनें।";
+      return;
+    }
+
+    state.codingFinished = true;
+
+    const correct = state.codingOrder.every(
+      (step, index) => step === index
+    );
+
+    if (correct) {
+      addPoints(3);
+      $("funCodingFeedback").textContent =
+        "🎉 शानदार! सही क्रम। आपको 3 अंक मिले!";
+    } else {
+      $("funCodingFeedback").textContent =
+        "अच्छा प्रयास! सही क्रम: " +
+        codingSteps.join(" → ") +
+        "। क्रमबद्ध निर्देश कंप्यूटर के लिए महत्वपूर्ण हैं।";
+    }
+
+    $("funCodingCheck").disabled = true;
+    $("funCodingOptions").querySelectorAll("button")
+      .forEach(button => button.disabled = true);
+
+    finishGame("coding");
+  });
+
+  $("funCodingReset").addEventListener("click", () => {
+    if (state.codingFinished) return;
+
+    state.codingOrder = [];
+
+    codingOptions.querySelectorAll("button").forEach(button => {
+      button.disabled = false;
+      button.classList.remove("fun-correct", "fun-wrong");
+    });
+
+    $("funCodingFeedback").textContent = "";
+    renderCodingSequence();
+  });
+
+  // =========================================
+  // GAME 4: COMPUTER MEMORY MATCH
+  // =========================================
+
+  function setupMemoryGame() {
+    const cards = [];
+
+    memoryPairs.forEach(pair => {
+      cards.push({
+        id: pair.id,
+        label: pair.en,
+        icon: pair.icon
+      });
+
+      cards.push({
+        id: pair.id,
+        label: pair.hi,
+        icon: pair.icon
+      });
+    });
+
+    const grid = $("funMemoryGrid");
+    grid.replaceChildren();
+
+    shuffle(cards).forEach((card, index) => {
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.className = "fun-memory-card";
+      button.dataset.pair = card.id;
+      button.dataset.index = String(index);
+      button.setAttribute("aria-label", "बंद कार्ड");
+      button.setAttribute("aria-pressed", "false");
+      button.textContent = "?";
+
+      button.addEventListener("click", () => {
+        handleMemoryCard(button, card);
+      });
+
+      grid.appendChild(button);
+    });
+  }
+
+  function handleMemoryCard(button, card) {
+    if (state.memoryFinished) return;
+    if (button.disabled) return;
+    if (state.memoryOpen.some(item => item.button === button)) return;
+    if (state.memoryOpen.length >= 2) return;
+
+    button.classList.add("is-open");
+    button.replaceChildren();
+
+    const icon = document.createElement("span");
+    icon.textContent = card.icon;
+
+    const label = document.createElement("span");
+    label.textContent = card.label;
+
+    button.append(icon, label);
+    button.setAttribute("aria-label", card.label);
+    button.setAttribute("aria-pressed", "true");
+
+    state.memoryOpen.push({ button, card });
+
+    if (state.memoryOpen.length === 2) {
+      const [first, second] = state.memoryOpen;
+
+      if (first.card.id === second.card.id) {
+        first.button.classList.add("is-matched");
+        second.button.classList.add("is-matched");
+
+        first.button.disabled = true;
+        second.button.disabled = true;
+
+        state.memoryMatched.add(first.card.id);
+        state.memoryOpen = [];
+
+        addPoints(1);
+
+        $("funMemoryCounter").textContent =
+          "मिलान: " + state.memoryMatched.size + " / 4";
+
+        $("funMemoryFeedback").textContent =
+          "🎉 सही जोड़ी! +1 अंक।";
+
+        if (state.memoryMatched.size === memoryPairs.length) {
+          state.memoryFinished = true;
+          $("funMemoryFeedback").textContent =
+            "🏆 सभी जोड़ियाँ मिल गईं! Memory Champion!";
+
+          finishGame("memory");
+        }
+      } else {
+        $("funMemoryFeedback").textContent =
+          "फिर से कोशिश करें! दोनों नामों का मिलान करें।";
+
+        const openCards = state.memoryOpen.slice();
+        state.memoryOpen = [];
+
+        window.setTimeout(() => {
+          if (state.memoryFinished) return;
+
+          openCards.forEach(item => {
+            if (item.button.classList.contains("is-matched")) return;
+
+            item.button.classList.remove("is-open");
+            item.button.textContent = "?";
+            item.button.setAttribute("aria-label", "बंद कार्ड");
+            item.button.setAttribute("aria-pressed", "false");
+          });
+        }, 850);
+      }
+    }
+  }
+
+  // =========================================
+  // RESTART ALL GAMES
+  // =========================================
+
+  function restartGames() {
+    state.score = 0;
+    state.completed.clear();
+    state.badges.clear();
+
+    state.quizIndex = 0;
+    state.aiIndex = 0;
+    state.quizAnswered = false;
+    state.aiAnswered = false;
+
+    state.codingOrder = [];
+    state.codingFinished = false;
+
+    state.memoryOpen = [];
+    state.memoryMatched.clear();
+    state.memoryFinished = false;
+
+    $("funFinalResult").classList.add("fun-hidden");
+
+    $("funCodingCheck").disabled = false;
+
+    codingOptions.querySelectorAll("button").forEach(button => {
+      button.disabled = false;
+      button.classList.remove("fun-correct", "fun-wrong");
+    });
+
+    $("funCodingFeedback").textContent = "";
+    renderCodingSequence();
+
+    $("funMemoryCounter").textContent = "मिलान: 0 / 4";
+    $("funMemoryFeedback").textContent = "";
+
+    renderScore();
+    renderBadges();
+    renderQuiz();
+    renderAiGame();
+    setupMemoryGame();
+
+    $("funQuizQuestion").scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+
+  $("funPlayAgain").addEventListener("click", restartGames);
+
+  // Start all four games.
+  renderScore();
+  renderBadges();
+  renderQuiz();
+  renderAiGame();
+  setupMemoryGame();
+
+})();
+</script>
+
 </body>
 </html>
