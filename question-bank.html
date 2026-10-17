@@ -1,0 +1,413 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Class 10 Question Bank | CHAKIYA</title>
+<style>
+:root {
+  --primary: #174ea6;
+  --accent: #0d9488;
+  --bg: #f3f6fb;
+  --text: #172033;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+header {
+  background: linear-gradient(120deg,#123b78,#2474c8);
+  color: white;
+  padding: 24px 16px;
+  text-align: center;
+}
+header h1 { margin: 0 0 8px; }
+header p { margin: 0; }
+.container {
+  max-width: 850px;
+  margin: 24px auto;
+  padding: 0 14px;
+}
+.panel {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 5px 20px #162b4d12;
+}
+select, button {
+  padding: 12px 15px;
+  border-radius: 9px;
+  border: 1px solid #d3dce9;
+  font-size: 15px;
+}
+select { width: 100%; margin: 7px 0 15px; }
+button {
+  cursor: pointer;
+  font-weight: 700;
+}
+.primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+}
+.secondary { background: #eaf1ff; color: var(--primary); }
+button:disabled { opacity: .5; cursor: not-allowed; }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.actions button { flex: 1; }
+.progress {
+  height: 8px;
+  background: #e5eaf2;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 14px 0;
+}
+#progressFill {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width .25s;
+}
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: #53627a;
+  font-size: 14px;
+}
+.option {
+  display: block;
+  padding: 13px;
+  margin: 9px 0;
+  border: 1px solid #dce4ef;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.option:hover { background: #f2f7ff; }
+.option input { margin-right: 9px; }
+.option.correct { border-color: #15966a; background: #e8f8ef; }
+.option.wrong { border-color: #dc4444; background: #fff0f0; }
+#feedback { margin: 14px 0; font-weight: 700; }
+#result { display: none; }
+#questionArea { display: none; }
+#timer { font-weight: 800; color: #c2410c; }
+footer { text-align: center; padding: 24px; color: #64748b; }
+.small { color: #64748b; font-size: 13px; line-height: 1.5; }
+</style>
+</head>
+<body>
+<header>
+  <h1>CHAKIYA QUESTION BANK</h1>
+  <p>Class 10 BSEB Matric · Previous Year Objective Practice</p>
+</header>
+
+<main class="container">
+  <section class="panel" id="setup">
+    <h2>Start your test</h2>
+    <label for="subject">Select subject</label>
+    <select id="subject">
+      <option value="english">English</option>
+    </select>
+
+    <label for="year">Examination year</label>
+    <select id="year">
+      <option value="2025">2025</option>
+    </select>
+
+    <label for="mode">Test mode</label>
+    <select id="mode">
+      <option value="practice">Practice — instant answers</option>
+      <option value="timed">Timed test — answers at the end</option>
+    </select>
+
+    <label for="count">Questions</label>
+    <select id="count">
+      <option value="5">5 questions (demo)</option>
+      <option value="10">10 questions (demo)</option>
+      <option value="all">All available demo questions</option>
+    </select>
+
+    <p class="small">
+      Demo questions are provided to test this page. They are not verified
+      transcriptions of the original BSEB examination paper.
+    </p>
+    <button class="primary" id="startBtn">Start Test →</button>
+  </section>
+
+  <section class="panel" id="questionArea">
+    <div class="meta">
+      <span id="questionCount"></span>
+      <span>Time: <span id="timer">--:--</span></span>
+      <span id="scoreLive">Score: 0</span>
+    </div>
+    <div class="progress"><div id="progressFill"></div></div>
+    <h2 id="questionText"></h2>
+    <div id="options"></div>
+    <div id="feedback" aria-live="polite"></div>
+    <div class="actions">
+      <button class="secondary" id="prevBtn">← Previous</button>
+      <button class="secondary" id="nextBtn">Next →</button>
+      <button class="primary" id="finishBtn">Submit Test</button>
+    </div>
+  </section>
+
+  <section class="panel" id="result">
+    <h2>Test Result</h2>
+    <h1 id="finalScore"></h1>
+    <p id="resultMessage"></p>
+    <div class="actions">
+      <button class="primary" id="reviewBtn">Review Answers</button>
+      <button class="secondary" id="restartBtn">Try Again</button>
+    </div>
+    <div id="reviewArea"></div>
+  </section>
+</main>
+
+<footer>UHS Chakiya Tarari, Bhojpur · Learn, Practise, Succeed</footer>
+
+<script>
+"use strict";
+
+// DEMO DATA ONLY.
+// Replace with verified questions from the actual examination paper.
+const questions = [
+  {
+    q: "Choose the correct plural of 'child'.",
+    options: ["Childs", "Children", "Childes", "Childrens"],
+    answer: 1,
+    explanation: "'Children' is the plural form of 'child'."
+  },
+  {
+    q: "Choose the synonym of 'happy'.",
+    options: ["Joyful", "Angry", "Weak", "Silent"],
+    answer: 0,
+    explanation: "'Joyful' means feeling or expressing happiness."
+  },
+  {
+    q: "Choose the opposite of 'ancient'.",
+    options: ["Old", "Historic", "Modern", "Past"],
+    answer: 2,
+    explanation: "'Modern' is an antonym of 'ancient'."
+  },
+  {
+    q: "Fill in the blank: She ___ to school every day.",
+    options: ["go", "going", "goes", "gone"],
+    answer: 2,
+    explanation: "With 'she' in the simple present, use 'goes'."
+  },
+  {
+    q: "Which word is a noun?",
+    options: ["Quickly", "Beautiful", "Honesty", "Run"],
+    answer: 2,
+    explanation: "'Honesty' is a noun."
+  },
+  {
+    q: "Choose the correct article: He is ___ honest man.",
+    options: ["a", "an", "the", "no article"],
+    answer: 1,
+    explanation: "'Honest' begins with a vowel sound, so use 'an'."
+  },
+  {
+    q: "What is the past tense of 'write'?",
+    options: ["Writed", "Written", "Wrote", "Writing"],
+    answer: 2,
+    explanation: "The simple past tense of 'write' is 'wrote'."
+  },
+  {
+    q: "Choose the correctly spelled word.",
+    options: ["Beautifull", "Beautiful", "Beutiful", "Beautifal"],
+    answer: 1,
+    explanation: "The correct spelling is 'beautiful'."
+  },
+  {
+    q: "Choose the pronoun: 'Rita said she was ready.'",
+    options: ["Rita", "Said", "She", "Ready"],
+    answer: 2,
+    explanation: "'She' is the pronoun."
+  },
+  {
+    q: "Choose the opposite of 'brave'.",
+    options: ["Courageous", "Fearless", "Cowardly", "Bold"],
+    answer: 2,
+    explanation: "'Cowardly' is an antonym of 'brave'."
+  }
+];
+
+let testQuestions = [];
+let answers = {};
+let current = 0;
+let submitted = false;
+let reviewMode = false;
+let secondsLeft = 0;
+let timerId = null;
+
+const $ = id => document.getElementById(id);
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;",
+    '"': "&quot;", "'": "&#39;"
+  })[char]);
+}
+
+function shuffle(array) {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+function startTest() {
+  clearInterval(timerId);
+  const count = $("count").value === "all"
+    ? questions.length
+    : Number($("count").value);
+
+  testQuestions = shuffle(questions).slice(0, count);
+  answers = {};
+  current = 0;
+  submitted = false;
+  reviewMode = false;
+
+  $("setup").style.display = "none";
+  $("result").style.display = "none";
+  $("questionArea").style.display = "block";
+
+  const timed = $("mode").value === "timed";
+  secondsLeft = timed ? testQuestions.length * 60 : 0;
+  $("timer").textContent = timed ? formatTime(secondsLeft) : "Practice";
+  $("finishBtn").style.display = "inline-block";
+
+  if (timed) {
+    timerId = setInterval(() => {
+      secondsLeft--;
+      $("timer").textContent = formatTime(Math.max(0, secondsLeft));
+      if (secondsLeft <= 0) finishTest();
+    }, 1000);
+  }
+
+  renderQuestion();
+}
+
+function formatTime(seconds) {
+  return String(Math.floor(seconds / 60)).padStart(2, "0") + ":" +
+    String(seconds % 60).padStart(2, "0");
+}
+
+function renderQuestion() {
+  const item = testQuestions[current];
+  $("questionCount").textContent =
+    `Question ${current + 1} of ${testQuestions.length}`;
+  $("questionText").textContent = item.q;
+  $("progressFill").style.width =
+    ((current + 1) / testQuestions.length * 100) + "%";
+
+  $("options").innerHTML = item.options.map((option, index) => {
+    let cls = "";
+    if (reviewMode && index === item.answer) cls = "correct";
+    else if (reviewMode && answers[current] === index) cls = "wrong";
+
+    return `<label class="option ${cls}">
+      <input type="radio" name="answer" value="${index}"
+      ${answers[current] === index ? "checked" : ""}
+      ${submitted || reviewMode ? "disabled" : ""}>
+      ${String.fromCharCode(65 + index)}. ${escapeHTML(option)}
+    </label>`;
+  }).join("");
+
+  $("feedback").textContent = "";
+  if ($("mode").value === "practice" &&
+      answers[current] !== undefined) {
+    showFeedback();
+  }
+
+  $("prevBtn").disabled = current === 0;
+  $("nextBtn").disabled = current === testQuestions.length - 1;
+  $("scoreLive").textContent = "Score: " + calculateScore();
+}
+
+function showFeedback() {
+  const item = testQuestions[current];
+  const chosen = answers[current];
+  if (chosen === undefined) return;
+
+  if (chosen === item.answer) {
+    $("feedback").textContent = "✓ Correct! " + item.explanation;
+    $("feedback").style.color = "#087443";
+  } else {
+    $("feedback").textContent =
+      "✗ Incorrect. Correct answer: " +
+      item.options[item.answer] + ". " + item.explanation;
+    $("feedback").style.color = "#bd3030";
+  }
+}
+
+$("options").addEventListener("change", event => {
+  if (submitted || reviewMode || !event.target.matches('input[type="radio"]')) {
+    return;
+  }
+  answers[current] = Number(event.target.value);
+  $("scoreLive").textContent = "Score: " + calculateScore();
+
+  if ($("mode").value === "practice") {
+    showFeedback();
+  }
+});
+
+function calculateScore() {
+  return testQuestions.reduce((total, item, index) =>
+    total + (answers[index] === item.answer ? 1 : 0), 0);
+}
+
+function finishTest() {
+  if (submitted) return;
+  submitted = true;
+  clearInterval(timerId);
+  $("questionArea").style.display = "none";
+  $("result").style.display = "block";
+
+  const score = calculateScore();
+  $("finalScore").textContent =
+    `${score} / ${testQuestions.length}`;
+  $("resultMessage").textContent =
+    `You answered ${score} correctly and ` +
+    `${testQuestions.length - score} incorrectly or left blank.`;
+
+  $("reviewArea").innerHTML = "";
+}
+
+function reviewAnswers() {
+  reviewMode = true;
+  $("result").style.display = "none";
+  $("questionArea").style.display = "block";
+  $("finishBtn").style.display = "none";
+  renderQuestion();
+}
+
+function restartTest() {
+  clearInterval(timerId);
+  $("result").style.display = "none";
+  $("questionArea").style.display = "none";
+  $("setup").style.display = "block";
+}
+
+$("startBtn").addEventListener("click", startTest);
+$("prevBtn").addEventListener("click", () => {
+  if (current > 0) { current--; renderQuestion(); }
+});
+$("nextBtn").addEventListener("click", () => {
+  if (current < testQuestions.length - 1) { current++; renderQuestion(); }
+});
+$("finishBtn").addEventListener("click", finishTest);
+$("reviewBtn").addEventListener("click", reviewAnswers);
+$("restartBtn").addEventListener("click", restartTest);
+</script>
+</body>
+</html>
