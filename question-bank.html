@@ -1,491 +1,1223 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Class 10 Question Bank | CHAKIYA</title>
+<title>Class 10 English Question Bank | CHAKIYA</title>
 <style>
-:root {
-  --primary: #174ea6;
-  --accent: #0d9488;
-  --bg: #f3f6fb;
-  --text: #172033;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
-header {
-  background: linear-gradient(120deg,#123b78,#2474c8);
-  color: white;
-  padding: 24px 16px;
-  text-align: center;
-}
-header h1 { margin: 0 0 8px; }
-header p { margin: 0; }
-.container {
-  max-width: 850px;
-  margin: 24px auto;
-  padding: 0 14px;
-}
-.panel {
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 18px;
-  box-shadow: 0 5px 20px #162b4d12;
-}
-select, button {
-  padding: 12px 15px;
-  border-radius: 9px;
-  border: 1px solid #d3dce9;
-  font-size: 15px;
-}
-select { width: 100%; margin: 7px 0 15px; }
-button {
-  cursor: pointer;
-  font-weight: 700;
-}
-.primary {
-  background: var(--primary);
-  color: white;
-  border: none;
-}
-.secondary { background: #eaf1ff; color: var(--primary); }
-button:disabled { opacity: .5; cursor: not-allowed; }
-.actions { display: flex; gap: 10px; flex-wrap: wrap; }
-.actions button { flex: 1; }
-.progress {
-  height: 8px;
-  background: #e5eaf2;
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 14px 0;
-}
-#progressFill {
-  height: 100%;
-  width: 0;
-  background: var(--accent);
-  transition: width .25s;
-}
-.meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-  color: #53627a;
-  font-size: 14px;
-}
-.option {
-  display: block;
-  padding: 13px;
-  margin: 9px 0;
-  border: 1px solid #dce4ef;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.option:hover { background: #f2f7ff; }
-.option input { margin-right: 9px; }
-.option.correct { border-color: #15966a; background: #e8f8ef; }
-.option.wrong { border-color: #dc4444; background: #fff0f0; }
-#feedback { margin: 14px 0; font-weight: 700; }
-#result { display: none; }
-#questionArea { display: none; }
-#timer { font-weight: 800; color: #c2410c; }
-footer { text-align: center; padding: 24px; color: #64748b; }
-.small { color: #64748b; font-size: 13px; line-height: 1.5; }
+:root{--primary:#174ea6;--accent:#0d9488;--bg:#f3f6fb;--text:#172033;--muted:#64748b}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(120deg,#123b78,#2474c8);color:white;padding:25px 16px;text-align:center}
+header h1{margin:0 0 8px;font-size:clamp(24px,4vw,34px)}header p{margin:0;line-height:1.5}
+.container{max-width:900px;margin:24px auto;padding:0 14px}
+.panel{background:white;border-radius:16px;padding:20px;margin-bottom:18px;box-shadow:0 5px 20px #162b4d12}
+label.field{display:block;font-weight:700;margin-top:12px}
+select,button{padding:12px 15px;border-radius:9px;border:1px solid #d3dce9;font-size:15px}
+select{width:100%;margin:7px 0 10px;background:white}
+button{cursor:pointer;font-weight:700}
+.primary{background:var(--primary);color:white;border:none}.secondary{background:#eaf1ff;color:var(--primary)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.actions button{flex:1}
+.progress{height:8px;background:#e5eaf2;border-radius:8px;overflow:hidden;margin:14px 0}
+#progressFill{height:100%;width:0;background:var(--accent);transition:width .25s}
+.meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#53627a;font-size:14px}
+.option{display:block;padding:13px;margin:9px 0;border:1px solid #dce4ef;border-radius:10px;cursor:pointer;line-height:1.45}
+.option:hover{background:#f2f7ff}.option input{margin-right:9px}.option.correct{border-color:#15966a;background:#e8f8ef}.option.wrong{border-color:#dc4444;background:#fff0f0}
+#feedback{margin:14px 0;font-weight:700;line-height:1.5}#result,#questionArea{display:none}#timer{font-weight:800;color:#c2410c}
+.small{color:var(--muted);font-size:13px;line-height:1.55}.notice{padding:12px 14px;background:#fff8e6;border-left:4px solid #e5a000;border-radius:8px;font-size:13px;line-height:1.5}
+.review-item{padding:12px 0;border-bottom:1px solid #e5eaf2}.review-item:last-child{border-bottom:0}
+footer{text-align:center;padding:24px;color:var(--muted)}
+@media(max-width:560px){.panel{padding:16px}.actions button{min-width:100px}header{padding:22px 12px}}
 </style>
 </head>
 <body>
-<header>
-  <h1>CHAKIYA QUESTION BANK</h1>
-  <p>Class 10 BSEB Matric · Previous Year Objective Practice</p>
-</header>
-
+<header><h1>CHAKIYA QUESTION BANK</h1><p>Class 10 BSEB Matric · English 2025 · Objective Practice</p></header>
 <main class="container">
-  <section class="panel" id="setup">
-    <h2>Start your test</h2>
-    <label for="subject">Select subject</label>
-    <select id="subject">
-      <option value="english">English</option>
-    </select>
-
-    <label for="year">Examination year</label>
-    <select id="year">
-      <option value="2025">2025</option>
-    </select>
-
-    <label for="mode">Test mode</label>
-    <select id="mode">
-      <option value="practice">Practice — instant answers</option>
-      <option value="timed">Timed test — answers at the end</option>
-    </select>
-
-    <label for="count">Questions</label>
-    <select id="count">
-      <option value="5">5 questions (demo)</option>
-      <option value="10">10 questions (demo)</option>
-      <option value="all">All available demo questions</option>
-    </select>
-
-    <p class="small">
-      Demo questions are provided to test this page. They are not verified
-      transcriptions of the original BSEB examination paper.
-    </p>
-    <button class="primary" id="startBtn">Start Test →</button>
-  </section>
-
-  <section class="panel" id="questionArea">
-    <div class="meta">
-      <span id="questionCount"></span>
-      <span>Time: <span id="timer">--:--</span></span>
-      <span id="scoreLive">Score: 0</span>
-    </div>
-    <div class="progress"><div id="progressFill"></div></div>
-    <h2 id="questionText"></h2>
-    <div id="options"></div>
-    <div id="feedback" aria-live="polite"></div>
-    <div class="actions">
-      <button class="secondary" id="prevBtn">← Previous</button>
-      <button class="secondary" id="nextBtn">Next →</button>
-      <button class="primary" id="finishBtn">Submit Test</button>
-    </div>
-  </section>
-
-  <section class="panel" id="result">
-    <h2>Test Result</h2>
-    <h1 id="finalScore"></h1>
-    <p id="resultMessage"></p>
-    <div class="actions">
-      <button class="primary" id="reviewBtn">Review Answers</button>
-      <button class="secondary" id="restartBtn">Try Again</button>
-    </div>
-    <div id="reviewArea"></div>
-  </section>
+<section class="panel" id="setup">
+<h2>Start your test</h2>
+<p class="small">100 objective questions from the uploaded English 2025 paper. The original paper asks students to answer any 50 questions.</p>
+<label class="field" for="subject">Subject</label><select id="subject"><option>English</option></select>
+<label class="field" for="year">Examination year</label><select id="year"><option>2025</option></select>
+<label class="field" for="mode">Test mode</label><select id="mode"><option value="practice">Practice — instant answers</option><option value="timed">Timed test — answers at the end</option></select>
+<label class="field" for="count">Number of questions</label><select id="count"><option value="10">10 questions</option><option value="30">30 questions</option><option value="50">50 questions (exam practice)</option><option value="all">All 100 questions</option></select>
+<div class="notice"><strong>Answer-key note:</strong> The questions are transcribed from the PDF you supplied. The answer choices are an educational draft, not an official BSEB answer key; please verify literature/textbook answers before using this for formal grading.</div>
+<p class="small">Timed mode allows 1 minute per selected question. Your answers stay in this browser and are not saved to Google Sheets.</p>
+<button class="primary" id="startBtn">Start Test →</button>
+</section>
+<section class="panel" id="questionArea">
+<div class="meta"><span id="questionCount"></span><span>Time: <span id="timer">--:--</span></span><span id="scoreLive">Score: 0</span></div>
+<div class="progress"><div id="progressFill"></div></div>
+<h2 id="questionText"></h2><div id="options"></div><div id="feedback" aria-live="polite"></div>
+<div class="actions"><button class="secondary" id="prevBtn">← Previous</button><button class="secondary" id="nextBtn">Next →</button><button class="primary" id="finishBtn">Submit Test</button></div>
+</section>
+<section class="panel" id="result">
+<h2>Test Result</h2><h1 id="finalScore"></h1><p id="resultMessage"></p>
+<div class="actions"><button class="primary" id="reviewBtn">Review Answers</button><button class="secondary" id="restartBtn">Try Again</button></div><div id="reviewArea"></div>
+</section>
 </main>
-
 <footer>UHS Chakiya Tarari, Bhojpur · Learn, Practise, Succeed</footer>
-
 <script>
 "use strict";
-
-// DEMO DATA ONLY.
-// Replace with verified questions from the actual examination paper.
-
 const questions = [
   {
-    q: "The slow thinkers are unable to…",
-    options: [
+    "q": "The slow thinkers are unable to…",
+    "options": [
       "Get married",
       "Run fast",
       "Eat their food",
       "Earn their living"
     ],
-    answer: 3,
-    explanation: "The answer given in the reference is 'earn their living'."
+    "answer": 3,
+    "explanation": "Correct option: Earn their living."
   },
   {
-    q: "Jim wanted everybody to contribute a little of their time to save our…",
-    options: [
+    "q": "Jim wanted everybody to contribute a little of their time to save our…",
+    "options": [
       "Houses",
       "Plants",
       "Environment",
       "Education system"
     ],
-    answer: 2,
-    explanation: "The correct option is environment."
+    "answer": 2,
+    "explanation": "Correct option: Environment."
   },
   {
-    q: "Gillu craved for ______ of its caretaker, Mahadevi Verma.",
-    options: ["Pen", "Attention", "Pencil", "Fruit"],
-    answer: 1,
-    explanation: "Gillu craved for the attention of its caretaker."
+    "q": "Gillu craved for ______ of its caretaker, Mahadevi Verma.",
+    "options": [
+      "Pen",
+      "Attention",
+      "Pencil",
+      "Fruit"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Attention."
   },
   {
-    q: "It is indeed shameful that the ______ were beaten up.",
-    options: ["Pandits", "Priests", "Maulanas", "Buddhist monks"],
-    answer: 3,
-    explanation: "The referenced answer is Buddhist monks."
+    "q": "It is indeed shameful that the ______ were beaten up.",
+    "options": [
+      "Pandits",
+      "Priests",
+      "Maulanas",
+      "Buddhist monks"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Buddhist monks."
   },
   {
-    q: "Indian cinema lacks ______.",
-    options: ["Music", "Choreography", "Maturity", "Direction"],
-    answer: 2,
-    explanation: "The referenced answer is maturity."
+    "q": "Indian cinema lacks ______.",
+    "options": [
+      "Music",
+      "Choreography",
+      "Maturity",
+      "Direction"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Maturity."
   },
   {
-    q: "The old, blind woman was also ______.",
-    options: ["Hate", "Honour", "Wise", "Disobey"],
-    answer: 2,
-    explanation: "The referenced answer is wise."
+    "q": "The old, blind woman was also ______.",
+    "options": [
+      "Hate",
+      "Honour",
+      "Wise",
+      "Disobey"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Wise."
   },
   {
-    q: "According to Humayun Kabir, it is not very easy to define the concept of ______.",
-    options: ["Religion", "Education", "Culture", "Illiteracy"],
-    answer: 2,
-    explanation: "The referenced answer is culture."
+    "q": "According to Humayun Kabir, it is not very easy to define the concept of ______.",
+    "options": [
+      "Religion",
+      "Education",
+      "Culture",
+      "Illiteracy"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Culture."
   },
   {
-    q: "The two girls met each other at the local ______.",
-    options: ["Temple", "Gurudwara", "Mosque", "Church"],
-    answer: 3,
-    explanation: "The referenced answer is church."
+    "q": "The two girls met each other at the local _____.",
+    "options": [
+      "Temple",
+      "Gurudwara",
+      "Mosque",
+      "Church"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Church."
   },
   {
-    q: "The writer classifies himself as a ______ thinker in 'The Pace of Living'.",
-    options: ["Sad", "Quick", "Slow", "Happy"],
-    answer: 2,
-    explanation: "The writer classifies himself as a slow thinker."
+    "q": "The writer classifies himself as a ______ thinker in 'The Pace of Living'.",
+    "options": [
+      "Sad",
+      "Quick",
+      "Slow",
+      "Happy"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Slow."
   },
   {
-    q: "Burning of leaves is bad for ______.",
-    options: [
+    "q": "Burning of leaves is bad for _____.",
+    "options": [
       "Breath and air",
       "Men and society",
       "Nature and society",
       "Air and environment"
     ],
-    answer: 3,
-    explanation: "The referenced answer is air and environment."
-  },
-  
-  {
-    q: "Mahadevi Verma was a _______ poetess.",
-    options: ["Chayavadi", "Revolutionary", "Bhakti", "Romantic"],
-    answer: 0,
-    explanation: "Correct answer: Chayavadi."
+    "answer": 3,
+    "explanation": "Correct option: Air and environment."
   },
   {
-    q: "The snow had melted owing to _______.",
-    options: ["Rough weather", "Rainy weather", "Cold weather", "Warm weather"],
-    answer: 3,
-    explanation: "Correct answer: Warm weather."
+    "q": "Mahadevi Verma was a ______ poetess.",
+    "options": [
+      "Chayavadi",
+      "Revolutionary",
+      "Bhakti",
+      "Romantic"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Chayavadi."
   },
   {
-    q: "'God made the ____, and man made the town'.",
-    options: ["City", "Country", "Woman", "Town"],
-    answer: 1,
-    explanation: "Correct answer: Country."
+    "q": "The snow had melted owing to ______.",
+    "options": [
+      "Rough weather",
+      "Rainy weather",
+      "Cold weather",
+      "Warm weather"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Warm weather."
   },
   {
-    q: "A _____ man passes his days smoothly.",
-    options: ["Happy", "Running", "Sad", "Crooked"],
-    answer: 0,
-    explanation: "Correct answer: Happy."
+    "q": "'God made the ____, and man made the town'.",
+    "options": [
+      "City",
+      "Country",
+      "Woman",
+      "Town"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Country."
   },
   {
-    q: "The polythene bag is buried inside the _________.",
-    options: ["Table", "Tunnel", "Garbage-bin", "Pot-hole"],
-    answer: 2,
-    explanation: "Correct answer: Garbage-bin."
+    "q": "A _____ man passes his days smoothly.",
+    "options": [
+      "Happy",
+      "Running",
+      "Sad",
+      "Crooked"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Happy."
   },
   {
-    q: "Radha's friends feel that Radha will never be _____ again.",
-    options: ["Angry", "Jealous", "Sad", "Happy"],
-    answer: 2,
-    explanation: "Answer indicated by the secondary answer key: Sad."
+    "q": "The polythene bag is buried inside the _________.",
+    "options": [
+      "Table",
+      "Tunnel",
+      "Garbage-bin",
+      "Pot-hole"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Garbage-bin."
   },
   {
-    q: "____ made the rich man mad.",
-    options: ["Passion", "Desire", "Lust", "Love"],
-    answer: 1,
-    explanation: "Correct answer indicated by the secondary answer key: Desire."
+    "q": "Raddha's friends feel that Radha will never be _____ again.",
+    "options": [
+      "Angry",
+      "Jealous",
+      "Sad",
+      "Happy"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Happy."
   },
   {
-    q: "The poet calls the Koel a rain of _____.",
-    options: ["Emotion", "Fire", "Sparks", "Water"],
-    answer: 2,
-    explanation: "Correct answer indicated by the secondary answer key: Sparks."
+    "q": "____ made the rich man mad.",
+    "options": [
+      "Passion",
+      "Desire",
+      "Lust",
+      "Love"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Desire."
   },
   {
-    q: "The porter ______ because he gets exhausted working all day.",
-    options: ["Laughs", "Sleeps", "Eats", "Sings"],
-    answer: 1,
-    explanation: "Correct answer: Sleeps."
+    "q": "The poet calls the Koel a rain of _____.",
+    "options": [
+      "Emotion",
+      "Fire",
+      "Sparks",
+      "Water"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Sparks."
   },
   {
-    q: "Mantha's stories seemed as tranquil as _______.",
-    options: ["Dreams", "Moon", "Night", "Stars"],
-    answer: 0,
-    explanation: "Correct answer: Dreams."
+    "q": "The porter ______ because he gets exhausted working all day.",
+    "options": [
+      "Laughs",
+      "Sleeps",
+      "Eats",
+      "Sings"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Sleeps."
+  },
+  {
+    "q": "Mantha's stories seemed as tranquil as _______.",
+    "options": [
+      "Dreams",
+      "Moon",
+      "Night",
+      "Stars"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Dreams."
+  },
+  {
+    "q": "________ chars the cuckoo's wings.",
+    "options": [
+      "The fire of hatred",
+      "The fire of jealousy",
+      "The fire of anger",
+      "The fire of love"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: The fire of jealousy."
+  },
+  {
+    "q": "The porter ___ over the kingdom of sleep.",
+    "options": [
+      "Thinks",
+      "Laughs",
+      "Cries",
+      "Reigns"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Reigns."
+  },
+  {
+    "q": "Martha told her stories in the _____.",
+    "options": [
+      "Forest",
+      "Hut",
+      "Hazel Glen",
+      "Church"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Hazel Glen."
+  },
+  {
+    "q": "Radha was never able to give the ____ to any question.",
+    "options": [
+      "Confused answer",
+      "Exact answer",
+      "Wrong answer",
+      "Improper answer"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Exact answer."
+  },
+  {
+    "q": "Jabra was Halku's ________.",
+    "options": [
+      "Eat",
+      "Donkey",
+      "Horse",
+      "Dog"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Dog."
+  },
+  {
+    "q": "________ causes a quick reaction.",
+    "options": [
+      "Allergy",
+      "Injection",
+      "Substances",
+      "Medicine"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Allergy."
+  },
+  {
+    "q": "What did the lawyer prefer?",
+    "options": [
+      "Wine",
+      "Money",
+      "Death",
+      "Life imprisonment"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Life imprisonment."
+  },
+  {
+    "q": "Mr. Gessler's shoes lasted ____.",
+    "options": [
+      "Long",
+      "Forever",
+      "Short",
+      "Never"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Long."
+  },
+  {
+    "q": "_______ were tied up at the table-corners for the party.",
+    "options": [
+      "Lilies",
+      "Daisies",
+      "Sunflower",
+      "Roses"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Daisies."
+  },
+  {
+    "q": "The daughter in 'Two Horizons' does not wish to ____ any more.",
+    "options": [
+      "Dream",
+      "Want",
+      "Desire",
+      "Need"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Dream."
+  },
+  {
+    "q": "The narrator and his girlfriend in 'Love Defiled' were more than ____ lovers.",
+    "options": [
+      "Physical",
+      "Distant",
+      "Emotional",
+      "Platonic"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Physical."
+  },
+  {
+    "q": "Halku was a ________.",
+    "options": [
+      "Washerman",
+      "Fisherman",
+      "Tenant farmer",
+      "Landlord"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Tenant farmer."
+  },
+  {
+    "q": "The sheets and pillows should be washed ____ in hot water.",
+    "options": [
+      "Monthly",
+      "Daily",
+      "Yearly",
+      "Weekly"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Weekly."
+  },
+  {
+    "q": "The banker was afraid of honouring the bet because ____.",
+    "options": [
+      "He had become financially weak",
+      "He was very rich",
+      "He was cruel",
+      "He was cunning"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: He had become financially weak."
+  },
+  {
+    "q": "The narrator's girlfriend very confidently introduced her former ____ to her husband.",
+    "options": [
+      "Boyfriend",
+      "Brother",
+      "Sister",
+      "Mother"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Boyfriend."
+  },
+  {
+    "q": "Aung San Suu Kyi's son refers to his mother's ___ and personal sacrifices.",
+    "options": [
+      "Respect",
+      "Love",
+      "Dedication",
+      "Hatred"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Dedication."
+  },
+  {
+    "q": "The author wanted to feed the ____ Gillu.",
+    "options": [
+      "Happy",
+      "Hungry",
+      "Injured",
+      "Scared"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Injured."
+  },
+  {
+    "q": "Health and virtue are _____ for a contented man.",
+    "options": [
+      "Blessings",
+      "Troubles",
+      "Curses",
+      "Problems"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Blessings."
+  },
+  {
+    "q": "The cinema combines the cold _________ of science.",
+    "options": [
+      "Love",
+      "Dream",
+      "Logic",
+      "Art"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Logic."
+  },
+  {
+    "q": "The old woman in 'Once upon a Time' is a daughter of ____.",
+    "options": [
+      "Tribals",
+      "Affluent class",
+      "Slave",
+      "Farmer"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Tribals."
+  },
+  {
+    "q": "Though the man was very rich, still he was not _________.",
+    "options": [
+      "Satisfied",
+      "Greedy",
+      "Happy",
+      "Sad"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Satisfied."
+  },
+  {
+    "q": "____ university conferred an honorary doctorate degree on Satyajit Ray.",
+    "options": [
+      "Oxford",
+      "Harvard",
+      "Cambridge",
+      "Stanford"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Oxford."
+  },
+  {
+    "q": "'O Kalpaka, I seek your aid; All I want is a pot of gold!' is from ____.",
+    "options": [
+      "Koel",
+      "The Empty Heart",
+      "The Sleeping Porter",
+      "Polythene Bag"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: The Empty Heart."
+  },
+  {
+    "q": "The two girls in 'Little Girls Wiser Than Men' met _______.",
+    "options": [
+      "In a lane",
+      "In the kitchen",
+      "On the road",
+      "In the drawing room"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: In a lane."
+  },
+  {
+    "q": "'Lo! The roses are on fire which winds and waters catch!' is from ____.",
+    "options": [
+      "Thinner Than a Crescent",
+      "Koel",
+      "The Empty Heart",
+      "Ode on Solitude"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Koel."
+  },
+  {
+    "q": "Humayun Kabir was a famous ________.",
+    "options": [
+      "Doctor",
+      "Teacher",
+      "Political thinker",
+      "Singer"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Political thinker."
+  },
+  {
+    "q": "Jim's mother told him that he used ______ all the time for watching television.",
+    "options": [
+      "Watch",
+      "Energy",
+      "Time",
+      "Electricity"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Electricity."
+  },
+  {
+    "q": "Being hurt causes _______ in human beings.",
+    "options": [
+      "Pleasure",
+      "Forgiveness",
+      "Pain",
+      "Jealousy"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Pain."
+  },
+  {
+    "q": "There were '______ silver pitchers'.",
+    "options": [
+      "Five",
+      "Seven",
+      "Six",
+      "Eight"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Seven."
+  },
+  {
+    "q": "The poet refers to the Koel's '______ strains'.",
+    "options": [
+      "Low-pitched",
+      "Muted",
+      "High-pitched",
+      "Silent"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: High-pitched."
+  },
+  {
+    "q": "The corn merchant was upset because his ____ was cheating him.",
+    "options": [
+      "Niece",
+      "Son-in-law",
+      "Cousin",
+      "Nephew"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Son-in-law."
+  },
+  {
+    "q": "Aung San Suu Kyi's party is known as ______.",
+    "options": [
+      "Myanmar League",
+      "Myanmar Congress",
+      "National League for Democracy",
+      "National Congress"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: National League for Democracy."
+  },
+  {
+    "q": "'Sound sleep by night; study and ease' is from ____.",
+    "options": [
+      "Koel",
+      "The Empty Heart",
+      "Martha",
+      "Ode on Solitude"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Ode on Solitude."
+  },
+  {
+    "q": "Sakas and Hunas were the _______ of India.",
+    "options": [
+      "Thieves",
+      "Businessmen",
+      "Invaders",
+      "Politicians"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Invaders."
+  },
+  {
+    "q": "The daughter was impressed by her mother's undiminished _____.",
+    "options": [
+      "Enthusiasm",
+      "Love",
+      "Jealousy",
+      "Hatred"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Enthusiasm."
+  },
+  {
+    "q": "'O Madhva, I have run to call you' is from ____.",
+    "options": [
+      "Thinner Than a Crescent",
+      "Koel",
+      "Martha",
+      "The Sleeping Porter"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Koel."
+  },
+  {
+    "q": "Katherine Mansfield was inspired by ____.",
+    "options": [
+      "John Galsworthy",
+      "Prem Chand",
+      "Anton Chekhov",
+      "R.C. Hutchinson"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Anton Chekhov."
+  },
+  {
+    "q": "'And her beauty far away / Would fade, as her voice ran on,' is from ____.",
+    "options": [
+      "Koel",
+      "Ode on Autumn",
+      "Martha",
+      "The Sleeping Porter"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Martha."
+  },
+  {
+    "q": "The raw material of cinema is ______ itself.",
+    "options": [
+      "Life",
+      "Camera",
+      "Studio",
+      "Hall"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Life."
+  },
+  {
+    "q": "'And least be threatened in the fields and groves?' is from ____.",
+    "options": [
+      "God Made the Country",
+      "Koel",
+      "The Sleeping Porter",
+      "Martha"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: God Made the Country."
+  },
+  {
+    "q": "Choose the correctly spelt word.",
+    "options": [
+      "Dificulti",
+      "Dewficulti",
+      "Difewculti",
+      "Difficulty"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Difficulty."
+  },
+  {
+    "q": "Choose the correctly spelt word.",
+    "options": [
+      "Untouchable",
+      "Untuchuble",
+      "Unteucheble",
+      "Uentouchable"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Untouchable."
+  },
+  {
+    "q": "Choose the correctly spelt word.",
+    "options": [
+      "Corespond",
+      "Curespund",
+      "Currypond",
+      "Correspond"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Correspond."
+  },
+  {
+    "q": "Choose the correctly spelt word.",
+    "options": [
+      "Reflection",
+      "Raflection",
+      "Rifliction",
+      "Rewflection"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Reflection."
+  },
+  {
+    "q": "Choose the correctly spelt word.",
+    "options": [
+      "Fiminene",
+      "Femenien",
+      "Feminine",
+      "Fewmenene"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Feminine."
+  },
+  {
+    "q": "Choose the correctly spelt word.",
+    "options": [
+      "Emprusion",
+      "Impression",
+      "Impewsion",
+      "Emprision"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Impression."
+  },
+  {
+    "q": "Choose the correctly spelt word.",
+    "options": [
+      "Incarsirated",
+      "Inkarcirated",
+      "Incarcerated",
+      "Incaarcirated"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Incarcerated."
+  },
+  {
+    "q": "Choose the correct indirect speech: Rekha said, “I have finished my work.”",
+    "options": [
+      "Rekha is saying that she is finishing her work.",
+      "Rekha says that she must finish my work.",
+      "Rekha said that she had finished her work.",
+      "Rekha declared that she finish her work."
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Rekha said that she had finished her work.."
+  },
+  {
+    "q": "Choose the correct indirect speech: My father said, “It may rain.”",
+    "options": [
+      "My father said that it might rain.",
+      "My father says that it might rain.",
+      "My father said that it will rain.",
+      "My father said that it may rain."
+    ],
+    "answer": 0,
+    "explanation": "Correct option: My father said that it might rain.."
+  },
+  {
+    "q": "Choose the correct indirect speech: Chotu said, “Where is the doctor?”",
+    "options": [
+      "Chotu asking where the doctor is.",
+      "Chotu asked where is the doctor.",
+      "Chotu says that where is the doctor.",
+      "Chotu asked where the doctor was."
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Chotu asked where the doctor was.."
+  },
+  {
+    "q": "Choose the correct direct speech: Vivek asked me not to play in the sun.",
+    "options": [
+      "Vivek told, “Do not play in the sun.”",
+      "Vivek had asked, “Do not play in the sun.”",
+      "Vivek said, “Don’t play in the sun.”",
+      "Vivek said, “Do play, not in the sun.”"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Vivek said, “Don’t play in the sun.”."
+  },
+  {
+    "q": "Choose the correct direct speech: The mother forbade her children from going out.",
+    "options": [
+      "The mother is saying to her children, “Do not go out.”",
+      "The mother said to her children, “Do not go out.”",
+      "The mother was saying to her children, “Do not go out.”",
+      "The mother asks to her children, “Do not go out.”"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: The mother said to her children, “Do not go out.”."
+  },
+  {
+    "q": "Choose the correct direct speech: He exclaimed with sorrow that he was ruined.",
+    "options": [
+      "He saying, “Alas! I am ruined.”",
+      "He asks, “Alas! I am ruined.”",
+      "He said, “Alas! I am ruined.”",
+      "He is saying, “Alas! I am ruined.”"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: He said, “Alas! I am ruined.”."
+  },
+  {
+    "q": "Ritika is known ____ me.",
+    "options": [
+      "Of",
+      "To",
+      "At",
+      "On"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: To."
+  },
+  {
+    "q": "I bought these goods ____ the market.",
+    "options": [
+      "On",
+      "From",
+      "In",
+      "Of"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: From."
+  },
+  {
+    "q": "Please cut the mangoes _____ a sharp knife.",
+    "options": [
+      "On",
+      "With",
+      "Of",
+      "By"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: With."
+  },
+  {
+    "q": "I shall complete my work ____ an hour.",
+    "options": [
+      "At",
+      "Within",
+      "On",
+      "Through"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Within."
+  },
+  {
+    "q": "Rani is angry _____ her friends.",
+    "options": [
+      "With",
+      "From",
+      "In",
+      "Of"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: With."
+  },
+  {
+    "q": "Sneha has lived in this society ____ childhood.",
+    "options": [
+      "Since",
+      "By",
+      "At",
+      "For"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Since."
+  },
+  {
+    "q": "Sanchita comes _____ a good family.",
+    "options": [
+      "On",
+      "At",
+      "From",
+      "By"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: From."
+  },
+  {
+    "q": "My brother ____ to Poona last week.",
+    "options": [
+      "Go",
+      "Went",
+      "Goes",
+      "Will go"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Went."
+  },
+  {
+    "q": "Sarita _____ singing for an hour.",
+    "options": [
+      "Has been",
+      "Is",
+      "Was been",
+      "Has"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Has been."
+  },
+  {
+    "q": "Javed did not ___ a letter.",
+    "options": [
+      "Wrote",
+      "Written",
+      "Write",
+      "Writing"
+    ],
+    "answer": 2,
+    "explanation": "Correct option: Write."
+  },
+  {
+    "q": "Seema was ____ a pink saree.",
+    "options": [
+      "Wear",
+      "Wearing",
+      "Wore",
+      "Will wear"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Wearing."
+  },
+  {
+    "q": "You can ___ me whenever you want.",
+    "options": [
+      "Met",
+      "Meet",
+      "Meeting",
+      "Will meet"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Meet."
+  },
+  {
+    "q": "I ___ every morning for the whole mankind.",
+    "options": [
+      "Pray",
+      "Prayed",
+      "Praying",
+      "Has pray"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Pray."
+  },
+  {
+    "q": "Kamlesh has got his car _____.",
+    "options": [
+      "Repairing",
+      "Repaired",
+      "Repair",
+      "Will repair"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Repaired."
+  },
+  {
+    "q": "Choose the correct antonym of 'Humility'.",
+    "options": [
+      "Dignity",
+      "Anger",
+      "Cruelty",
+      "Pride"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Pride."
+  },
+  {
+    "q": "Choose the correct antonym of 'Shallow'.",
+    "options": [
+      "High",
+      "Wide",
+      "Long",
+      "Deep"
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Deep."
+  },
+  {
+    "q": "Choose the correct synonym of 'Adequate'.",
+    "options": [
+      "Sufficient",
+      "Necessary",
+      "Additional",
+      "Procured"
+    ],
+    "answer": 0,
+    "explanation": "Correct option: Sufficient."
+  },
+  {
+    "q": "Choose the correct synonym of 'Relish'.",
+    "options": [
+      "Realise",
+      "Enjoy",
+      "Taste",
+      "Reveal"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Enjoy."
+  },
+  {
+    "q": "Choose the active voice of 'By whom was it painted?'",
+    "options": [
+      "Who painting it?",
+      "Who painted it?",
+      "Whom painted it?",
+      "Whose painting it?"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: Who painted it?."
+  },
+  {
+    "q": "Choose the active voice of 'A novel is being read by her.'",
+    "options": [
+      "She reads a novel.",
+      "She had been read a novel.",
+      "She is reading a novel.",
+      "She was read a novel."
+    ],
+    "answer": 2,
+    "explanation": "Correct option: She is reading a novel.."
+  },
+  {
+    "q": "Choose the active voice of 'A card was sent to me by Ashish.'",
+    "options": [
+      "Ashish will be sending me a card.",
+      "Ashish had to send me a card.",
+      "Ashish sending me a card.",
+      "Ashish sent me a card."
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Ashish sent me a card.."
+  },
+  {
+    "q": "Choose the passive voice of 'It is time to open the shop.'",
+    "options": [
+      "It is for the shop to be opened on time.",
+      "It is time to be opened the shop.",
+      "It is time for the shop to be opened.",
+      "The shop must be opened on time."
+    ],
+    "answer": 2,
+    "explanation": "Correct option: It is time for the shop to be opened.."
+  },
+  {
+    "q": "Choose the passive voice of 'Who has stolen my books?'",
+    "options": [
+      "By whom my books have been stolen?",
+      "By whom have my books been stolen?",
+      "By whom has my books been stolen?",
+      "By whom my books has been stolen?"
+    ],
+    "answer": 1,
+    "explanation": "Correct option: By whom have my books been stolen?."
+  },
+  {
+    "q": "Choose the passive voice of 'Promises should be kept.'",
+    "options": [
+      "You must keep the promises.",
+      "We must keep the promises.",
+      "Kept the promises.",
+      "One should keep one's promises."
+    ],
+    "answer": 3,
+    "explanation": "Correct option: One should keep one's promises.."
+  },
+  {
+    "q": "Choose the correct translation of: मैंने उसे पार्क में बैठे हुए देखा।",
+    "options": [
+      "I saw him sitting in the park.",
+      "I will see him sit in the park.",
+      "I see him sit in the park.",
+      "I had seen him sit in the park."
+    ],
+    "answer": 0,
+    "explanation": "Correct option: I saw him sitting in the park.."
+  },
+  {
+    "q": "Choose the correct translation of: शांति एक अमूल्य चीज है।",
+    "options": [
+      "Peace will be invaluable.",
+      "Peace was invaluable.",
+      "Peace has been invaluable.",
+      "Peace is a priceless thing."
+    ],
+    "answer": 3,
+    "explanation": "Correct option: Peace is a priceless thing.."
+  },
+  {
+    "q": "Choose the correct translation of: हमें मेहनत करना चाहिए।",
+    "options": [
+      "Hard work we should.",
+      "We should be a hard-working man.",
+      "We should work hard.",
+      "Our work should be done hardly."
+    ],
+    "answer": 2,
+    "explanation": "Correct option: We should work hard.."
   }
-
 ];
-
-let testQuestions = [];
-let answers = {};
-let current = 0;
-let submitted = false;
-let reviewMode = false;
-let secondsLeft = 0;
-let timerId = null;
-
-const $ = id => document.getElementById(id);
-
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;",
-    '"': "&quot;", "'": "&#39;"
-  })[char]);
+let testQuestions=[], answers={}, current=0, submitted=false, reviewMode=false, secondsLeft=0, timerId=null;
+const $=id=>document.getElementById(id);
+function escapeHTML(value){return String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));}
+function formatTime(seconds){return String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0");}
+function startTest(){
+ clearInterval(timerId);
+ const count=$("count").value==="all"?questions.length:Number($("count").value);
+ testQuestions=questions.slice(0,count);
+ answers={};current=0;submitted=false;reviewMode=false;
+ $("setup").style.display="none";$("result").style.display="none";$("questionArea").style.display="block";
+ $("finishBtn").style.display="inline-block";
+ const timed=$("mode").value==="timed";secondsLeft=timed?testQuestions.length*60:0;
+ $("timer").textContent=timed?formatTime(secondsLeft):"Practice";
+ if(timed){timerId=setInterval(()=>{secondsLeft--;$("timer").textContent=formatTime(Math.max(0,secondsLeft));if(secondsLeft<=0)finishTest();},1000);}
+ renderQuestion();
 }
-
-function shuffle(array) {
-  const result = [...array];
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-  return result;
+function renderQuestion(){
+ const item=testQuestions[current];
+ $("questionCount").textContent=`Question ${current+1} of ${testQuestions.length}`;
+ $("questionText").textContent=`Q${questions.indexOf(item)+1}. ${item.q}`;
+ $("progressFill").style.width=((current+1)/testQuestions.length*100)+"%";
+ $("options").innerHTML=item.options.map((option,index)=>{
+  let cls="";
+  if((reviewMode||submitted)&&index===item.answer)cls="correct";
+  else if((reviewMode||submitted)&&answers[current]===index)cls="wrong";
+  return `<label class="option ${cls}"><input type="radio" name="answer" value="${index}" ${answers[current]===index?"checked":""} ${submitted||reviewMode?"disabled":""}>${String.fromCharCode(65+index)}. ${escapeHTML(option)}</label>`;
+ }).join("");
+ $("feedback").textContent="";
+ if($("mode").value==="practice"&&answers[current]!==undefined)showFeedback();
+ if(reviewMode){$("feedback").textContent="Correct answer: "+item.options[item.answer];$("feedback").style.color="#087443";}
+ $("prevBtn").disabled=current===0;$("nextBtn").disabled=current===testQuestions.length-1;
+ $("scoreLive").textContent="Score: "+calculateScore();
 }
-
-function startTest() {
-  clearInterval(timerId);
-  const count = $("count").value === "all"
-    ? questions.length
-    : Number($("count").value);
-
-  testQuestions = shuffle(questions).slice(0, count);
-  answers = {};
-  current = 0;
-  submitted = false;
-  reviewMode = false;
-
-  $("setup").style.display = "none";
-  $("result").style.display = "none";
-  $("questionArea").style.display = "block";
-
-  const timed = $("mode").value === "timed";
-  secondsLeft = timed ? testQuestions.length * 60 : 0;
-  $("timer").textContent = timed ? formatTime(secondsLeft) : "Practice";
-  $("finishBtn").style.display = "inline-block";
-
-  if (timed) {
-    timerId = setInterval(() => {
-      secondsLeft--;
-      $("timer").textContent = formatTime(Math.max(0, secondsLeft));
-      if (secondsLeft <= 0) finishTest();
-    }, 1000);
-  }
-
-  renderQuestion();
+function showFeedback(){
+ const item=testQuestions[current],chosen=answers[current];if(chosen===undefined)return;
+ if(chosen===item.answer){$("feedback").textContent="✓ Correct! "+item.explanation;$("feedback").style.color="#087443";}
+ else{$("feedback").textContent="✗ Incorrect. Correct answer: "+item.options[item.answer]+". "+item.explanation;$("feedback").style.color="#bd3030";}
 }
-
-function formatTime(seconds) {
-  return String(Math.floor(seconds / 60)).padStart(2, "0") + ":" +
-    String(seconds % 60).padStart(2, "0");
-}
-
-function renderQuestion() {
-  const item = testQuestions[current];
-  $("questionCount").textContent =
-    `Question ${current + 1} of ${testQuestions.length}`;
-  $("questionText").textContent = item.q;
-  $("progressFill").style.width =
-    ((current + 1) / testQuestions.length * 100) + "%";
-
-  $("options").innerHTML = item.options.map((option, index) => {
-    let cls = "";
-    if (reviewMode && index === item.answer) cls = "correct";
-    else if (reviewMode && answers[current] === index) cls = "wrong";
-
-    return `<label class="option ${cls}">
-      <input type="radio" name="answer" value="${index}"
-      ${answers[current] === index ? "checked" : ""}
-      ${submitted || reviewMode ? "disabled" : ""}>
-      ${String.fromCharCode(65 + index)}. ${escapeHTML(option)}
-    </label>`;
-  }).join("");
-
-  $("feedback").textContent = "";
-  if ($("mode").value === "practice" &&
-      answers[current] !== undefined) {
-    showFeedback();
-  }
-
-  $("prevBtn").disabled = current === 0;
-  $("nextBtn").disabled = current === testQuestions.length - 1;
-  $("scoreLive").textContent = "Score: " + calculateScore();
-}
-
-function showFeedback() {
-  const item = testQuestions[current];
-  const chosen = answers[current];
-  if (chosen === undefined) return;
-
-  if (chosen === item.answer) {
-    $("feedback").textContent = "✓ Correct! " + item.explanation;
-    $("feedback").style.color = "#087443";
-  } else {
-    $("feedback").textContent =
-      "✗ Incorrect. Correct answer: " +
-      item.options[item.answer] + ". " + item.explanation;
-    $("feedback").style.color = "#bd3030";
-  }
-}
-
-$("options").addEventListener("change", event => {
-  if (submitted || reviewMode || !event.target.matches('input[type="radio"]')) {
-    return;
-  }
-  answers[current] = Number(event.target.value);
-  $("scoreLive").textContent = "Score: " + calculateScore();
-
-  if ($("mode").value === "practice") {
-    showFeedback();
-  }
+$("options").addEventListener("change",event=>{
+ if(submitted||reviewMode||!event.target.matches('input[type="radio"]'))return;
+ answers[current]=Number(event.target.value);$("scoreLive").textContent="Score: "+calculateScore();
+ if($("mode").value==="practice")showFeedback();
 });
-
-function calculateScore() {
-  return testQuestions.reduce((total, item, index) =>
-    total + (answers[index] === item.answer ? 1 : 0), 0);
+function calculateScore(){return testQuestions.reduce((total,item,index)=>total+(answers[index]===item.answer?1:0),0);}
+function finishTest(){
+ if(submitted)return;submitted=true;clearInterval(timerId);$("questionArea").style.display="none";$("result").style.display="block";
+ const score=calculateScore();$("finalScore").textContent=`${score} / ${testQuestions.length}`;
+ $("resultMessage").textContent=`Correct: ${score} · Incorrect or unanswered: ${testQuestions.length-score}.`;
+ $("reviewArea").innerHTML="";
 }
-
-function finishTest() {
-  if (submitted) return;
-  submitted = true;
-  clearInterval(timerId);
-  $("questionArea").style.display = "none";
-  $("result").style.display = "block";
-
-  const score = calculateScore();
-  $("finalScore").textContent =
-    `${score} / ${testQuestions.length}`;
-  $("resultMessage").textContent =
-    `You answered ${score} correctly and ` +
-    `${testQuestions.length - score} incorrectly or left blank.`;
-
-  $("reviewArea").innerHTML = "";
+function reviewAnswers(){
+ reviewMode=true;$("result").style.display="none";$("questionArea").style.display="block";$("finishBtn").style.display="none";renderQuestion();
 }
-
-function reviewAnswers() {
-  reviewMode = true;
-  $("result").style.display = "none";
-  $("questionArea").style.display = "block";
-  $("finishBtn").style.display = "none";
-  renderQuestion();
-}
-
-function restartTest() {
-  clearInterval(timerId);
-  $("result").style.display = "none";
-  $("questionArea").style.display = "none";
-  $("setup").style.display = "block";
-}
-
-$("startBtn").addEventListener("click", startTest);
-$("prevBtn").addEventListener("click", () => {
-  if (current > 0) { current--; renderQuestion(); }
-});
-$("nextBtn").addEventListener("click", () => {
-  if (current < testQuestions.length - 1) { current++; renderQuestion(); }
-});
-$("finishBtn").addEventListener("click", finishTest);
-$("reviewBtn").addEventListener("click", reviewAnswers);
-$("restartBtn").addEventListener("click", restartTest);
+function restartTest(){clearInterval(timerId);$("result").style.display="none";$("questionArea").style.display="none";$("setup").style.display="block";}
+$("startBtn").addEventListener("click",startTest);
+$("prevBtn").addEventListener("click",()=>{if(current>0){current--;renderQuestion();}});
+$("nextBtn").addEventListener("click",()=>{if(current<testQuestions.length-1){current++;renderQuestion();}});
+$("finishBtn").addEventListener("click",finishTest);$("reviewBtn").addEventListener("click",reviewAnswers);$("restartBtn").addEventListener("click",restartTest);
 </script>
-</body>
-</html>
+</body></html>
