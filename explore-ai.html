@@ -4,2146 +4,1245 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>कंप्यूटर एवं AI शिक्षा | UHS Chakiya Tarari</title>
-  <meta name="description"
-        content="UHS Chakiya Tarari Bhojpur में कंप्यूटर, कृत्रिम बुद्धिमत्ता, डिजिटल शिक्षा और प्रोग्रामिंग की जानकारी हिंदी में सीखें।">
-
-  <meta name="theme-color" content="#004b49">
+  <title>CHAKIYA Computer Parts Mission</title>
+  <meta name="description" content="कंप्यूटर के भागों को पहचानें और उनके कार्य हिंदी में सीखें।">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --ai-primary: #004b49;
-      --ai-secondary: #087e78;
-      --ai-gold: #d6a52a;
-      --ai-bg: #eff6f3;
-      --ai-white: #ffffff;
-      --ai-text: #254744;
-      --ai-muted: #657c79;
-      --ai-border: #d8e8e2;
-      --ai-shadow: 0 8px 28px rgba(0, 75, 73, 0.07);
+      --cream: #fffaf0;
+      --paper: #ffffff;
+      --sage: #dce8d5;
+      --sage-dark: #526d4c;
+      --peach: #f8ded2;
+      --gold: #e9c46a;
+      --ink: #344238;
+      --muted: #758075;
+      --line: #e6e5d9;
+      --good: #dff2df;
+      --bad: #fbe3dd;
+      --shadow: 0 12px 35px rgba(74, 87, 63, .09);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
+      background:
+        radial-gradient(circle at top left, #f8e9d9, transparent 32%),
+        var(--cream);
+      color: var(--ink);
       font-family: "Noto Sans Devanagari", Mangal, sans-serif;
-      color: var(--ai-text);
-      background: var(--ai-bg);
-      line-height: 1.8;
+      line-height: 1.7;
     }
 
-    img {
-      display: block;
-      max-width: 100%;
+    button { font: inherit; }
+
+    .page {
+      width: min(1100px, 92%);
+      margin: auto;
     }
 
-    a {
-      color: inherit;
+    .topbar {
+      background: rgba(255,255,255,.88);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 0;
     }
 
-    button {
-      font: inherit;
-    }
-
-    .ai-container {
-      width: min(1180px, 92%);
-      margin-inline: auto;
-    }
-
-    /* Header */
-    .ai-header {
-      background: var(--ai-primary);
-      color: white;
-      box-shadow: 0 5px 20px rgba(0, 50, 48, 0.12);
-    }
-
-    .ai-nav {
-      min-height: 76px;
+    .brand {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .ai-brand {
-      color: white;
-      text-decoration: none;
+      gap: 12px;
       font-weight: 800;
-      font-size: 19px;
-      line-height: 1.5;
     }
 
-    .ai-brand small {
-      display: block;
-      color: #b9ded6;
-      font-size: 11px;
-      font-weight: 400;
-    }
-
-    .ai-nav-links {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      flex-wrap: wrap;
-    }
-
-    .ai-nav-links a {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .ai-nav-links a:hover {
-      color: #f3cb61;
-    }
-
-    .ai-back {
-      padding: 9px 15px;
-      border: 1px solid rgba(255,255,255,.55);
-      border-radius: 7px;
-    }
-
-    /* Hero */
-    .ai-hero {
-      padding: 55px 0 35px;
-    }
-
-    .ai-hero-card {
-      background: var(--ai-white);
-      border: 1px solid var(--ai-border);
-      border-radius: 16px;
-      padding: 34px;
+    .brand-icon {
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      align-items: center;
-      gap: 34px;
-      box-shadow: var(--ai-shadow);
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: var(--sage);
+      font-size: 26px;
     }
 
-    .ai-eyebrow {
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 25px;
+      padding: 38px 0 25px;
+    }
+
+    .hero-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: clamp(22px, 4vw, 40px);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
       display: inline-block;
-      color: var(--ai-secondary);
-      background: #e4f3ee;
-      border-radius: 50px;
+      background: var(--peach);
+      border-radius: 99px;
       padding: 5px 13px;
       font-size: 13px;
       font-weight: 700;
     }
 
-    .ai-hero h1 {
-      color: var(--ai-primary);
-      font-size: clamp(28px, 4vw, 43px);
-      line-height: 1.45;
+    h1 {
+      font-size: clamp(30px, 5vw, 49px);
+      line-height: 1.3;
+      margin: 16px 0 12px;
+    }
+
+    .hero p { color: var(--muted); }
+
+    .hero-art {
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #e1ebd9, #fae6d9);
+      border-radius: 28px;
+      font-size: clamp(80px, 15vw, 150px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 13px;
+      padding: 12px 19px;
+      background: var(--sage-dark);
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform .2s, filter .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .btn-soft {
+      background: var(--peach);
+      color: var(--ink);
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 28px 0 20px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(25px, 4vw, 34px);
+      margin: 0 0 5px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .scoreboard {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat {
+      background: var(--cream);
+      padding: 13px;
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+      color: var(--sage-dark);
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .progress-track {
+      height: 10px;
+      border-radius: 99px;
+      overflow: hidden;
+      background: #eeeadd;
+      margin-top: 15px;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, #a8c69f, #e9c46a);
+      transition: width .35s ease;
+    }
+
+    .mission-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+      margin: 20px 0 45px;
+    }
+
+    .level-panel,
+    .game-panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+
+    .level-panel h3,
+    .game-panel h3 {
+      margin-top: 0;
+    }
+
+    .level-map {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .level-btn {
+      min-height: 46px;
+      border: 1px solid var(--line);
+      background: var(--cream);
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .level-btn.current {
+      background: var(--sage);
+      border: 2px solid var(--sage-dark);
+    }
+
+    .level-btn.completed {
+      background: var(--good);
+      border-color: #9bc49a;
+    }
+
+    .level-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .level-note {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .game-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      background: var(--peach);
+      border-radius: 99px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .question-number {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .question-text {
+      font-size: clamp(20px, 3vw, 27px);
+      line-height: 1.5;
+      font-weight: 800;
       margin: 17px 0;
     }
 
-    .ai-hero p {
-      color: var(--ai-muted);
-      font-size: 17px;
-      margin: 0 0 22px;
+    .picture-stage {
+      min-height: 230px;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #f3f0e4, #f9e4d8);
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
-    .ai-buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+    .part-emoji {
+      font-size: clamp(90px, 14vw, 145px);
+      line-height: 1.2;
+      filter: drop-shadow(0 8px 8px rgba(0,0,0,.08));
     }
 
-    .ai-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 11px 17px;
+    .picture-caption {
       font-weight: 700;
-      border: 1px solid var(--ai-primary);
-      transition: transform .2s, background .2s;
+      margin-top: 8px;
     }
 
-    .ai-btn:hover {
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .option {
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 14px;
+      text-align: left;
+      background: #fffdf8;
+      cursor: pointer;
+      color: var(--ink);
+      min-height: 58px;
+      transition: .18s;
+    }
+
+    .option:hover:not(:disabled) {
+      border-color: #a5bd99;
+      background: #f0f5eb;
       transform: translateY(-2px);
     }
 
-    .ai-btn-primary {
-      background: var(--ai-primary);
-      color: white;
+    .option.correct {
+      background: var(--good);
+      border-color: #7eb17e;
     }
 
-    .ai-btn-outline {
-      color: var(--ai-primary);
-      background: white;
+    .option.wrong {
+      background: var(--bad);
+      border-color: #df9b8d;
     }
 
-    .ai-hero-image {
-      width: 100%;
-      height: 330px;
-      object-fit: cover;
-      border-radius: 12px;
-      background: #dbece7;
-    }
+    .option:disabled { cursor: default; }
 
-    /* Common sections */
-    .ai-section {
-      padding: 36px 0;
-    }
-
-    .ai-section-heading {
-      text-align: center;
-      margin-bottom: 27px;
-    }
-
-    .ai-section-heading h2 {
-      color: var(--ai-primary);
-      font-size: clamp(24px, 3vw, 32px);
-      margin: 0 0 8px;
-    }
-
-    .ai-section-heading p {
-      margin: 0;
-      color: var(--ai-muted);
-    }
-
-    .ai-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .ai-card {
-      min-width: 0;
-      background: var(--ai-white);
-      border: 1px solid var(--ai-border);
-      border-radius: 13px;
-      overflow: hidden;
-      box-shadow: var(--ai-shadow);
-    }
-
-    .ai-card-image {
-      width: 100%;
-      height: 195px;
-      object-fit: cover;
-      background: #e2efea;
-    }
-
-    .ai-card-body {
-      padding: 20px;
-    }
-
-    .ai-card h3 {
-      color: var(--ai-primary);
-      margin: 0 0 10px;
-      font-size: 20px;
-    }
-
-    .ai-card p {
-      margin: 0 0 14px;
-      color: var(--ai-muted);
-      font-size: 15px;
-    }
-
-    .ai-card ul {
-      padding-left: 22px;
-      margin: 10px 0 0;
-    }
-
-    .ai-card li {
-      margin: 6px 0;
-    }
-
-    .ai-tag {
-      display: inline-block;
-      background: #fff4d7;
-      color: #795600;
-      padding: 3px 10px;
-      border-radius: 5px;
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .ai-text-link {
-      display: inline-block;
-      color: var(--ai-secondary);
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .ai-text-link:hover {
-      text-decoration: underline;
-    }
-
-    /* Learning steps */
-    .ai-learning-panel {
-      background: var(--ai-primary);
-      color: white;
-      border-radius: 15px;
-      padding: 30px;
-    }
-
-    .ai-learning-panel h2 {
-      margin-top: 0;
-      color: white;
-    }
-
-    .ai-steps {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .ai-step {
-      border: 1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.07);
-      border-radius: 10px;
-      padding: 18px;
-    }
-
-    .ai-step-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 37px;
-      height: 37px;
-      border-radius: 50%;
-      background: var(--ai-gold);
-      color: #173b35;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .ai-step h3 {
-      margin: 5px 0;
-      font-size: 17px;
-    }
-
-    .ai-step p {
-      color: #d2e9e2;
-      margin: 0;
-      font-size: 14px;
-    }
-
-    /* Example */
-    .ai-example {
-      display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      align-items: center;
-      gap: 25px;
-      padding: 26px;
-      background: white;
-      border: 1px solid var(--ai-border);
+    .feedback {
+      margin-top: 15px;
       border-radius: 14px;
-      box-shadow: var(--ai-shadow);
-    }
-
-    .ai-example h3 {
-      color: var(--ai-primary);
-      font-size: 23px;
-      margin: 0 0 10px;
-    }
-
-    .ai-example p {
-      color: var(--ai-muted);
-    }
-
-    .ai-example-image {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      border-radius: 10px;
-      background: #e2efea;
-    }
-
-    .ai-note {
-      border-left: 4px solid var(--ai-gold);
-      background: #fff8e8;
-      padding: 14px 17px;
-      border-radius: 5px;
-      margin-top: 16px;
-    }
-
-    /* Quiz */
-    .ai-quiz {
-      max-width: 760px;
-      margin: 0 auto;
-      background: white;
-      border: 1px solid var(--ai-border);
-      border-radius: 14px;
-      padding: 26px;
-      box-shadow: var(--ai-shadow);
-    }
-
-    .ai-question {
-      border-bottom: 1px solid var(--ai-border);
-      padding: 16px 0;
-    }
-
-    .ai-question:first-child {
-      padding-top: 0;
-    }
-
-    .ai-question p {
-      font-weight: 700;
-      margin: 0 0 10px;
-    }
-
-    .ai-option {
-      display: block;
-      padding: 7px 0;
-      cursor: pointer;
-    }
-
-    .ai-option input {
-      margin-right: 8px;
-      accent-color: var(--ai-secondary);
-    }
-
-    .ai-quiz button {
-      margin-top: 18px;
-      cursor: pointer;
-    }
-
-    .ai-result {
-      margin-top: 18px;
-      padding: 14px;
-      background: #e8f5ee;
-      color: var(--ai-primary);
-      border-radius: 8px;
-      font-weight: 700;
-    }
-
-    .ai-result:empty {
+      padding: 13px 15px;
+      background: #f5f2e8;
       display: none;
     }
 
-    /* Footer */
-    .ai-footer {
-      margin-top: 35px;
-      padding: 28px 0;
-      background: #003c3a;
-      color: #e2f0ec;
-      text-align: center;
+    .feedback.show { display: block; }
+
+    .game-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 17px;
     }
 
-    .ai-footer p {
-      margin: 5px 0;
+    .game-actions .btn { margin: 0; }
+
+    .final-card {
+      display: none;
+      margin: 22px 0 40px;
+      padding: 28px;
+      border-radius: 22px;
+      background: #fff;
+      border: 2px solid var(--gold);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .final-card.show { display: block; }
+
+    .final-card .big-star {
+      font-size: 60px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
       font-size: 14px;
     }
 
-    .ai-footer a {
-      color: white;
+    @media (max-width: 780px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-art { min-height: 190px; }
+      .mission-layout { grid-template-columns: 1fr; }
+      .level-map { grid-template-columns: repeat(5, minmax(0, 1fr)); }
     }
 
-    @media (max-width: 850px) {
-      .ai-hero-card {
-        grid-template-columns: 1fr;
-        padding: 24px;
-      }
-
-      .ai-hero-image {
-        height: 280px;
-      }
-
-      .ai-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .ai-steps {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .ai-example {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .ai-nav {
-        padding: 14px 0;
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .ai-nav-links {
-        gap: 12px 16px;
-      }
-
-      .ai-nav-links a {
-        font-size: 13px;
-      }
-
-      .ai-hero {
-        padding-top: 22px;
-      }
-
-      .ai-hero-card {
-        padding: 19px;
-      }
-
-      .ai-hero p {
-        font-size: 15px;
-      }
-
-      .ai-hero-image {
-        height: 220px;
-      }
-
-      .ai-grid,
-      .ai-steps {
-        grid-template-columns: 1fr;
-      }
-
-      .ai-section {
-        padding: 25px 0;
-      }
-
-      .ai-learning-panel,
-      .ai-quiz {
-        padding: 19px;
-      }
-
-      .ai-card-image {
-        height: 210px;
-      }
-
-      .ai-example-image {
-        height: 220px;
-      }
+    @media (max-width: 480px) {
+      .scoreboard { grid-template-columns: repeat(2, 1fr); }
+      .options { grid-template-columns: 1fr; }
+      .level-panel, .game-panel { padding: 15px; }
+      .level-map { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .picture-stage { min-height: 190px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
       *, *::before, *::after {
+        scroll-behavior: auto !important;
         transition: none !important;
       }
     }
-    
-/* =========================================
-   CHAKIYA FUN ZONE - ISOLATED GAME STYLES
-   ========================================= */
-
-#chakiya-fun-zone {
-  --fun-primary: #00534f;
-  --fun-accent: #eab308;
-  --fun-bg: #f0f8f5;
-  --fun-border: #d8e9e2;
-  color: #244844;
-  padding: 35px 0;
-}
-
-#chakiya-fun-zone * {
-  box-sizing: border-box;
-}
-
-#chakiya-fun-zone .fun-heading {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-#chakiya-fun-zone .fun-heading h2 {
-  color: var(--fun-primary);
-  font-size: clamp(26px, 4vw, 36px);
-  margin: 0 0 8px;
-}
-
-#chakiya-fun-zone .fun-heading p {
-  color: #657c79;
-  margin: 0;
-}
-
-#chakiya-fun-zone .fun-scoreboard {
-  background: linear-gradient(120deg, #004b49, #087e78);
-  color: white;
-  padding: 22px;
-  border-radius: 16px;
-  margin-bottom: 25px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: center;
-  justify-content: space-between;
-}
-
-#chakiya-fun-zone .fun-stat {
-  text-align: center;
-  min-width: 85px;
-}
-
-#chakiya-fun-zone .fun-stat strong {
-  display: block;
-  font-size: 27px;
-  line-height: 1.4;
-  color: #ffdc71;
-}
-
-#chakiya-fun-zone .fun-stat span {
-  font-size: 13px;
-}
-
-#chakiya-fun-zone .fun-progress {
-  height: 8px;
-  width: 100%;
-  background: rgba(255,255,255,.22);
-  border-radius: 99px;
-  overflow: hidden;
-  margin-top: 8px;
-}
-
-#chakiya-fun-zone .fun-progress-bar {
-  width: 0;
-  height: 100%;
-  background: #ffdc71;
-  transition: width .3s ease;
-}
-
-#chakiya-fun-zone .fun-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-}
-
-#chakiya-fun-zone .fun-card {
-  background: white;
-  border: 1px solid var(--fun-border);
-  border-radius: 15px;
-  padding: 22px;
-  box-shadow: 0 5px 20px rgba(0,75,73,.06);
-  min-width: 0;
-}
-
-#chakiya-fun-zone .fun-card h3 {
-  color: var(--fun-primary);
-  margin: 0 0 8px;
-  font-size: 21px;
-}
-
-#chakiya-fun-zone .fun-description {
-  color: #657c79;
-  font-size: 14px;
-  margin: 0 0 17px;
-}
-
-#chakiya-fun-zone .fun-question {
-  font-weight: 700;
-  margin: 14px 0;
-}
-
-#chakiya-fun-zone .fun-options {
-  display: grid;
-  gap: 9px;
-}
-
-#chakiya-fun-zone .fun-btn {
-  font: inherit;
-  border: 1px solid #cbded7;
-  border-radius: 9px;
-  background: #fff;
-  color: #244844;
-  padding: 11px 13px;
-  cursor: pointer;
-  text-align: left;
-  transition: background .15s, border-color .15s, transform .15s;
-}
-
-#chakiya-fun-zone .fun-btn:hover:not(:disabled) {
-  border-color: #087e78;
-  background: #eff9f5;
-  transform: translateY(-1px);
-}
-
-#chakiya-fun-zone .fun-btn:focus-visible {
-  outline: 3px solid #eab308;
-  outline-offset: 2px;
-}
-
-#chakiya-fun-zone .fun-btn:disabled {
-  cursor: default;
-  opacity: .8;
-}
-
-#chakiya-fun-zone .fun-btn.fun-correct {
-  background: #e2f7e9;
-  border-color: #239451;
-  color: #155d34;
-}
-
-#chakiya-fun-zone .fun-btn.fun-wrong {
-  background: #fff0ed;
-  border-color: #d65b4b;
-  color: #8c3025;
-}
-
-#chakiya-fun-zone .fun-action {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border: 0;
-  border-radius: 9px;
-  background: var(--fun-primary);
-  color: white;
-  font: inherit;
-  font-weight: 700;
-  padding: 11px 17px;
-  margin-top: 15px;
-  cursor: pointer;
-}
-
-#chakiya-fun-zone .fun-action:hover {
-  background: #087e78;
-}
-
-#chakiya-fun-zone .fun-action:disabled {
-  opacity: .55;
-  cursor: default;
-}
-
-#chakiya-fun-zone .fun-feedback {
-  margin-top: 12px;
-  padding: 11px;
-  border-radius: 8px;
-  background: #edf6f2;
-  min-height: 42px;
-  font-size: 14px;
-}
-
-#chakiya-fun-zone .fun-feedback:empty {
-  display: none;
-}
-
-#chakiya-fun-zone .fun-muted {
-  color: #657c79;
-  font-size: 13px;
-}
-
-#chakiya-fun-zone .fun-sequence {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 14px 0;
-}
-
-#chakiya-fun-zone .fun-sequence .fun-btn {
-  text-align: center;
-  flex: 1 1 100px;
-}
-
-#chakiya-fun-zone .fun-memory-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 15px;
-}
-
-#chakiya-fun-zone .fun-memory-card {
-  min-width: 0;
-  aspect-ratio: 1;
-  border: 1px solid #cbded7;
-  border-radius: 10px;
-  background: #eaf5f0;
-  color: #00534f;
-  font-size: clamp(19px, 3vw, 30px);
-  font-weight: 700;
-  cursor: pointer;
-  overflow-wrap: anywhere;
-  padding: 4px;
-}
-
-#chakiya-fun-zone .fun-memory-card span {
-  display: block;
-  font-size: 11px;
-  line-height: 1.3;
-}
-
-#chakiya-fun-zone .fun-memory-card.is-open,
-#chakiya-fun-zone .fun-memory-card.is-matched {
-  background: #fff7d9;
-  border-color: #eab308;
-}
-
-#chakiya-fun-zone .fun-memory-card.is-matched {
-  background: #e2f7e9;
-  border-color: #239451;
-  cursor: default;
-}
-
-#chakiya-fun-zone .fun-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-#chakiya-fun-zone .fun-badge {
-  border: 1px solid #d8e9e2;
-  border-radius: 10px;
-  background: #f3f7f5;
-  padding: 10px 12px;
-  font-size: 13px;
-}
-
-#chakiya-fun-zone .fun-badge.is-earned {
-  border-color: #eab308;
-  background: #fff5d5;
-}
-
-#chakiya-fun-zone .fun-final {
-  margin-top: 24px;
-  padding: 24px;
-  border: 2px solid #eab308;
-  border-radius: 15px;
-  background: #fffaf0;
-  text-align: center;
-}
-
-#chakiya-fun-zone .fun-final h3 {
-  color: #00534f;
-  margin-top: 0;
-}
-
-#chakiya-fun-zone .fun-final-score {
-  color: #00534f;
-  font-size: 35px;
-  font-weight: 800;
-}
-
-#chakiya-fun-zone .fun-hidden {
-  display: none !important;
-}
-
-@media (max-width: 650px) {
-  #chakiya-fun-zone .fun-grid {
-    grid-template-columns: 1fr;
-  }
-
-  #chakiya-fun-zone .fun-card {
-    padding: 17px;
-  }
-
-  #chakiya-fun-zone .fun-scoreboard {
-    justify-content: center;
-  }
-
-  #chakiya-fun-zone .fun-stat {
-    flex: 1 1 28%;
-  }
-
-  #chakiya-fun-zone .fun-memory-grid {
-    gap: 6px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #chakiya-fun-zone *,
-  #chakiya-fun-zone *::before,
-  #chakiya-fun-zone *::after {
-    transition: none !important;
-  }
-}
-
   </style>
 </head>
 
 <body>
-
-  <!-- Header -->
-  <header class="ai-header">
-    <nav class="ai-nav ai-container" aria-label="मुख्य नेविगेशन">
-      <a class="ai-brand" href="index.html">
+  <header class="topbar">
+    <div class="page brand">
+      <div class="brand-icon">🖥️</div>
+      <div>
         UHS CHAKIYA TARARI
-        <small>भोजपुर, बिहार | कंप्यूटर एवं AI शिक्षा</small>
-      </a>
-
-      <div class="ai-nav-links">
-        <a href="index.html">होम</a>
-        <a href="#computer">कंप्यूटर</a>
-        <a href="#ai">AI शिक्षा</a>
-        <a href="#practice">अभ्यास</a>
-        <a class="ai-back" href="index.html">← मुख्य वेबसाइट</a>
+        <small>भोजपुर, बिहार · Computer Learning Mission</small>
       </div>
-    </nav>
+    </div>
   </header>
 
-  <main>
-
-    <!-- Hero -->
-    <section class="ai-hero">
-      <div class="ai-container ai-hero-card">
-        <div>
-          <span class="ai-eyebrow">डिजिटल शिक्षा • नई तकनीक</span>
-
-          <h1>तकनीक को समझें,<br>ज्ञान को बढ़ाएँ</h1>
-
-          <p>
-            कंप्यूटर और कृत्रिम बुद्धिमत्ता (AI) आज शिक्षा, विज्ञान
-            और आधुनिक जीवन का महत्वपूर्ण हिस्सा हैं। आइए सरल हिंदी
-            में सीखें कि कंप्यूटर कैसे काम करता है और AI हमारी
-            पढ़ाई में किस प्रकार सहायता कर सकता है।
-          </p>
-
-          <div class="ai-buttons">
-            <a class="ai-btn ai-btn-primary" href="#computer">
-              कंप्यूटर सीखें →
-            </a>
-            <a class="ai-btn ai-btn-outline" href="#ai">
-              AI के बारे में जानें
-            </a>
-          </div>
-        </div>
-
-        <img
-          class="ai-hero-image"
-          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1100&q=85"
-          alt="कंप्यूटर और डिजिटल शिक्षा"
-          fetchpriority="high"
-        >
+  <main class="page">
+    <section class="hero">
+      <div class="hero-card">
+        <span class="eyebrow">🎮 सीखो · पहचानो · आगे बढ़ो</span>
+        <h1>Computer Parts<br>Mission Game</h1>
+        <p>
+          कंप्यूटर के भागों को पहचानें, उनका काम सीखें और
+          50 लेवल पूरे करके Tech Champion बनें!
+        </p>
+        <button class="btn" id="startMission">🚀 मिशन शुरू करें</button>
       </div>
+      <div class="hero-art" aria-label="कंप्यूटर का चित्र">🖥️⌨️🖱️</div>
     </section>
 
-    <!-- Computer -->
-    <section class="ai-section" id="computer">
-      <div class="ai-container">
-        <div class="ai-section-heading">
-          <h2>01. कंप्यूटर की मूल जानकारी</h2>
-          <p>कंप्यूटर क्या है और इसका उपयोग कहाँ किया जाता है?</p>
-        </div>
-
-        <div class="ai-grid">
-
-          <article class="ai-card">
-            <img
-              class="ai-card-image"
-              src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80"
-              alt="कंप्यूटर कीबोर्ड और डेस्कटॉप"
-              loading="lazy"
-            >
-            <div class="ai-card-body">
-              <span class="ai-tag">कंप्यूटर परिचय</span>
-              <h3>कंप्यूटर क्या है?</h3>
-              <p>
-                कंप्यूटर एक इलेक्ट्रॉनिक मशीन है जो निर्देशों के
-                अनुसार डेटा को संसाधित करके उपयोगी परिणाम देती है।
-              </p>
-              <ul>
-                <li>डेटा स्वीकार करता है।</li>
-                <li>निर्देशों के अनुसार कार्य करता है।</li>
-                <li>परिणाम दिखाता या सुरक्षित करता है।</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="ai-card">
-            <img
-              class="ai-card-image"
-              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80"
-              alt="कंप्यूटर पर डिजिटल कार्य"
-              loading="lazy"
-            >
-            <div class="ai-card-body">
-              <span class="ai-tag">हार्डवेयर और सॉफ्टवेयर</span>
-              <h3>कंप्यूटर के भाग</h3>
-              <p>
-                कंप्यूटर के मुख्य भौतिक भाग हार्डवेयर कहलाते हैं।
-                कार्य करने वाले प्रोग्राम सॉफ्टवेयर कहलाते हैं।
-              </p>
-              <ul>
-                <li>मॉनिटर — जानकारी दिखाता है।</li>
-                <li>कीबोर्ड — अक्षर और संख्याएँ लिखता है।</li>
-                <li>माउस — स्क्रीन पर विकल्प चुनता है।</li>
-                <li>सॉफ्टवेयर — निर्देशों के अनुसार काम करता है।</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="ai-card">
-            <img
-              class="ai-card-image"
-              src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=800&q=80"
-              alt="विद्यार्थियों के लिए डिजिटल अध्ययन"
-              loading="lazy"
-            >
-            <div class="ai-card-body">
-              <span class="ai-tag">डिजिटल कौशल</span>
-              <h3>कंप्यूटर के उपयोग</h3>
-              <p>
-                कंप्यूटर पढ़ाई, विज्ञान, संचार, लेखन और
-                जानकारी को व्यवस्थित करने में सहायता करता है।
-              </p>
-              <ul>
-                <li>MS Word में दस्तावेज बनाना।</li>
-                <li>शैक्षणिक सामग्री पढ़ना।</li>
-                <li>प्रेजेंटेशन और प्रोजेक्ट बनाना।</li>
-                <li>सुरक्षित इंटरनेट का उपयोग करना।</li>
-              </ul>
-            </div>
-          </article>
-
-        </div>
+    <section>
+      <div class="section-title">
+        <h2>🏆 आपकी सीखने की यात्रा</h2>
+        <p>हर लेवल में 5 सवाल · सही जवाब पर अंक और स्टार</p>
       </div>
+
+      <div class="scoreboard">
+        <div class="stat"><strong id="score">0</strong><span>कुल अंक</span></div>
+        <div class="stat"><strong id="stars">0 ⭐</strong><span>स्टार</span></div>
+        <div class="stat"><strong id="completed">0 / 50</strong><span>पूरे लेवल</span></div>
+        <div class="stat"><strong id="rank">शुरुआती</strong><span>आपका रैंक</span></div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
     </section>
 
-    <!-- AI -->
-    <section class="ai-section" id="ai">
-      <div class="ai-container">
-        <div class="ai-section-heading">
-          <h2>02. कृत्रिम बुद्धिमत्ता (AI)</h2>
-          <p>AI को समझें और जिम्मेदारी से उसका उपयोग करना सीखें।</p>
+    <section class="mission-layout" id="mission">
+      <aside class="level-panel">
+        <h3>🗺️ Level Map</h3>
+        <p class="level-note">अगला लेवल खोलने के लिए वर्तमान लेवल के 5 सवाल पूरे करें।</p>
+        <div class="level-map" id="levelMap"></div>
+      </aside>
+
+      <section class="game-panel">
+        <div class="game-top">
+          <span class="pill" id="levelName">लेवल 1</span>
+          <span class="question-number" id="questionCounter">प्रश्न 1 / 5</span>
         </div>
-
-        <div class="ai-grid">
-
-          <article class="ai-card">
-            <img
-              class="ai-card-image"
-              src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80"
-              alt="कृत्रिम बुद्धिमत्ता और डिजिटल तकनीक"
-              loading="lazy"
-            >
-            <div class="ai-card-body">
-              <span class="ai-tag">AI परिचय</span>
-              <h3>AI क्या है?</h3>
-              <p>
-                कृत्रिम बुद्धिमत्ता ऐसी तकनीकों का समूह है जिनसे
-                कंप्यूटर भाषा समझने, उदाहरणों से पैटर्न पहचानने
-                और कुछ समस्याओं को हल करने जैसे काम कर सकते हैं।
-              </p>
-              <p>
-                उदाहरण: भाषा अनुवाद, आवाज पहचान और तस्वीरों में
-                वस्तुओं की पहचान।
-              </p>
-            </div>
-          </article>
-
-          <article class="ai-card">
-            <img
-              class="ai-card-image"
-              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
-              alt="पढ़ाई और जानकारी पर काम करते विद्यार्थी"
-              loading="lazy"
-            >
-            <div class="ai-card-body">
-              <span class="ai-tag">पढ़ाई में AI</span>
-              <h3>AI हमारी मदद कैसे करता है?</h3>
-              <p>
-                AI कठिन विषयों को सरल भाषा में समझाने, अभ्यास
-                प्रश्न बनाने और नए विचार खोजने में मदद कर सकता है।
-              </p>
-              <ul>
-                <li>विज्ञान के विषयों को सरल करना।</li>
-                <li>हिंदी से अंग्रेजी में अनुवाद करना।</li>
-                <li>प्रोजेक्ट की रूपरेखा बनाना।</li>
-                <li>अभ्यास के लिए प्रश्न तैयार करना।</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="ai-card">
-            <img
-              class="ai-card-image"
-              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80"
-              alt="तकनीक का उपयोग करते विद्यार्थी"
-              loading="lazy"
-            >
-            <div class="ai-card-body">
-              <span class="ai-tag">जिम्मेदार उपयोग</span>
-              <h3>AI का सुरक्षित उपयोग</h3>
-              <p>
-                AI कभी-कभी गलत उत्तर भी दे सकता है। इसलिए
-                उसकी जानकारी को किताब, शिक्षक और विश्वसनीय
-                स्रोतों से जाँचना आवश्यक है।
-              </p>
-              <ul>
-                <li>अपना पासवर्ड साझा न करें।</li>
-                <li>निजी जानकारी अपलोड न करें।</li>
-                <li>उत्तर को समझकर अपने शब्दों में लिखें।</li>
-                <li>महत्वपूर्ण तथ्यों की पुष्टि करें।</li>
-              </ul>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Practical example -->
-    <section class="ai-section">
-      <div class="ai-container">
-        <div class="ai-section-heading">
-          <h2>03. एक आसान उदाहरण</h2>
-          <p>AI की सहायता से विज्ञान का विषय कैसे सीखें?</p>
-        </div>
-
-        <div class="ai-example">
+        <div class="question-text" id="questionText">मिशन शुरू करने के लिए बटन दबाएँ।</div>
+        <div class="picture-stage">
           <div>
-            <img
-              class="ai-example-image"
-              src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=900&q=85"
-              alt="विज्ञान प्रयोगशाला में अध्ययन"
-              loading="lazy"
-            >
-          </div>
-
-          <div>
-            <span class="ai-tag">विद्यार्थियों के लिए गतिविधि</span>
-            <h3>विषय: जल चक्र (Water Cycle)</h3>
-
-            <p>
-              कल्पना कीजिए कि आपको जल चक्र समझना है। आप AI से
-              कह सकते हैं:
-            </p>
-
-            <div class="ai-note">
-              “जल चक्र को कक्षा 6 के विद्यार्थी के लिए सरल
-              हिंदी में उदाहरण सहित समझाइए और पाँच अभ्यास
-              प्रश्न दीजिए।”
-            </div>
-
-            <p>
-              इसके बाद उत्तर पढ़ें, अपनी पाठ्यपुस्तक से मिलाएँ
-              और शिक्षक की सहायता से कठिन बातों को समझें।
-              AI से मिली जानकारी को बिना जाँचे सही न मानें।
-            </p>
-
-            <a class="ai-btn ai-btn-primary" href="#practice">
-              अब अभ्यास करें →
-            </a>
+            <div class="part-emoji" id="partPicture">🖥️</div>
+            <div class="picture-caption" id="pictureCaption">Computer Parts Mission</div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Learning path -->
-    <section class="ai-section">
-      <div class="ai-container">
-        <div class="ai-learning-panel">
-          <h2>04. सीखने के चार चरण</h2>
-
-          <div class="ai-steps">
-            <div class="ai-step">
-              <span class="ai-step-number">01</span>
-              <h3>कंप्यूटर पहचानें</h3>
-              <p>मॉनिटर, कीबोर्ड, माउस और CPU के बारे में सीखें।</p>
-            </div>
-
-            <div class="ai-step">
-              <span class="ai-step-number">02</span>
-              <h3>टाइपिंग सीखें</h3>
-              <p>हिंदी और अंग्रेजी में अभ्यास करें।</p>
-            </div>
-
-            <div class="ai-step">
-              <span class="ai-step-number">03</span>
-              <h3>AI समझें</h3>
-              <p>AI के उदाहरण और उसकी सीमाएँ जानें।</p>
-            </div>
-
-            <div class="ai-step">
-              <span class="ai-step-number">04</span>
-              <h3>प्रोजेक्ट बनाएँ</h3>
-              <p>सीखे हुए ज्ञान से एक छोटा शैक्षणिक प्रोजेक्ट बनाएँ।</p>
-            </div>
-          </div>
+        <div class="options" id="options"></div>
+        <div class="feedback" id="feedback" aria-live="polite"></div>
+        <div class="game-actions">
+          <button class="btn" id="nextQuestion" disabled>अगला सवाल →</button>
+          <button class="btn btn-soft" id="restartLevel">लेवल फिर से खेलें</button>
         </div>
-      </div>
+      </section>
     </section>
 
-    <!-- Quiz -->
-    <section class="ai-section" id="practice">
-      <div class="ai-container">
-        <div class="ai-section-heading">
-          <h2>05. अपना ज्ञान जाँचें</h2>
-          <p>तीन सरल प्रश्नों के उत्तर चुनें।</p>
-        </div>
-
-        <form class="ai-quiz" id="aiQuiz">
-
-          <div class="ai-question">
-            <p>प्रश्न 1: कंप्यूटर का उपयोग किस काम में होता है?</p>
-
-            <label class="ai-option">
-              <input type="radio" name="q1" value="a" required>
-              केवल खेल खेलने में
-            </label>
-
-            <label class="ai-option">
-              <input type="radio" name="q1" value="b">
-              पढ़ाई, गणना और जानकारी व्यवस्थित करने में
-            </label>
-
-            <label class="ai-option">
-              <input type="radio" name="q1" value="c">
-              किसी काम में नहीं
-            </label>
-          </div>
-
-          <div class="ai-question">
-            <p>प्रश्न 2: AI के बारे में कौन-सी बात सही है?</p>
-
-            <label class="ai-option">
-              <input type="radio" name="q2" value="a" required>
-              AI हमेशा सही उत्तर देता है।
-            </label>
-
-            <label class="ai-option">
-              <input type="radio" name="q2" value="b">
-              AI केवल कैलकुलेटर का दूसरा नाम है।
-            </label>
-
-            <label class="ai-option">
-              <input type="radio" name="q2" value="c">
-              AI मदद कर सकता है, लेकिन उसका उत्तर गलत भी हो सकता है।
-            </label>
-          </div>
-
-          <div class="ai-question">
-            <p>प्रश्न 3: इंटरनेट पर अपना पासवर्ड किसे बताना चाहिए?</p>
-
-            <label class="ai-option">
-              <input type="radio" name="q3" value="a" required>
-              किसी को भी नहीं।
-            </label>
-
-            <label class="ai-option">
-              <input type="radio" name="q3" value="b">
-              हर ऑनलाइन वेबसाइट को।
-            </label>
-
-            <label class="ai-option">
-              <input type="radio" name="q3" value="c">
-              अनजान व्यक्ति को।
-            </label>
-          </div>
-
-          <button class="ai-btn ai-btn-primary" type="submit">
-            उत्तर जाँचें
-          </button>
-
-          <div class="ai-result"
-               id="aiQuizResult"
-               role="status"
-               aria-live="polite"></div>
-
-        </form>
-      </div>
+    <section class="final-card" id="finalCard">
+      <div class="big-star">🏆</div>
+      <h2>आप Computer Tech Champion हैं!</h2>
+      <p id="finalMessage"></p>
+      <button class="btn" id="playAgain">फिर से खेलें</button>
     </section>
-
   </main>
 
-<!-- ==========================================
-     CHAKIYA STUDENT FUN ZONE
-     Insert before the existing Footer
-     ========================================== -->
-
-<section id="chakiya-fun-zone">
-  <div class="ai-container">
-
-    <div class="fun-heading">
-      <h2>🎮 CHAKIYA Fun Zone</h2>
-      <p>खेलो, सीखो, सितारे कमाओ और बनो टेक्नोलॉजी चैंपियन!</p>
-    </div>
-
-    <!-- Scoreboard -->
-    <div class="fun-scoreboard">
-      <div class="fun-stat">
-        <strong id="funTotalScore">0</strong>
-        <span>कुल अंक / 15</span>
-      </div>
-      <div class="fun-stat">
-        <strong id="funStars">0 ⭐</strong>
-        <span>कमाए गए सितारे</span>
-      </div>
-      <div class="fun-stat">
-        <strong id="funCompleted">0 / 4</strong>
-        <span>पूरे किए खेल</span>
-      </div>
-      <div class="fun-stat">
-        <strong id="funRank">शुरुआत</strong>
-        <span>आपका स्तर</span>
-      </div>
-      <div style="width:100%">
-        <div style="font-size:12px">आपकी प्रगति</div>
-        <div class="fun-progress">
-          <div class="fun-progress-bar" id="funProgressBar"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="fun-grid">
-
-      <!-- GAME 1: COMPUTER QUIZ -->
-      <article class="fun-card" id="funQuizGame">
-        <h3>🧠 1. Computer Quiz Battle</h3>
-        <p class="fun-description">
-          चार सवालों के जवाब दें। हर सही जवाब पर एक अंक!
-        </p>
-
-        <div id="funQuizQuestion" class="fun-question"></div>
-        <div id="funQuizOptions" class="fun-options"></div>
-        <div id="funQuizFeedback" class="fun-feedback"
-             aria-live="polite"></div>
-
-        <p class="fun-muted" id="funQuizCounter">सवाल 1 / 4</p>
-        <button type="button" class="fun-action"
-                id="funQuizNext" disabled>
-          अगला सवाल →
-        </button>
-      </article>
-
-      <!-- GAME 2: AI OR HUMAN -->
-      <article class="fun-card" id="funAiGame">
-        <h3>🤖 2. AI या इंसान?</h3>
-        <p class="fun-description">
-          पहचानिए कि यह काम AI, इंसान या दोनों कर सकते हैं।
-        </p>
-
-        <div id="funAiQuestion" class="fun-question"></div>
-        <div id="funAiOptions" class="fun-options"></div>
-        <div id="funAiFeedback" class="fun-feedback"
-             aria-live="polite"></div>
-
-        <p class="fun-muted" id="funAiCounter">चुनौती 1 / 4</p>
-        <button type="button" class="fun-action"
-                id="funAiNext" disabled>
-          अगली चुनौती →
-        </button>
-      </article>
-
-      <!-- GAME 3: CODING PUZZLE -->
-      <article class="fun-card" id="funCodingGame">
-        <h3>💻 3. Coding Sequence Puzzle</h3>
-        <p class="fun-description">
-          एक कंप्यूटर को सही क्रम में निर्देश देना सीखें।
-        </p>
-
-        <div class="fun-question">
-          रोबोट को किताब उठाकर मेज पर रखनी है।
-          नीचे दिए गए निर्देशों को सही क्रम में चुनें।
-        </div>
-
-        <p class="fun-muted">
-          निर्देशों पर क्रम से क्लिक करें। चुना हुआ क्रम नीचे दिखेगा।
-        </p>
-
-        <div class="fun-options" id="funCodingOptions">
-          <button type="button" class="fun-btn" data-step="2">
-            3. किताब उठाओ
-          </button>
-          <button type="button" class="fun-btn" data-step="0">
-            1. किताब के पास जाओ
-          </button>
-          <button type="button" class="fun-btn" data-step="3">
-            4. मेज पर रखो
-          </button>
-          <button type="button" class="fun-btn" data-step="1">
-            2. किताब को पहचानो
-          </button>
-        </div>
-
-        <p class="fun-question">आपका चुना हुआ क्रम:</p>
-        <div id="funCodingSequence" class="fun-sequence">
-          <span class="fun-muted">अभी कोई निर्देश नहीं चुना है।</span>
-        </div>
-
-        <div id="funCodingFeedback" class="fun-feedback"
-             aria-live="polite"></div>
-
-        <button type="button" class="fun-action"
-                id="funCodingCheck">
-          क्रम जाँचें
-        </button>
-        <button type="button" class="fun-action"
-                id="funCodingReset">
-          फिर से चुनें
-        </button>
-      </article>
-
-      <!-- GAME 4: MEMORY MATCH -->
-      <article class="fun-card" id="funMemoryGame">
-        <h3>🃏 4. Computer Memory Match</h3>
-        <p class="fun-description">
-          कार्ड खोलें और कंप्यूटर के भागों के अंग्रेजी
-          तथा हिंदी नामों का मिलान करें।
-        </p>
-
-        <div class="fun-question">
-          सही जोड़ी खोजें। कुल चार जोड़ियाँ हैं।
-        </div>
-
-        <div id="funMemoryGrid" class="fun-memory-grid"></div>
-
-        <p class="fun-muted" id="funMemoryCounter">
-          मिलान: 0 / 4
-        </p>
-
-        <div id="funMemoryFeedback" class="fun-feedback"
-             aria-live="polite"></div>
-      </article>
-
-    </div>
-
-    <!-- Badges -->
-    <div class="fun-card" style="margin-top:22px">
-      <h3>🏅 आपकी Achievement Badges</h3>
-      <p class="fun-description">
-        खेल पूरे करें और नई उपलब्धियाँ हासिल करें।
-      </p>
-
-      <div class="fun-badges" id="funBadges">
-        <div class="fun-badge" data-badge="first">
-          🔒 पहला कदम
-        </div>
-        <div class="fun-badge" data-badge="quiz">
-          🔒 Quiz Master
-        </div>
-        <div class="fun-badge" data-badge="memory">
-          🔒 Memory Champion
-        </div>
-        <div class="fun-badge" data-badge="coding">
-          🔒 Coding Star
-        </div>
-        <div class="fun-badge" data-badge="perfect">
-          🔒 Tech Champion
-        </div>
-      </div>
-    </div>
-
-    <!-- Final result -->
-    <div class="fun-final fun-hidden" id="funFinalResult"
-         aria-live="polite">
-      <h3>🎉 आपकी Fun Zone रिपोर्ट</h3>
-      <div class="fun-final-score" id="funFinalScore">0 / 15</div>
-      <p id="funFinalMessage"></p>
-      <p id="funFinalBadges"></p>
-      <button type="button" class="fun-action"
-              id="funPlayAgain">
-        🔄 सभी खेल फिर से खेलें
-      </button>
-    </div>
-
-    <p class="fun-muted" style="text-align:center;margin-top:18px">
-      यह अभ्यास खेल शैक्षणिक मनोरंजन के लिए है।
-      अंक इसी ब्राउज़र पेज पर रखे जाते हैं।
-    </p>
-
-  </div>
-</section>
-
-  <!-- Footer -->
-  <footer class="ai-footer">
-    <div class="ai-container">
-      <p><strong>UHS Chakiya Tarari, Bhojpur, Bihar</strong></p>
-      <p>शिक्षा • तकनीकी ज्ञान • वैज्ञानिक दृष्टिकोण</p>
-      <p><a href="index.html">← मुख्य वेबसाइट पर वापस जाएँ</a></p>
-      <p>© <span id="aiYear"></span> UHS Chakiya Tarari</p>
+  <footer>
+    <div class="page">
+      <strong>UHS Chakiya Tarari, Bhojpur, Bihar</strong><br>
+      शिक्षा · तकनीक · वैज्ञानिक सोच
     </div>
   </footer>
 
   <script>
-    (function () {
-      "use strict";
+    "use strict";
 
-      const yearElement = document.getElementById("aiYear");
+    
+const computerParts = [
+  {
+    name: "मॉनिटर",
+    emoji: "🖥️",
+    function: "यह कंप्यूटर की जानकारी स्क्रीन पर दिखाता है।",
+    type: "आउटपुट डिवाइस"
+  },
+  {
+    name: "कीबोर्ड",
+    emoji: "⌨️",
+    function: "इससे अक्षर, संख्या और निर्देश टाइप किए जाते हैं।",
+    type: "इनपुट डिवाइस"
+  },
+  {
+    name: "माउस",
+    emoji: "🖱️",
+    function: "इससे स्क्रीन पर पॉइंटर चलाते और विकल्प चुनते हैं।",
+    type: "इनपुट डिवाइस"
+  },
+  {
+    name: "प्रिंटर",
+    emoji: "🖨️",
+    function: "यह दस्तावेज और चित्र कागज पर छापता है।",
+    type: "आउटपुट डिवाइस"
+  },
+  {
+    name: "स्पीकर",
+    emoji: "🔊",
+    function: "यह कंप्यूटर की आवाज बाहर सुनाता है।",
+    type: "आउटपुट डिवाइस"
+  },
+  {
+    name: "हेडफोन",
+    emoji: "🎧",
+    function: "इससे आवाज व्यक्तिगत रूप से सुनी जाती है।",
+    type: "आउटपुट डिवाइस"
+  },
+  {
+    name: "माइक्रोफोन",
+    emoji: "🎙️",
+    function: "यह आवाज को कंप्यूटर में इनपुट करता है।",
+    type: "इनपुट डिवाइस"
+  },
+  {
+    name: "वेबकैम",
+    emoji: "📷",
+    function: "यह फोटो और वीडियो कंप्यूटर में भेजता है।",
+    type: "इनपुट डिवाइस"
+  },
+  {
+    name: "स्कैनर",
+    emoji: "📄",
+    function: "यह कागजी दस्तावेज को डिजिटल रूप में बदलता है।",
+    type: "इनपुट डिवाइस"
+  },
+  {
+    name: "CPU",
+    emoji: "🧠",
+    function: "यह निर्देशों को संसाधित करता है और गणना करता है।",
+    type: "प्रोसेसिंग"
+  },
+  {
+    name: "RAM",
+    emoji: "🧩",
+    function: "यह चल रहे प्रोग्राम का अस्थायी डेटा रखती है।",
+    type: "मुख्य मेमोरी"
+  },
+  {
+    name: "SSD",
+    emoji: "💾",
+    function: "यह डेटा को लंबे समय तक सुरक्षित रखता है।",
+    type: "स्टोरेज"
+  },
+  {
+    name: "हार्ड डिस्क",
+    emoji: "💽",
+    function: "यह फाइल, प्रोग्राम और अन्य डेटा रखती है।",
+    type: "स्टोरेज"
+  },
+  {
+    name: "मदरबोर्ड",
+    emoji: "🟩",
+    function: "यह कंप्यूटर के विभिन्न भागों को जोड़ता है।",
+    type: "मुख्य सर्किट बोर्ड"
+  },
+  {
+    name: "पावर सप्लाई",
+    emoji: "🔌",
+    function: "यह कंप्यूटर के भागों को आवश्यक विद्युत शक्ति देती है।",
+    type: "पावर यूनिट"
+  },
+  {
+    name: "कूलिंग फैन",
+    emoji: "🌀",
+    function: "यह हवा चलाकर कंप्यूटर के भागों को ठंडा रखने में मदद करता है।",
+    type: "कूलिंग"
+  },
+  {
+    name: "GPU",
+    emoji: "🎮",
+    function: "यह ग्राफिक्स और चित्रों की प्रोसेसिंग करता है।",
+    type: "ग्राफिक्स प्रोसेसर"
+  },
+  {
+    name: "नेटवर्क कार्ड",
+    emoji: "🌐",
+    function: "यह कंप्यूटर को नेटवर्क से जोड़ने में मदद करता है।",
+    type: "नेटवर्किंग"
+  },
+  {
+    name: "USB पोर्ट",
+    emoji: "🔗",
+    function: "इससे संगत डिवाइस और एक्सेसरी जोड़ी जाती हैं।",
+    type: "कनेक्शन पोर्ट"
+  },
+  {
+    name: "पेन ड्राइव",
+    emoji: "📀",
+    function: "यह डेटा को एक डिवाइस से दूसरे डिवाइस तक ले जा सकती है।",
+    type: "पोर्टेबल स्टोरेज"
+  },
+  {
+    name: "मेमोरी कार्ड",
+    emoji: "💳",
+    function: "यह छोटे आकार में डिजिटल डेटा सुरक्षित रखता है।",
+    type: "स्टोरेज"
+  },
+  {
+    name: "प्रोजेक्टर",
+    emoji: "📽️",
+    function: "यह बड़ी सतह या पर्दे पर चित्र दिखाता है।",
+    type: "आउटपुट डिवाइस"
+  },
+  {
+    name: "टचस्क्रीन",
+    emoji: "👆",
+    function: "इस पर छूकर जानकारी देख और विकल्प चुन सकते हैं।",
+    type: "इनपुट और आउटपुट"
+  },
+  {
+    name: "बैटरी",
+    emoji: "🔋",
+    function: "यह विद्युत ऊर्जा संचित करके उपकरण को शक्ति देती है।",
+    type: "ऊर्जा स्रोत"
+  },
+  {
+    name: "लैपटॉप टचपैड",
+    emoji: "⬜",
+    function: "यह उंगली से पॉइंटर चलाने में मदद करता है।",
+    type: "इनपुट डिवाइस"
+  },
+  {
+    name: "ईथरनेट केबल",
+    emoji: "🧵",
+    function: "यह तार के माध्यम से नेटवर्क कनेक्शन देती है।",
+    type: "नेटवर्किंग"
+  },
+  {
+    name: "HDMI केबल",
+    emoji: "🔌",
+    function: "यह संगत डिवाइसों के बीच डिजिटल वीडियो और ऑडियो भेजती है।",
+    type: "कनेक्शन केबल"
+  },
+  {
+    name: "मोडेम",
+    emoji: "📡",
+    function: "यह इंटरनेट कनेक्शन उपलब्ध कराने में मदद करता है।",
+    type: "नेटवर्किंग"
+  },
+  {
+    name: "राउटर",
+    emoji: "📶",
+    function: "यह नेटवर्कों के बीच डेटा भेजता है और डिवाइस जोड़ सकता है।",
+    type: "नेटवर्किंग"
+  },
+  {
+    name: "BIOS/UEFI",
+    emoji: "⚙️",
+    function: "यह कंप्यूटर चालू होने पर शुरुआती हार्डवेयर जाँच और बूट प्रक्रिया में मदद करता है।",
+    type: "फर्मवेयर"
+  }
+];
 
-      if (yearElement) {
-        yearElement.textContent = new Date().getFullYear();
-      }
+const levelTopics = [
+  "कंप्यूटर की पहचान",
+  "इनपुट डिवाइस",
+  "आउटपुट डिवाइस",
+  "CPU और प्रोसेसिंग",
+  "मेमोरी",
+  "स्टोरेज",
+  "मदरबोर्ड",
+  "पावर और कूलिंग",
+  "पोर्ट और केबल",
+  "नेटवर्किंग",
+  "कंप्यूटर के बुनियादी भाग",
+  "इनपुट बनाम आउटपुट",
+  "डेटा स्टोरेज",
+  "हार्डवेयर कनेक्शन",
+  "प्रोसेसर का कार्य",
+  "RAM और ROM",
+  "SSD और हार्ड डिस्क",
+  "ग्राफिक्स",
+  "ध्वनि उपकरण",
+  "वीडियो उपकरण",
+  "लैपटॉप के भाग",
+  "डेस्कटॉप के भाग",
+  "प्रिंटिंग और स्कैनिंग",
+  "डिजिटल कनेक्शन",
+  "नेटवर्क उपकरण",
+  "सुरक्षित कंप्यूटर उपयोग",
+  "डेटा और फाइलें",
+  "सिस्टम स्टार्टअप",
+  "कंप्यूटर की देखभाल",
+  "हार्डवेयर की पहचान",
+  "उन्नत स्टोरेज",
+  "प्रोसेसिंग और ग्राफिक्स",
+  "नेटवर्किंग की समझ",
+  "पावर प्रबंधन",
+  "कूलिंग प्रणाली",
+  "इनपुट तकनीक",
+  "आउटपुट तकनीक",
+  "पोर्ट पहचान",
+  "कंप्यूटर के अंदर के भाग",
+  "डिवाइस समस्या पहचान",
+  "सिस्टम के घटक",
+  "हार्डवेयर और सॉफ्टवेयर",
+  "कनेक्शन की समझ",
+  "डेटा का प्रवाह",
+  "कंप्यूटर रखरखाव",
+  "डिजिटल कार्यप्रणाली",
+  "हार्डवेयर चुनौती",
+  "उन्नत पहचान",
+  "मिश्रित कंप्यूटर ज्ञान",
+  "टेक चैंपियन फाइनल"
+];
 
-      const quiz = document.getElementById("aiQuiz");
-      const result = document.getElementById("aiQuizResult");
+function shuffleArray(items) {
+  const copy = [...items];
 
-      if (!quiz || !result) return;
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
 
-      quiz.addEventListener("submit", function (event) {
-        event.preventDefault();
+  return copy;
+}
 
-        const answers = {
-          q1: "b",
-          q2: "c",
-          q3: "a"
-        };
+function buildQuestion(part, index, level) {
+  const questionTypes = [
+    {
+      q: `इस चित्र में दिखाए गए भाग का नाम क्या है?`,
+      answer: part.name
+    },
+    {
+      q: `${part.name} का मुख्य कार्य क्या है?`,
+      answer: part.function
+    },
+    {
+      q: `${part.name} किस श्रेणी में आता है?`,
+      answer: part.type
+    },
+    {
+      q: `किस भाग का काम यह है: ${part.function}`,
+      answer: part.name
+    },
+    {
+      q: `कंप्यूटर में ${part.name} का उपयोग क्यों किया जाता है?`,
+      answer: part.function
+    }
+  ];
 
-        let score = 0;
+  const type = questionTypes[index % questionTypes.length];
 
-        for (const question in answers) {
-          const selected = quiz.querySelector(
-            'input[name="' + question + '"]:checked'
-          );
+  const distractors = shuffleArray(
+    computerParts.filter(item => item.name !== part.name)
+  ).slice(0, 3);
 
-          if (selected && selected.value === answers[question]) {
-            score++;
-          }
-        }
-
-        result.textContent =
-          "आपका स्कोर: " + score + " / 3। " +
-          (score === 3
-            ? "बहुत अच्छा! आपने सभी उत्तर सही दिए।"
-            : "अच्छा प्रयास! ऊपर दिए गए पाठ को दोबारा पढ़ें और फिर अभ्यास करें।");
-      });
-    })();
-  </script>
-
-<script>
-(function () {
-  "use strict";
-
-  const root = document.getElementById("chakiya-fun-zone");
-  if (!root || root.dataset.funInitialized === "true") return;
-  root.dataset.funInitialized = "true";
-
-  const $ = id => document.getElementById(id);
-
-  const state = {
-    score: 0,
-    completed: new Set(),
-    badges: new Set(),
-    quizIndex: 0,
-    aiIndex: 0,
-    quizAnswered: false,
-    aiAnswered: false,
-    codingOrder: [],
-    codingFinished: false,
-    memoryOpen: [],
-    memoryMatched: new Set(),
-    memoryFinished: false
+  const correctOption = {
+    label: type.answer,
+    correct: true
   };
 
-  const MAX_SCORE = 15;
+  const wrongOptions = distractors.map(item => ({
+    label: type.answer === part.name
+      ? item.name
+      : item.function,
+    correct: false
+  }));
 
-  const quizQuestions = [
-    {
-      q: "कंप्यूटर में टाइप करने के लिए किसका उपयोग होता है?",
-      options: ["मॉनिटर", "कीबोर्ड", "स्पीकर", "प्रिंटर"],
-      answer: 1,
-      why: "कीबोर्ड से अक्षर, संख्या और निर्देश टाइप किए जाते हैं।"
-    },
-    {
-      q: "कंप्यूटर का कौन-सा भाग जानकारी स्क्रीन पर दिखाता है?",
-      options: ["माउस", "माइक्रोफोन", "मॉनिटर", "स्कैनर"],
-      answer: 2,
-      why: "मॉनिटर कंप्यूटर की दृश्य जानकारी दिखाता है।"
-    },
-    {
-      q: "इनमें से कौन-सा AI का उपयोग है?",
-      options: [
-        "भाषा का अनुवाद करना",
-        "कागज को अपने आप पानी में बदलना",
-        "बिना ऊर्जा के चलना",
-        "हर प्रश्न का हमेशा सही उत्तर देना"
-      ],
-      answer: 0,
-      why: "AI भाषा अनुवाद में सहायता कर सकता है, लेकिन गलती भी कर सकता है।"
-    },
-    {
-      q: "अपना पासवर्ड सुरक्षित रखने का सही तरीका क्या है?",
-      options: [
-        "सभी दोस्तों को बताना",
-        "सोशल मीडिया पर लिखना",
-        "अनजान व्यक्ति को भेजना",
-        "इसे निजी रखना और साझा न करना"
-      ],
-      answer: 3,
-      why: "पासवर्ड निजी रखना खाते की सुरक्षा के लिए जरूरी है।"
-    }
-  ];
+  return {
+    id: `L${level}-Q${index + 1}`,
+    picture: part.emoji,
+    caption: part.name,
+    question: type.q,
+    explanation: `${part.name}: ${part.function} श्रेणी: ${part.type}.`,
+    options: shuffleArray([correctOption, ...wrongOptions])
+  };
+}
 
-  const aiQuestions = [
-    {
-      q: "कंप्यूटर पर किसी भाषा का अनुवाद करना।",
-      options: ["AI", "इंसान", "दोनों"],
-      answer: 2,
-      why: "AI अनुवाद कर सकता है और इंसान भी भाषा का अनुवाद कर सकता है।"
-    },
-    {
-      q: "कक्षा में विद्यार्थी के वास्तविक अनुभव से कहानी सुनाना।",
-      options: ["AI", "इंसान", "दोनों"],
-      answer: 1,
-      why: "इंसान अपने निजी अनुभवों और यादों से कहानी सुना सकता है।"
-    },
-    {
-      q: "तस्वीरों में बिल्ली की पहचान करना।",
-      options: ["AI", "इंसान", "दोनों"],
-      answer: 2,
-      why: "AI तस्वीरों में पैटर्न पहचान सकता है और इंसान भी बिल्ली पहचान सकता है।"
-    },
-    {
-      q: "अपने मित्र को आमने-सामने गले लगाना।",
-      options: ["AI", "इंसान", "दोनों"],
-      answer: 1,
-      why: "यहाँ सामान्य अर्थ में वास्तविक शारीरिक संपर्क की बात है।"
-    }
-  ];
+const missions = Array.from({ length: 50 }, (_, levelIndex) => {
+  const levelNumber = levelIndex + 1;
 
-  const codingSteps = [
-    "किताब के पास जाओ",
-    "किताब को पहचानो",
-    "किताब उठाओ",
-    "मेज पर रखो"
-  ];
+  const parts = shuffleArray(computerParts).slice(0, 5);
 
-  const memoryPairs = [
-    { id: "keyboard", icon: "⌨️", en: "Keyboard", hi: "कीबोर्ड" },
-    { id: "mouse", icon: "🖱️", en: "Mouse", hi: "माउस" },
-    { id: "monitor", icon: "🖥️", en: "Monitor", hi: "मॉनिटर" },
-    { id: "printer", icon: "🖨️", en: "Printer", hi: "प्रिंटर" }
-  ];
+  return {
+    level: levelNumber,
+    title: levelTopics[levelIndex],
+    questions: parts.map((part, questionIndex) =>
+      buildQuestion(part, questionIndex, levelNumber)
+    )
+  };
+});
 
-  // Shuffle a new array without modifying the original.
-  function shuffle(items) {
-    const result = items.slice();
+/* =========================================
+   CHAKIYA COMPUTER PARTS MISSION
+   PART 3: GAME ENGINE
+========================================= */
 
-    for (let i = result.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [result[i], result[j]] = [result[j], result[i]];
-    }
+const gameState = {
+  level: 1,
+  questionIndex: 0,
+  score: 0,
+  stars: 0,
+  completedLevels: [],
+  unlockedLevel: 1,
+  answered: false,
+  started: false
+};
 
-    return result;
+const $ = id => document.getElementById(id);
+
+function saveGame() {
+  try {
+    localStorage.setItem(
+      "chakiyacomputerMission",
+      JSON.stringify(gameState)
+    );
+  } catch (error) {
+    console.warn("गेम की प्रगति सेव नहीं हो सकी।");
   }
+}
 
-  function addPoints(amount) {
-    state.score = Math.min(MAX_SCORE, state.score + amount);
-    renderScore();
-  }
-
-  function finishGame(name) {
-    state.completed.add(name);
-    renderScore();
-    renderBadges();
-
-    if (state.completed.size === 4) {
-      showFinalResult();
-    }
-  }
-
-  function renderScore() {
-    $("funTotalScore").textContent = state.score;
-    $("funStars").textContent = state.score + " ⭐";
-    $("funCompleted").textContent = state.completed.size + " / 4";
-
-    const percent = Math.round(
-      (state.score / MAX_SCORE) * 100
+function loadGame() {
+  try {
+    const saved = localStorage.getItem(
+      "chakiyacomputerMission"
     );
 
-    $("funProgressBar").style.width = percent + "%";
+    if (!saved) return;
 
-    let rank = "शुरुआत";
+    const data = JSON.parse(saved);
 
-    if (state.score >= 12) rank = "चैंपियन";
-    else if (state.score >= 8) rank = "स्टार";
-    else if (state.score >= 4) rank = "खिलाड़ी";
-
-    $("funRank").textContent = rank;
-  }
-
-  function renderBadges() {
-    if (state.score > 0) state.badges.add("first");
-    if (state.completed.has("quiz")) state.badges.add("quiz");
-    if (state.completed.has("memory")) state.badges.add("memory");
-    if (state.completed.has("coding")) state.badges.add("coding");
-    if (state.score === MAX_SCORE) state.badges.add("perfect");
-
-    root.querySelectorAll("[data-badge]").forEach(el => {
-      const key = el.dataset.badge;
-      const earned = state.badges.has(key);
-
-      el.classList.toggle("is-earned", earned);
-
-      const labels = {
-        first: "🌱 पहला कदम",
-        quiz: "🧠 Quiz Master",
-        memory: "🃏 Memory Champion",
-        coding: "💻 Coding Star",
-        perfect: "🏆 Tech Champion"
-      };
-
-      el.textContent =
-        (earned ? "🏅 " : "🔒 ") + labels[key];
-    });
-  }
-
-  function showFinalResult() {
-    $("funFinalResult").classList.remove("fun-hidden");
-    $("funFinalScore").textContent =
-      state.score + " / " + MAX_SCORE;
-
-    let message;
-
-    if (state.score === MAX_SCORE) {
-      message = "शानदार! आपने सभी अंक हासिल किए। आप Tech Champion हैं!";
-    } else if (state.score >= 11) {
-      message = "बहुत बढ़िया! आपकी तकनीकी समझ मजबूत हो रही है।";
-    } else if (state.score >= 7) {
-      message = "अच्छा प्रयास! अभ्यास जारी रखें और नए सितारे कमाएँ।";
-    } else {
-      message = "शाबाश! आपने सभी खेल पूरे किए। फिर अभ्यास करके बेहतर स्कोर पाएँ।";
+    if (
+      !data ||
+      !Number.isInteger(data.level) ||
+      data.level < 1 ||
+      data.level > 50
+    ) {
+      return;
     }
 
-    $("funFinalMessage").textContent = message;
+    gameState.score = Math.max(0, Number(data.score) || 0);
+    gameState.stars = Math.max(0, Number(data.stars) || 0);
 
-    const badgeNames = {
-      first: "पहला कदम",
-      quiz: "Quiz Master",
-      memory: "Memory Champion",
-      coding: "Coding Star",
-      perfect: "Tech Champion"
-    };
+    gameState.completedLevels = Array.isArray(
+      data.completedLevels
+    )
+      ? data.completedLevels.filter(
+          n => Number.isInteger(n) && n >= 1 && n <= 50
+        )
+      : [];
 
-    $("funFinalBadges").textContent =
-      "आपके बैज: " +
-      (state.badges.size
-        ? Array.from(state.badges).map(b => badgeNames[b]).join(" • ")
-        : "अभी कोई बैज नहीं");
+    gameState.unlockedLevel = Math.min(
+      50,
+      Math.max(1, Number(data.unlockedLevel) || 1)
+    );
 
-    $("funFinalResult").scrollIntoView({
-      behavior: "smooth",
-      block: "nearest"
-    });
+    gameState.level = gameState.unlockedLevel;
+  } catch (error) {
+    console.warn("सेव की गई प्रगति पढ़ी नहीं जा सकी।");
   }
+}
 
-  // =========================================
-  // GAME 1: COMPUTER QUIZ BATTLE
-  // =========================================
+function currentMission() {
+  return missions[gameState.level - 1];
+}
 
-  function renderQuiz() {
-    const item = quizQuestions[state.quizIndex];
+function currentQuestion() {
+  const mission = currentMission();
 
-    $("funQuizQuestion").textContent =
-      "प्रश्न " + (state.quizIndex + 1) + ": " + item.q;
+  return mission?.questions[gameState.questionIndex];
+}
 
-    $("funQuizCounter").textContent =
-      "सवाल " + (state.quizIndex + 1) + " / " +
-      quizQuestions.length;
+function renderLevelMap() {
+  const map = $("levelMap");
 
-    $("funQuizFeedback").textContent = "";
-    $("funQuizOptions").replaceChildren();
+  if (!map) return;
 
-    item.options.forEach((label, index) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "fun-btn";
-      button.textContent = label;
+  map.replaceChildren();
 
-      button.addEventListener("click", () => {
-        if (state.quizAnswered) return;
+  missions.forEach(mission => {
+    const button = document.createElement("button");
 
-        state.quizAnswered = true;
+    button.type = "button";
+    button.className = "level-btn";
+    button.textContent = mission.level;
 
-        const correct = index === item.answer;
+    const isCompleted =
+      gameState.completedLevels.includes(mission.level);
 
-        if (correct) {
-          addPoints(1);
-          button.classList.add("fun-correct");
-          $("funQuizFeedback").textContent =
-            "✅ सही जवाब! +1 अंक। " + item.why;
-        } else {
-          button.classList.add("fun-wrong");
-          $("funQuizFeedback").textContent =
-            "💡 सही उत्तर: " + item.options[item.answer] +
-            "। " + item.why;
-        }
+    const isCurrent =
+      mission.level === gameState.level;
 
-        Array.from($("funQuizOptions").children)
-          .forEach((other, i) => {
-            other.disabled = true;
+    const isLocked =
+      mission.level > gameState.unlockedLevel;
 
-            if (i === item.answer) {
-              other.classList.add("fun-correct");
-            }
-          });
+    if (isCompleted) button.classList.add("completed");
+    if (isCurrent) button.classList.add("current");
 
-        $("funQuizNext").disabled = false;
-        $("funQuizNext").textContent =
-          state.quizIndex === quizQuestions.length - 1
-            ? "क्विज पूरा करें ✓"
-            : "अगला सवाल →";
+    button.disabled = isLocked;
+
+    button.title = isLocked
+      ? "पहले पिछला लेवल पूरा करें"
+      : mission.title;
+
+    button.setAttribute(
+      "aria-label",
+      `लेवल ${mission.level}: ${mission.title}`
+    );
+
+    button.addEventListener("click", () => {
+      if (isLocked) return;
+
+      gameState.level = mission.level;
+      gameState.questionIndex = 0;
+      gameState.answered = false;
+      gameState.started = true;
+
+      $("finalCard").classList.remove("show");
+
+      renderLevelMap();
+      renderQuestion();
+
+      $("mission").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
       });
-
-      $("funQuizOptions").appendChild(button);
     });
 
-    $("funQuizNext").disabled = true;
-    state.quizAnswered = false;
+    map.appendChild(button);
+  });
+}
+
+function renderScoreboard() {
+  $("score").textContent = gameState.score;
+  $("stars").textContent = `${gameState.stars} ⭐`;
+
+  $("completed").textContent =
+    `${gameState.completedLevels.length} / 50`;
+
+  const percent =
+    (gameState.completedLevels.length / 50) * 100;
+
+  $("progress").style.width = `${percent}%`;
+
+  let rank = "शुरुआती";
+
+  if (gameState.stars >= 100) {
+    rank = "टेक चैंपियन";
+  } else if (gameState.stars >= 50) {
+    rank = "कंप्यूटर मास्टर";
+  } else if (gameState.stars >= 20) {
+    rank = "टेक एक्सप्लोरर";
+  } else if (gameState.stars >= 5) {
+    rank = "सीखने वाला";
   }
 
-  $("funQuizNext").addEventListener("click", () => {
-    if (!state.quizAnswered) return;
+  $("rank").textContent = rank;
+}
 
-    if (state.quizIndex < quizQuestions.length - 1) {
-      state.quizIndex++;
-      renderQuiz();
-    } else {
-      $("funQuizQuestion").textContent =
-        "🎉 Computer Quiz Battle पूरा हुआ!";
-      $("funQuizOptions").replaceChildren();
-      $("funQuizFeedback").textContent =
-        "आपने क्विज पूरा कर लिया। आपके सही उत्तरों के अंक जुड़ गए हैं।";
-      $("funQuizNext").disabled = true;
-      finishGame("quiz");
-    }
+function renderQuestion() {
+  const mission = currentMission();
+  const question = currentQuestion();
+
+  if (!mission || !question) {
+    showLevelComplete();
+    return;
+  }
+
+  gameState.answered = false;
+
+  $("levelName").textContent =
+    `लेवल ${mission.level}: ${mission.title}`;
+
+  $("questionCounter").textContent =
+    `प्रश्न ${gameState.questionIndex + 1} / 5`;
+
+  $("questionText").textContent = question.question;
+  $("partPicture").textContent = question.picture;
+  $("pictureCaption").textContent = question.caption;
+
+  const optionsBox = $("options");
+
+  optionsBox.replaceChildren();
+
+  question.options.forEach(option => {
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "option";
+    button.textContent = option.label;
+
+    button.addEventListener("click", () => {
+      checkAnswer(button, option, question);
+    });
+
+    optionsBox.appendChild(button);
   });
 
-  // =========================================
-  // GAME 2: AI OR HUMAN
-  // =========================================
+  const feedback = $("feedback");
 
-  function renderAiGame() {
-    const item = aiQuestions[state.aiIndex];
+  feedback.className = "feedback";
+  feedback.textContent = "";
 
-    $("funAiQuestion").textContent =
-      "चुनौती " + (state.aiIndex + 1) + ": " + item.q;
+  $("nextQuestion").disabled = true;
+  $("nextQuestion").textContent =
+    gameState.questionIndex === 4
+      ? "लेवल का परिणाम देखें →"
+      : "अगला सवाल →";
 
-    $("funAiCounter").textContent =
-      "चुनौती " + (state.aiIndex + 1) + " / " +
-      aiQuestions.length;
+  $("restartLevel").disabled = false;
 
-    $("funAiFeedback").textContent = "";
-    $("funAiOptions").replaceChildren();
+  renderLevelMap();
+  renderScoreboard();
+}
 
-    item.options.forEach((label, index) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "fun-btn";
-      button.textContent = label;
+function checkAnswer(selectedButton, selectedOption, question) {
+  if (gameState.answered) return;
 
-      button.addEventListener("click", () => {
-        if (state.aiAnswered) return;
+  gameState.answered = true;
 
-        state.aiAnswered = true;
+  const buttons = [
+    ...$("options").querySelectorAll(".option")
+  ];
 
-        if (index === item.answer) {
-          addPoints(1);
-          button.classList.add("fun-correct");
-          $("funAiFeedback").textContent =
-            "⭐ सही! +1 अंक। " + item.why;
-        } else {
-          button.classList.add("fun-wrong");
-          $("funAiFeedback").textContent =
-            "💡 बेहतर उत्तर: " + item.options[item.answer] +
-            "। " + item.why;
-        }
-
-        Array.from($("funAiOptions").children)
-          .forEach((other, i) => {
-            other.disabled = true;
-
-            if (i === item.answer) {
-              other.classList.add("fun-correct");
-            }
-          });
-
-        $("funAiNext").disabled = false;
-        $("funAiNext").textContent =
-          state.aiIndex === aiQuestions.length - 1
-            ? "चुनौती पूरी करें ✓"
-            : "अगली चुनौती →";
-      });
-
-      $("funAiOptions").appendChild(button);
-    });
-
-    $("funAiNext").disabled = true;
-    state.aiAnswered = false;
-  }
-
-  $("funAiNext").addEventListener("click", () => {
-    if (!state.aiAnswered) return;
-
-    if (state.aiIndex < aiQuestions.length - 1) {
-      state.aiIndex++;
-      renderAiGame();
-    } else {
-      $("funAiQuestion").textContent = "🎉 AI या इंसान? पूरा हुआ!";
-      $("funAiOptions").replaceChildren();
-      $("funAiFeedback").textContent =
-        "आपने सभी चुनौतियाँ पूरी कर लीं!";
-      $("funAiNext").disabled = true;
-      finishGame("ai");
-    }
-  });
-
-  // =========================================
-  // GAME 3: CODING SEQUENCE PUZZLE
-  // =========================================
-
-  const codingOptions = $("funCodingOptions");
-
-  codingOptions.addEventListener("click", event => {
-    const button = event.target.closest("[data-step]");
-
-    if (!button || state.codingFinished) return;
-
-    const step = Number(button.dataset.step);
-
-    if (state.codingOrder.includes(step)) return;
-
-    state.codingOrder.push(step);
+  buttons.forEach(button => {
     button.disabled = true;
-    button.classList.add("fun-correct");
 
-    renderCodingSequence();
-    $("funCodingFeedback").textContent = "";
-  });
-
-  function renderCodingSequence() {
-    const container = $("funCodingSequence");
-    container.replaceChildren();
-
-    if (!state.codingOrder.length) {
-      const hint = document.createElement("span");
-      hint.className = "fun-muted";
-      hint.textContent = "अभी कोई निर्देश नहीं चुना है।";
-      container.appendChild(hint);
-      return;
-    }
-
-    state.codingOrder.forEach((step, index) => {
-      const item = document.createElement("span");
-      item.className = "fun-btn";
-      item.textContent =
-        (index + 1) + ". " + codingSteps[step];
-      container.appendChild(item);
-    });
-  }
-
-  $("funCodingCheck").addEventListener("click", () => {
-    if (state.codingFinished) return;
-
-    if (state.codingOrder.length !== codingSteps.length) {
-      $("funCodingFeedback").textContent =
-        "पहले सभी चार निर्देश चुनें।";
-      return;
-    }
-
-    state.codingFinished = true;
-
-    const correct = state.codingOrder.every(
-      (step, index) => step === index
+    const option = question.options.find(
+      item => item.label === button.textContent
     );
 
-    if (correct) {
-      addPoints(3);
-      $("funCodingFeedback").textContent =
-        "🎉 शानदार! सही क्रम। आपको 3 अंक मिले!";
-    } else {
-      $("funCodingFeedback").textContent =
-        "अच्छा प्रयास! सही क्रम: " +
-        codingSteps.join(" → ") +
-        "। क्रमबद्ध निर्देश कंप्यूटर के लिए महत्वपूर्ण हैं।";
+    if (option?.correct) {
+      button.classList.add("correct");
     }
-
-    $("funCodingCheck").disabled = true;
-    $("funCodingOptions").querySelectorAll("button")
-      .forEach(button => button.disabled = true);
-
-    finishGame("coding");
   });
 
-  $("funCodingReset").addEventListener("click", () => {
-    if (state.codingFinished) return;
+  const feedback = $("feedback");
 
-    state.codingOrder = [];
+  if (selectedOption.correct) {
+    selectedButton.classList.add("correct");
 
-    codingOptions.querySelectorAll("button").forEach(button => {
-      button.disabled = false;
-      button.classList.remove("fun-correct", "fun-wrong");
-    });
+    gameState.score += 10;
+    gameState.stars += 1;
 
-    $("funCodingFeedback").textContent = "";
-    renderCodingSequence();
-  });
+    feedback.textContent =
+      `बहुत बढ़िया! 🎉 ${question.explanation}`;
+  } else {
+    selectedButton.classList.add("wrong");
 
-  // =========================================
-  // GAME 4: COMPUTER MEMORY MATCH
-  // =========================================
-
-  function setupMemoryGame() {
-    const cards = [];
-
-    memoryPairs.forEach(pair => {
-      cards.push({
-        id: pair.id,
-        label: pair.en,
-        icon: pair.icon
-      });
-
-      cards.push({
-        id: pair.id,
-        label: pair.hi,
-        icon: pair.icon
-      });
-    });
-
-    const grid = $("funMemoryGrid");
-    grid.replaceChildren();
-
-    shuffle(cards).forEach((card, index) => {
-      const button = document.createElement("button");
-
-      button.type = "button";
-      button.className = "fun-memory-card";
-      button.dataset.pair = card.id;
-      button.dataset.index = String(index);
-      button.setAttribute("aria-label", "बंद कार्ड");
-      button.setAttribute("aria-pressed", "false");
-      button.textContent = "?";
-
-      button.addEventListener("click", () => {
-        handleMemoryCard(button, card);
-      });
-
-      grid.appendChild(button);
-    });
+    feedback.textContent =
+      `कोशिश अच्छी थी! सही जानकारी: ${question.explanation}`;
   }
 
-  function handleMemoryCard(button, card) {
-    if (state.memoryFinished) return;
-    if (button.disabled) return;
-    if (state.memoryOpen.some(item => item.button === button)) return;
-    if (state.memoryOpen.length >= 2) return;
+  feedback.classList.add("show");
 
-    button.classList.add("is-open");
-    button.replaceChildren();
+  $("nextQuestion").disabled = false;
 
-    const icon = document.createElement("span");
-    icon.textContent = card.icon;
+  renderScoreboard();
+  saveGame();
+}
 
-    const label = document.createElement("span");
-    label.textContent = card.label;
+function showLevelComplete() {
+  const level = gameState.level;
 
-    button.append(icon, label);
-    button.setAttribute("aria-label", card.label);
-    button.setAttribute("aria-pressed", "true");
+  if (!gameState.completedLevels.includes(level)) {
+    gameState.completedLevels.push(level);
+  }
 
-    state.memoryOpen.push({ button, card });
+  if (level < 50) {
+    gameState.unlockedLevel = Math.max(
+      gameState.unlockedLevel,
+      level + 1
+    );
+  }
 
-    if (state.memoryOpen.length === 2) {
-      const [first, second] = state.memoryOpen;
+  gameState.started = false;
 
-      if (first.card.id === second.card.id) {
-        first.button.classList.add("is-matched");
-        second.button.classList.add("is-matched");
+  renderLevelMap();
+  renderScoreboard();
+  saveGame();
 
-        first.button.disabled = true;
-        second.button.disabled = true;
+  $("levelName").textContent = `लेवल ${level} पूरा! 🏆`;
 
-        state.memoryMatched.add(first.card.id);
-        state.memoryOpen = [];
+  $("questionCounter").textContent = "5 / 5 प्रश्न पूरे";
 
-        addPoints(1);
+  $("questionText").textContent =
+    level === 50
+      ? "बधाई हो! आपने सभी 50 लेवल पूरे कर लिए!"
+      : "शानदार! आपने यह मिशन पूरा कर लिया।";
 
-        $("funMemoryCounter").textContent =
-          "मिलान: " + state.memoryMatched.size + " / 4";
+  $("partPicture").textContent =
+    level === 50 ? "🏆" : "🌟";
 
-        $("funMemoryFeedback").textContent =
-          "🎉 सही जोड़ी! +1 अंक।";
+  $("pictureCaption").textContent =
+    level === 50 ? "Tech Champion" : "अगला लेवल अनलॉक हो गया!";
 
-        if (state.memoryMatched.size === memoryPairs.length) {
-          state.memoryFinished = true;
-          $("funMemoryFeedback").textContent =
-            "🏆 सभी जोड़ियाँ मिल गईं! Memory Champion!";
+  $("options").replaceChildren();
 
-          finishGame("memory");
-        }
-      } else {
-        $("funMemoryFeedback").textContent =
-          "फिर से कोशिश करें! दोनों नामों का मिलान करें।";
+  $("feedback").textContent =
+    `आपका कुल स्कोर ${gameState.score} अंक है।`;
+  $("feedback").classList.add("show");
 
-        const openCards = state.memoryOpen.slice();
-        state.memoryOpen = [];
+  $("nextQuestion").disabled = false;
+  $("nextQuestion").textContent =
+    level === 50 ? "फाइनल परिणाम देखें 🏆" : "अगला लेवल शुरू करें →";
 
-        window.setTimeout(() => {
-          if (state.memoryFinished) return;
+  $("restartLevel").disabled = false;
 
-          openCards.forEach(item => {
-            if (item.button.classList.contains("is-matched")) return;
+  if (level === 50) {
+    $("finalCard").classList.add("show");
 
-            item.button.classList.remove("is-open");
-            item.button.textContent = "?";
-            item.button.setAttribute("aria-label", "बंद कार्ड");
-            item.button.setAttribute("aria-pressed", "false");
-          });
-        }, 850);
-      }
+    $("finalMessage").textContent =
+      `आपने 50 में से ${gameState.completedLevels.length} लेवल पूरे किए और ${gameState.score} अंक प्राप्त किए।`;
+  }
+}
+
+function nextStep() {
+  if (gameState.started === false) {
+    if (gameState.level === 50 &&
+        gameState.completedLevels.includes(50)) {
+      $("finalCard").classList.add("show");
+      $("finalCard").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+      return;
     }
+
+    if (gameState.level < 50) {
+      gameState.level += 1;
+      gameState.questionIndex = 0;
+      gameState.started = true;
+
+      $("finalCard").classList.remove("show");
+
+      renderQuestion();
+
+      $("mission").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+    return;
   }
 
-  // =========================================
-  // RESTART ALL GAMES
-  // =========================================
+  if (!gameState.answered) return;
 
-  function restartGames() {
-    state.score = 0;
-    state.completed.clear();
-    state.badges.clear();
-
-    state.quizIndex = 0;
-    state.aiIndex = 0;
-    state.quizAnswered = false;
-    state.aiAnswered = false;
-
-    state.codingOrder = [];
-    state.codingFinished = false;
-
-    state.memoryOpen = [];
-    state.memoryMatched.clear();
-    state.memoryFinished = false;
-
-    $("funFinalResult").classList.add("fun-hidden");
-
-    $("funCodingCheck").disabled = false;
-
-    codingOptions.querySelectorAll("button").forEach(button => {
-      button.disabled = false;
-      button.classList.remove("fun-correct", "fun-wrong");
-    });
-
-    $("funCodingFeedback").textContent = "";
-    renderCodingSequence();
-
-    $("funMemoryCounter").textContent = "मिलान: 0 / 4";
-    $("funMemoryFeedback").textContent = "";
-
-    renderScore();
-    renderBadges();
-    renderQuiz();
-    renderAiGame();
-    setupMemoryGame();
-
-    $("funQuizQuestion").scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
+  if (gameState.questionIndex < 4) {
+    gameState.questionIndex += 1;
+    renderQuestion();
+  } else {
+    gameState.questionIndex = 5;
+    showLevelComplete();
   }
+}
 
-  $("funPlayAgain").addEventListener("click", restartGames);
+function startMission() {
+  gameState.started = true;
 
-  // Start all four games.
-  renderScore();
-  renderBadges();
-  renderQuiz();
-  renderAiGame();
-  setupMemoryGame();
+  $("finalCard").classList.remove("show");
 
-})();
-</script>
+  renderLevelMap();
+  renderQuestion();
 
+  $("mission").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function restartCurrentLevel() {
+  gameState.questionIndex = 0;
+  gameState.started = true;
+
+  $("finalCard").classList.remove("show");
+
+  renderQuestion();
+}
+
+function resetEntireGame() {
+  const confirmed = confirm(
+    "क्या आप पूरी प्रगति मिटाकर गेम फिर से शुरू करना चाहते हैं?"
+  );
+
+  if (!confirmed) return;
+
+  gameState.level = 1;
+  gameState.questionIndex = 0;
+  gameState.score = 0;
+  gameState.stars = 0;
+  gameState.completedLevels = [];
+  gameState.unlockedLevel = 1;
+  gameState.answered = false;
+  gameState.started = true;
+
+  saveGame();
+
+  $("finalCard").classList.remove("show");
+
+  renderLevelMap();
+  renderQuestion();
+  renderScoreboard();
+}
+
+$("startMission").addEventListener("click", startMission);
+
+$("nextQuestion").addEventListener("click", nextStep);
+
+$("restartLevel").addEventListener(
+  "click",
+  restartCurrentLevel
+);
+
+$("playAgain").addEventListener("click", resetEntireGame);
+
+loadGame();
+renderLevelMap();
+renderScoreboard();
+renderQuestion();
+
+  </script>
 </body>
 </html>
