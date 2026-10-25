@@ -1168,7 +1168,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
-    
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const dropdown = document.getElementById("examDropdown");
+    const toggle = document.getElementById("examToggle");
+
+    if (!dropdown || !toggle) return;
+
+    toggle.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const isOpen = dropdown.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!dropdown.contains(event.target)) {
+            dropdown.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+        }
+    });
+});
+</script>
 <script>
 (() => {
   const API_URL = "https://script.google.com/macros/s/AKfycbzVPiOa5gNCsCMx-RYF0yPLhnAlxGJzxBc5tm1KVHOemuDHBYID12o87c_YYCLU71i7/exec";
