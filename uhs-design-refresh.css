@@ -482,3 +482,44 @@ button:focus-visible {
 #notice-board .notice-item p {
   color: #262d2b;
 }
+
+/* MOBILE LAYOUT IMPROVEMENTS */
+@media (max-width: 600px) {
+  .container {
+    width: 94%;
+  }
+
+  .header,
+  .header-content {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  nav,
+  .navbar {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  nav a,
+  .navbar a {
+    white-space: nowrap;
+  }
+
+  .notice-board,
+  #notice-board {
+    background: rgba(255, 255, 255, 0.97);
+    padding: 14px 10px;
+  }
+
+  .notice-board .notice-item,
+  #notice-board .notice-item {
+    padding: 12px 10px;
+    margin: 10px 0;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
