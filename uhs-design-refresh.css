@@ -452,3 +452,33 @@ button:focus-visible {
   .contact-grid { grid-template-columns: 1fr; }
   .notice-item { align-items: flex-start; }
 }
+/* NOTICE BOARD - CLEAN PROFESSIONAL LOOK */
+.notice-board,
+#notice-board {
+  background: rgba(255, 255, 255, 0.96);
+  padding: 24px 20px;
+  border-radius: 14px;
+}
+
+.notice-board h2,
+#notice-board h2 {
+  color: #075449;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.notice-board .notice-item,
+#notice-board .notice-item {
+  background: #ffffff;
+  border: 1px solid #e2e9e6;
+  border-left: 5px solid #c49a35;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 12px 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.notice-board .notice-item p,
+#notice-board .notice-item p {
+  color: #262d2b;
+}
