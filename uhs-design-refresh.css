@@ -649,3 +649,42 @@ button:focus-visible {
         letter-spacing: 0.5px;
     }
 }
+
+/* PROFESSIONAL NAVIGATION MENU */
+.navbar .nav-container > a,
+.navbar .nav-container .dropdown-toggle {
+    font-family: "Trebuchet MS", "Noto Sans Devanagari",
+                 "Nirmala UI", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #ffffff;
+    padding: 14px 13px;
+    transition: color 0.25s ease,
+                background-color 0.25s ease;
+}
+
+/* Attractive hover effect */
+.navbar .nav-container > a:hover,
+.navbar .nav-container .dropdown-toggle:hover {
+    color: #ffdf70;
+    background-color: rgba(255, 255, 255, 0.09);
+}
+
+/* Keep dropdown arrows visible */
+.navbar .dropdown-toggle span {
+    font-size: 13px;
+    margin-left: 4px;
+}
+
+/* Responsive navigation */
+@media (max-width: 768px) {
+    .navbar .nav-container > a,
+    .navbar .nav-container .dropdown-toggle {
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: 0.4px;
+        padding: 12px 14px;
+    }
+}
