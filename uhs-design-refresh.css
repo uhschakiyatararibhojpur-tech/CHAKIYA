@@ -19,7 +19,7 @@ html { scroll-behavior: smooth; }
 body {
   color: var(--uhs-ink);
   background: #fff;
-  font-family: Arial, "Noto Sans Devanagari", sans-serif;
+  font-family: "Noto Sans Devanagari", "Nirmala UI", Mangal, sans-serif;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
 }
