@@ -3728,3 +3728,54 @@ button:focus-visible,
     }
 }
 
+
+/* FIX: Minister photo and menu overlapping */
+.navbar .nav-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+}
+
+.navbar .minister-nav {
+    position: static !important;
+    transform: none !important;
+    margin-left: auto !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 8px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.navbar .minister-nav-photo {
+    width: 34px;
+    height: 34px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    display: block;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+    .navbar .nav-container {
+        justify-content: flex-start;
+    }
+
+    .navbar .minister-nav {
+        margin: 10px 0 8px auto !important;
+        font-size: 11px;
+    }
+
+    .navbar .minister-nav-photo {
+        width: 30px;
+        height: 30px;
+    }
+}
