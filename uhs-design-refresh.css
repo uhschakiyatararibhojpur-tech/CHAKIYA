@@ -688,3 +688,90 @@ button:focus-visible {
         padding: 12px 14px;
     }
 }
+
+/* FINAL FIX: Minister photo in the white school header */
+.header .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    position: relative;
+}
+
+.header .school-brand {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.header .minister-header {
+    position: static;
+    transform: none;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    max-width: 125px;
+    color: #075b49;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.header .minister-header-photo {
+    display: block;
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 50%;
+    border: 3px solid #e9ad24;
+    box-shadow: 0 3px 10px rgba(0,0,0,.12);
+}
+
+.header .menu-btn {
+    flex: 0 0 auto;
+    position: static;
+    z-index: 20;
+}
+
+@media (max-width: 700px) {
+    .header .header-content {
+        gap: 6px;
+        min-height: 112px;
+    }
+
+    .header .school-brand {
+        flex: 1 1 0;
+        gap: 6px;
+    }
+
+    .header .school-brand h1 {
+        font-size: clamp(13px, 3.8vw, 17px);
+        line-height: 1.2;
+    }
+
+    .header .school-brand p {
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    .header .minister-header {
+        flex: 0 0 62px;
+        max-width: 62px;
+        gap: 3px;
+        font-size: 8px;
+        line-height: 1.25;
+    }
+
+    .header .minister-header-photo {
+        width: 42px;
+        height: 42px;
+    }
+
+    .header .menu-btn {
+        padding: 7px 9px;
+        font-size: 19px;
+    }
+}
