@@ -3779,3 +3779,52 @@ button:focus-visible,
         height: 30px;
     }
 }
+
+/* Education Minister photo in white school header */
+.header-content {
+    position: relative;
+}
+
+.minister-header {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    color: #07594f;
+    font-size: 13px;
+    font-weight: 700;
+    z-index: 10;
+}
+
+.minister-header-photo {
+    width: 82px;
+    height: 82px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 50%;
+    border: 3px solid #e2b64d;
+    box-shadow: 0 3px 10px rgba(0,0,0,.15);
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .minister-header-photo {
+        width: 48px;
+        height: 48px;
+    }
+
+    .minister-header {
+        right: 4px;
+        font-size: 9px;
+        gap: 3px;
+    }
+
+    .school-brand {
+        padding-right: 65px;
+    }
+}
