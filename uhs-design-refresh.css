@@ -743,3 +743,107 @@ button:focus-visible {
         height: 42px;
     }
 }
+
+/* ===== FIX MOBILE HEADER AND NAVBAR ALIGNMENT ===== */
+
+@media (max-width: 768px) {
+
+    /* Header alignment */
+    .header .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .header .school-brand {
+        display: flex;
+        align-items: center;
+        flex: 1 1 0;
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .header .school-logo img {
+        width: 64px;
+        height: auto;
+        display: block;
+    }
+
+    .header .school-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .header .school-info h1 {
+        font-size: clamp(13px, 3.5vw, 18px);
+        line-height: 1.25;
+        margin: 0 0 8px;
+    }
+
+    .header .school-info p {
+        font-size: 11px;
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    .header .school-info small {
+        display: none;
+    }
+
+    /* Minister photo and caption */
+    .header .minister-header {
+        flex: 0 0 58px;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        font-size: 8px;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+    }
+
+    .header .minister-header-photo {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #d7ad35;
+    }
+
+    /* Hamburger button */
+    .header .menu-btn {
+        flex: 0 0 42px;
+        width: 42px;
+        height: 46px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Navigation options */
+    .navbar,
+    nav {
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+
+    .navbar .container,
+    nav .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 12px;
+        padding-right: 12px;
+        box-sizing: border-box;
+    }
+
+    /* Keep menu items centered and evenly spaced */
+    .navbar a,
+    nav a {
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow-wrap: break-word;
+    }
+}
