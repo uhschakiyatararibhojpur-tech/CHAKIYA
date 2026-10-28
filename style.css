@@ -3673,3 +3673,49 @@ button:focus-visible,
   }
 }
 
+/* Bihar Education Minister - Navbar Photo */
+.minister-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-left: auto;
+  padding: 5px 10px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border-radius: 25px;
+  transition: background 0.3s ease;
+}
+
+.minister-nav:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.minister-nav-photo {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  display: block;
+}
+
+/* Mobile display */
+@media (max-width: 768px) {
+  .minister-nav {
+    gap: 5px;
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+
+  .minister-nav-photo {
+    width: 32px;
+    height: 32px;
+  }
+}
+
