@@ -1602,36 +1602,39 @@ body > *:not(#festivalCanvas):not(#festivalTitle) {
     }
   }
 
-  function animate(now) {
-    const t=now%cycle;
-    const scene=t<10000 ? 0 : t<12000 ? 1 : 2;
+  
+function animate(now) {
+  const t = now % cycle;
+  const scene = t < 9000 ? 0 : t < 10000 ? 1 : 2;
 
-    if(scene!==previousScene) {
-      title.style.opacity="0";
-      setTimeout(()=>{
-        if(scene===0) {
-          heading.textContent="🪔 शुभ दीपावली 🪔";
-          subheading.textContent="प्रकाश, खुशियों और समृद्धि का पर्व";
-        } else if(scene===2) {
-          heading.textContent="🙏 जय छठी मैया 🙏";
-          subheading.textContent="आस्था, श्रद्धा और सूर्य उपासना का महापर्व";
-        }
-        title.style.opacity="1";
-      },500);
-      previousScene=scene;
-    }
+  if (scene !== previousScene) {
+    title.style.opacity = "0";
 
-    if(t<10000) {
-      drawFireworks(now);
-    } else if(t<12000) {
-      ctx.fillStyle="#17142b";
-      ctx.fillRect(0,0,w,h);
-    } else {
-      drawChhath(t-12000);
-    }
+    setTimeout(() => {
+      if (scene === 0) {
+        heading.textContent = "🪔 शुभ दीपावली 🪔";
+        subheading.textContent = "प्रकाश, खुशियों और समृद्धि का पर्व";
+      } else if (scene === 2) {
+        heading.textContent = "🙏 जय छठी मैया 🙏";
+        subheading.textContent =
+          "आस्था, श्रद्धा और सूर्य उपासना का महापर्व";
+      }
+      title.style.opacity = "1";
+    }, 400);
 
-    requestAnimationFrame(animate);
+    previousScene = scene;
   }
+
+  if (t < 9000) {
+    drawFireworks(now);
+  } else if (t < 10000) {
+    drawChhath(0);
+  } else {
+    drawChhath(t - 10000);
+  }
+
+  requestAnimationFrame(animate);
+}
 
   if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     requestAnimationFrame(animate);
