@@ -1337,6 +1337,307 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
+    
+<!-- CHAKIYA DIWALI + CHHATH ANIMATION -->
+<canvas id="festivalCanvas" aria-hidden="true"></canvas>
+
+<div id="festivalTitle" aria-live="polite">
+  <span id="festivalHeading">🪔 शुभ दीपावली 🪔</span>
+  <small id="festivalSubheading">प्रकाश, खुशियों और समृद्धि का पर्व</small>
+</div>
+
+<style>
+#festivalCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Keep website content above animation */
+body > *:not(#festivalCanvas):not(#festivalTitle) {
+  position: relative;
+  z-index: 2;
+}
+
+/* Transparent festive heading */
+#festivalTitle {
+  position: fixed;
+  top: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  text-align: center;
+  color: #fff;
+  z-index: 3;
+  pointer-events: none;
+  text-shadow: 0 3px 12px #000;
+  transition: opacity 1s ease;
+}
+#festivalHeading {
+  display: block;
+  font-size: clamp(25px, 5vw, 55px);
+  font-weight: 900;
+}
+#festivalSubheading {
+  display: block;
+  margin-top: 12px;
+  font-size: clamp(14px, 2vw, 21px);
+}
+@media(max-width:600px) {
+  #festivalTitle { top: 17%; }
+}
+
+/* Respect reduced-motion preferences */
+@media(prefers-reduced-motion:reduce) {
+  #festivalCanvas { opacity: .35; }
+}
+</style>
+
+<script>
+(() => {
+  const canvas = document.getElementById("festivalCanvas");
+  const ctx = canvas.getContext("2d");
+  const heading = document.getElementById("festivalHeading");
+  const subheading = document.getElementById("festivalSubheading");
+  const title = document.getElementById("festivalTitle");
+
+  let w, h, particles = [], fireworks = [];
+  let lastBurst = 0;
+  let previousScene = -1;
+  const cycle = 26000;
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  function burst(x, y) {
+    const colors = ["#ffcc33", "#ff3b30", "#00e5ff",
+                    "#ff66cc", "#ffffff", "#a5ff4b"];
+    const color = colors[Math.floor(Math.random()*colors.length)];
+    for (let i=0; i<65; i++) {
+      const angle = Math.random()*Math.PI*2;
+      const speed = 1.2 + Math.random()*4;
+      fireworks.push({
+        x,y,
+        vx:Math.cos(angle)*speed,
+        vy:Math.sin(angle)*speed,
+        life:1,
+        color
+      });
+    }
+  }
+
+  function drawFireworks(t) {
+    const sky = ctx.createLinearGradient(0,0,0,h);
+    sky.addColorStop(0,"#080b2c");
+    sky.addColorStop(1,"#54204d");
+    ctx.fillStyle = sky;
+    ctx.fillRect(0,0,w,h);
+
+    if(t-lastBurst > 500) {
+      burst(w*(.12+Math.random()*.76), h*(.08+Math.random()*.48));
+      lastBurst=t;
+    }
+
+    fireworks.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += .035;
+      p.life -= .012;
+      ctx.globalAlpha = Math.max(0,p.life);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,2.2,0,Math.PI*2);
+      ctx.fill();
+    });
+    ctx.globalAlpha=1;
+    fireworks=fireworks.filter(p=>p.life>0);
+
+    // Glowing diyas along the bottom
+    for(let i=0;i<Math.ceil(w/100);i++) {
+      const x=i*100+35;
+      const y=h-35;
+      ctx.fillStyle="#c66b1a";
+      ctx.beginPath();
+      ctx.ellipse(x,y,18,7,0,0,Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle="#ffdf65";
+      ctx.shadowColor="#ff8c00";
+      ctx.shadowBlur=22;
+      ctx.beginPath();
+      ctx.ellipse(x,y-9,5,10,0,0,Math.PI*2);
+      ctx.fill();
+      ctx.shadowBlur=0;
+    }
+  }
+
+  function drawPerson(x,y,scale,walk,offering) {
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.scale(scale,scale);
+    ctx.fillStyle="#171b25";
+
+    // Head
+    ctx.beginPath();
+    ctx.arc(0,-57,9,0,Math.PI*2);
+    ctx.fill();
+
+    // Body
+    ctx.fillRect(-7,-48,14,32);
+
+    // Arms
+    ctx.strokeStyle="#171b25";
+    ctx.lineWidth=6;
+    ctx.lineCap="round";
+    ctx.beginPath();
+    ctx.moveTo(-5,-43);
+    ctx.lineTo(-15,-25);
+    ctx.lineTo(-8,-13);
+    ctx.moveTo(5,-43);
+    if(offering) {
+      ctx.lineTo(18,-57);
+      ctx.lineTo(27,-68);
+    } else {
+      ctx.lineTo(14,-28);
+      ctx.lineTo(19,-15);
+    }
+    ctx.stroke();
+
+    // Legs
+    ctx.beginPath();
+    ctx.moveTo(-4,-16);
+    ctx.lineTo(walk ? -12 : -6,0);
+    ctx.moveTo(4,-16);
+    ctx.lineTo(walk ? 12 : 6,0);
+    ctx.stroke();
+
+    // Daura basket
+    ctx.fillStyle="#d69a40";
+    ctx.fillRect(18,-83,25,12);
+    ctx.strokeStyle="#f3c66b";
+    ctx.lineWidth=2;
+    for(let i=0;i<4;i++) {
+      ctx.beginPath();
+      ctx.moveTo(19+i*7,-83);
+      ctx.lineTo(19+i*7,-71);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawChhath(t) {
+    const sky=ctx.createLinearGradient(0,0,0,h);
+    sky.addColorStop(0,"#44264f");
+    sky.addColorStop(.45,"#f18b55");
+    sky.addColorStop(1,"#ffd18a");
+    ctx.fillStyle=sky;
+    ctx.fillRect(0,0,w,h);
+
+    // Rising Sun
+    const sunX=w*.72, sunY=h*.36;
+    const glow=ctx.createRadialGradient(sunX,sunY,5,sunX,sunY,100);
+    glow.addColorStop(0,"#fff7bd");
+    glow.addColorStop(1,"rgba(255,180,50,0)");
+    ctx.fillStyle=glow;
+    ctx.beginPath();
+    ctx.arc(sunX,sunY,100,0,Math.PI*2);
+    ctx.fill();
+
+    ctx.fillStyle="#ffdf70";
+    ctx.beginPath();
+    ctx.arc(sunX,sunY,35,0,Math.PI*2);
+    ctx.fill();
+
+    // Ganga water
+    const waterY=h*.62;
+    const water=ctx.createLinearGradient(0,waterY,0,h);
+    water.addColorStop(0,"#317d91");
+    water.addColorStop(1,"#123c60");
+    ctx.fillStyle=water;
+    ctx.fillRect(0,waterY,w,h-waterY);
+
+    // Water reflections
+    for(let i=0;i<30;i++) {
+      const x=((i*113+t*.025)% (w+80))-40;
+      const y=waterY+20+(i*17)%(h-waterY);
+      ctx.strokeStyle="rgba(255,221,150,.35)";
+      ctx.lineWidth=2;
+      ctx.beginPath();
+      ctx.moveTo(x,y);
+      ctx.lineTo(x+25+(i%4)*12,y);
+      ctx.stroke();
+    }
+
+    // Ghat and people
+    ctx.fillStyle="#493a39";
+    ctx.fillRect(0,waterY-12,w,15);
+
+    // Devotees walking, then offering Arghya
+    const walking=t<6500;
+    for(let i=0;i<Math.min(7,Math.ceil(w/130));i++) {
+      const x=walking
+        ? ((i*135 + t*.035)%(w+100))-50
+        : w*.15+i*(w*.68/6);
+      drawPerson(x,waterY+45,0.85+(i%3)*.12,
+                 walking && Math.sin(t/180+i)>0,
+                 !walking);
+    }
+
+    // Small flowers and offerings
+    ctx.fillStyle="#ffd45a";
+    for(let i=0;i<12;i++) {
+      ctx.beginPath();
+      ctx.arc((i*97+t*.01)%w,waterY+15+(i%4)*18,3,0,Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function animate(now) {
+    const t=now%cycle;
+    const scene=t<10000 ? 0 : t<12000 ? 1 : 2;
+
+    if(scene!==previousScene) {
+      title.style.opacity="0";
+      setTimeout(()=>{
+        if(scene===0) {
+          heading.textContent="🪔 शुभ दीपावली 🪔";
+          subheading.textContent="प्रकाश, खुशियों और समृद्धि का पर्व";
+        } else if(scene===2) {
+          heading.textContent="🙏 जय छठी मैया 🙏";
+          subheading.textContent="आस्था, श्रद्धा और सूर्य उपासना का महापर्व";
+        }
+        title.style.opacity="1";
+      },500);
+      previousScene=scene;
+    }
+
+    if(t<10000) {
+      drawFireworks(now);
+    } else if(t<12000) {
+      ctx.fillStyle="#17142b";
+      ctx.fillRect(0,0,w,h);
+    } else {
+      drawChhath(t-12000);
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    requestAnimationFrame(animate);
+  }
+})();
+</script>
 </body>
 </html>
 
