@@ -101,6 +101,24 @@
   </div>
 
   <script>
+    
+const API_URL = "https://script.google.com/macros/s/AKfycbxW7D449J0tM9hyki-Xy8fIYNx9ho7xXkXwHFmGKxpwpbuj-JCbBXcO150Udzod8nK7/exec";
+
+async function apiRequest(action, payload = {}) {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify({
+      action,
+      ...payload
+    })
+  });
+
+  return await response.json();
+}
+
     let scanner = null;
     let scanning = false;
 
