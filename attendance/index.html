@@ -2,190 +2,354 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CHAKIYA Barcode Attendance</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CHAKIYA Barcode Attendance</title>
+<script src="https://unpkg.com/html5-qrcode"></script>
 
-  <script src="https://unpkg.com/html5-qrcode"></script>
-
-  <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      background: #f1f5f9;
-      color: #172554;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 25px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 5px 25px #00000012;
-    }
-
-    h2 { text-align: center; }
-    .subtitle {
-      text-align: center;
-      color: #64748b;
-    }
-
-    #reader {
-      width: 100%;
-      margin: 20px auto;
-    }
-
-    button {
-      border: 0;
-      padding: 13px 18px;
-      border-radius: 8px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 5px;
-    }
-
-    #startBtn { background: #15803d; }
-    #stopBtn { background: #dc2626; }
-    #manualBtn { background: #1d4ed8; }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      margin-top: 10px;
-      font-size: 16px;
-    }
-
-    .center { text-align: center; }
-    .result {
-      background: #eff6ff;
-      border-radius: 10px;
-      padding: 15px;
-      margin-top: 20px;
-      overflow-wrap: anywhere;
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;padding:18px;font-family:Arial,sans-serif;
+  background:#f1f5f9;color:#172554
+}
+.container{
+  max-width:600px;margin:20px auto;background:white;
+  padding:22px;border-radius:16px;
+  box-shadow:0 5px 25px #00000012
+}
+h2{text-align:center;margin-bottom:5px}
+.subtitle{text-align:center;color:#64748b}
+input{
+  width:100%;padding:13px;margin:8px 0;
+  border:1px solid #cbd5e1;border-radius:8px;font-size:16px
+}
+button{
+  border:0;padding:13px 17px;border-radius:8px;
+  color:white;font-weight:bold;cursor:pointer;margin:5px
+}
+button:disabled{opacity:.5;cursor:not-allowed}
+.center{text-align:center}
+#loginBtn{background:#1d4ed8}
+#startBtn{background:#15803d}
+#stopBtn{background:#dc2626}
+#manualBtn{background:#1d4ed8}
+#summaryBtn{background:#7c3aed}
+#logoutBtn{background:#475569}
+#reader{width:100%;margin:18px auto}
+.result{
+  background:#eff6ff;border-radius:10px;
+  padding:15px;margin-top:18px;overflow-wrap:anywhere
+}
+.hidden{display:none}
+.status{font-weight:bold;margin-top:12px}
+</style>
 </head>
 
 <body>
-  <div class="container">
-    <h2>CHAKIYA</h2>
-    <p class="subtitle">Class 9 Barcode Attendance System</p>
+<div class="container">
 
-    <div class="center">
-      <button id="startBtn" onclick="startScanner()">Start Camera</button>
-      <button id="stopBtn" onclick="stopScanner()">Stop Camera</button>
-    </div>
+<h2>CHAKIYA</h2>
+<p class="subtitle">Class 9 Barcode Attendance System</p>
 
-    <div id="reader"></div>
+<!-- TEACHER LOGIN -->
+<div id="loginPanel">
+  <h3>Teacher Login</h3>
+  <input id="teacherId" placeholder="Enter Teacher ID">
+  <input id="teacherPin" type="password"
+         inputmode="numeric" placeholder="Enter PIN">
+  <div class="center">
+    <button id="loginBtn" onclick="teacherLogin()">Login</button>
+  </div>
+</div>
 
-    <h3>Manual Barcode Entry</h3>
-    <input id="manualBarcode"
-      type="text"
-      placeholder="Enter Student ID / Barcode">
+<!-- ATTENDANCE PANEL -->
+<div id="attendancePanel" class="hidden">
 
-    <div class="center">
-      <button id="manualBtn" onclick="manualScan()">Test Barcode</button>
-    </div>
-
-    <div class="result">
-      <strong>Scanner result:</strong>
-      <p id="result">Waiting for barcode...</p>
-    </div>
+  <div class="result">
+    <strong>Logged in:</strong>
+    <p id="teacherInfo">Teacher</p>
   </div>
 
-  <script>
-    
-const API_URL = "https://script.google.com/macros/s/AKfycbxW7D449J0tM9hyki-Xy8fIYNx9ho7xXkXwHFmGKxpwpbuj-JCbBXcO150Udzod8nK7/exec";
+  <h3>Barcode Scanner</h3>
 
-async function apiRequest(action, payload = {}) {
-  const response = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
+  <div class="center">
+    <button id="startBtn" onclick="startScanner()">Start Camera</button>
+    <button id="stopBtn" onclick="stopScanner()">Stop Camera</button>
+  </div>
+
+  <div id="reader"></div>
+
+  <h3>Manual Barcode Entry</h3>
+  <input id="manualBarcode"
+         placeholder="Enter Student ID / Barcode">
+  <div class="center">
+    <button id="manualBtn" onclick="manualScan()">Mark Attendance</button>
+  </div>
+
+  <div class="center">
+    <button id="summaryBtn" onclick="loadSummary()">
+      Today's Summary
+    </button>
+    <button id="logoutBtn" onclick="teacherLogout()">Logout</button>
+  </div>
+
+  <div class="result">
+    <strong>Attendance Result:</strong>
+    <p id="result">Ready to scan.</p>
+  </div>
+
+  <div class="result">
+    <strong>Today's Summary:</strong>
+    <pre id="summary">Click Today's Summary.</pre>
+  </div>
+
+</div>
+</div>
+
+<script>
+const API_URL =
+"https://script.google.com/macros/s/AKfycbxW7D449J0tM9hyki-Xy8fIYNx9ho7xXkXwHFmGKxpwpbuj-JCbBXcO150Udzod8nK7/exec";
+
+let sessionToken = null;
+let teacherData = null;
+let scanner = null;
+let scanning = false;
+let submitting = false;
+let lastBarcode = "";
+let lastScanTime = 0;
+
+async function apiRequest(action,payload={}) {
+  const response = await fetch(API_URL,{
+    method:"POST",
+    headers:{
+      "Content-Type":"text/plain;charset=utf-8"
     },
-    body: JSON.stringify({
-      action,
-      ...payload
-    })
+    body:JSON.stringify({action,...payload})
   });
 
   return await response.json();
 }
 
-    let scanner = null;
-    let scanning = false;
+function showResult(message){
+  document.getElementById("result").textContent = message;
+}
 
-    async function startScanner() {
-      if (!window.Html5Qrcode) {
-        alert("Scanner library failed to load. Check internet.");
-        return;
-      }
+async function teacherLogin(){
+  const teacherId =
+    document.getElementById("teacherId").value.trim();
+  const pin =
+    document.getElementById("teacherPin").value.trim();
 
-      try {
-        if (!scanner) {
-          scanner = new Html5Qrcode("reader", {
-            formatsToSupport: [
-              Html5QrcodeSupportedFormats.CODE_128
-            ]
-          });
-        }
+  if(!teacherId || !pin){
+    alert("Please enter Teacher ID and PIN.");
+    return;
+  }
 
-        const cameras = await Html5Qrcode.getCameras();
+  const btn=document.getElementById("loginBtn");
+  btn.disabled=true;
+  btn.textContent="Logging in...";
 
-        if (!cameras || cameras.length === 0) {
-          throw new Error("No camera detected.");
-        }
+  try{
+    const response=await apiRequest("login",{
+      teacherId:teacherId,
+      pin:pin
+    });
 
-        const camera = cameras.find(c =>
-          /back|rear|environment/i.test(c.label)
-        ) || cameras[0];
-
-        await scanner.start(
-          camera.id,
-          {
-            fps: 10,
-            qrbox: { width: 300, height: 130 }
-          },
-          decodedText => {
-            document.getElementById("result").textContent =
-              "Barcode detected: " + decodedText;
-          },
-          () => {}
-        );
-
-        scanning = true;
-        document.getElementById("startBtn").disabled = true;
-
-      } catch (error) {
-        alert("Camera error: " + error.message);
-        console.error(error);
-      }
+    if(!response.success){
+      throw new Error(response.message || "Login failed.");
     }
 
-    async function stopScanner() {
-      if (scanner && scanning) {
-        await scanner.stop();
-        scanning = false;
-      }
+    const data=response.data;
 
-      document.getElementById("startBtn").disabled = false;
+    if(!data || !data.token){
+      throw new Error("Login response did not contain a session token.");
     }
 
-    function manualScan() {
-      const value = document.getElementById("manualBarcode")
-        .value.trim();
+    sessionToken=data.token;
+    teacherData=data.teacher || {};
 
-      document.getElementById("result").textContent =
-        value ? "Manual barcode entered: " + value :
-        "Please enter a barcode.";
+    document.getElementById("loginPanel").classList.add("hidden");
+    document.getElementById("attendancePanel").classList.remove("hidden");
+
+    document.getElementById("teacherInfo").textContent =
+      teacherData.teacherName ||
+      teacherData.name ||
+      teacherId;
+
+    showResult("Login successful. Ready to scan.");
+
+  }catch(error){
+    alert("Login error: "+error.message);
+  }finally{
+    btn.disabled=false;
+    btn.textContent="Login";
+  }
+}
+
+async function startScanner(){
+  if(!sessionToken){
+    alert("Please login first.");
+    return;
+  }
+
+  if(!window.Html5Qrcode){
+    alert("Scanner library failed to load.");
+    return;
+  }
+
+  try{
+    if(!scanner){
+      scanner=new Html5Qrcode("reader",{
+        formatsToSupport:[
+          Html5QrcodeSupportedFormats.CODE_128
+        ]
+      });
     }
-  </script>
+
+    const cameras=await Html5Qrcode.getCameras();
+
+    if(!cameras || cameras.length===0){
+      throw new Error("No camera detected.");
+    }
+
+    const camera=cameras.find(c=>
+      /back|rear|environment/i.test(c.label)
+    ) || cameras[0];
+
+    await scanner.start(
+      camera.id,
+      {
+        fps:10,
+        qrbox:{width:300,height:130}
+      },
+      decodedText=>{
+        processBarcode(decodedText);
+      },
+      ()=>{}
+    );
+
+    scanning=true;
+    document.getElementById("startBtn").disabled=true;
+    showResult("Camera started. Scan a student barcode.");
+
+  }catch(error){
+    alert("Camera error: "+error.message);
+    console.error(error);
+  }
+}
+
+async function stopScanner(){
+  if(scanner && scanning){
+    await scanner.stop();
+    scanning=false;
+  }
+  document.getElementById("startBtn").disabled=false;
+}
+
+async function processBarcode(barcode){
+  barcode=String(barcode).trim();
+
+  if(!barcode || !sessionToken || submitting)return;
+
+  const now=Date.now();
+
+  // Prevent repeated camera reads of the same barcode.
+  if(barcode===lastBarcode && now-lastScanTime<4000)return;
+
+  lastBarcode=barcode;
+  lastScanTime=now;
+  submitting=true;
+
+  showResult("Submitting attendance for "+barcode+"...");
+
+  try{
+    const response=await apiRequest("mark",{
+      token:sessionToken,
+      barcode:barcode
+    });
+
+    if(!response.success){
+      throw new Error(response.message || "Attendance failed.");
+    }
+
+    const data=response.data || {};
+
+    if(data.success===false){
+      throw new Error(data.message || "Attendance not recorded.");
+    }
+
+    showResult(
+      "Attendance response:\n"+
+      JSON.stringify(data,null,2)
+    );
+
+  }catch(error){
+    showResult("Error: "+error.message);
+  }finally{
+    submitting=false;
+  }
+}
+
+function manualScan(){
+  const value=document.getElementById("manualBarcode")
+    .value.trim();
+
+  if(!value){
+    alert("Please enter a barcode.");
+    return;
+  }
+
+  processBarcode(value);
+}
+
+async function loadSummary(){
+  if(!sessionToken)return;
+
+  const section =
+    teacherData.assignedSection ||
+    teacherData.section ||
+    "A";
+
+  document.getElementById("summary").textContent="Loading...";
+
+  try{
+    const response=await apiRequest("summary",{
+      token:sessionToken,
+      section:section
+    });
+
+    if(!response.success){
+      throw new Error(response.message || "Could not load summary.");
+    }
+
+    document.getElementById("summary").textContent =
+      JSON.stringify(response.data,null,2);
+
+  }catch(error){
+    document.getElementById("summary").textContent =
+      "Error: "+error.message;
+  }
+}
+
+async function teacherLogout(){
+  await stopScanner();
+
+  try{
+    await apiRequest("logout",{token:sessionToken});
+  }catch(error){
+    console.error(error);
+  }
+
+  sessionToken=null;
+  teacherData=null;
+
+  document.getElementById("attendancePanel").classList.add("hidden");
+  document.getElementById("loginPanel").classList.remove("hidden");
+  document.getElementById("teacherPin").value="";
+
+  showResult("Logged out.");
+}
+</script>
 </body>
 </html>
