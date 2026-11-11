@@ -5,172 +5,437 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CHAKIYA Barcode Attendance</title>
+
 <script src="https://unpkg.com/html5-qrcode"></script>
 
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;padding:18px;font-family:Arial,sans-serif;
-  background:#f1f5f9;color:#172554
+* {
+  box-sizing: border-box;
 }
-.container{
-  max-width:600px;margin:20px auto;background:white;
-  padding:22px;border-radius:16px;
-  box-shadow:0 5px 25px #00000012
+
+body {
+  margin: 0;
+  padding: 18px;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #172554;
 }
-h2{text-align:center;margin-bottom:5px}
-.subtitle{text-align:center;color:#64748b}
-input{
-  width:100%;padding:13px;margin:8px 0;
-  border:1px solid #cbd5e1;border-radius:8px;font-size:16px
+
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  background: white;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 5px 25px #00000012;
 }
-button{
-  border:0;padding:13px 17px;border-radius:8px;
-  color:white;font-weight:bold;cursor:pointer;margin:5px
+
+h2 {
+  text-align: center;
+  margin-bottom: 5px;
 }
-button:disabled{opacity:.5;cursor:not-allowed}
-.center{text-align:center}
-#loginBtn{background:#1d4ed8}
-#startBtn{background:#15803d}
-#stopBtn{background:#dc2626}
-#manualBtn{background:#1d4ed8}
-#summaryBtn{background:#7c3aed}
-#logoutBtn{background:#475569}
-#reader{width:100%;margin:18px auto}
-.result{
-  background:#eff6ff;border-radius:10px;
-  padding:15px;margin-top:18px;overflow-wrap:anywhere
+
+.subtitle {
+  text-align: center;
+  color: #64748b;
 }
-.hidden{display:none}
-.status{font-weight:bold;margin-top:12px}
+
+input {
+  width: 100%;
+  padding: 13px;
+  margin: 8px 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+button {
+  border: 0;
+  padding: 13px 17px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.center {
+  text-align: center;
+}
+
+#loginBtn {
+  background: #1d4ed8;
+}
+
+#startBtn {
+  background: #15803d;
+}
+
+#stopBtn {
+  background: #dc2626;
+}
+
+#manualBtn {
+  background: #1d4ed8;
+}
+
+#summaryBtn {
+  background: #7c3aed;
+}
+
+#logoutBtn {
+  background: #475569;
+}
+
+#reader {
+  width: 100%;
+  margin: 18px auto;
+}
+
+.result {
+  background: #eff6ff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 18px;
+  overflow-wrap: anywhere;
+}
+
+.hidden {
+  display: none;
+}
+
+.status {
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+#result {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+#summary {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 8px;
+  }
+
+  .container {
+    margin: 8px auto;
+    padding: 15px;
+  }
+
+  button {
+    padding: 12px;
+  }
+}
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
-<h2>CHAKIYA</h2>
-<p class="subtitle">Class 9 Barcode Attendance System</p>
+  <h2>CHAKIYA</h2>
+  <p class="subtitle">Class 9 Barcode Attendance System</p>
 
-<!-- TEACHER LOGIN -->
-<div id="loginPanel">
-  <h3>Teacher Login</h3>
-  <input id="teacherId" placeholder="Enter Teacher ID">
-  <input id="teacherPin" type="password"
-         inputmode="numeric" placeholder="Enter PIN">
-  <div class="center">
-    <button id="loginBtn" onclick="teacherLogin()">Login</button>
-  </div>
-</div>
+  <!-- TEACHER LOGIN -->
+  <div id="loginPanel">
 
-<!-- ATTENDANCE PANEL -->
-<div id="attendancePanel" class="hidden">
+    <h3>Teacher Login</h3>
 
-  <div class="result">
-    <strong>Logged in:</strong>
-    <p id="teacherInfo">Teacher</p>
-  </div>
+    <input
+      id="teacherId"
+      placeholder="Enter Teacher ID"
+      autocomplete="username"
+    >
 
-  <h3>Barcode Scanner</h3>
+    <input
+      id="teacherPin"
+      type="password"
+      inputmode="numeric"
+      placeholder="Enter PIN"
+      autocomplete="current-password"
+    >
 
-  <div class="center">
-    <button id="startBtn" onclick="startScanner()">Start Camera</button>
-    <button id="stopBtn" onclick="stopScanner()">Stop Camera</button>
-  </div>
+    <div class="center">
+      <button id="loginBtn" onclick="teacherLogin()">
+        Login
+      </button>
+    </div>
 
-  <div id="reader"></div>
-
-  <h3>Manual Barcode Entry</h3>
-  <input id="manualBarcode"
-         placeholder="Enter Student ID / Barcode">
-  <div class="center">
-    <button id="manualBtn" onclick="manualScan()">Mark Attendance</button>
   </div>
 
-  <div class="center">
-    <button id="summaryBtn" onclick="loadSummary()">
-      Today's Summary
-    </button>
-    <button id="logoutBtn" onclick="teacherLogout()">Logout</button>
+  <!-- ATTENDANCE PANEL -->
+  <div id="attendancePanel" class="hidden">
+
+    <div class="result">
+      <strong>Logged in:</strong>
+      <p id="teacherInfo">Teacher</p>
+    </div>
+
+    <h3>Barcode Scanner</h3>
+
+    <div class="center">
+      <button id="startBtn" onclick="startScanner()">
+        Start Camera
+      </button>
+
+      <button id="stopBtn" onclick="stopScanner()">
+        Stop Camera
+      </button>
+    </div>
+
+    <div id="reader"></div>
+
+    <h3>Manual Barcode Entry</h3>
+
+    <input
+      id="manualBarcode"
+      placeholder="Enter Student ID / Barcode"
+    >
+
+    <div class="center">
+      <button id="manualBtn" onclick="manualScan()">
+        Mark Attendance
+      </button>
+    </div>
+
+    <div class="center">
+      <button id="summaryBtn" onclick="loadSummary()">
+        Today's Summary
+      </button>
+
+      <button id="logoutBtn" onclick="teacherLogout()">
+        Logout
+      </button>
+    </div>
+
+    <div class="result">
+      <strong>Attendance Result:</strong>
+      <p id="result">Ready to scan.</p>
+    </div>
+
+    <div class="result">
+      <strong>Today's Summary:</strong>
+      <pre id="summary">Click Today's Summary.</pre>
+    </div>
+
   </div>
 
-  <div class="result">
-    <strong>Attendance Result:</strong>
-    <p id="result">Ready to scan.</p>
-  </div>
-
-  <div class="result">
-    <strong>Today's Summary:</strong>
-    <pre id="summary">Click Today's Summary.</pre>
-  </div>
-
-</div>
 </div>
 
 <script>
+
+// ========================================
+// CONFIGURATION
+// ========================================
+
 const API_URL =
 "https://script.google.com/macros/s/AKfycbxW7D449J0tM9hyki-Xy8fIYNx9ho7xXkXwHFmGKxpwpbuj-JCbBXcO150Udzod8nK7/exec";
 
 let sessionToken = null;
 let teacherData = null;
 let scanner = null;
+
 let scanning = false;
 let submitting = false;
+
 let lastBarcode = "";
 let lastScanTime = 0;
 
-async function apiRequest(action,payload={}) {
-  const response = await fetch(API_URL,{
-    method:"POST",
-    headers:{
-      "Content-Type":"text/plain;charset=utf-8"
+// Shared audio context
+let audioContext = null;
+
+
+// ========================================
+// API REQUEST
+// ========================================
+
+async function apiRequest(action, payload = {}) {
+
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
     },
-    body:JSON.stringify({action,...payload})
+    body: JSON.stringify({
+      action,
+      ...payload
+    })
   });
+
+  if (!response.ok) {
+    throw new Error("Server connection failed. HTTP " + response.status);
+  }
 
   return await response.json();
 }
 
-function showResult(message){
-  document.getElementById("result").textContent = message;
+
+// ========================================
+// AUDIO UNLOCK
+// ========================================
+
+async function unlockAudio() {
+
+  try {
+
+    const AudioContextClass =
+      window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioContextClass) {
+      console.log("AudioContext is not supported.");
+      return;
+    }
+
+    if (!audioContext) {
+      audioContext = new AudioContextClass();
+    }
+
+    if (audioContext.state === "suspended") {
+      await audioContext.resume();
+    }
+
+    // Silent sound to unlock browser audio
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    gain.gain.value = 0;
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.02);
+
+  } catch (error) {
+    console.log("Audio unlock failed:", error);
+  }
 }
 
-async function teacherLogin(){
+
+// ========================================
+// SUCCESS BEEP + VIBRATION
+// ========================================
+
+function playSuccessBeep() {
+
+  try {
+
+    if (audioContext && audioContext.state === "running") {
+
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+
+      oscillator.type = "sine";
+      oscillator.frequency.value = 1100;
+
+      gain.gain.setValueAtTime(
+        0.4,
+        audioContext.currentTime
+      );
+
+      gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        audioContext.currentTime + 0.3
+      );
+
+      oscillator.start();
+
+      oscillator.stop(
+        audioContext.currentTime + 0.3
+      );
+
+    }
+
+  } catch (error) {
+    console.log("Beep sound unavailable:", error);
+  }
+
+  // Mobile vibration
+  try {
+    if ("vibrate" in navigator) {
+      navigator.vibrate(200);
+    }
+  } catch (error) {
+    console.log("Vibration unavailable:", error);
+  }
+}
+
+
+// ========================================
+// RESULT MESSAGE
+// ========================================
+
+function showResult(message) {
+
+  document.getElementById("result").textContent = message;
+
+}
+
+
+// ========================================
+// TEACHER LOGIN
+// ========================================
+
+async function teacherLogin() {
+
   const teacherId =
     document.getElementById("teacherId").value.trim();
+
   const pin =
     document.getElementById("teacherPin").value.trim();
 
-  if(!teacherId || !pin){
+  if (!teacherId || !pin) {
     alert("Please enter Teacher ID and PIN.");
     return;
   }
 
-  const btn=document.getElementById("loginBtn");
-  btn.disabled=true;
-  btn.textContent="Logging in...";
+  const btn = document.getElementById("loginBtn");
 
-  try{
-    const response=await apiRequest("login",{
-      teacherId:teacherId,
-      pin:pin
+  btn.disabled = true;
+  btn.textContent = "Logging in...";
+
+  try {
+
+    const response = await apiRequest("login", {
+      teacherId: teacherId,
+      pin: pin
     });
 
-    if(!response.success){
+    if (!response.success) {
       throw new Error(response.message || "Login failed.");
     }
 
-    const data=response.data;
+    const data = response.data;
 
-    if(!data || !data.token){
-      throw new Error("Login response did not contain a session token.");
+    if (!data || !data.token) {
+      throw new Error(
+        "Login response did not contain a session token."
+      );
     }
 
-    sessionToken=data.token;
-    teacherData=data.teacher || {};
+    sessionToken = data.token;
+    teacherData = data.teacher || {};
 
-    document.getElementById("loginPanel").classList.add("hidden");
-    document.getElementById("attendancePanel").classList.remove("hidden");
+    document.getElementById("loginPanel")
+      .classList.add("hidden");
+
+    document.getElementById("attendancePanel")
+      .classList.remove("hidden");
 
     document.getElementById("teacherInfo").textContent =
       teacherData.teacherName ||
@@ -179,187 +444,366 @@ async function teacherLogin(){
 
     showResult("Login successful. Ready to scan.");
 
-  }catch(error){
-    alert("Login error: "+error.message);
-  }finally{
-    btn.disabled=false;
-    btn.textContent="Login";
+  } catch (error) {
+
+    alert("Login error: " + error.message);
+
+  } finally {
+
+    btn.disabled = false;
+    btn.textContent = "Login";
+
   }
 }
 
-async function startScanner(){
-  if(!sessionToken){
+
+// ========================================
+// START CAMERA SCANNER
+// ========================================
+
+async function startScanner() {
+
+  if (!sessionToken) {
     alert("Please login first.");
     return;
   }
 
-  if(!window.Html5Qrcode){
+  if (!window.Html5Qrcode) {
     alert("Scanner library failed to load.");
     return;
   }
 
-  try{
-    if(!scanner){
-      scanner=new Html5Qrcode("reader",{
-  formatsToSupport:[
-    Html5QrcodeSupportedFormats.CODE_128,
-    Html5QrcodeSupportedFormats.CODE_39,
-    Html5QrcodeSupportedFormats.EAN_13,
-    Html5QrcodeSupportedFormats.QR_CODE
-  ],
-  verbose:true
-});
+  if (scanning) {
+    return;
+  }
+
+  try {
+
+    // Unlock audio directly from Start Camera click
+    await unlockAudio();
+
+    if (!scanner) {
+
+      scanner = new Html5Qrcode("reader", {
+
+        formatsToSupport: [
+          Html5QrcodeSupportedFormats.CODE_128,
+          Html5QrcodeSupportedFormats.CODE_39,
+          Html5QrcodeSupportedFormats.EAN_13,
+          Html5QrcodeSupportedFormats.QR_CODE
+        ],
+
+        verbose: false
+
+      });
+
     }
 
-    const cameras=await Html5Qrcode.getCameras();
+    const cameras = await Html5Qrcode.getCameras();
 
-    if(!cameras || cameras.length===0){
+    if (!cameras || cameras.length === 0) {
       throw new Error("No camera detected.");
     }
 
-    const camera=cameras.find(c=>
+    const camera = cameras.find(c =>
       /back|rear|environment/i.test(c.label)
     ) || cameras[0];
 
     await scanner.start(
+
       camera.id,
+
       {
-        fps:10,
-        qrbox:function(viewfinderWidth,viewfinderHeight){
-    return {
-        width:Math.floor(viewfinderWidth*0.90),
-        height:Math.min(180,Math.floor(viewfinderHeight*0.45))
-    };
-},
-aspectRatio:1.777
+        fps: 10,
+
+        qrbox: function(viewfinderWidth, viewfinderHeight) {
+
+          return {
+            width: Math.floor(viewfinderWidth * 0.90),
+            height: Math.min(
+              180,
+              Math.floor(viewfinderHeight * 0.45)
+            )
+          };
+
+        },
+
+        aspectRatio: 1.777
+
       },
-      decodedText=>{
+
+      decodedText => {
         processBarcode(decodedText);
       },
-      ()=>{}
+
+      () => {}
+
     );
 
-    scanning=true;
-    document.getElementById("startBtn").disabled=true;
+    scanning = true;
+
+    document.getElementById("startBtn").disabled = true;
+
     showResult("Camera started. Scan a student barcode.");
 
-  }catch(error){
-    alert("Camera error: "+error.message);
+  } catch (error) {
+
+    scanning = false;
+
+    document.getElementById("startBtn").disabled = false;
+
+    alert("Camera error: " + error.message);
+
     console.error(error);
+
   }
+
 }
 
-async function stopScanner(){
-  if(scanner && scanning){
-    await scanner.stop();
-    scanning=false;
+
+// ========================================
+// STOP CAMERA
+// ========================================
+
+async function stopScanner() {
+
+  try {
+
+    if (scanner && scanning) {
+
+      await scanner.stop();
+
+      scanning = false;
+
+    }
+
+  } catch (error) {
+
+    console.error("Camera stop error:", error);
+
   }
-  document.getElementById("startBtn").disabled=false;
+
+  document.getElementById("startBtn").disabled = false;
+
 }
 
-async function processBarcode(barcode){
-  barcode=String(barcode).trim();
 
-  if(!barcode || !sessionToken || submitting)return;
+// ========================================
+// PROCESS BARCODE
+// ========================================
 
-  const now=Date.now();
+async function processBarcode(barcode) {
 
-  // Prevent repeated camera reads of the same barcode.
-  if(barcode===lastBarcode && now-lastScanTime<4000)return;
+  barcode = String(barcode).trim();
 
-  lastBarcode=barcode;
-  lastScanTime=now;
-  submitting=true;
+  if (!barcode || !sessionToken || submitting) {
+    return;
+  }
 
-  showResult("Submitting attendance for "+barcode+"...");
+  const now = Date.now();
 
-  try{
-    const response=await apiRequest("mark",{
-      token:sessionToken,
-      barcode:barcode
+  // Prevent repeated camera reads of same barcode
+  if (
+    barcode === lastBarcode &&
+    now - lastScanTime < 4000
+  ) {
+    return;
+  }
+
+  lastBarcode = barcode;
+  lastScanTime = now;
+
+  submitting = true;
+
+  const manualBtn = document.getElementById("manualBtn");
+
+  manualBtn.disabled = true;
+
+  showResult("Submitting attendance for " + barcode + "...");
+
+  try {
+
+    const response = await apiRequest("mark", {
+      token: sessionToken,
+      barcode: barcode
     });
 
-    if(!response.success){
-      throw new Error(response.message || "Attendance failed.");
+    if (!response.success) {
+      throw new Error(
+        response.message || "Attendance failed."
+      );
     }
 
-    const data=response.data || {};
+    const data = response.data || {};
 
-    if(data.success===false){
-      throw new Error(data.message || "Attendance not recorded.");
+    if (data.success === false) {
+      throw new Error(
+        data.message || "Attendance not recorded."
+      );
     }
 
-    showResult(
-      "Attendance response:\n"+
-      JSON.stringify(data,null,2)
-    );
+    // Successful attendance: beep and vibrate
+    playSuccessBeep();
 
-  }catch(error){
-    showResult("Error: "+error.message);
-  }finally{
-    submitting=false;
+    const studentName =
+      data.studentName || data.name || "Student";
+
+    const rollNo =
+      data.rollNo || "";
+
+    const section =
+      data.section || "";
+
+    const duplicate =
+      data.duplicate === true;
+
+    if (duplicate) {
+
+      showResult(
+        "ALREADY MARKED\n\n" +
+        "Student: " + studentName + "\n" +
+        "Roll No: " + rollNo + "\n" +
+        "Section: " + section
+      );
+
+    } else {
+
+      showResult(
+        "ATTENDANCE SUBMITTED SUCCESSFULLY!\n\n" +
+        "Student: " + studentName + "\n" +
+        "Roll No: " + rollNo + "\n" +
+        "Section: " + section
+      );
+
+    }
+
+    // Clear manual barcode field
+    document.getElementById("manualBarcode").value = "";
+
+  } catch (error) {
+
+    showResult("ERROR: " + error.message);
+
+    console.error("Attendance submission error:", error);
+
+  } finally {
+
+    submitting = false;
+    manualBtn.disabled = false;
+
   }
+
 }
 
-function manualScan(){
-  const value=document.getElementById("manualBarcode")
-    .value.trim();
 
-  if(!value){
+// ========================================
+// MANUAL BARCODE ENTRY
+// ========================================
+
+function manualScan() {
+
+  const value =
+    document.getElementById("manualBarcode")
+      .value.trim();
+
+  if (!value) {
     alert("Please enter a barcode.");
     return;
   }
 
   processBarcode(value);
+
 }
 
-async function loadSummary(){
-  if(!sessionToken)return;
+
+// ========================================
+// TODAY'S ATTENDANCE SUMMARY
+// ========================================
+
+async function loadSummary() {
+
+  if (!sessionToken) {
+    return;
+  }
 
   const section =
     teacherData.assignedSection ||
     teacherData.section ||
     "A";
 
-  document.getElementById("summary").textContent="Loading...";
+  document.getElementById("summary").textContent =
+    "Loading...";
 
-  try{
-    const response=await apiRequest("summary",{
-      token:sessionToken,
-      section:section
+  try {
+
+    const response = await apiRequest("summary", {
+      token: sessionToken,
+      section: section
     });
 
-    if(!response.success){
-      throw new Error(response.message || "Could not load summary.");
+    if (!response.success) {
+      throw new Error(
+        response.message || "Could not load summary."
+      );
     }
 
     document.getElementById("summary").textContent =
-      JSON.stringify(response.data,null,2);
+      JSON.stringify(response.data, null, 2);
 
-  }catch(error){
+  } catch (error) {
+
     document.getElementById("summary").textContent =
-      "Error: "+error.message;
+      "Error: " + error.message;
+
   }
+
 }
 
-async function teacherLogout(){
+
+// ========================================
+// TEACHER LOGOUT
+// ========================================
+
+async function teacherLogout() {
+
   await stopScanner();
 
-  try{
-    await apiRequest("logout",{token:sessionToken});
-  }catch(error){
-    console.error(error);
+  try {
+
+    await apiRequest("logout", {
+      token: sessionToken
+    });
+
+  } catch (error) {
+
+    console.error("Logout error:", error);
+
   }
 
-  sessionToken=null;
-  teacherData=null;
+  sessionToken = null;
+  teacherData = null;
 
-  document.getElementById("attendancePanel").classList.add("hidden");
-  document.getElementById("loginPanel").classList.remove("hidden");
-  document.getElementById("teacherPin").value="";
+  lastBarcode = "";
+  lastScanTime = 0;
+
+  document.getElementById("attendancePanel")
+    .classList.add("hidden");
+
+  document.getElementById("loginPanel")
+    .classList.remove("hidden");
+
+  document.getElementById("teacherPin").value = "";
+
+  document.getElementById("teacherId").value = "";
+
+  document.getElementById("summary").textContent =
+    "Click Today's Summary.";
 
   showResult("Logged out.");
+
 }
+
 </script>
+
 </body>
 </html>
