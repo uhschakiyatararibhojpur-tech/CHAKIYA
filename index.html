@@ -1362,29 +1362,33 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
-    
-// ======================================
-// ONLINE ATTENDANCE DROPDOWN
-// ======================================
+
+/* =====================================
+   ONLINE ATTENDANCE DROPDOWN
+===================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     const dropdown = document.getElementById("attendanceDropdown");
     const toggle = document.getElementById("attendanceToggle");
 
-    if (!dropdown || !toggle) return;
+    if (!dropdown || !toggle) {
+        console.error("Attendance dropdown not found!");
+        return;
+    }
 
     toggle.addEventListener("click", function (event) {
+        event.preventDefault();
         event.stopPropagation();
 
-        const isOpen = dropdown.classList.toggle("active");
+        const isOpen = dropdown.classList.toggle("open");
 
-        toggle.setAttribute("aria-expanded", isOpen);
+        toggle.setAttribute("aria-expanded", String(isOpen));
     });
 
     document.addEventListener("click", function (event) {
         if (!dropdown.contains(event.target)) {
-            dropdown.classList.remove("active");
+            dropdown.classList.remove("open");
             toggle.setAttribute("aria-expanded", "false");
         }
     });
