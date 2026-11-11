@@ -3902,3 +3902,14 @@ button:focus-visible,
 .about-card h3 {
     margin-top: 20px;
 }
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown .dropdown-menu {
+    display: none;
+}
+
+.nav-dropdown.open .dropdown-menu {
+    display: block;
+}
