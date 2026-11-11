@@ -1364,17 +1364,14 @@ if ("serviceWorker" in navigator) {
         alert("CHAKIYA Attendance JavaScript Loaded Successfully");
 </script>
 
-/* =====================================
-   ONLINE ATTENDANCE DROPDOWN
-===================================== */
 
+    <script>
 document.addEventListener("DOMContentLoaded", function () {
-
     const dropdown = document.getElementById("attendanceDropdown");
     const toggle = document.getElementById("attendanceToggle");
 
     if (!dropdown || !toggle) {
-        console.error("Attendance dropdown not found!");
+        console.error("Attendance dropdown elements not found");
         return;
     }
 
@@ -1384,7 +1381,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const isOpen = dropdown.classList.toggle("open");
 
-        toggle.setAttribute("aria-expanded", String(isOpen));
+        toggle.setAttribute("aria-expanded", isOpen);
     });
 
     document.addEventListener("click", function (event) {
@@ -1393,9 +1390,8 @@ document.addEventListener("DOMContentLoaded", function () {
             toggle.setAttribute("aria-expanded", "false");
         }
     });
-
 });
-
+</script>
 </body>
 </html>
 
