@@ -201,10 +201,14 @@ async function startScanner(){
   try{
     if(!scanner){
       scanner=new Html5Qrcode("reader",{
-        formatsToSupport:[
-          Html5QrcodeSupportedFormats.CODE_128
-        ]
-      });
+  formatsToSupport:[
+    Html5QrcodeSupportedFormats.CODE_128,
+    Html5QrcodeSupportedFormats.CODE_39,
+    Html5QrcodeSupportedFormats.EAN_13,
+    Html5QrcodeSupportedFormats.QR_CODE
+  ],
+  verbose:true
+});
     }
 
     const cameras=await Html5Qrcode.getCameras();
@@ -221,7 +225,13 @@ async function startScanner(){
       camera.id,
       {
         fps:10,
-        qrbox:{width:300,height:130}
+        qrbox:function(viewfinderWidth,viewfinderHeight){
+    return {
+        width:Math.floor(viewfinderWidth*0.90),
+        height:Math.min(180,Math.floor(viewfinderHeight*0.45))
+    };
+},
+aspectRatio:1.777
       },
       decodedText=>{
         processBarcode(decodedText);
