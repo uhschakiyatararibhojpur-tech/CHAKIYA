@@ -1362,6 +1362,35 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
+    
+// ======================================
+// ONLINE ATTENDANCE DROPDOWN
+// ======================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const dropdown = document.getElementById("attendanceDropdown");
+    const toggle = document.getElementById("attendanceToggle");
+
+    if (!dropdown || !toggle) return;
+
+    toggle.addEventListener("click", function (event) {
+        event.stopPropagation();
+
+        const isOpen = dropdown.classList.toggle("active");
+
+        toggle.setAttribute("aria-expanded", isOpen);
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!dropdown.contains(event.target)) {
+            dropdown.classList.remove("active");
+            toggle.setAttribute("aria-expanded", "false");
+        }
+    });
+
+});
+
 </body>
 </html>
 
