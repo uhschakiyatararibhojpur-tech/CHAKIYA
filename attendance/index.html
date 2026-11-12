@@ -182,6 +182,34 @@ button:disabled {
       <strong>Logged in:</strong>
       <p id="teacherInfo">Teacher</p>
     </div>
+    
+<!-- HOLIDAY MANAGEMENT -->
+<div id="holidayPanel" class="result hidden">
+
+  <h3>📅 School Holiday Management</h3>
+
+  <label for="holidayDate">Select Holiday Date</label>
+  <input type="date" id="holidayDate">
+
+  <label for="holidayReason">Holiday Reason</label>
+  <input
+    type="text"
+    id="holidayReason"
+    placeholder="Example: Chhath Puja"
+  >
+
+  <button
+    id="holidayBtn"
+    type="button"
+    onclick="declareHoliday()"
+    style="background:#d97706;width:100%">
+    Declare Holiday
+  </button>
+
+  <p id="holidayMessage"></p>
+
+</div>
+
 
     <h3>Barcode Scanner</h3>
 
@@ -385,6 +413,198 @@ function showResult(message) {
   document.getElementById("result").textContent = message;
 
 }
+  
+/************ HOLIDAY MANAGEMENT ************/
+
+function setupHolidayPanel() {
+
+  const panel = document.getElementById("holidayPanel");
+
+  // Only show the feature to Admin.
+  if (teacherData && teacherData.role === "Admin") {
+    panel.classList.remove("hidden");
+  } else {
+    panel.classList.add("hidden");
+  }
+
+  // Set today's date as the default date.
+  const today = new Date();
+
+  document.getElementById("holidayDate").value =
+    today.getFullYear() + "-" +
+    String(today.getMonth() + 1).padStart(2, "0") + "-" +
+    String(today.getDate()).padStart(2, "0");
+}
+
+
+async function declareHoliday() {
+
+  if (!sessionToken) {
+    alert("Please login first.");
+    return;
+  }
+
+  if (!teacherData || teacherData.role !== "Admin") {
+    alert("Only Admin can declare a school holiday.");
+    return;
+  }
+
+  const date = document.getElementById("holidayDate").value;
+  const reason = document.getElementById("holidayReason").value.trim();
+
+  const button = document.getElementById("holidayBtn");
+  const message = document.getElementById("holidayMessage");
+
+  if (!date) {
+    message.textContent = "Please select a date.";
+    return;
+  }
+
+  if (!reason) {
+    message.textContent = "Please enter the holiday reason.";
+    return;
+  }
+
+  if (!confirm(
+    "Declare " + reason + " as a school holiday on " + date + "?"
+  )) {
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Declaring...";
+  message.textContent = "Please wait...";
+
+  try {
+
+    const response = await apiRequest("declareHoliday", {
+      token: sessionToken,
+      date: date,
+      reason: reason
+    });
+
+    if (!response.success) {
+      throw new Error(response.message || "Could not declare holiday.");
+    }
+
+    const data = response.data || {};
+
+    message.textContent =
+      "✓ " + (data.message || "Holiday declared successfully.");
+
+    message.style.color = "#15803d";
+
+    document.getElementById("holidayReason").value = "";
+
+  } catch (error) {
+
+    message.textContent = "Error: " + error.message;
+    message.style.color = "#dc2626";
+
+  } finally {
+
+    button.disabled = false;
+    button.textContent = "Declare Holiday";
+
+  }
+}
+
+  
+/************ HOLIDAY MANAGEMENT ************/
+
+function setupHolidayPanel() {
+
+  const panel = document.getElementById("holidayPanel");
+
+  // Only show the feature to Admin.
+  if (teacherData && teacherData.role === "Admin") {
+    panel.classList.remove("hidden");
+  } else {
+    panel.classList.add("hidden");
+  }
+
+  // Set today's date as the default date.
+  const today = new Date();
+
+  document.getElementById("holidayDate").value =
+    today.getFullYear() + "-" +
+    String(today.getMonth() + 1).padStart(2, "0") + "-" +
+    String(today.getDate()).padStart(2, "0");
+}
+
+
+async function declareHoliday() {
+
+  if (!sessionToken) {
+    alert("Please login first.");
+    return;
+  }
+
+  if (!teacherData || teacherData.role !== "Admin") {
+    alert("Only Admin can declare a school holiday.");
+    return;
+  }
+
+  const date = document.getElementById("holidayDate").value;
+  const reason = document.getElementById("holidayReason").value.trim();
+
+  const button = document.getElementById("holidayBtn");
+  const message = document.getElementById("holidayMessage");
+
+  if (!date) {
+    message.textContent = "Please select a date.";
+    return;
+  }
+
+  if (!reason) {
+    message.textContent = "Please enter the holiday reason.";
+    return;
+  }
+
+  if (!confirm(
+    "Declare " + reason + " as a school holiday on " + date + "?"
+  )) {
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Declaring...";
+  message.textContent = "Please wait...";
+
+  try {
+
+    const response = await apiRequest("declareHoliday", {
+      token: sessionToken,
+      date: date,
+      reason: reason
+    });
+
+    if (!response.success) {
+      throw new Error(response.message || "Could not declare holiday.");
+    }
+
+    const data = response.data || {};
+
+    message.textContent =
+      "✓ " + (data.message || "Holiday declared successfully.");
+
+    message.style.color = "#15803d";
+
+    document.getElementById("holidayReason").value = "";
+
+  } catch (error) {
+
+    message.textContent = "Error: " + error.message;
+    message.style.color = "#dc2626";
+
+  } finally {
+
+    button.disabled = false;
+    button.textContent = "Declare Holiday";
+
+  }
+}
+
 
 
 // ========================================
@@ -430,6 +650,7 @@ async function teacherLogin() {
 
     sessionToken = data.token;
     teacherData = data.teacher || {};
+    setupHolidayPanel();
 
     document.getElementById("loginPanel")
       .classList.add("hidden");
