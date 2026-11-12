@@ -3913,3 +3913,111 @@ button:focus-visible,
 .nav-dropdown.open .dropdown-menu {
     display: block;
 }
+
+
+/* ===================================
+   UHS CHAKIYA LIVE PHOTO GALLERY
+=================================== */
+
+#gallery .gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+#gallery .gallery-item {
+  overflow: hidden;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.09);
+  cursor: pointer;
+  transition: transform .25s ease;
+}
+
+#gallery .gallery-item:hover {
+  transform: translateY(-5px);
+}
+
+#gallery .gallery-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+#gallery .gallery-item h3 {
+  padding: 13px;
+  margin: 0;
+  font-size: 16px;
+  color: #14532d;
+}
+
+.gallery-event {
+  padding: 0 13px 14px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.gallery-loading,
+.gallery-message {
+  text-align: center;
+  margin: 22px 0;
+  color: #64748b;
+}
+
+/* Lightbox */
+.gallery-lightbox {
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  inset: 0;
+  background: rgba(0,0,0,.93);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.gallery-lightbox.active {
+  display: flex;
+}
+
+.gallery-lightbox img {
+  max-width: 95%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.gallery-lightbox p {
+  color: white;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.gallery-close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 42px;
+  cursor: pointer;
+}
+
+@media(max-width: 600px) {
+  #gallery .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  #gallery .gallery-item img {
+    height: 145px;
+  }
+
+  #gallery .gallery-item h3 {
+    font-size: 13px;
+    padding: 9px;
+  }
+}
