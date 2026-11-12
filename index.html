@@ -742,103 +742,57 @@
 
 
 
+
 <!-- GALLERY -->
+<section class="section light-section" id="gallery">
+  <div class="container">
 
-<section
-    class="section light-section"
-    id="gallery">
+    <div class="section-heading">
+      <span>PHOTO GALLERY</span>
+      <h2>विद्यालय गैलरी</h2>
+      <div class="heading-line"></div>
+    </div>
 
+    <!-- Existing school photos + automatically uploaded photos -->
+    <div class="gallery-grid" id="galleryGrid">
 
-    <div class="container">
+      <div class="gallery-item">
+        <img src="independence.jpg"
+             alt="Independence Day celebration at UHS Chakiya">
+        <h3>Independence Day Celebration</h3>
+      </div>
 
+      <div class="gallery-item">
+        <img src="SCHOOL4.jpg" alt="UHS Chakiya Campus">
+        <h3>Campus</h3>
+      </div>
 
-        <div class="section-heading">
-
-            <span>
-                PHOTO GALLERY
-            </span>
-
-            <h2>
-                विद्यालय गैलरी
-            </h2>
-
-            <div class="heading-line"></div>
-
-        </div>
-
-
-
-        <div class="gallery-grid">
-
-
-            
-<div class="gallery-item">
-  <img src="independence.jpg" alt="Independence Day celebration at UHS Chakiya">
-  <h3>Independence Day Celebration</h3>
-</div>
-
-            <div class="gallery-item">
-  <img src="SCHOOL4.jpg" alt=" Campus UHS Chakiya">
-  <h3>Campus</h3>
-</div>
-
-
-
-            <div class="gallery-item">
-  <img src="SCHOOL3.jpg" alt="UHS Chakiya">
-  <h3>School</h3>
-</div>
-
-
-
-            <div class="gallery-item">
-
-                <div>
-                    📚
-                </div>
-
-                <span>
-                    Library
-                </span>
-
-            </div>
-
-
-
-            <div class="gallery-item">
-
-                <div>
-                    ⚽
-                </div>
-
-                <span>
-                    Sports
-                </span>
-
-            </div>
-
-
-
-            <div class="gallery-item">
-
-                <div>
-                    🎓
-                </div>
-
-                <span>
-                    Students
-                </span>
-
-            </div>
-
-
-        </div>
-
+      <div class="gallery-item">
+        <img src="SCHOOL3.jpg" alt="UHS Chakiya School">
+        <h3>School</h3>
+      </div>
 
     </div>
 
+    <p id="galleryLoading" class="gallery-loading">
+      विद्यालय की नई तस्वीरें लोड हो रही हैं...
+    </p>
 
+    <p id="galleryMessage" class="gallery-message"></p>
+
+  </div>
 </section>
+
+<!-- PHOTO LIGHTBOX -->
+<div id="galleryLightbox" class="gallery-lightbox"
+     aria-hidden="true">
+  <button type="button" id="galleryClose"
+          class="gallery-close" aria-label="Close">
+    &times;
+  </button>
+  <img id="galleryLargeImage" src="" alt="School photo">
+  <p id="galleryImageCaption"></p>
+</div>
 
 
 
@@ -1400,6 +1354,145 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+    
+<script>
+(() => {
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbw9beoSRGHP6hEE1CbXD9mk-u2A5HSUlWD3I2VA1vLr2AzQC_ZiOPLQ5L2h8TKj2aaK/exec";
+
+  const grid = document.getElementById("galleryGrid");
+  const loading = document.getElementById("galleryLoading");
+  const message = document.getElementById("galleryMessage");
+
+  const lightbox = document.getElementById("galleryLightbox");
+  const largeImage = document.getElementById("galleryLargeImage");
+  const caption = document.getElementById("galleryImageCaption");
+  const closeButton = document.getElementById("galleryClose");
+
+  if (!grid || !loading || !message) return;
+
+  function openLightbox(url, title) {
+    largeImage.src = url;
+    largeImage.alt = title;
+    caption.textContent = title;
+    lightbox.classList.add("active");
+    lightbox.setAttribute("aria-hidden", "false");
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("active");
+    lightbox.setAttribute("aria-hidden", "true");
+    largeImage.src = "";
+  }
+
+  closeButton.addEventListener("click", closeLightbox);
+
+  lightbox.addEventListener("click", event => {
+    if (event.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeLightbox();
+  });
+
+  function addPhoto(photo) {
+    if (!photo.imageUrl || !photo.photoName) return;
+
+    const card = document.createElement("div");
+    card.className = "gallery-item";
+
+    const img = document.createElement("img");
+    img.src = photo.imageUrl;
+    img.alt = photo.event || "UHS Chakiya school photo";
+    img.loading = "lazy";
+
+    img.onerror = () => {
+      card.remove();
+    };
+
+    const heading = document.createElement("h3");
+    heading.textContent = photo.event || photo.photoName;
+
+    const details = document.createElement("div");
+    details.className = "gallery-event";
+    details.textContent =
+      (photo.category || "School Event") +
+      (photo.date ? " • " + photo.date : "");
+
+    card.appendChild(img);
+    card.appendChild(heading);
+    card.appendChild(details);
+
+    card.addEventListener("click", () => {
+      openLightbox(photo.imageUrl, photo.event || photo.photoName);
+    });
+
+    grid.appendChild(card);
+  }
+
+  function loadGallery() {
+    loading.style.display = "block";
+    message.textContent = "";
+
+    const callbackName =
+      "chakiyaGallery_" + Date.now() + "_" +
+      Math.random().toString(36).slice(2);
+
+    const script = document.createElement("script");
+    let finished = false;
+
+    const timeout = setTimeout(() => {
+      finish();
+      loading.style.display = "none";
+      message.textContent =
+        "नई तस्वीरें लोड नहीं हो सकीं। कृपया बाद में प्रयास करें।";
+    }, 15000);
+
+    function finish() {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timeout);
+      delete window[callbackName];
+      script.remove();
+    }
+
+    window[callbackName] = photos => {
+      finish();
+      loading.style.display = "none";
+
+      if (!Array.isArray(photos)) {
+        message.textContent = "Gallery data उपलब्ध नहीं है।";
+        return;
+      }
+
+      if (photos.length === 0) {
+        message.textContent = "अभी कोई नई तस्वीर उपलब्ध नहीं है।";
+        return;
+      }
+
+      photos.forEach(addPhoto);
+    };
+
+    script.onerror = () => {
+      finish();
+      loading.style.display = "none";
+      message.textContent = "Gallery server से संपर्क नहीं हो सका।";
+    };
+
+    script.src = API_URL +
+      "?action=gallery&callback=" +
+      encodeURIComponent(callbackName) +
+      "&t=" + Date.now();
+
+    document.head.appendChild(script);
+  }
+
+  loadGallery();
+})();
+</script>
+</body>
+</html>
+
 </body>
 </html>
 
