@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Attendance | UHS Chakiya</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,sans-serif;
+  background:#f1f5f9;
+  color:#1e293b;
+}
+header{
+  background:linear-gradient(120deg,#123b70,#087e8b);
+  color:white;
+  padding:25px 15px;
+  text-align:center;
+}
+header h1{font-size:24px;margin-bottom:7px}
+header p{font-size:14px}
+.container{max-width:900px;margin:25px auto;padding:0 15px}
+.panel{
+  background:white;
+  border-radius:14px;
+  padding:22px;
+  box-shadow:0 4px 18px rgba(0,0,0,.07);
+  margin-bottom:20px;
+}
+.panel h2{font-size:19px;margin-bottom:16px}
+.form-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+input,button{
+  padding:13px;
+  border-radius:8px;
+  font-size:15px;
+}
+input{
+  border:1px solid #cbd5e1;
+  flex:1;
+  min-width:180px;
+}
+button{
+  border:0;
+  background:#087e8b;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+button:hover{background:#065f68}
+button:disabled{opacity:.6;cursor:wait}
+#message{margin-top:14px;font-size:14px}
+.error{color:#dc2626}
+.success{color:#15803d}
+.hidden{display:none!important}
+.student-info{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+.info-item{
+  background:#f1f5f9;
+  padding:13px;
+  border-radius:9px;
+}
+.info-item small{color:#64748b;display:block;margin-bottom:5px}
+.info-item strong{font-size:16px}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.stat{
+  padding:17px 10px;
+  text-align:center;
+  border-radius:10px;
+  background:#f1f5f9;
+}
+.stat strong{display:block;font-size:25px;margin-bottom:5px}
+.stat span{font-size:13px;color:#64748b}
+.present{color:#15803d}
+.absent{color:#dc2626}
+.percentage{color:#087e8b}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:400px}
+th,td{
+  padding:13px;
+  border-bottom:1px solid #e2e8f0;
+  text-align:left;
+  font-size:14px;
+}
+th{background:#f1f5f9}
+.status{
+  padding:5px 10px;
+  border-radius:20px;
+  font-weight:bold;
+  font-size:12px;
+}
+.status-present{background:#dcfce7;color:#166534}
+.status-absent{background:#fee2e2;color:#991b1b}
+.empty{text-align:center;color:#64748b;padding:25px}
+footer{text-align:center;color:#64748b;font-size:13px;padding:25px}
+@media(max-width:600px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .student-info{grid-template-columns:1fr}
+  header h1{font-size:21px}
+  .panel{padding:17px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>UHS CHAKIYA TARARI</h1>
+  <p>Class 9 – Student Attendance Portal</p>
+</header>
+
+<div class="container">
+
+  <section class="panel">
+    <h2>🔐 Check Your Attendance</h2>
+
+    <div class="form-row">
+      <input
+        type="text"
+        id="studentId"
+        placeholder="Enter your Student ID"
+        autocomplete="off"
+      >
+      <input type="month" id="month">
+      <button id="searchBtn" onclick="loadAttendance()">View Attendance</button>
+    </div>
+
+    <div id="message"></div>
+  </section>
+
+  <div id="resultArea" class="hidden">
+
+    <section class="panel">
+      <h2>👨‍🎓 Student Information</h2>
+      <div class="student-info">
+        <div class="info-item">
+          <small>Student Name</small>
+          <strong id="studentName">-</strong>
+        </div>
+        <div class="info-item">
+          <small>Student ID</small>
+          <strong id="studentCode">-</strong>
+        </div>
+        <div class="info-item">
+          <small>Roll Number</small>
+          <strong id="rollNo">-</strong>
+        </div>
+        <div class="info-item">
+          <small>Class / Section</small>
+          <strong id="classSection">-</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>📊 Monthly Attendance Summary</h2>
+      <div class="stats">
+        <div class="stat">
+          <strong id="totalDays">0</strong>
+          <span>Total Days</span>
+        </div>
+        <div class="stat">
+          <strong id="presentDays" class="present">0</strong>
+          <span>Present</span>
+        </div>
+        <div class="stat">
+          <strong id="absentDays" class="absent">0</strong>
+          <span>Absent</span>
+        </div>
+        <div class="stat">
+          <strong id="percentage" class="percentage">0%</strong>
+          <span>Attendance</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>📅 Daily Attendance Record</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Day</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="attendanceBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  © UHS Chakiya Tarari, Bhojpur, Bihar<br>
+  Student Attendance Management System
+</footer>
+
+<script>
+const API_URL =
+"https://script.google.com/macros/s/AKfycbxW7D449J0tM9hyki-Xy8fIYNx9ho7xXkXwHFmGKxpwpbuj-JCbBXcO150Udzod8nK7/exec";
+
+const monthInput = document.getElementById("month");
+const today = new Date();
+
+monthInput.value =
+  today.getFullYear() + "-" +
+  String(today.getMonth()+1).padStart(2,"0");
+
+async function loadAttendance(){
+
+  const studentId =
+    document.getElementById("studentId").value.trim();
+
+  const month = monthInput.value;
+  const message = document.getElementById("message");
+  const button = document.getElementById("searchBtn");
+
+  document.getElementById("resultArea").classList.add("hidden");
+
+  if(!studentId){
+    showMessage("Please enter your Student ID.","error");
+    return;
+  }
+
+  if(!month){
+    showMessage("Please select a month.","error");
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Loading...";
+  showMessage("Fetching attendance records...","");
+
+  try{
+
+    const response = await fetch(API_URL,{
+      method:"POST",
+      headers:{
+        "Content-Type":"text/plain;charset=utf-8"
+      },
+      body:JSON.stringify({
+        action:"studentAttendance",
+        studentId:studentId,
+        month:month
+      })
+    });
+
+    const result = await response.json();
+
+    if(!result.success){
+      throw new Error(result.message || "Attendance could not be loaded.");
+    }
+
+    const data = result.data || result;
+
+    if(!data.student){
+      throw new Error("Student information was not returned.");
+    }
+
+    displayAttendance(data);
+    showMessage("Attendance loaded successfully.","success");
+
+  }catch(error){
+    showMessage(error.message || "Something went wrong. Please try again.","error");
+  }
+
+  button.disabled = false;
+  button.textContent = "View Attendance";
+}
+
+function displayAttendance(data){
+
+  const student = data.student;
+  const summary = data.monthlySummary;
+  const records = data.dailyRecords || [];
+
+  document.getElementById("studentName").textContent =
+    student.name || "-";
+
+  document.getElementById("studentCode").textContent =
+    student.studentId || "-";
+
+  document.getElementById("rollNo").textContent =
+    student.rollNo || "-";
+
+  document.getElementById("classSection").textContent =
+    (student.studentClass || "-") + " / " +
+    (student.section || "-");
+
+  document.getElementById("totalDays").textContent =
+    summary.total || 0;
+
+  document.getElementById("presentDays").textContent =
+    summary.present || 0;
+
+  document.getElementById("absentDays").textContent =
+    summary.absent || 0;
+
+  document.getElementById("percentage").textContent =
+    (summary.percentage || 0) + "%";
+
+  const body = document.getElementById("attendanceBody");
+  body.innerHTML = "";
+
+  const selectedMonthRecords = records.filter(record =>
+    record.date.substring(0,7) === data.selectedMonth
+  );
+
+  if(selectedMonthRecords.length === 0){
+    body.innerHTML =
+      '<tr><td colspan="3" class="empty">No attendance records available for this month.</td></tr>';
+  }else{
+
+    selectedMonthRecords.sort((a,b) =>
+      b.date.localeCompare(a.date)
+    );
+
+    selectedMonthRecords.forEach(record => {
+
+      const date = new Date(record.date + "T00:00:00");
+
+      const day = date.toLocaleDateString("en-IN",{
+        weekday:"long"
+      });
+
+      const isPresent = record.status === "Present";
+
+      const row = document.createElement("tr");
+
+      const dateCell = document.createElement("td");
+      dateCell.textContent = record.date;
+
+      const dayCell = document.createElement("td");
+      dayCell.textContent = day;
+
+      const statusCell = document.createElement("td");
+      const badge = document.createElement("span");
+
+      badge.className = "status " +
+        (isPresent ? "status-present" : "status-absent");
+
+      badge.textContent = record.status;
+
+      statusCell.appendChild(badge);
+
+      row.append(dateCell,dayCell,statusCell);
+      body.appendChild(row);
+    });
+  }
+
+  document.getElementById("resultArea").classList.remove("hidden");
+}
+
+function showMessage(text,type){
+  const message = document.getElementById("message");
+  message.textContent = text;
+  message.className = type;
+}
+
+document.getElementById("studentId")
+  .addEventListener("keydown",function(event){
+    if(event.key === "Enter"){
+      loadAttendance();
+    }
+  });
+
+monthInput.addEventListener("change",function(){
+  if(document.getElementById("studentId").value.trim()){
+    loadAttendance();
+  }
+});
+</script>
+
+</body>
+</html>
