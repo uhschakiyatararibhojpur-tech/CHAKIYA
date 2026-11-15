@@ -1512,16 +1512,22 @@ document.addEventListener("DOMContentLoaded", function () {
     document.head.appendChild(script);
   }
 
+  
   loadGallery();
 })();
+</script>
 
+<!-- FACILITIES DROPDOWN SCRIPT -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
     const dropdown = document.getElementById("facilitiesDropdown");
     const toggle = document.getElementById("facilitiesToggle");
 
-    if (!dropdown || !toggle) return;
+    if (!dropdown || !toggle) {
+        console.error("Facilities dropdown not found");
+        return;
+    }
 
     toggle.addEventListener("click", function (event) {
         event.preventDefault();
