@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JPG to PDF Converter | CHAKIYA</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f5fa;
+    color: #243047;
+}
+
+header {
+    background: #123d70;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h2 {
+    margin: 0 0 8px;
+}
+
+header p {
+    margin: 0;
+}
+
+.container {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+h3 {
+    color: #123d70;
+}
+
+.upload-box {
+    border: 2px dashed #397bc1;
+    border-radius: 12px;
+    padding: 35px 15px;
+    text-align: center;
+    background: #f5f9ff;
+    cursor: pointer;
+}
+
+.upload-box input {
+    display: none;
+}
+
+.upload-box strong {
+    color: #1764a5;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 22px 0;
+}
+
+.controls label {
+    flex: 1;
+    min-width: 150px;
+    font-weight: bold;
+}
+
+select {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    margin-top: 8px;
+    border: 1px solid #ccd5e0;
+    border-radius: 7px;
+}
+
+button {
+    border: none;
+    padding: 13px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.convert-btn {
+    background: #1764a5;
+    color: white;
+    width: 100%;
+}
+
+.convert-btn:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.back-btn {
+    background: white;
+    color: #123d70;
+    border: 1px solid #123d70;
+    margin-top: 15px;
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.preview-item {
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    padding: 8px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.preview-item img {
+    width: 100%;
+    height: 125px;
+    object-fit: contain;
+}
+
+.preview-item p {
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+#status {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #657187;
+}
+
+@media(max-width:600px) {
+    .container {
+        margin: 15px;
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>JPG to PDF Converter</h2>
+    <p>CHAKIYA School Digital Facility</p>
+</header>
+
+<div class="container">
+
+    <h3>Convert Images into PDF</h3>
+
+    <label class="upload-box" for="imageInput">
+        <strong>+ Select JPG Images</strong>
+        <p>Choose one or multiple JPG/JPEG images</p>
+        <input type="file" id="imageInput"
+               accept=".jpg,.jpeg,image/jpeg" multiple>
+    </label>
+
+    <div id="preview" class="preview-grid"></div>
+
+    <div class="controls">
+
+        <label>
+            PDF Page Size
+            <select id="pageSize">
+                <option value="a4">A4</option>
+                <option value="a3">A3</option>
+                <option value="letter">Letter</option>
+            </select>
+        </label>
+
+        <label>
+            Page Orientation
+            <select id="orientation">
+                <option value="portrait">Portrait</option>
+                <option value="landscape">Landscape</option>
+            </select>
+        </label>
+
+        <label>
+            Image Margin
+            <select id="margin">
+                <option value="5">Small</option>
+                <option value="10" selected>Normal</option>
+                <option value="20">Large</option>
+            </select>
+        </label>
+
+    </div>
+
+    <button class="convert-btn" id="convertBtn" disabled>
+        Download PDF
+    </button>
+
+    <p id="status"></p>
+
+    <button class="back-btn" onclick="window.location.href='index.html'">
+        ← Back to CHAKIYA Website
+    </button>
+
+</div>
+
+<footer>
+    © <span id="year"></span> UHS Chakiya Tarari Bhojpur
+</footer>
+
+<script>
+const imageInput = document.getElementById("imageInput");
+const preview = document.getElementById("preview");
+const convertBtn = document.getElementById("convertBtn");
+const statusText = document.getElementById("status");
+
+let selectedImages = [];
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+imageInput.addEventListener("change", function () {
+    selectedImages = Array.from(this.files);
+
+    preview.innerHTML = "";
+    statusText.textContent = "";
+
+    selectedImages.forEach(function (file) {
+        if (!["image/jpeg"].includes(file.type)) {
+            statusText.textContent =
+                "Please select JPG/JPEG images only.";
+            selectedImages = [];
+            preview.innerHTML = "";
+            convertBtn.disabled = true;
+            return;
+        }
+
+        const url = URL.createObjectURL(file);
+
+        const item = document.createElement("div");
+        item.className = "preview-item";
+
+        const img = document.createElement("img");
+        img.src = url;
+
+        const name = document.createElement("p");
+        name.textContent = file.name;
+
+        item.appendChild(img);
+        item.appendChild(name);
+        preview.appendChild(item);
+    });
+
+    convertBtn.disabled = selectedImages.length === 0;
+
+    if (selectedImages.length > 0) {
+        statusText.textContent =
+            selectedImages.length + " image(s) selected.";
+    }
+});
+
+function readImage(file) {
+    return new Promise(function (resolve, reject) {
+        const reader = new FileReader();
+
+        reader.onload = function () {
+            const img = new Image();
+
+            img.onload = function () {
+                resolve({
+                    data: reader.result,
+                    width: img.naturalWidth,
+                    height: img.naturalHeight
+                });
+            };
+
+            img.onerror = reject;
+            img.src = reader.result;
+        };
+
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+convertBtn.addEventListener("click", async function () {
+
+    if (!selectedImages.length) return;
+
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+        statusText.textContent =
+            "PDF library could not load. Check your internet connection and reload.";
+        return;
+    }
+
+    convertBtn.disabled = true;
+    statusText.textContent = "Creating your PDF...";
+
+    try {
+        const { jsPDF } = window.jspdf;
+
+        const orientation =
+            document.getElementById("orientation").value;
+
+        const pageSize =
+            document.getElementById("pageSize").value;
+
+        const margin =
+            Number(document.getElementById("margin").value);
+
+        const pdf = new jsPDF({
+            orientation: orientation,
+            unit: "mm",
+            format: pageSize
+        });
+
+        for (let i = 0; i < selectedImages.length; i++) {
+
+            const image = await readImage(selectedImages[i]);
+
+            if (i > 0) {
+                pdf.addPage(pageSize, orientation);
+            }
+
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+
+            const availableWidth = pageWidth - margin * 2;
+            const availableHeight = pageHeight - margin * 2;
+
+            const scale = Math.min(
+                availableWidth / image.width,
+                availableHeight / image.height
+            );
+
+            const width = image.width * scale;
+            const height = image.height * scale;
+
+            const x = (pageWidth - width) / 2;
+            const y = (pageHeight - height) / 2;
+
+            pdf.addImage(
+                image.data,
+                "JPEG",
+                x,
+                y,
+                width,
+                height
+            );
+        }
+
+        pdf.save("CHAKIYA-Images.pdf");
+
+        statusText.textContent =
+            "PDF created successfully!";
+
+    } catch (error) {
+        console.error(error);
+        statusText.textContent =
+            "Conversion failed. Please try again.";
+    }
+
+    convertBtn.disabled = false;
+});
+</script>
+
+</body>
+</html>
