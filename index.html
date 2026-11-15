@@ -179,9 +179,33 @@
             Staff
         </a>
 
-        <a href="#facilities">
-            Facilities
+        
+<!-- FACILITIES DROPDOWN -->
+<div class="nav-dropdown" id="facilitiesDropdown">
+
+    <button
+        type="button"
+        class="dropdown-toggle"
+        id="facilitiesToggle"
+        aria-expanded="false"
+        aria-controls="facilitiesMenu">
+
+        Facilities <span>▾</span>
+
+    </button>
+
+    <div class="dropdown-menu" id="facilitiesMenu">
+
+        <a href="#facilities" class="dropdown-option">
+            School Facilities
         </a>
+
+        <a href="jpg-to-pdf.html" class="dropdown-option">
+            JPG to PDF Converter
+        </a>
+
+    </div>
+</div>
 
         <a href="#notices">
             Notices
@@ -1489,10 +1513,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
   loadGallery();
 })();
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const dropdown = document.getElementById("facilitiesDropdown");
+    const toggle = document.getElementById("facilitiesToggle");
+
+    if (!dropdown || !toggle) return;
+
+    toggle.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const isOpen = dropdown.classList.toggle("open");
+
+        toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!dropdown.contains(event.target)) {
+            dropdown.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+        }
+    });
+
+});
 </script>
-</body>
-</html>
 
 </body>
 </html>
-
