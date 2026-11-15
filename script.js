@@ -1,242 +1,126 @@
-// ===============================
+
+// =====================================
+// CHAKIYA SCHOOL WEBSITE - SCRIPT.JS
+// =====================================
+
 // MOBILE MENU
-// ===============================
-
 function toggleMenu() {
-
     const navbar = document.getElementById("navbar");
 
     if (navbar) {
         navbar.classList.toggle("active");
     }
-
 }
 
 
-// ===============================
-// CURRENT YEAR
-// ===============================
+// UPDATE FOOTER YEAR
+document.addEventListener("DOMContentLoaded", function () {
+    const yearElement = document.getElementById("year");
 
-const yearElement = document.getElementById("year");
-
-if (yearElement) {
-
-    yearElement.textContent =
-        new Date().getFullYear();
-
-}
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+});
 
 
-// ===============================
 // NOTICE TICKER
-// ===============================
+document.addEventListener("DOMContentLoaded", function () {
+    const tickerText = document.getElementById("tickerText");
 
-const notices = [
-
-    "विद्यालय की नवीनतम सूचनाओं के लिए Notice Section देखें।",
-
-    "विद्यार्थी नियमित रूप से विद्यालय की सूचना पट्ट देखें।",
-
-    "विद्यालय में शैक्षणिक एवं सह-शैक्षणिक गतिविधियाँ संचालित हैं।",
-
-    "Admission एवं अन्य जानकारी के लिए विद्यालय कार्यालय से संपर्क करें।"
-
-];
-
-let noticeIndex = 0;
-
-const ticker =
-    document.getElementById("tickerText");
-
-if (ticker) {
-
-    setInterval(function () {
-
-        noticeIndex++;
-
-        if (noticeIndex >= notices.length) {
-            noticeIndex = 0;
-        }
-
-        ticker.style.opacity = "0";
-
-        setTimeout(function () {
-
-            ticker.textContent =
-                notices[noticeIndex];
-
-            ticker.style.opacity = "1";
-
-        }, 300);
-
-    }, 4000);
-
-}
+    if (tickerText) {
+        // Keep the existing ticker content unchanged.
+        // Add ticker functionality here only if required.
+    }
+});
 
 
-// ===============================
-// BACK TO TOP
-// ===============================
+// BACK TO TOP BUTTON
+document.addEventListener("DOMContentLoaded", function () {
+    const backToTop = document.getElementById("backToTop");
 
-const topButton =
-    document.getElementById("topButton");
-
-if (topButton) {
+    if (!backToTop) return;
 
     window.addEventListener("scroll", function () {
-
-        if (window.scrollY > 400) {
-
-            topButton.style.display = "block";
-
-        } else {
-
-            topButton.style.display = "none";
-
-        }
-
+        backToTop.style.display =
+            window.scrollY > 300 ? "block" : "none";
     });
 
-}
-
-
-function scrollToTop() {
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
+    backToTop.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
     });
-
-}
-
+});
 
 
-// CLOSE MOBILE MENU ONLY AFTER A REAL NAVIGATION
-document
-    .querySelectorAll(".nav-container a")
-    .forEach(function (link) {
+// CLOSE MOBILE MENU AFTER NAVIGATION
+document.addEventListener("DOMContentLoaded", function () {
+    const navbar = document.getElementById("navbar");
+
+    if (!navbar) return;
+
+    navbar.querySelectorAll("a").forEach(function (link) {
         link.addEventListener("click", function () {
-            // Do not close the menu when Academics is tapped
-            if (link.id === "academicsToggle") {
-                return;
-            }
-
-            // Do not close the menu when a dropdown option is tapped
-            if (link.classList.contains("dropdown-option")) {
-                return;
-            }
-
-            const navbar = document.getElementById("navbar");
-
-            if (navbar) {
+            if (window.innerWidth <= 700) {
                 navbar.classList.remove("active");
             }
         });
     });
+});
+
 
 // FADE-IN ANIMATION
-// ===============================
+document.addEventListener("DOMContentLoaded", function () {
+    const fadeElements = document.querySelectorAll(".fade-in");
 
-const observer =
-    new IntersectionObserver(
+    if (!("IntersectionObserver" in window)) {
+        fadeElements.forEach(element => {
+            element.classList.add("visible");
+        });
+        return;
+    }
 
-        function(entries) {
-
-            entries.forEach(function(entry) {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add("show");
-
-                }
-
-            });
-
-        },
-
-        {
-            threshold: 0.12
-        }
-
-    );
-
-
-document
-    .querySelectorAll(
-        ".academic-card, .staff-card, .facility-card, .notice-item, .contact-card"
-    )
-    .forEach(function(element) {
-
-        element.classList.add("fade-element");
-
-        observer.observe(element);
-
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
     });
 
+    fadeElements.forEach(function (element) {
+        observer.observe(element);
+    });
+});
 
 
-/* CHAKIYA BACKEND TEST
-   Disabled because /api/test currently returns 404.
-   This test is not required to display website notices.
-*/
+// SCROLL REVEAL ANIMATION
+document.addEventListener("DOMContentLoaded", function () {
+    const revealElements = document.querySelectorAll(".reveal");
 
-// Re-enable after confirming the backend test route exists.
-
-/* =========================================
-   CHAKIYA SCROLL REVEAL
-   Add at the bottom of script.js
-   ========================================= */
-
-(function () {
-    function initChakScrollReveal() {
-        const selectors = [
-            ".academic-card",
-            ".staff-card",
-            ".facility-card",
-            ".notice-card",
-            ".gallery-item",
-            ".info-card"
-        ];
-
-        const elements = document.querySelectorAll(selectors.join(","));
-
-        if (!elements.length) return;
-
-        /* Show everything if animation is unsupported
-           or the visitor prefers reduced motion. */
-        if (
-            !("IntersectionObserver" in window) ||
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ) {
-            return;
-        }
-
-        const observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("chak-visible");
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.12
+    if (!("IntersectionObserver" in window)) {
+        revealElements.forEach(element => {
+            element.classList.add("active");
         });
-
-        elements.forEach(function (element) {
-            element.classList.add("chak-reveal");
-            observer.observe(element);
-        });
+        return;
     }
 
-    if (document.readyState === "loading") {
-        document.addEventListener(
-            "DOMContentLoaded",
-            initChakScrollReveal
-        );
-    } else {
-        initChakScrollReveal();
-    }
-})();
+    const revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
+
+    revealElements.forEach(function (element) {
+        revealObserver.observe(element);
+    });
+});
