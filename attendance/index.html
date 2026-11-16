@@ -884,14 +884,15 @@ async function processBarcode(barcode) {
       );
     }
 
- // Successful attendance: beep, vibrate and speak
-playSuccessBeep();
-
+ // Successful attendance: voice and vibration
 const studentName =
   data.studentName || data.name || "Student";
 
 if (!data.duplicate) {
   speakPresent(studentName);
+  if ("vibrate" in navigator) {
+    navigator.vibrate(100);
+  }
 }
 
     const rollNo =
