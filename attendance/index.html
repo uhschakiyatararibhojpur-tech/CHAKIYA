@@ -865,11 +865,18 @@ async function processBarcode(barcode) {
 
   try {
 
-    const response = await apiRequest("mark", {
-      token: sessionToken,
-      barcode: barcode
-    });
+    const startTime = performance.now();
 
+const response = await apiRequest("mark", {
+  token: sessionToken,
+  barcode: barcode
+});
+
+console.log(
+  "Server response time:",
+  (performance.now() - startTime).toFixed(0),
+  "ms"
+);
     if (!response.success) {
       throw new Error(
         response.message || "Attendance failed."
