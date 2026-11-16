@@ -351,7 +351,26 @@ async function unlockAudio() {
   }
 }
 
+// ========================================
+// VOICE ANNOUNCEMENT
+// ========================================
 
+function speakPresent(studentName) {
+  if (!("speechSynthesis" in window)) return;
+
+  window.speechSynthesis.cancel();
+
+  const message = new SpeechSynthesisUtterance(
+    "Present Sir. " + studentName
+  );
+
+  message.lang = "en-IN";
+  message.rate = 1;
+  message.pitch = 1;
+  message.volume = 1;
+
+  window.speechSynthesis.speak(message);
+}
 // ========================================
 // SUCCESS BEEP + VIBRATION
 // ========================================
@@ -865,11 +884,15 @@ async function processBarcode(barcode) {
       );
     }
 
-    // Successful attendance: beep and vibrate
-    playSuccessBeep();
+ // Successful attendance: beep, vibrate and speak
+playSuccessBeep();
 
-    const studentName =
-      data.studentName || data.name || "Student";
+const studentName =
+  data.studentName || data.name || "Student";
+
+if (!data.duplicate) {
+  speakPresent(studentName);
+}
 
     const rollNo =
       data.rollNo || "";
