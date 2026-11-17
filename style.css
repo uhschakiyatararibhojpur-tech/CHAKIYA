@@ -4103,3 +4103,33 @@ button:focus-visible,
         text-align: center !important;
     }
 }
+
+/* ===== ROTATING EARTH BACKGROUND ===== */
+
+#earth-background {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    background: #020817;
+}
+
+#earth-background canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Keep website content above background */
+
+body {
+    position: relative;
+    isolation: isolate;
+}
+
+#earth-background {
+    z-index: -1;
+}
