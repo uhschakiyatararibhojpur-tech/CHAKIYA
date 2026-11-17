@@ -4158,3 +4158,76 @@ body {
 .hero-overlay {
     background: transparent !important;
 }
+
+/* ==========================================
+   CHAKIYA WEBSITE PERFORMANCE OPTIMIZATION
+   ========================================== */
+
+/* Remove unnecessary continuous animations */
+.academic-icon,
+.facility-image,
+.stat-icon,
+.card-icon,
+.contact-icon,
+.header::after,
+.header .school-logo img,
+.header .school-brand h1::after,
+.notice-ticker .ticker-title,
+.section-heading .heading-line::after,
+.section-heading .heading-line {
+    animation: none !important;
+    filter: none !important;
+}
+
+/* Remove expensive glass blur */
+#noticeBoard {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+}
+
+/* Simplify hover transitions */
+.academic-card,
+.staff-card,
+.facility-card,
+.gallery-item,
+.nav-container a {
+    transition: background-color 0.2s ease,
+                border-color 0.2s ease !important;
+}
+
+/* Reduce image processing */
+.slider-track img {
+    filter: none !important;
+}
+
+/* Stop decorative technology animations if still present */
+.tech-circuit,
+.tech-computer,
+.screen-ai {
+    animation: none !important;
+}
+
+/* Mobile performance */
+@media (max-width: 768px) {
+    .home-slider {
+        box-shadow: none;
+    }
+
+    .staff-card,
+    .facility-card,
+    .academic-card {
+        box-shadow: none;
+    }
+}
+
+/* Respect device motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
