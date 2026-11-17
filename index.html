@@ -1,38 +1,29 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta charset="UTF-8">
-    <title>UHS Chakiya Tarari Bhojpur Bihar | Official School Website</title>
-
-    <meta name="description" content="Official website of UHS Chakiya Tarari, Bhojpur, Bihar. Explore school notices, academics, student achievements, gallery and online examinations.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UHS Chakiya Tarari Bhojpur Bihar | Official School Website</title>
+<meta name="description" content="Official website of UHS Chakiya Tarari, Bhojpur, Bihar. Explore school notices, academics, student achievements, gallery and online examinations.">
 <meta name="theme-color" content="#005b50">
 <link rel="manifest" href="/manifest.json">
-
-
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="uhs-design-refresh.css">
-
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="uhs-design-refresh.css">
 </head>
 
-
 <body>
-    <!-- 3D ROTATING EARTH BACKGROUND -->
-    <div id="earth-background"></div>
+
+<!-- 3D ROTATING EARTH BACKGROUND -->
+<div id="earth-background"></div>
 
 <!-- HEADER -->
 <header class="header">
     <div class="container header-content">
-
-        <!-- School branding -->
         <div class="school-brand">
             <div class="school-logo">
-                <img src="school-logo.png"
-                     alt="UHS Chakiya Tarari School Logo">
+                <img src="school-logo.png" alt="UHS Chakiya Tarari School Logo">
             </div>
-
             <div class="school-info">
                 <h1>UHS CHAKIYA TARARI</h1>
                 <p>उच्च माध्यमिक विद्यालय चकिया तरारी, भोजपुर</p>
@@ -40,7 +31,6 @@
             </div>
         </div>
 
-        <!-- Minister photo on the upper right -->
         <div class="minister-header">
             <img src="education-minister.png"
                  alt="बिहार के शिक्षा मंत्री"
@@ -48,525 +38,242 @@
             <span>माननीय शिक्षा मंत्री, बिहार</span>
         </div>
 
-        <!-- Mobile menu button -->
         <button class="menu-btn"
                 onclick="toggleMenu()"
                 aria-label="Open navigation menu"
                 aria-expanded="false">
             ☰
         </button>
-
     </div>
 </header>
 
-
-
 <!-- NAVIGATION -->
-
 <nav class="navbar" id="navbar">
-
     <div class="container nav-container">
 
-        <a href="#home">
-            Home
-        </a>
+        <a href="#home">Home</a>
 
- 
+        <!-- ONLINE EXAM DROPDOWN -->
+        <div class="nav-dropdown" id="examDropdown">
+            <button type="button"
+                    class="dropdown-toggle"
+                    id="examToggle"
+                    aria-expanded="false"
+                    aria-controls="examMenu">
+                ऑनलाइन परीक्षा <span>▾</span>
+            </button>
 
-<!-- ONLINE EXAM DROPDOWN -->
-<div class="nav-dropdown" id="examDropdown">
+            <div class="dropdown-menu" id="examMenu">
+                <a href="https://script.google.com/macros/s/AKfycbwv6-8WRuHVphibk1kL3RZgY57S6VjMnE_ExMK4H5eiofP1iQEdqjEKrnzik1ejCWrAkQ/exec"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="dropdown-option">
+                    विद्यार्थी ऑनलाइन परीक्षा
+                </a>
 
-    <button
-        type="button"
-        class="dropdown-toggle"
-        id="examToggle"
-        aria-expanded="false"
-        aria-controls="examMenu">
-        ऑनलाइन परीक्षा <span>▾</span>
-    </button>
+                <a href="https://script.google.com/macros/s/AKfycbwv6-8WRuHVphibk1kL3RZgY57S6VjMnE_ExMK4H5eiofP1iQEdqjEKrnzik1ejCWrAkQ/exec?page=teacher"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="dropdown-option">
+                    शिक्षक परीक्षा पैनल
+                </a>
 
-    <div class="dropdown-menu" id="examMenu">
+                <a href="https://script.google.com/macros/s/AKfycbwv6-8WRuHVphibk1kL3RZgY57S6VjMnE_ExMK4H5eiofP1iQEdqjEKrnzik1ejCWrAkQ/exec?page=merit"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="dropdown-option">
+                    मेरिट लिस्ट एवं परिणाम
+                </a>
+            </div>
+        </div>
 
-        <a
-            href="https://script.google.com/macros/s/AKfycbwv6-8WRuHVphibk1kL3RZgY57S6VjMnE_ExMK4H5eiofP1iQEdqjEKrnzik1ejCWrAkQ/exec"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="dropdown-option">
-            विद्यार्थी ऑनलाइन परीक्षा
-        </a>
+        <!-- ONLINE ATTENDANCE DROPDOWN -->
+        <div class="nav-dropdown" id="attendanceDropdown">
+            <button type="button"
+                    class="dropdown-toggle"
+                    id="attendanceToggle"
+                    aria-expanded="false"
+                    aria-controls="attendanceMenu">
+                ऑनलाइन उपस्थिति <span>▾</span>
+            </button>
 
-        <a
-            href="https://script.google.com/macros/s/AKfycbwv6-8WRuHVphibk1kL3RZgY57S6VjMnE_ExMK4H5eiofP1iQEdqjEKrnzik1ejCWrAkQ/exec?page=teacher"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="dropdown-option">
-            शिक्षक परीक्षा पैनल
-        </a>
+            <div class="dropdown-menu" id="attendanceMenu">
+                <a href="https://uhschakiyatararibhojpur-tech.github.io/CHAKIYA/attendance/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="dropdown-option">
+                    शिक्षक ऑनलाइन उपस्थिति पैनल
+                </a>
 
-        <a
-            href="https://script.google.com/macros/s/AKfycbwv6-8WRuHVphibk1kL3RZgY57S6VjMnE_ExMK4H5eiofP1iQEdqjEKrnzik1ejCWrAkQ/exec?page=merit"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="dropdown-option">
-            मेरिट लिस्ट एवं परिणाम
-        </a>
+                <a href="https://uhschakiyatararibhojpur-tech.github.io/CHAKIYA/attendance/student-attendance.html"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="dropdown-option">
+                    विद्यार्थी अपनी उपस्थिति देखें
+                </a>
+            </div>
+        </div>
 
-    </div>
-</div>
+        <a href="about.html">About</a>
 
-<!-- ONLINE ATTENDANCE DROPDOWN -->
-<div class="nav-dropdown" id="attendanceDropdown">
+        <!-- ACADEMICS DROPDOWN -->
+        <div class="nav-dropdown" id="academicsDropdown">
+            <button type="button"
+                    class="dropdown-toggle"
+                    id="academicsToggle"
+                    aria-expanded="false"
+                    aria-controls="academicsMenu">
+                Academics <span>▾</span>
+            </button>
 
-    <button
-        type="button"
-        class="dropdown-toggle"
-        id="attendanceToggle"
-        aria-expanded="false"
-        aria-controls="attendanceMenu">
-        ऑनलाइन उपस्थिति <span>▾</span>
-    </button>
+            <div class="dropdown-menu" id="academicsMenu">
+                <a href="#academics" class="dropdown-option">
+                    Academic Information
+                </a>
 
-    <div class="dropdown-menu" id="attendanceMenu">
+                <a href="https://script.google.com/macros/s/AKfycbyC8ACQcUkbPPugH_lzdzBPkThwqipSazmYbnAK-RkBpkU7p1_6-nc8mbKH7jaKiRXilA/exec"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="dropdown-option">
+                    Document / Marksheet / TC Request
+                </a>
+            </div>
+        </div>
 
-    <a
-        href="https://uhschakiyatararibhojpur-tech.github.io/CHAKIYA/attendance/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="dropdown-option">
-        शिक्षक ऑनलाइन उपस्थिति पैनल
-    </a>
+        <a href="#staff">Staff</a>
 
-    <a
-        href="https://uhschakiyatararibhojpur-tech.github.io/CHAKIYA/attendance/student-attendance.html"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="dropdown-option">
-        विद्यार्थी अपनी उपस्थिति देखें
-    </a>
+        <!-- FACILITIES DROPDOWN -->
+        <div class="nav-dropdown" id="facilitiesDropdown">
+            <button type="button"
+                    class="dropdown-toggle"
+                    id="facilitiesToggle"
+                    aria-expanded="false"
+                    aria-controls="facilitiesMenu">
+                Facilities <span>▾</span>
+            </button>
 
-</div>
-</div>
+            <div class="dropdown-menu" id="facilitiesMenu">
+                <a href="#facilities" class="dropdown-option">
+                    School Facilities
+                </a>
 
-       
+                <a href="jpg-to-pdf.html" class="dropdown-option">
+                    JPG to PDF Converter
+                </a>
+            </div>
+        </div>
 
-        
+        <a href="#notices">Notices</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <a href="#document-submission">📄 दस्तावेज जमा करें</a>
 
-<a href="about.html">About</a>
-
-<div class="nav-dropdown" id="academicsDropdown">
-    <button
-    type="button"
-    class="dropdown-toggle"
-    id="academicsToggle"
-    aria-expanded="false"
-    aria-controls="academicsMenu">
-    Academics <span>▾</span>
-</button>
-    <div class="dropdown-menu" id="academicsMenu">
-        <a href="#academics" class="dropdown-option">
-            Academic Information
-        </a>
-
-        <a href="https://script.google.com/macros/s/AKfycbyC8ACQcUkbPPugH_lzdzBPkThwqipSazmYbnAK-RkBpkU7p1_6-nc8mbKH7jaKiRXilA/exec"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="dropdown-option">
-            Document / Marksheet / TC Request
-        </a>
-    </div>
-</div>
-
-        <a href="#staff">
-            Staff
-        </a>
-
-        
-
-<!-- FACILITIES DROPDOWN -->
-<div class="nav-dropdown" id="facilitiesDropdown">
-
-    <button
-        type="button"
-        class="dropdown-toggle"
-        id="facilitiesToggle"
-        aria-expanded="false"
-        aria-controls="facilitiesMenu">
-
-        Facilities <span>▾</span>
-    </button>
-
-    <div class="dropdown-menu" id="facilitiesMenu">
-
-        <a href="#facilities" class="dropdown-option">
-            School Facilities
-        </a>
-
-        <a href="jpg-to-pdf.html" class="dropdown-option">
-            JPG to PDF Converter
-        </a>
-
-    </div>
-
-</div>
-
-        <a href="#notices">
-            Notices
-        </a>
-
-        <a href="#gallery">
-            Gallery
-        </a>
-
-<a href="#contact">Contact</a>
-
-<a href="#document-submission">
-    📄 दस्तावेज जमा करें
-</a>
-        
-    </div>
-    
     </div>
 </nav>
 
-    <!-- NOTICES -->
+<!-- NOTICES -->
 <section class="section" id="notices">
-  <div class="container">
+    <div class="container">
+        <div class="section-ing">
+            <span>NOTICE BOARD</span>
+            <div class="ing-line"></div>
+        </div>
 
-    <div class="section-ing">
-      <span>NOTICE BOARD</span>
-      <div class="ing-line"></div>
+        <div class="notice-board" id="noticeBoard">
+            <p>विद्यालय की सूचनाएँ लोड हो रही हैं...</p>
+        </div>
+
+        <div id="noticeMessage" role="status" aria-live="polite"></div>
     </div>
-
-    <div class="notice-board" id="noticeBoard">
-      <p>विद्यालय की सूचनाएँ लोड हो रही हैं...</p>
-    </div>
-
-    <div id="noticeMessage" role="status" aria-live="polite"></div>
-
-  </div>
 </section>
 
 <!-- ABOUT SCHOOL -->
-
-<section
-    class="section"
-    id="about">
-
-
+<section class="section" id="about">
     <div class="container">
 
-
         <div class="section-ing">
-
-
-            <span>
-                ABOUT OUR SCHOOL
-            </span>
-
-
-            <h2>
-                विद्यालय के बारे में
-            </h2>
-
-
+            <span>ABOUT OUR SCHOOL</span>
+            <h2>विद्यालय के बारे में</h2>
             <div class="ing-line"></div>
-
-
         </div>
 
-
-
         <div class="about-grid">
-
-
             <div class="about-text">
-
-
-                <h3>
-                    UHS Chakiya Tarari
-                </h3>
-
+                <h3>UHS Chakiya Tarari</h3>
 
                 <p>
-
                     उच्च माध्यमिक विद्यालय चकिया तरारी,
                     भोजपुर, बिहार विद्यार्थियों को
                     गुणवत्तापूर्ण एवं समावेशी शिक्षा
                     प्रदान करने के लिए कार्यरत एक
                     सरकारी विद्यालय है।
-
                 </p>
 
-
                 <p>
-
                     विद्यालय में विद्यार्थियों के
                     शैक्षणिक विकास के साथ-साथ खेल,
                     तकनीकी शिक्षा, प्रयोगात्मक शिक्षा
                     एवं रचनात्मक गतिविधियों पर भी
                     विशेष ध्यान दिया जाता है।
-
                 </p>
 
-
                 <p>
-
                     हमारा उद्देश्य विद्यार्थियों को
                     आधुनिक तकनीक एवं गुणवत्तापूर्ण
                     शिक्षा से जोड़कर उनके सर्वांगीण
                     विकास के लिए बेहतर वातावरण
                     उपलब्ध कराना है।
-
                 </p>
-
-
             </div>
 
-
-
             <div class="about-card">
-
-
                 <div class="card-icon">
-
                     <img src="STUDENTS.png" alt="UHS Chakiya Tarari School">
-
                 </div>
 
-
-                <h3>
-
-                    हमारा उद्देश्य
-
-                </h3>
-
+                <h3>हमारा उद्देश्य</h3>
 
                 <p>
-
                     शिक्षा, अनुशासन, तकनीकी ज्ञान
                     और नैतिक मूल्यों के माध्यम से
                     विद्यार्थियों का सर्वांगीण विकास।
-
                 </p>
-
-
             </div>
-
-
         </div>
-
-
     </div>
-
-
 </section>
-
-
-
-
-
-<!-- SCHOOL AI & COMPUTER EDUCATION -->
-<section class="school-technology" id="ai-future">
-  <div class="technology-container">
-
-    <div class="technology-ing">
-      <span class="technology-eyebrow">
-        UHS CHAKIYA TARARI • DIGITAL EDUCATION
-      </span>
-
-      <h2>AI एवं कंप्यूटर शिक्षा</h2>
-
-      <div class="technology-rule"></div>
-
-      <p>
-        विद्यार्थियों में वैज्ञानिक दृष्टिकोण, डिजिटल साक्षरता
-        एवं आधुनिक तकनीकी ज्ञान के विकास की दिशा में एक पहल।
-      </p>
-    </div>
-
-    <div class="technology-main">
-
-      <div class="technology-message">
-        <h3>तकनीक को समझें, ज्ञान को बढ़ाएँ</h3>
-
-        <p>
-          कंप्यूटर एवं कृत्रिम बुद्धिमत्ता (AI) आधुनिक जीवन,
-          शिक्षा और विज्ञान के महत्वपूर्ण अंग हैं। इनके
-          ज्ञान से विद्यार्थी तकनीक का सही उपयोग करना,
-          समस्याओं का समाधान करना और नई संभावनाओं को
-          समझना सीख सकते हैं।
-        </p>
-
-        <a href="explore-ai.html" class="technology-link">
-          AI एवं कंप्यूटर के बारे में जानें
-          <span aria-hidden="true">→</span>
-        </a>
-      </div>
-
-      <div class="technology-visual" aria-hidden="true">
-        <div class="tech-circuit circuit-a"></div>
-        <div class="tech-circuit circuit-b"></div>
-
-        <div class="tech-computer">
-          <div class="tech-screen">
-            <div class="screen-er">COMPUTER EDUCATION</div>
-
-            <div class="screen-ai">
-              <span>AI</span>
-            </div>
-
-            <div class="screen-lines">
-              <i></i><i></i><i></i>
-            </div>
-          </div>
-
-          <div class="tech-monitor-stand"></div>
-          <div class="tech-monitor-base"></div>
-        </div>
-
-        <div class="tech-caption">
-          COMPUTERS • AI • DIGITAL LEARNING
-        </div>
-      </div>
-
-    </div>
-
-    <div class="technology-topics">
-      <div class="technology-topic">
-        <span>01</span>
-        <div>
-          <h4>कंप्यूटर की मूल जानकारी</h4>
-          <p>हार्डवेयर, सॉफ्टवेयर एवं डिजिटल कौशल</p>
-        </div>
-      </div>
-
-      <div class="technology-topic">
-        <span>02</span>
-        <div>
-          <h4>कृत्रिम बुद्धिमत्ता (AI)</h4>
-          <p>AI की उपयोगिता एवं जिम्मेदार प्रयोग</p>
-        </div>
-      </div>
-
-      <div class="technology-topic">
-        <span>03</span>
-        <div>
-          <h4>कोडिंग एवं तार्किक सोच</h4>
-          <p>प्रोग्रामिंग की मूल अवधारणाएँ</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="technology-footer">
-      शिक्षा • तकनीकी ज्ञान • वैज्ञानिक दृष्टिकोण
-    </div>
-
-  </div>
-</section>
-
-
 
 <!-- ACADEMICS -->
-
-<section
-    class="section light-section"
-    id="academics">
-
-
+<section class="section light-section" id="academics">
     <div class="container">
 
-
         <div class="section-ing">
-
-            <span>
-                ACADEMICS
-            </span>
-
-            <h2>
-                शैक्षणिक व्यवस्था
-            </h2>
-
+            <span>ACADEMICS</span>
+            <h2>शैक्षणिक व्यवस्था</h2>
             <div class="ing-line"></div>
-
         </div>
-
-
 
         <div class="academic-grid">
-
-
             <div class="academic-card">
-
-                <div class="academic-icon">
-                    🎓
-                </div>
-
-                <h3>
-                    कक्षा 9–10
-                </h3>
-
+                <div class="academic-icon">🎓</div>
+                <h3>कक्षा 9–10</h3>
                 <p>
-
                     माध्यमिक स्तर की शिक्षा एवं
                     बोर्ड परीक्षा की तैयारी।
-
                 </p>
-
             </div>
 
-
-
             <div class="academic-card">
-
-                <div class="academic-icon">
-                    🏆
-                </div>
-
-                <h3>
-                    कक्षा 11–12
-                </h3>
-
+                <div class="academic-icon">🏆</div>
+                <h3>कक्षा 11–12</h3>
                 <p>
-
                     उच्च माध्यमिक स्तर पर
                     विषय आधारित शिक्षा।
-
                 </p>
-
             </div>
-
-
-
-            <div class="academic-card">
-
-                <div class="academic-icon">
-                    💻
-                </div>
-
-                <h3>
-                    Computer Education
-                </h3>
-
-                <p>
-
-                    विद्यार्थियों को कंप्यूटर एवं
-                    आधुनिक तकनीक का व्यावहारिक ज्ञान।
-
-                </p>
-
-            </div>
-
-
         </div>
-
-
     </div>
-
-
 </section>
-
-
-
 
 <!-- STAFF -->
 <section class="section" id="staff">
@@ -613,9 +320,7 @@
             </div>
 
             <div class="staff-card">
-                <div class="staff-photo">
-                    👨‍💻
-                </div>
+                <div class="staff-photo">👨‍💻</div>
                 <h3>Agrendra Kumar</h3>
                 <p>कंप्यूटर शिक्षक</p>
             </div>
@@ -628,7 +333,6 @@
                 <p>प्रधान लिपिक</p>
             </div>
 
-            <!-- NEW TEACHER -->
             <div class="staff-card">
                 <div class="staff-photo">
                     <img src="FAZALSIR.jpg" alt="Talimi markaz">
@@ -637,378 +341,201 @@
                 <p>Comunity-level education</p>
             </div>
 
-        </div><!-- End of staff-grid -->
-
+        </div>
     </div>
 </section>
 
-
-
 <!-- FACILITIES -->
-
-<section
-    class="section light-section"
-    id="facilities">
-
-
+<section class="section light-section" id="facilities">
     <div class="container">
 
-
         <div class="section-heading">
-
-            <span>
-                SCHOOL FACILITIES
-            </span>
-
-            <h2>
-                विद्यालय सुविधाएं
-            </h2>
-
+            <span>SCHOOL FACILITIES</span>
+            <h2>विद्यालय सुविधाएं</h2>
             <div class="heading-line"></div>
-
         </div>
-
-
 
         <div class="facility-grid">
 
+            <div class="facility-card">
+                <img src="school_campus1.jpeg" alt="school campus">
+                <h3>School Campus</h3>
+            </div>
 
             <div class="facility-card">
-  <img src="school_campus1.jpeg" alt="school campus">
-  <h3>School Campus</h3>
-</div>
+                <img src="mashaal_winners.jpeg" alt="sports winner">
+                <h3>sports</h3>
+            </div>
 
             <div class="facility-card">
-  <img src="mashaal_winners.jpeg" alt="sports winner">
-  <h3>sports </h3>
-</div>
-
-
+                <img src="tour_nalanda.jpeg" alt="tour">
+                <h3>tour</h3>
+            </div>
 
             <div class="facility-card">
-  <img src="tour_nalanda.jpeg" alt="tour">
-  <h3> tour </h3>
-</div>
-
-
-
-            <div class="facility-card">
-
-                <div class="facility-image">
-                    ⚽
-                </div>
-
-                <h3>
-                    Sports
-                </h3>
-
+                <div class="facility-image">⚽</div>
+                <h3>Sports</h3>
                 <p>
-
                     विद्यार्थियों के शारीरिक विकास
                     के लिए खेल सामग्री एवं गतिविधियाँ।
-
                 </p>
-
             </div>
 
-
-
             <div class="facility-card">
-
-                <div class="facility-image">
-                    📹
-                </div>
-
-                <h3>
-                    CCTV Surveillance
-                </h3>
-
+                <div class="facility-image">📹</div>
+                <h3>CCTV Surveillance</h3>
                 <p>
-
                     विद्यालय परिसर में सुरक्षा हेतु
                     CCTV निगरानी व्यवस्था।
-
                 </p>
-
             </div>
-
-
 
             <div class="facility-card">
-
-                <div class="facility-image">
-                    📶
-                </div>
-
-                <h3>
-                    High-Speed Wi-Fi
-                </h3>
-
+                <div class="facility-image">📶</div>
+                <h3>High-Speed Wi-Fi</h3>
                 <p>
-
                     डिजिटल शिक्षा एवं ऑनलाइन
                     संसाधनों के लिए इंटरनेट सुविधा।
-
                 </p>
-
             </div>
 
-
         </div>
-
-
     </div>
-
-
 </section>
-
-
-
-
-
-
-
 
 <!-- GALLERY -->
 <section class="section light-section" id="gallery">
-  <div class="container">
+    <div class="container">
 
-    <div class="section-heading">
-      <span>PHOTO GALLERY</span>
-      <h2>विद्यालय गैलरी</h2>
-      <div class="heading-line"></div>
+        <div class="section-heading">
+            <span>PHOTO GALLERY</span>
+            <h2>विद्यालय गैलरी</h2>
+            <div class="heading-line"></div>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+
+            <div class="gallery-item">
+                <img src="independence.jpg"
+                     alt="Independence Day celebration at UHS Chakiya">
+                <h3>Independence Day Celebration</h3>
+            </div>
+
+            <div class="gallery-item">
+                <img src="SCHOOL4.jpg" alt="UHS Chakiya Campus">
+                <h3>Campus</h3>
+            </div>
+
+            <div class="gallery-item">
+                <img src="SCHOOL3.jpg" alt="UHS Chakiya School">
+                <h3>School</h3>
+            </div>
+
+        </div>
+
+        <p id="galleryLoading" class="gallery-loading">
+            विद्यालय की नई तस्वीरें लोड हो रही हैं...
+        </p>
+
+        <p id="galleryMessage" class="gallery-message"></p>
     </div>
-
-    <!-- Existing school photos + automatically uploaded photos -->
-    <div class="gallery-grid" id="galleryGrid">
-
-      <div class="gallery-item">
-        <img src="independence.jpg"
-             alt="Independence Day celebration at UHS Chakiya">
-        <h3>Independence Day Celebration</h3>
-      </div>
-
-      <div class="gallery-item">
-        <img src="SCHOOL4.jpg" alt="UHS Chakiya Campus">
-        <h3>Campus</h3>
-      </div>
-
-      <div class="gallery-item">
-        <img src="SCHOOL3.jpg" alt="UHS Chakiya School">
-        <h3>School</h3>
-      </div>
-
-    </div>
-
-    <p id="galleryLoading" class="gallery-loading">
-      विद्यालय की नई तस्वीरें लोड हो रही हैं...
-    </p>
-
-    <p id="galleryMessage" class="gallery-message"></p>
-
-  </div>
 </section>
 
 <!-- PHOTO LIGHTBOX -->
-<div id="galleryLightbox" class="gallery-lightbox"
-     aria-hidden="true">
-  <button type="button" id="galleryClose"
-          class="gallery-close" aria-label="Close">
-    &times;
-  </button>
-  <img id="galleryLargeImage" src="" alt="School photo">
-  <p id="galleryImageCaption"></p>
+<div id="galleryLightbox" class="gallery-lightbox" aria-hidden="true">
+    <button type="button"
+            id="galleryClose"
+            class="gallery-close"
+            aria-label="Close">
+        &times;
+    </button>
+
+    <img id="galleryLargeImage" src="" alt="School photo">
+    <p id="galleryImageCaption"></p>
 </div>
 
-
-
 <!-- ADMISSION -->
-
-<section
-    class="section admission-section"
-    id="admission">
-
-
+<section class="section admission-section" id="admission">
     <div class="container">
-
-
         <div class="admission-box">
 
-
             <div>
-
-                <span>
-                    ADMISSION
-                </span>
-
-                <h2>
-                    नामांकन संबंधी जानकारी
-                </h2>
+                <span>ADMISSION</span>
+                <h2>नामांकन संबंधी जानकारी</h2>
 
                 <p>
-
                     विद्यालय में नामांकन से संबंधित
                     आवश्यक जानकारी, दस्तावेज एवं
                     प्रक्रिया के लिए विद्यालय कार्यालय
                     से संपर्क करें।
-
                 </p>
-
             </div>
 
-
-            <a
-                href="#contact"
-                class="btn primary-btn">
-
+            <a href="#contact" class="btn primary-btn">
                 Contact School
-
             </a>
 
-
         </div>
-
-
     </div>
-
-
 </section>
 
-
-
 <!-- CONTACT -->
-
-<section
-    class="section"
-    id="contact">
-
-
+<section class="section" id="contact">
     <div class="container">
 
-
         <div class="section-heading">
-
-            <span>
-                CONTACT US
-            </span>
-
-            <h2>
-                संपर्क करें
-            </h2>
-
+            <span>CONTACT US</span>
+            <h2>संपर्क करें</h2>
             <div class="heading-line"></div>
-
         </div>
-
-
 
         <div class="contact-grid">
 
-
             <div class="contact-card">
-
-                <div class="contact-icon">
-                    📍
-                </div>
-
-                <h3>
-                    विद्यालय का पता
-                </h3>
-
+                <div class="contact-icon">📍</div>
+                <h3>विद्यालय का पता</h3>
                 <p>
-
                     UHS Chakiya Tarari<br>
                     Tarari, Bhojpur<br>
                     Bihar, India
-
                 </p>
-
             </div>
-
-
 
             <div class="contact-card">
-
-                <div class="contact-icon">
-                    📧
-                </div>
-
-                <h3>
-                    Email
-                </h3>
-
-                <p>
-
-                    uhschakiyatararibhojpur@gmail.com
-
-                </p>
-
+                <div class="contact-icon">📧</div>
+                <h3>Email</h3>
+                <p>uhschakiyatararibhojpur@gmail.com</p>
             </div>
-
-
 
             <div class="contact-card">
-
-                <div class="contact-icon">
-                    🏫
-                </div>
-
-                <h3>
-                    विद्यालय
-                </h3>
-
-                <p>
-                    UHS Chakiya Tarari
-                </p>
-
+                <div class="contact-icon">🏫</div>
+                <h3>विद्यालय</h3>
+                <p>UHS Chakiya Tarari</p>
             </div>
-
 
         </div>
-
-
 
         <div class="map-box">
-
-
             <div>
+                <span class="map-icon">📍</span>
+                <h3>UHS Chakiya Tarari</h3>
+                <p>Tarari, Bhojpur, Bihar</p>
 
-                <span class="map-icon">
-                    📍
-                </span>
-
-                <h3>
-                    UHS Chakiya Tarari
-                </h3>
-
-                <p>
-                    Tarari, Bhojpur, Bihar
-                </p>
-
-
-                <a
-                    href="https://www.google.com/maps/search/?api=1&query=UHS+Chakiya+Tarari+Bhojpur+Bihar"
-                    target="_blank"
-                    class="map-btn">
-
+                <a href="https://www.google.com/maps/search/?api=1&query=UHS+Chakiya+Tarari+Bhojpur+Bihar"
+                   target="_blank"
+                   class="map-btn">
                     Open in Google Maps
-
                 </a>
-
             </div>
-
-
         </div>
 
-
     </div>
-
-
 </section>
 
 <!-- DOCUMENT SUBMISSION SECTION -->
 <section id="document-submission" class="section light-section">
     <div class="container">
+
         <div class="section-heading">
             <span>DOCUMENT SUBMISSION</span>
             <h2>दस्तावेज जमा करें</h2>
@@ -1021,134 +548,66 @@
         </p>
 
         <div style="text-align:center; margin:28px auto;">
-            <a
-                href="https://script.google.com/macros/s/AKfycbw-54yWkmol3cxX4pr3lRbKH6JJNfz1nSlNdZCfB9bCnJoK5d2x-sb6erxCfDx2QFwm/exec"
-                target="_blank"
-                rel="noopener noreferrer"
-                style="display:inline-block; padding:15px 24px; background:#126747; color:#fff; border-radius:8px; text-decoration:none; font-weight:700;">
+            <a href="https://script.google.com/macros/s/AKfycbw-54yWkmol3cxX4pr3lRbKH6JJNfz1nSlNdZCfB9bCnJoK5d2x-sb6erxCfDx2QFwm/exec"
+               target="_blank"
+               rel="noopener noreferrer"
+               style="display:inline-block; padding:15px 24px; background:#126747; color:#fff; border-radius:8px; text-decoration:none; font-weight:700;">
                 📄 दस्तावेज जमा करें — Open Form
             </a>
         </div>
+
     </div>
 </section>
 
-
-<!-- END DOCUMENT SUBMISSION FORM -->
-```
-
 <!-- FOOTER -->
-
 <footer class="footer">
-
-
     <div class="container footer-grid">
 
-
         <div>
-
-            <h3>
-                UHS CHAKIYA TARARI
-            </h3>
+            <h3>UHS CHAKIYA TARARI</h3>
 
             <p>
-
                 उच्च माध्यमिक विद्यालय चकिया
                 तरारी, भोजपुर, बिहार
-
             </p>
 
-            <p>
-
-                शिक्षा • अनुशासन • ज्ञान • विकास
-
-            </p>
-
+            <p>शिक्षा • अनुशासन • ज्ञान • विकास</p>
         </div>
-
-
 
         <div>
+            <h3>Quick Links</h3>
 
-            <h3>
-                Quick Links
-            </h3>
-
-            <a href="#about">
-                About
-            </a>
-
-            <a href="#academics">
-                Academics
-            </a>
-
-            <a href="#staff">
-                Staff
-            </a>
-
-            <a href="#notices">
-                Notices
-            </a>
-
-            <a href="#contact">
-                Contact
-            </a>
-
+            <a href="#about">About</a>
+            <a href="#academics">Academics</a>
+            <a href="#staff">Staff</a>
+            <a href="#notices">Notices</a>
+            <a href="#contact">Contact</a>
         </div>
-
-
 
         <div>
+            <h3>Important</h3>
 
-            <h3>
-                Important
-            </h3>
-
-            <a href="#admission">
-                Admission
-            </a>
-
-            <a href="#facilities">
-                Facilities
-            </a>
-
-            <a href="#gallery">
-                Gallery
-            </a>
-
+            <a href="#admission">Admission</a>
+            <a href="#facilities">Facilities</a>
+            <a href="#gallery">Gallery</a>
         </div>
-
 
     </div>
-
-
 
     <div class="copyright">
-
         © <span id="year"></span>
-
         UHS Chakiya Tarari, Bhojpur.
-
         All Rights Reserved.
-
     </div>
-
-
 </footer>
 
-
-
 <!-- BACK TO TOP -->
+<button id="topButton" onclick="scrollToTop()">↑</button>
 
-<button
-    id="topButton"
-    onclick="scrollToTop()">
-
-    ↑
-
-</button>
-
+<!-- MAIN JAVASCRIPT -->
 <script src="script.js"></script>
 
+<!-- ACADEMICS DROPDOWN -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const dropdown = document.getElementById("academicsDropdown");
@@ -1172,6 +631,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
+<!-- EXAM DROPDOWN -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const dropdown = document.getElementById("examDropdown");
@@ -1195,165 +656,171 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
+<!-- NOTICE BOARD DATA -->
 <script>
 (() => {
-  const API_URL = "https://script.google.com/macros/s/AKfycbzVPiOa5gNCsCMx-RYF0yPLhnAlxGJzxBc5tm1KVHOemuDHBYID12o87c_YYCLU71i7/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbzVPiOa5gNCsCMx-RYF0yPLhnAlxGJzxBc5tm1KVHOemuDHBYID12o87c_YYCLU71i7/exec";
 
-  const board = document.getElementById("noticeBoard");
-  const message = document.getElementById("noticeMessage");
+    const board = document.getElementById("noticeBoard");
+    const message = document.getElementById("noticeMessage");
 
-  if (!board || !message) return;
+    if (!board || !message) return;
 
-  function addText(parent, tag, value, className) {
-    const el = document.createElement(tag);
-    if (className) el.className = className;
-    el.textContent = value;
-    parent.appendChild(el);
-    return el;
-  }
-
-  function formatDate(value) {
-    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || "");
-    if (match) return `${match[3]}/${match[2]}/${match[1]}`;
-
-    const indianDate = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(value || "");
-    if (indianDate) return value;
-
-    return value || "सूचना";
-  }
-
-  function showNotices(data) {
-    if (!data || !data.success || !Array.isArray(data.notices)) {
-      throw new Error(data?.error || "Invalid server response");
+    function addText(parent, tag, value, className) {
+        const el = document.createElement(tag);
+        if (className) el.className = className;
+        el.textContent = value;
+        parent.appendChild(el);
+        return el;
     }
 
-    board.replaceChildren();
-    message.textContent = "";
+    function formatDate(value) {
+        const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || "");
+        if (match) return `${match[3]}/${match[2]}/${match[1]}`;
 
-    if (data.notices.length === 0) {
-      addText(board, "p", "फिलहाल कोई प्रकाशित सूचना उपलब्ध नहीं है।");
-      return;
+        const indianDate = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(value || "");
+        if (indianDate) return value;
+
+        return value || "सूचना";
     }
 
-    data.notices.forEach(notice => {
-      const item = document.createElement("article");
-      item.className = "notice-item";
-
-      const dateBox = document.createElement("div");
-      dateBox.className = "notice-date";
-
-      const dateText = formatDate(notice.date);
-      const parts = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(dateText);
-
-      if (parts) {
-        addText(dateBox, "strong", parts[1]);
-        addText(dateBox, "span", parts[2] + "/" + parts[3]);
-      } else {
-        addText(dateBox, "strong", dateText);
-      }
-
-      const content = document.createElement("div");
-      content.className = "notice-content";
-
-      addText(content, "span", notice.category || "GENERAL", "notice-tag");
-      addText(content, "h3", notice.title || "विद्यालय सूचना");
-      addText(content, "p", notice.description || "");
-
-      if (notice.pdfUrl) {
-        try {
-          const pdf = new URL(notice.pdfUrl);
-
-          if (
-            pdf.protocol === "https:" &&
-            ["drive.google.com", "docs.google.com"].includes(pdf.hostname)
-          ) {
-            const link = document.createElement("a");
-            link.href = pdf.href;
-            link.target = "_blank";
-            link.rel = "noopener noreferrer";
-            link.textContent = "📄 सूचना PDF देखें";
-            content.appendChild(link);
-          }
-        } catch (error) {
-          console.warn("Invalid notice PDF URL", error);
+    function showNotices(data) {
+        if (!data || !data.success || !Array.isArray(data.notices)) {
+            throw new Error(data?.error || "Invalid server response");
         }
-      }
 
-      item.appendChild(dateBox);
-      item.appendChild(content);
-      board.appendChild(item);
-    });
-  }
+        board.replaceChildren();
+        message.textContent = "";
 
-  function loadNotices() {
-    board.replaceChildren();
-    message.textContent = "";
-    addText(board, "p", "विद्यालय की सूचनाएँ लोड हो रही हैं...");
+        if (data.notices.length === 0) {
+            addText(board, "p", "फिलहाल कोई प्रकाशित सूचना उपलब्ध नहीं है।");
+            return;
+        }
 
-    const callbackName =
-      "chakiyaNotice_" + Date.now() + "_" +
-      Math.random().toString(36).slice(2);
+        data.notices.forEach(notice => {
+            const item = document.createElement("article");
+            item.className = "notice-item";
 
-    const script = document.createElement("script");
-    let finished = false;
+            const dateBox = document.createElement("div");
+            dateBox.className = "notice-date";
 
-    const timeout = setTimeout(() => {
-      finish();
-      board.replaceChildren();
-      message.textContent =
-        "सूचनाएँ लोड नहीं हो सकीं। Apps Script URL और deployment जाँचें।";
-    }, 15000);
+            const dateText = formatDate(notice.date);
+            const parts = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(dateText);
 
-    function finish() {
-      if (finished) return;
-      finished = true;
-      clearTimeout(timeout);
-      delete window[callbackName];
-      script.remove();
+            if (parts) {
+                addText(dateBox, "strong", parts[1]);
+                addText(dateBox, "span", parts[2] + "/" + parts[3]);
+            } else {
+                addText(dateBox, "strong", dateText);
+            }
+
+            const content = document.createElement("div");
+            content.className = "notice-content";
+
+            addText(content, "span", notice.category || "GENERAL", "notice-tag");
+            addText(content, "h3", notice.title || "विद्यालय सूचना");
+            addText(content, "p", notice.description || "");
+
+            if (notice.pdfUrl) {
+                try {
+                    const pdf = new URL(notice.pdfUrl);
+
+                    if (
+                        pdf.protocol === "https:" &&
+                        ["drive.google.com", "docs.google.com"].includes(pdf.hostname)
+                    ) {
+                        const link = document.createElement("a");
+                        link.href = pdf.href;
+                        link.target = "_blank";
+                        link.rel = "noopener noreferrer";
+                        link.textContent = "📄 सूचना PDF देखें";
+                        content.appendChild(link);
+                    }
+                } catch (error) {
+                    console.warn("Invalid notice PDF URL", error);
+                }
+            }
+
+            item.appendChild(dateBox);
+            item.appendChild(content);
+            board.appendChild(item);
+        });
     }
 
-    window[callbackName] = data => {
-      finish();
-      try {
-        showNotices(data);
-      } catch (error) {
-        console.error(error);
+    function loadNotices() {
         board.replaceChildren();
-        message.textContent = "सूचनाएँ पढ़ने में समस्या हुई।";
-      }
-    };
+        message.textContent = "";
+        addText(board, "p", "विद्यालय की सूचनाएँ लोड हो रही हैं...");
 
-    script.onerror = () => {
-      finish();
-      board.replaceChildren();
-      message.textContent =
-        "सर्वर से संपर्क नहीं हो सका। Apps Script deployment जाँचें।";
-    };
+        const callbackName =
+            "chakiyaNotice_" + Date.now() + "_" +
+            Math.random().toString(36).slice(2);
 
-    script.src = API_URL +
-      (API_URL.includes("?") ? "&" : "?") +
-      "callback=" + encodeURIComponent(callbackName) +
-      "&t=" + Date.now();
+        const script = document.createElement("script");
+        let finished = false;
 
-    document.head.appendChild(script);
-  }
+        const timeout = setTimeout(() => {
+            finish();
+            board.replaceChildren();
+            message.textContent =
+                "सूचनाएँ लोड नहीं हो सकीं। Apps Script URL और deployment जाँचें।";
+        }, 15000);
 
-  loadNotices();
+        function finish() {
+            if (finished) return;
+            finished = true;
+            clearTimeout(timeout);
+            delete window[callbackName];
+            script.remove();
+        }
+
+        window[callbackName] = data => {
+            finish();
+
+            try {
+                showNotices(data);
+            } catch (error) {
+                console.error(error);
+                board.replaceChildren();
+                message.textContent = "सूचनाएँ पढ़ने में समस्या हुई।";
+            }
+        };
+
+        script.onerror = () => {
+            finish();
+            board.replaceChildren();
+            message.textContent =
+                "सर्वर से संपर्क नहीं हो सका। Apps Script deployment जाँचें।";
+        };
+
+        script.src = API_URL +
+            (API_URL.includes("?") ? "&" : "?") +
+            "callback=" + encodeURIComponent(callbackName) +
+            "&t=" + Date.now();
+
+        document.head.appendChild(script);
+    }
+
+    loadNotices();
 })();
 </script>
-    <script>
+
+<!-- SERVICE WORKER -->
+<script>
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/service-worker.js")
-      .then(() => console.log("UHS App Service Worker Registered"))
-      .catch(error => console.error("Service Worker Error:", error));
-  });
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js")
+            .then(() => console.log("UHS App Service Worker Registered"))
+            .catch(error => console.error("Service Worker Error:", error));
+    });
 }
-        alert("CHAKIYA Attendance JavaScript Loaded Successfully");
+
+alert("CHAKIYA Attendance JavaScript Loaded Successfully");
 </script>
 
-
-    <script>
+<!-- ATTENDANCE DROPDOWN -->
+<script>
 document.addEventListener("DOMContentLoaded", function () {
     const dropdown = document.getElementById("attendanceDropdown");
     const toggle = document.getElementById("attendanceToggle");
@@ -1368,7 +835,6 @@ document.addEventListener("DOMContentLoaded", function () {
         event.stopPropagation();
 
         const isOpen = dropdown.classList.toggle("open");
-
         toggle.setAttribute("aria-expanded", isOpen);
     });
 
@@ -1380,148 +846,147 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
-    
+
+<!-- GALLERY DATA AND LIGHTBOX -->
 <script>
 (() => {
-  const API_URL =
-    "https://script.google.com/macros/s/AKfycbw9beoSRGHP6hEE1CbXD9mk-u2A5HSUlWD3I2VA1vLr2AzQC_ZiOPLQ5L2h8TKj2aaK/exec";
+    const API_URL =
+        "https://script.google.com/macros/s/AKfycbw9beoSRGHP6hEE1CbXD9mk-u2A5HSUlWD3I2VA1vLr2AzQC_ZiOPLQ5L2h8TKj2aaK/exec";
 
-  const grid = document.getElementById("galleryGrid");
-  const loading = document.getElementById("galleryLoading");
-  const message = document.getElementById("galleryMessage");
+    const grid = document.getElementById("galleryGrid");
+    const loading = document.getElementById("galleryLoading");
+    const message = document.getElementById("galleryMessage");
 
-  const lightbox = document.getElementById("galleryLightbox");
-  const largeImage = document.getElementById("galleryLargeImage");
-  const caption = document.getElementById("galleryImageCaption");
-  const closeButton = document.getElementById("galleryClose");
+    const lightbox = document.getElementById("galleryLightbox");
+    const largeImage = document.getElementById("galleryLargeImage");
+    const caption = document.getElementById("galleryImageCaption");
+    const closeButton = document.getElementById("galleryClose");
 
-  if (!grid || !loading || !message) return;
+    if (!grid || !loading || !message) return;
 
-  function openLightbox(url, title) {
-    largeImage.src = url;
-    largeImage.alt = title;
-    caption.textContent = title;
-    lightbox.classList.add("active");
-    lightbox.setAttribute("aria-hidden", "false");
-  }
-
-  function closeLightbox() {
-    lightbox.classList.remove("active");
-    lightbox.setAttribute("aria-hidden", "true");
-    largeImage.src = "";
-  }
-
-  closeButton.addEventListener("click", closeLightbox);
-
-  lightbox.addEventListener("click", event => {
-    if (event.target === lightbox) closeLightbox();
-  });
-
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") closeLightbox();
-  });
-
-  function addPhoto(photo) {
-    if (!photo.imageUrl || !photo.photoName) return;
-
-    const card = document.createElement("div");
-    card.className = "gallery-item";
-
-    const img = document.createElement("img");
-    img.src = photo.imageUrl;
-    img.alt = photo.event || "UHS Chakiya school photo";
-    img.loading = "lazy";
-
-    img.onerror = () => {
-      card.remove();
-    };
-
-    const heading = document.createElement("h3");
-    heading.textContent = photo.event || photo.photoName;
-
-    const details = document.createElement("div");
-    details.className = "gallery-event";
-    details.textContent =
-      (photo.category || "School Event") +
-      (photo.date ? " • " + photo.date : "");
-
-    card.appendChild(img);
-    card.appendChild(heading);
-    card.appendChild(details);
-
-    card.addEventListener("click", () => {
-      openLightbox(photo.imageUrl, photo.event || photo.photoName);
-    });
-
-    grid.appendChild(card);
-  }
-
-  function loadGallery() {
-    loading.style.display = "block";
-    message.textContent = "";
-
-    const callbackName =
-      "chakiyaGallery_" + Date.now() + "_" +
-      Math.random().toString(36).slice(2);
-
-    const script = document.createElement("script");
-    let finished = false;
-
-    const timeout = setTimeout(() => {
-      finish();
-      loading.style.display = "none";
-      message.textContent =
-        "नई तस्वीरें लोड नहीं हो सकीं। कृपया बाद में प्रयास करें।";
-    }, 15000);
-
-    function finish() {
-      if (finished) return;
-      finished = true;
-      clearTimeout(timeout);
-      delete window[callbackName];
-      script.remove();
+    function openLightbox(url, title) {
+        largeImage.src = url;
+        largeImage.alt = title;
+        caption.textContent = title;
+        lightbox.classList.add("active");
+        lightbox.setAttribute("aria-hidden", "false");
     }
 
-    window[callbackName] = photos => {
-      finish();
-      loading.style.display = "none";
+    function closeLightbox() {
+        lightbox.classList.remove("active");
+        lightbox.setAttribute("aria-hidden", "true");
+        largeImage.src = "";
+    }
 
-      if (!Array.isArray(photos)) {
-        message.textContent = "Gallery data उपलब्ध नहीं है।";
-        return;
-      }
+    closeButton.addEventListener("click", closeLightbox);
 
-      if (photos.length === 0) {
-        message.textContent = "अभी कोई नई तस्वीर उपलब्ध नहीं है।";
-        return;
-      }
+    lightbox.addEventListener("click", event => {
+        if (event.target === lightbox) closeLightbox();
+    });
 
-      photos.forEach(addPhoto);
-    };
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") closeLightbox();
+    });
 
-    script.onerror = () => {
-      finish();
-      loading.style.display = "none";
-      message.textContent = "Gallery server से संपर्क नहीं हो सका।";
-    };
+    function addPhoto(photo) {
+        if (!photo.imageUrl || !photo.photoName) return;
 
-    script.src = API_URL +
-      "?action=gallery&callback=" +
-      encodeURIComponent(callbackName) +
-      "&t=" + Date.now();
+        const card = document.createElement("div");
+        card.className = "gallery-item";
 
-    document.head.appendChild(script);
-  }
+        const img = document.createElement("img");
+        img.src = photo.imageUrl;
+        img.alt = photo.event || "UHS Chakiya school photo";
+        img.loading = "lazy";
 
-  
-  loadGallery();
+        img.onerror = () => {
+            card.remove();
+        };
+
+        const heading = document.createElement("h3");
+        heading.textContent = photo.event || photo.photoName;
+
+        const details = document.createElement("div");
+        details.className = "gallery-event";
+        details.textContent =
+            (photo.category || "School Event") +
+            (photo.date ? " • " + photo.date : "");
+
+        card.appendChild(img);
+        card.appendChild(heading);
+        card.appendChild(details);
+
+        card.addEventListener("click", () => {
+            openLightbox(photo.imageUrl, photo.event || photo.photoName);
+        });
+
+        grid.appendChild(card);
+    }
+
+    function loadGallery() {
+        loading.style.display = "block";
+        message.textContent = "";
+
+        const callbackName =
+            "chakiyaGallery_" + Date.now() + "_" +
+            Math.random().toString(36).slice(2);
+
+        const script = document.createElement("script");
+        let finished = false;
+
+        const timeout = setTimeout(() => {
+            finish();
+            loading.style.display = "none";
+            message.textContent =
+                "नई तस्वीरें लोड नहीं हो सकीं। कृपया बाद में प्रयास करें।";
+        }, 15000);
+
+        function finish() {
+            if (finished) return;
+            finished = true;
+            clearTimeout(timeout);
+            delete window[callbackName];
+            script.remove();
+        }
+
+        window[callbackName] = photos => {
+            finish();
+            loading.style.display = "none";
+
+            if (!Array.isArray(photos)) {
+                message.textContent = "Gallery data उपलब्ध नहीं है।";
+                return;
+            }
+
+            if (photos.length === 0) {
+                message.textContent = "अभी कोई नई तस्वीर उपलब्ध नहीं है।";
+                return;
+            }
+
+            photos.forEach(addPhoto);
+        };
+
+        script.onerror = () => {
+            finish();
+            loading.style.display = "none";
+            message.textContent = "Gallery server से संपर्क नहीं हो सका।";
+        };
+
+        script.src = API_URL +
+            "?action=gallery&callback=" +
+            encodeURIComponent(callbackName) +
+            "&t=" + Date.now();
+
+        document.head.appendChild(script);
+    }
+
+    loadGallery();
 })();
 </script>
 
-<!-- FACILITIES DROPDOWN SCRIPT -->
+<!-- FACILITIES DROPDOWN -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-
     const dropdown = document.getElementById("facilitiesDropdown");
     const toggle = document.getElementById("facilitiesToggle");
 
@@ -1535,7 +1000,6 @@ document.addEventListener("DOMContentLoaded", function () {
         event.stopPropagation();
 
         const isOpen = dropdown.classList.toggle("open");
-
         toggle.setAttribute("aria-expanded", String(isOpen));
     });
 
@@ -1545,10 +1009,11 @@ document.addEventListener("DOMContentLoaded", function () {
             toggle.setAttribute("aria-expanded", "false");
         }
     });
-
 });
 </script>
 
+<!-- ROTATING EARTH -->
 <script type="module" src="earth-background.js"></script>
+
 </body>
 </html>
