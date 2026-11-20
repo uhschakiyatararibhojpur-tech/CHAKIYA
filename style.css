@@ -4231,6 +4231,61 @@ body {
         scroll-behavior: auto !important;
     }
 }
+/* Officials section */
+.header-officials {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 20px;
+
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: auto;
+    max-width: 350px;
+}
+
+/* Individual official */
+.official-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center;
+
+    width: 130px;
+    min-width: 130px;
+    text-align: center;
+}
+
+/* Official photo */
+.official-photo {
+    width: 75px !important;
+    height: 75px !important;
+    max-width: 75px !important;
+    min-width: 75px !important;
+
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #d4af37;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+
+    display: block;
+}
+
+/* Official name */
+.official-name {
+    width: 130px;
+    margin-top: 8px;
+
+    font-size: 12px;
+    font-weight: 700;
+    color: #075b4d;
+    line-height: 1.5;
+    text-align: center;
+}
 @media (max-width: 768px) {
     .header-officials {
         position: static;
