@@ -4295,3 +4295,15 @@ body {
         text-align: center;
     }
 }
+/* EXCHANGE MENU AND MINISTER POSITION ON MOBILE */
+@media (max-width: 768px) {
+
+    .header-officials {
+        order: 3 !important;
+    }
+
+    .menu-toggle {
+        order: 4 !important;
+    }
+
+}
