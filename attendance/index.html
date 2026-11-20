@@ -9,134 +9,512 @@
 <script src="https://unpkg.com/html5-qrcode"></script>
 
 <style>
+/* =========================================
+   CHAKIYA PROFESSIONAL ATTENDANCE DESIGN
+   ========================================= */
+
+:root {
+    --navy: #0f172a;
+    --navy-light: #1e293b;
+    --blue: #2563eb;
+    --blue-dark: #1d4ed8;
+    --teal: #14b8a6;
+    --green: #16a34a;
+    --red: #dc2626;
+    --orange: #f59e0b;
+    --purple: #7c3aed;
+
+    --background: #f1f5f9;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+}
+
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  padding: 18px;
-  font-family: Arial, sans-serif;
-  background: #f1f5f9;
-  color: #172554;
+    margin: 0;
+    padding: 24px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:
+        radial-gradient(
+            circle at top left,
+            #dbeafe 0,
+            transparent 35%
+        ),
+        #f1f5f9;
+    color: var(--text);
+    min-height: 100vh;
 }
+
+/* =========================================
+   MAIN CONTAINER
+   ========================================= */
 
 .container {
-  max-width: 600px;
-  margin: 20px auto;
-  background: white;
-  padding: 22px;
-  border-radius: 16px;
-  box-shadow: 0 5px 25px #00000012;
+    max-width: 1100px;
+    margin: 25px auto;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 5px;
+/* =========================================
+   HEADER
+   ========================================= */
+
+.container > h2 {
+    margin: 0;
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e40af
+    );
+    color: #ffffff;
+    text-align: left;
+    padding: 30px 32px 10px;
+    border-radius: 24px 24px 0 0;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
 
-.subtitle {
-  text-align: center;
-  color: #64748b;
+.container > .subtitle {
+    margin: 0;
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e40af
+    );
+    color: #cbd5e1;
+    text-align: left;
+    padding: 0 32px 28px;
+    border-radius: 0 0 24px 24px;
+    font-size: 15px;
 }
 
-input {
-  width: 100%;
-  padding: 13px;
-  margin: 8px 0;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  font-size: 16px;
+/* =========================================
+   LOGIN AND ATTENDANCE PANELS
+   ========================================= */
+
+#loginPanel,
+#attendancePanel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 12px 40px #0f172a0b;
 }
+
+#loginPanel h3,
+#attendancePanel h3 {
+    font-size: 20px;
+    margin: 10px 0 18px;
+    color: var(--navy);
+    font-weight: 750;
+}
+
+/* =========================================
+   INPUTS
+   ========================================= */
+
+input,
+select {
+    width: 100%;
+    padding: 15px 16px;
+    margin: 8px 0 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 13px;
+    font-size: 16px;
+    background: #ffffff;
+    color: var(--text);
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px #2563eb15;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #475569;
+    margin: 10px 0 4px;
+}
+
+/* =========================================
+   BUTTONS
+   ========================================= */
 
 button {
-  border: 0;
-  padding: 13px 17px;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 5px;
+    border: none;
+    padding: 13px 20px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 5px;
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s,
+        opacity 0.15s;
+    font-size: 14px;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px #00000020;
+}
+
+button:active:not(:disabled) {
+    transform: scale(0.98);
 }
 
 button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+    opacity: 0.45;
+    cursor: not-allowed;
 }
 
 .center {
-  text-align: center;
+    text-align: center;
 }
+
+/* Login */
 
 #loginBtn {
-  background: #1d4ed8;
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+    min-width: 200px;
 }
 
+/* Camera */
+
 #startBtn {
-  background: #15803d;
+    background: linear-gradient(
+        135deg,
+        #16a34a,
+        #15803d
+    );
 }
 
 #stopBtn {
-  background: #dc2626;
+    background: linear-gradient(
+        135deg,
+        #ef4444,
+        #dc2626
+    );
 }
+
+/* Manual Attendance */
 
 #manualBtn {
-  background: #1d4ed8;
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
 }
+
+/* Summary */
 
 #summaryBtn {
-  background: #7c3aed;
+    background: linear-gradient(
+        135deg,
+        #8b5cf6,
+        #7c3aed
+    );
 }
+
+/* Logout */
 
 #logoutBtn {
-  background: #475569;
+    background: linear-gradient(
+        135deg,
+        #475569,
+        #334155
+    );
 }
+
+/* =========================================
+   CAMERA SCANNER
+   ========================================= */
 
 #reader {
-  width: 100%;
-  margin: 18px auto;
+    width: 100%;
+    margin: 22px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #020617;
+    border: 2px solid #cbd5e1;
+    min-height: 250px;
+    box-shadow: 0 10px 30px #00000012;
 }
+
+#reader video {
+    border-radius: 16px;
+}
+
+/* =========================================
+   RESULT CARDS
+   ========================================= */
 
 .result {
-  background: #eff6ff;
-  border-radius: 10px;
-  padding: 15px;
-  margin-top: 18px;
-  overflow-wrap: anywhere;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px;
+    margin: 18px 0;
+    overflow-wrap: anywhere;
+    box-shadow: 0 4px 12px #00000004;
 }
 
-.hidden {
-  display: none;
+#teacherInfo {
+    margin: 10px 0 0;
+    font-weight: 700;
+    color: #1d4ed8;
+    font-size: 16px;
 }
 
-.status {
-  font-weight: bold;
-  margin-top: 12px;
+/* =========================================
+   HOLIDAY MANAGEMENT
+   ========================================= */
+
+#holidayPanel {
+    background: linear-gradient(
+        135deg,
+        #fff7ed,
+        #fffbeb
+    );
+    border: 1px solid #fed7aa;
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 25px;
 }
+
+#holidayPanel h3 {
+    color: #9a3412;
+    font-size: 19px;
+}
+
+#holidayBtn {
+    background: linear-gradient(
+        135deg,
+        #f59e0b,
+        #d97706
+    );
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+}
+
+#holidayMessage {
+    font-weight: 700;
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+/* =========================================
+   ATTENDANCE SECTION HEADINGS
+   ========================================= */
+
+#attendancePanel > h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+#attendancePanel > h3:first-of-type {
+    margin-top: 28px;
+}
+
+/* =========================================
+   MANUAL BARCODE
+   ========================================= */
+
+#manualBarcode {
+    font-family: monospace;
+    letter-spacing: 1px;
+    font-size: 17px;
+}
+
+/* =========================================
+   ATTENDANCE RESULT
+   ========================================= */
 
 #result {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-weight: 700;
+    line-height: 1.8;
+    font-size: 15px;
+    color: #334155;
 }
 
 #summary {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.8;
+    margin: 12px 0 0;
+    color: #334155;
+    font-size: 14px;
 }
 
-@media (max-width: 480px) {
-  body {
-    padding: 8px;
-  }
+/* =========================================
+   STATUS
+   ========================================= */
 
-  .container {
-    margin: 8px auto;
-    padding: 15px;
-  }
+.status {
+    font-weight: bold;
+    margin-top: 12px;
+}
 
-  button {
-    padding: 12px;
-  }
+.hidden {
+    display: none !important;
+}
+
+/* =========================================
+   BUTTON LAYOUT
+   ========================================= */
+
+#attendancePanel .center button {
+    margin: 7px;
+}
+
+/* =========================================
+   RESULT HIGHLIGHT
+   ========================================= */
+
+#attendancePanel .result strong {
+    color: #0f172a;
+    font-size: 15px;
+}
+
+#attendancePanel .result:nth-last-of-type(1) {
+    background: linear-gradient(
+        135deg,
+        #f8fafc,
+        #eff6ff
+    );
+}
+
+/* =========================================
+   SCANNER ANIMATION
+   ========================================= */
+
+@keyframes scannerPulse {
+    0% {
+        box-shadow: 0 0 0 0 #14b8a650;
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px #14b8a600;
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 #14b8a600;
+    }
+}
+
+#startBtn:not(:disabled) {
+    animation: scannerPulse 2s infinite;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        margin: 8px auto;
+    }
+
+    .container > h2 {
+        padding: 24px 20px 8px;
+        font-size: 25px;
+    }
+
+    .container > .subtitle {
+        padding: 0 20px 24px;
+        font-size: 13px;
+    }
+
+    #loginPanel,
+    #attendancePanel {
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    button {
+        margin: 4px 2px;
+        padding: 13px 15px;
+    }
+
+    #reader {
+        min-height: 210px;
+        border-radius: 16px;
+    }
+
+    #holidayPanel {
+        padding: 18px;
+    }
+
+    #attendancePanel .center {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #attendancePanel .center button {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    #loginBtn {
+        width: 100%;
+    }
+
+    input,
+    select {
+        font-size: 16px;
+    }
+}
+
+/* =========================================
+   LARGE SCREEN
+   ========================================= */
+
+@media (min-width: 1100px) {
+
+    .container {
+        max-width: 1100px;
+    }
+
+    #attendancePanel {
+        padding: 35px;
+    }
+
 }
 </style>
 </head>
