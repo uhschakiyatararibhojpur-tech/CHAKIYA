@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,383 +6,1083 @@
 <title>Student Attendance | UHS Chakiya</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0f172a;
+  --blue:#1e40af;
+  --blue-light:#3b82f6;
+  --background:#f1f5f9;
+  --card:#ffffff;
+  --text:#1e293b;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --green:#16a34a;
+  --red:#dc2626;
+  --orange:#f59e0b;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 body{
-  font-family:Arial,sans-serif;
-  background:#f1f5f9;
-  color:#1e293b;
+  font-family:Inter,Arial,sans-serif;
+  background:var(--background);
+  color:var(--text);
+  min-height:100vh;
 }
+
+/* ================= HEADER ================= */
+
 header{
-  background:linear-gradient(120deg,#123b70,#087e8b);
+  background:linear-gradient(120deg,#0f172a,#1e3a8a,#2563eb);
   color:white;
-  padding:25px 15px;
-  text-align:center;
+  padding:30px 20px;
+  position:relative;
+  overflow:hidden;
 }
-header h1{font-size:24px;margin-bottom:7px}
-header p{font-size:14px}
-.container{max-width:900px;margin:25px auto;padding:0 15px}
+
+header::after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+  right:-100px;
+  top:-120px;
+}
+
+.header-content{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  position:relative;
+  z-index:1;
+}
+
+.school-logo{
+  width:65px;
+  height:65px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#14b8a6,#0d9488);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  font-weight:900;
+  box-shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+.school-title h1{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:.5px;
+  margin-bottom:6px;
+}
+
+.school-title p{
+  font-size:14px;
+  color:#cbd5e1;
+  margin-bottom:5px;
+}
+
+.school-title .portal-name{
+  color:#bfdbfe;
+  font-size:13px;
+}
+
+.header-badge{
+  margin-left:auto;
+  text-align:right;
+}
+
+.header-badge span{
+  display:inline-block;
+  background:rgba(255,255,255,.12);
+  padding:10px 16px;
+  border-radius:30px;
+  font-size:13px;
+  border:1px solid rgba(255,255,255,.15);
+}
+
+/* ================= MAIN CONTAINER ================= */
+
+.container{
+  max-width:1100px;
+  margin:30px auto;
+  padding:0 20px;
+}
+
+/* ================= CARD ================= */
+
 .panel{
-  background:white;
-  border-radius:14px;
-  padding:22px;
-  box-shadow:0 4px 18px rgba(0,0,0,.07);
-  margin-bottom:20px;
+  background:var(--card);
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 5px 20px rgba(15,23,42,.05);
+  border:1px solid rgba(226,232,240,.8);
+  margin-bottom:22px;
 }
-.panel h2{font-size:19px;margin-bottom:16px}
+
+.panel h2{
+  font-size:19px;
+  margin-bottom:20px;
+  color:var(--navy);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.panel h2 .icon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#eff6ff;
+  font-size:20px;
+}
+
+/* ================= SEARCH ================= */
+
+.search-panel{
+  background:linear-gradient(135deg,#ffffff,#f8fafc);
+}
+
 .form-row{
   display:flex;
   flex-wrap:wrap;
   gap:12px;
 }
+
 input,button{
-  padding:13px;
-  border-radius:8px;
+  padding:14px 16px;
+  border-radius:10px;
   font-size:15px;
 }
+
 input{
-  border:1px solid #cbd5e1;
+  border:1px solid var(--border);
   flex:1;
-  min-width:180px;
+  min-width:200px;
+  background:#fff;
+  color:var(--text);
+  transition:.2s;
 }
+
+input:focus{
+  outline:none;
+  border-color:var(--blue-light);
+  box-shadow:0 0 0 3px rgba(59,130,246,.12);
+}
+
 button{
   border:0;
-  background:#087e8b;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
   color:white;
   cursor:pointer;
-  font-weight:bold;
+  font-weight:700;
+  transition:.2s;
+  box-shadow:0 4px 10px rgba(37,99,235,.2);
 }
-button:hover{background:#065f68}
-button:disabled{opacity:.6;cursor:wait}
-#message{margin-top:14px;font-size:14px}
-.error{color:#dc2626}
-.success{color:#15803d}
-.hidden{display:none!important}
+
+button:hover{
+  transform:translateY(-1px);
+  box-shadow:0 6px 15px rgba(37,99,235,.25);
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:wait;
+  transform:none;
+}
+
+/* ================= MESSAGE ================= */
+
+#message{
+  margin-top:16px;
+  padding:12px 15px;
+  border-radius:10px;
+  font-size:14px;
+  display:none;
+}
+
+#message:not(:empty){
+  display:block;
+}
+
+.error{
+  color:#991b1b;
+  background:#fee2e2;
+  border:1px solid #fecaca;
+}
+
+.success{
+  color:#166534;
+  background:#dcfce7;
+  border:1px solid #bbf7d0;
+}
+
+#message:not(.error):not(.success){
+  color:#1e40af;
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+}
+
+/* ================= STUDENT INFORMATION ================= */
+
 .student-info{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:12px;
+  gap:15px;
 }
+
 .info-item{
-  background:#f1f5f9;
-  padding:13px;
-  border-radius:9px;
+  background:#f8fafc;
+  border:1px solid var(--border);
+  padding:18px;
+  border-radius:12px;
+  transition:.2s;
 }
-.info-item small{color:#64748b;display:block;margin-bottom:5px}
-.info-item strong{font-size:16px}
+
+.info-item:hover{
+  background:#f1f5f9;
+  transform:translateY(-2px);
+}
+
+.info-item small{
+  color:var(--muted);
+  display:block;
+  margin-bottom:8px;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  font-weight:700;
+}
+
+.info-item strong{
+  font-size:17px;
+  color:var(--navy);
+  display:block;
+}
+
+/* ================= STATISTICS ================= */
+
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:12px;
+  gap:15px;
 }
+
 .stat{
-  padding:17px 10px;
-  text-align:center;
-  border-radius:10px;
-  background:#f1f5f9;
+  position:relative;
+  overflow:hidden;
+  padding:22px 18px;
+  border-radius:15px;
+  background:#f8fafc;
+  border:1px solid var(--border);
+  transition:.2s;
 }
-.stat strong{display:block;font-size:25px;margin-bottom:5px}
-.stat span{font-size:13px;color:#64748b}
-.present{color:#15803d}
-.absent{color:#dc2626}
-.percentage{color:#087e8b}
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:400px}
+
+.stat:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(15,23,42,.07);
+}
+
+.stat::after{
+  content:"";
+  position:absolute;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  right:-25px;
+  bottom:-35px;
+  opacity:.1;
+  background:currentColor;
+}
+
+.stat-icon{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  margin-bottom:15px;
+}
+
+.stat strong{
+  display:block;
+  font-size:32px;
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+.stat span{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.stat-total{
+  color:#2563eb;
+}
+
+.stat-total .stat-icon{
+  background:#dbeafe;
+}
+
+.stat-present{
+  color:#16a34a;
+}
+
+.stat-present .stat-icon{
+  background:#dcfce7;
+}
+
+.stat-absent{
+  color:#dc2626;
+}
+
+.stat-absent .stat-icon{
+  background:#fee2e2;
+}
+
+.stat-percentage{
+  color:#7c3aed;
+}
+
+.stat-percentage .stat-icon{
+  background:#ede9fe;
+}
+
+/* ================= TABLE ================= */
+
+.table-wrap{
+  overflow-x:auto;
+  border-radius:12px;
+  border:1px solid var(--border);
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:500px;
+}
+
 th,td{
-  padding:13px;
-  border-bottom:1px solid #e2e8f0;
+  padding:16px;
+  border-bottom:1px solid var(--border);
   text-align:left;
   font-size:14px;
 }
-th{background:#f1f5f9}
+
+th{
+  background:#f8fafc;
+  color:#475569;
+  font-weight:700;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+tbody tr{
+  transition:.15s;
+}
+
+tbody tr:hover{
+  background:#f8fafc;
+}
+
+tbody tr:last-child td{
+  border-bottom:none;
+}
+
 .status{
-  padding:5px 10px;
-  border-radius:20px;
-  font-weight:bold;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 12px;
+  border-radius:30px;
+  font-weight:700;
   font-size:12px;
 }
-.status-present{background:#dcfce7;color:#166534}
-.status-absent{background:#fee2e2;color:#991b1b}
-.empty{text-align:center;color:#64748b;padding:25px}
-footer{text-align:center;color:#64748b;font-size:13px;padding:25px}
-@media(max-width:600px){
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .student-info{grid-template-columns:1fr}
-  header h1{font-size:21px}
-  .panel{padding:17px}
+
+.status-present{
+  background:#dcfce7;
+  color:#166534;
 }
+
+.status-present::before{
+  content:"✓";
+}
+
+.status-absent{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.status-absent::before{
+  content:"✕";
+}
+
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:35px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  padding:30px 20px;
+  margin-top:20px;
+  border-top:1px solid var(--border);
+}
+
+footer strong{
+  color:#475569;
+}
+
+/* ================= HIDDEN ================= */
+
+.hidden{
+  display:none!important;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:800px){
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .header-content{
+    flex-wrap:wrap;
+  }
+
+  .header-badge{
+    margin-left:0;
+    text-align:left;
+    width:100%;
+  }
+
+}
+
+@media(max-width:600px){
+
+  header{
+    padding:24px 16px;
+  }
+
+  .school-logo{
+    width:55px;
+    height:55px;
+    font-size:25px;
+  }
+
+  .school-title h1{
+    font-size:21px;
+  }
+
+  .school-title p{
+    font-size:12px;
+  }
+
+  .container{
+    margin:20px auto;
+    padding:0 12px;
+  }
+
+  .panel{
+    padding:18px;
+    border-radius:15px;
+  }
+
+  .panel h2{
+    font-size:17px;
+  }
+
+  .form-row{
+    flex-direction:column;
+  }
+
+  input,button{
+    width:100%;
+  }
+
+  .student-info{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+
+  .stat{
+    padding:17px 13px;
+  }
+
+  .stat strong{
+    font-size:27px;
+  }
+
+  .stat span{
+    font-size:12px;
+  }
+
+  th,td{
+    padding:12px;
+  }
+
+}
+
+/* ================= LOADING ================= */
+
+.loading-spinner{
+  display:inline-block;
+  width:14px;
+  height:14px;
+  border:2px solid rgba(255,255,255,.4);
+  border-top-color:white;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+  margin-right:8px;
+  vertical-align:middle;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>UHS CHAKIYA TARARI</h1>
-  <p>Class 9 – Student Attendance Portal</p>
+
+  <div class="header-content">
+
+    <div class="school-logo">
+      U
+    </div>
+
+    <div class="school-title">
+      <h1>UHS CHAKIYA TARARI</h1>
+      <p>Chakiya Tarari • Bhojpur • Bihar</p>
+      <p class="portal-name">Class 9 Student Attendance Portal</p>
+    </div>
+
+    <div class="header-badge">
+      <span>📚 Academic Session 2026–27</span>
+    </div>
+
+  </div>
+
 </header>
 
 <div class="container">
 
-  <section class="panel">
-    <h2>🔐 Check Your Attendance</h2>
+  <!-- ATTENDANCE SEARCH -->
+
+  <section class="panel search-panel">
+
+    <h2>
+      <span class="icon">🔍</span>
+      Check Your Attendance
+    </h2>
 
     <div class="form-row">
+
       <input
         type="text"
         id="studentId"
         placeholder="Enter your Student ID"
         autocomplete="off"
       >
-      <input type="month" id="month">
-      <button id="searchBtn" onclick="loadAttendance()">View Attendance</button>
+
+      <input
+        type="month"
+        id="month"
+      >
+
+      <button id="searchBtn" onclick="loadAttendance()">
+        View Attendance
+      </button>
+
     </div>
 
     <div id="message"></div>
+
   </section>
+
+  <!-- RESULT AREA -->
 
   <div id="resultArea" class="hidden">
 
+    <!-- STUDENT INFORMATION -->
+
     <section class="panel">
-      <h2>👨‍🎓 Student Information</h2>
+
+      <h2>
+        <span class="icon">👨‍🎓</span>
+        Student Information
+      </h2>
+
       <div class="student-info">
+
         <div class="info-item">
           <small>Student Name</small>
           <strong id="studentName">-</strong>
         </div>
+
         <div class="info-item">
           <small>Student ID</small>
           <strong id="studentCode">-</strong>
         </div>
+
         <div class="info-item">
           <small>Roll Number</small>
           <strong id="rollNo">-</strong>
         </div>
+
         <div class="info-item">
           <small>Class / Section</small>
           <strong id="classSection">-</strong>
         </div>
+
       </div>
+
     </section>
 
+    <!-- ATTENDANCE SUMMARY -->
+
     <section class="panel">
-      <h2>📊 Monthly Attendance Summary</h2>
+
+      <h2>
+        <span class="icon">📊</span>
+        Monthly Attendance Summary
+      </h2>
+
       <div class="stats">
-        <div class="stat">
+
+        <div class="stat stat-total">
+
+          <div class="stat-icon">📅</div>
+
           <strong id="totalDays">0</strong>
-          <span>Total Days</span>
+
+          <span>Total Attendance Days</span>
+
         </div>
-        <div class="stat">
-          <strong id="presentDays" class="present">0</strong>
+
+        <div class="stat stat-present">
+
+          <div class="stat-icon">✓</div>
+
+          <strong id="presentDays">0</strong>
+
           <span>Present</span>
+
         </div>
-        <div class="stat">
-          <strong id="absentDays" class="absent">0</strong>
+
+        <div class="stat stat-absent">
+
+          <div class="stat-icon">✕</div>
+
+          <strong id="absentDays">0</strong>
+
           <span>Absent</span>
+
         </div>
-        <div class="stat">
-          <strong id="percentage" class="percentage">0%</strong>
-          <span>Attendance</span>
+
+        <div class="stat stat-percentage">
+
+          <div class="stat-icon">📈</div>
+
+          <strong id="percentage">0%</strong>
+
+          <span>Attendance Percentage</span>
+
         </div>
+
       </div>
+
     </section>
 
+    <!-- DAILY RECORD -->
+
     <section class="panel">
-      <h2>📅 Daily Attendance Record</h2>
+
+      <h2>
+        <span class="icon">📋</span>
+        Daily Attendance Record
+      </h2>
+
       <div class="table-wrap">
+
         <table>
+
           <thead>
+
             <tr>
               <th>Date</th>
               <th>Day</th>
               <th>Status</th>
             </tr>
+
           </thead>
+
           <tbody id="attendanceBody"></tbody>
+
         </table>
+
       </div>
+
     </section>
 
   </div>
+
 </div>
 
 <footer>
-  © UHS Chakiya Tarari, Bhojpur, Bihar<br>
+
+  <strong>© UHS Chakiya Tarari</strong><br>
+  Bhojpur, Bihar<br>
   Student Attendance Management System
+
 </footer>
 
 <script>
+
 const API_URL =
 "https://script.google.com/macros/s/AKfycbxW7D449J0tM9hyki-Xy8fIYNx9ho7xXkXwHFmGKxpwpbuj-JCbBXcO150Udzod8nK7/exec";
 
 const monthInput = document.getElementById("month");
+
 const today = new Date();
 
 monthInput.value =
   today.getFullYear() + "-" +
   String(today.getMonth()+1).padStart(2,"0");
 
+
 async function loadAttendance(){
 
   const studentId =
     document.getElementById("studentId").value.trim();
 
-  const month = monthInput.value;
-  const message = document.getElementById("message");
-  const button = document.getElementById("searchBtn");
+  const month =
+    monthInput.value;
 
-  document.getElementById("resultArea").classList.add("hidden");
+  const message =
+    document.getElementById("message");
+
+  const button =
+    document.getElementById("searchBtn");
+
+  document.getElementById("resultArea")
+    .classList.add("hidden");
 
   if(!studentId){
-    showMessage("Please enter your Student ID.","error");
+
+    showMessage(
+      "Please enter your Student ID.",
+      "error"
+    );
+
     return;
   }
 
   if(!month){
-    showMessage("Please select a month.","error");
+
+    showMessage(
+      "Please select a month.",
+      "error"
+    );
+
     return;
   }
 
   button.disabled = true;
-  button.textContent = "Loading...";
-  showMessage("Fetching attendance records...","");
+
+  button.innerHTML =
+    '<span class="loading-spinner"></span>Loading...';
+
+  showMessage(
+    "Fetching attendance records...",
+    ""
+  );
 
   try{
 
     const response = await fetch(API_URL,{
       method:"POST",
+
       headers:{
         "Content-Type":"text/plain;charset=utf-8"
       },
+
       body:JSON.stringify({
+
         action:"studentAttendance",
+
         studentId:studentId,
+
         month:month
+
       })
     });
 
     const result = await response.json();
 
     if(!result.success){
-      throw new Error(result.message || "Attendance could not be loaded.");
+
+      throw new Error(
+        result.message ||
+        "Attendance could not be loaded."
+      );
+
     }
 
-    const data = result.data || result;
+    const data =
+      result.data || result;
 
     if(!data.student){
-      throw new Error("Student information was not returned.");
+
+      throw new Error(
+        "Student information was not returned."
+      );
+
     }
 
     displayAttendance(data);
-    showMessage("Attendance loaded successfully.","success");
+
+    showMessage(
+      "✓ Attendance loaded successfully.",
+      "success"
+    );
 
   }catch(error){
-    showMessage(error.message || "Something went wrong. Please try again.","error");
+
+    showMessage(
+      error.message ||
+      "Something went wrong. Please try again.",
+      "error"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "View Attendance";
+
   }
 
-  button.disabled = false;
-  button.textContent = "View Attendance";
 }
+
 
 function displayAttendance(data){
 
-  const student = data.student;
-  const summary = data.monthlySummary;
-  const records = data.dailyRecords || [];
+  const student =
+    data.student;
 
-  document.getElementById("studentName").textContent =
-    student.name || "-";
+  const summary =
+    data.monthlySummary || {};
 
-  document.getElementById("studentCode").textContent =
-    student.studentId || "-";
+  const records =
+    data.dailyRecords || [];
 
-  document.getElementById("rollNo").textContent =
-    student.rollNo || "-";
 
-  document.getElementById("classSection").textContent =
-    (student.studentClass || "-") + " / " +
-    (student.section || "-");
+  /* STUDENT DETAILS */
 
-  document.getElementById("totalDays").textContent =
-    summary.total || 0;
+  document.getElementById("studentName")
+    .textContent = student.name || "-";
 
-  document.getElementById("presentDays").textContent =
-    summary.present || 0;
+  document.getElementById("studentCode")
+    .textContent = student.studentId || "-";
 
-  document.getElementById("absentDays").textContent =
-    summary.absent || 0;
+  document.getElementById("rollNo")
+    .textContent = student.rollNo || "-";
 
-  document.getElementById("percentage").textContent =
-    (summary.percentage || 0) + "%";
+  document.getElementById("classSection")
+    .textContent =
+      (student.studentClass || "-") +
+      " / " +
+      (student.section || "-");
 
-  const body = document.getElementById("attendanceBody");
+
+  /* SUMMARY */
+
+  document.getElementById("totalDays")
+    .textContent = summary.total || 0;
+
+  document.getElementById("presentDays")
+    .textContent = summary.present || 0;
+
+  document.getElementById("absentDays")
+    .textContent = summary.absent || 0;
+
+  document.getElementById("percentage")
+    .textContent =
+      (summary.percentage || 0) + "%";
+
+
+  /* DAILY RECORD */
+
+  const body =
+    document.getElementById("attendanceBody");
+
   body.innerHTML = "";
 
-  const selectedMonthRecords = records.filter(record =>
-    record.date.substring(0,7) === data.selectedMonth
-  );
+
+  const selectedMonthRecords =
+    records.filter(record =>
+      record.date.substring(0,7) ===
+      data.selectedMonth
+    );
+
 
   if(selectedMonthRecords.length === 0){
+
     body.innerHTML =
-      '<tr><td colspan="3" class="empty">No attendance records available for this month.</td></tr>';
+      '<tr><td colspan="3" class="empty">' +
+      '📭 No attendance records available for this month.' +
+      '</td></tr>';
+
   }else{
 
     selectedMonthRecords.sort((a,b) =>
       b.date.localeCompare(a.date)
     );
 
+
     selectedMonthRecords.forEach(record => {
 
-      const date = new Date(record.date + "T00:00:00");
+      const date =
+        new Date(record.date + "T00:00:00");
 
-      const day = date.toLocaleDateString("en-IN",{
-        weekday:"long"
-      });
+      const day =
+        date.toLocaleDateString("en-IN",{
+          weekday:"long"
+        });
 
-      const isPresent = record.status === "Present";
+      const isPresent =
+        record.status === "Present";
 
-      const row = document.createElement("tr");
 
-      const dateCell = document.createElement("td");
-      dateCell.textContent = record.date;
+      const row =
+        document.createElement("tr");
 
-      const dayCell = document.createElement("td");
-      dayCell.textContent = day;
 
-      const statusCell = document.createElement("td");
-      const badge = document.createElement("span");
+      const dateCell =
+        document.createElement("td");
 
-      badge.className = "status " +
-        (isPresent ? "status-present" : "status-absent");
+      dateCell.textContent =
+        record.date;
 
-      badge.textContent = record.status;
+
+      const dayCell =
+        document.createElement("td");
+
+      dayCell.textContent =
+        day;
+
+
+      const statusCell =
+        document.createElement("td");
+
+      const badge =
+        document.createElement("span");
+
+
+      badge.className =
+        "status " +
+        (isPresent
+          ? "status-present"
+          : "status-absent");
+
+
+      badge.textContent =
+        record.status;
+
 
       statusCell.appendChild(badge);
 
-      row.append(dateCell,dayCell,statusCell);
+
+      row.append(
+        dateCell,
+        dayCell,
+        statusCell
+      );
+
+
       body.appendChild(row);
+
     });
+
   }
 
-  document.getElementById("resultArea").classList.remove("hidden");
+
+  document.getElementById("resultArea")
+    .classList.remove("hidden");
+
 }
 
+
 function showMessage(text,type){
-  const message = document.getElementById("message");
-  message.textContent = text;
-  message.className = type;
+
+  const message =
+    document.getElementById("message");
+
+  message.textContent =
+    text;
+
+  message.className =
+    type;
+
 }
+
 
 document.getElementById("studentId")
   .addEventListener("keydown",function(event){
+
     if(event.key === "Enter"){
+
       loadAttendance();
+
     }
+
   });
 
+
 monthInput.addEventListener("change",function(){
-  if(document.getElementById("studentId").value.trim()){
+
+  if(
+    document.getElementById("studentId")
+      .value.trim()
+  ){
+
     loadAttendance();
+
   }
+
 });
+
 </script>
 
 </body>
