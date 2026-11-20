@@ -1,519 +1,641 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CHAKIYA Barcode Attendance</title>
+<title>CHAKIYA | Barcode Attendance</title>
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 
 <style>
-/* =========================================
-   CHAKIYA PROFESSIONAL ATTENDANCE DESIGN
-   ========================================= */
-
-:root {
-    --navy: #0f172a;
-    --navy-light: #1e293b;
-    --blue: #2563eb;
-    --blue-dark: #1d4ed8;
-    --teal: #14b8a6;
-    --green: #16a34a;
-    --red: #dc2626;
-    --orange: #f59e0b;
-    --purple: #7c3aed;
-
-    --background: #f1f5f9;
-    --card: #ffffff;
-    --text: #1e293b;
-    --muted: #64748b;
-    --border: #e2e8f0;
+:root{
+  --navy:#0f172a;
+  --blue:#1e40af;
+  --blue2:#2563eb;
+  --bg:#f1f5f9;
+  --card:#ffffff;
+  --text:#1e293b;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --green:#16a34a;
+  --red:#dc2626;
+  --orange:#f59e0b;
+  --purple:#7c3aed;
 }
 
-* {
-    box-sizing: border-box;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-body {
-    margin: 0;
-    padding: 24px;
-    font-family: "Segoe UI", Arial, sans-serif;
-    background:
-        radial-gradient(
-            circle at top left,
-            #dbeafe 0,
-            transparent 35%
-        ),
-        #f1f5f9;
-    color: var(--text);
-    min-height: 100vh;
+body{
+  font-family:Inter,"Segoe UI",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
 }
 
-/* =========================================
-   MAIN CONTAINER
-   ========================================= */
-
-.container {
-    max-width: 1100px;
-    margin: 25px auto;
-    background: transparent;
-    padding: 0;
-    border-radius: 0;
-    box-shadow: none;
+.container{
+  max-width:1500px;
+  margin:auto;
+  padding:24px;
 }
 
-/* =========================================
-   HEADER
-   ========================================= */
+/* HEADER */
 
-.container > h2 {
-    margin: 0;
-    background: linear-gradient(
-        135deg,
-        #0f172a,
-        #1e40af
-    );
-    color: #ffffff;
-    text-align: left;
-    padding: 30px 32px 10px;
-    border-radius: 24px 24px 0 0;
-    font-size: 30px;
-    font-weight: 800;
-    letter-spacing: 1px;
+.school-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:24px;
+  padding:28px 34px;
+  color:white;
+  background:linear-gradient(120deg,#0f172a,#1e3a8a 75%,#1d4ed8);
+  border-radius:22px;
+  box-shadow:0 12px 32px #0f172a20;
 }
 
-.container > .subtitle {
-    margin: 0;
-    background: linear-gradient(
-        135deg,
-        #0f172a,
-        #1e40af
-    );
-    color: #cbd5e1;
-    text-align: left;
-    padding: 0 32px 28px;
-    border-radius: 0 0 24px 24px;
-    font-size: 15px;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:18px;
 }
 
-/* =========================================
-   LOGIN AND ATTENDANCE PANELS
-   ========================================= */
-
-#loginPanel,
-#attendancePanel {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 30px;
-    margin-top: 20px;
-    box-shadow: 0 12px 40px #0f172a0b;
+.brand-mark{
+  width:68px;
+  height:68px;
+  display:grid;
+  place-items:center;
+  border-radius:20px;
+  background:linear-gradient(135deg,#14b8a6,#0d9488);
+  font-size:30px;
+  font-weight:900;
+  box-shadow:0 8px 20px #14b8a630;
 }
 
-#loginPanel h3,
-#attendancePanel h3 {
-    font-size: 20px;
-    margin: 10px 0 18px;
-    color: var(--navy);
-    font-weight: 750;
+.brand h1{
+  font-size:30px;
+  margin-bottom:6px;
+  letter-spacing:.5px;
 }
 
-/* =========================================
-   INPUTS
-   ========================================= */
-
-input,
-select {
-    width: 100%;
-    padding: 15px 16px;
-    margin: 8px 0 18px;
-    border: 1px solid #cbd5e1;
-    border-radius: 13px;
-    font-size: 16px;
-    background: #ffffff;
-    color: var(--text);
-    outline: none;
-    transition: all 0.2s ease;
+.brand p{
+  margin:4px 0;
+  color:#cbd5e1;
+  font-size:14px;
 }
 
-input:focus,
-select:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 4px #2563eb15;
+.header-right{
+  text-align:right;
 }
 
-label {
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    color: #475569;
-    margin: 10px 0 4px;
+.session-pill{
+  display:inline-block;
+  padding:11px 16px;
+  border-radius:30px;
+  background:#ffffff18;
+  border:1px solid #ffffff20;
+  font-size:14px;
 }
 
-/* =========================================
-   BUTTONS
-   ========================================= */
-
-button {
-    border: none;
-    padding: 13px 20px;
-    border-radius: 12px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    margin: 5px;
-    transition:
-        transform 0.15s,
-        box-shadow 0.15s,
-        opacity 0.15s;
-    font-size: 14px;
+.ready{
+  margin-top:10px;
+  color:#86efac;
+  font-weight:700;
+  font-size:13px;
 }
 
-button:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px #00000020;
+/* LOGIN */
+
+#loginPanel{
+  max-width:520px;
+  margin:35px auto;
+  background:white;
+  padding:30px;
+  border:1px solid var(--border);
+  border-radius:22px;
+  box-shadow:0 10px 30px #0f172a0b;
 }
 
-button:active:not(:disabled) {
-    transform: scale(0.98);
+#loginPanel h3{
+  margin-bottom:18px;
+  font-size:22px;
+  color:var(--navy);
 }
 
-button:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
+input,select{
+  width:100%;
+  padding:14px 16px;
+  margin:8px 0 16px;
+  border:1px solid #cbd5e1;
+  border-radius:12px;
+  font-size:16px;
+  background:white;
+  color:var(--text);
+  outline:none;
 }
 
-.center {
-    text-align: center;
+input:focus,select:focus{
+  border-color:var(--blue2);
+  box-shadow:0 0 0 4px #2563eb15;
 }
 
-/* Login */
-
-#loginBtn {
-    background: linear-gradient(
-        135deg,
-        #2563eb,
-        #1d4ed8
-    );
-    min-width: 200px;
+label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  color:#475569;
+  margin:10px 0 4px;
 }
 
-/* Camera */
+/* BUTTONS */
 
-#startBtn {
-    background: linear-gradient(
-        135deg,
-        #16a34a,
-        #15803d
-    );
+button{
+  border:0;
+  padding:13px 18px;
+  border-radius:12px;
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  margin:4px;
+  transition:.18s;
+  font-size:14px;
 }
 
-#stopBtn {
-    background: linear-gradient(
-        135deg,
-        #ef4444,
-        #dc2626
-    );
+button:hover:not(:disabled){
+  transform:translateY(-1px);
+  box-shadow:0 6px 15px #00000018;
 }
 
-/* Manual Attendance */
-
-#manualBtn {
-    background: linear-gradient(
-        135deg,
-        #2563eb,
-        #1d4ed8
-    );
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
 }
 
-/* Summary */
-
-#summaryBtn {
-    background: linear-gradient(
-        135deg,
-        #8b5cf6,
-        #7c3aed
-    );
+.center{
+  text-align:center;
 }
 
-/* Logout */
-
-#logoutBtn {
-    background: linear-gradient(
-        135deg,
-        #475569,
-        #334155
-    );
+#loginBtn{
+  background:#2563eb;
+  min-width:180px;
 }
 
-/* =========================================
-   CAMERA SCANNER
-   ========================================= */
-
-#reader {
-    width: 100%;
-    margin: 22px auto;
-    border-radius: 20px;
-    overflow: hidden;
-    background: #020617;
-    border: 2px solid #cbd5e1;
-    min-height: 250px;
-    box-shadow: 0 10px 30px #00000012;
+#startBtn{
+  background:#16a34a;
 }
 
-#reader video {
-    border-radius: 16px;
+#stopBtn{
+  background:#dc2626;
 }
 
-/* =========================================
-   RESULT CARDS
-   ========================================= */
-
-.result {
-    background: #f8fafc;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 22px;
-    margin: 18px 0;
-    overflow-wrap: anywhere;
-    box-shadow: 0 4px 12px #00000004;
+#manualBtn{
+  background:#2563eb;
 }
 
-#teacherInfo {
-    margin: 10px 0 0;
-    font-weight: 700;
-    color: #1d4ed8;
-    font-size: 16px;
+#summaryBtn{
+  background:#7c3aed;
 }
 
-/* =========================================
-   HOLIDAY MANAGEMENT
-   ========================================= */
-
-#holidayPanel {
-    background: linear-gradient(
-        135deg,
-        #fff7ed,
-        #fffbeb
-    );
-    border: 1px solid #fed7aa;
-    border-radius: 20px;
-    padding: 24px;
-    margin-bottom: 25px;
+#logoutBtn{
+  background:#dc2626;
 }
 
-#holidayPanel h3 {
-    color: #9a3412;
-    font-size: 19px;
+#refreshBtn{
+  background:#e2e8f0;
+  color:#1e293b;
 }
 
-#holidayBtn {
-    background: linear-gradient(
-        135deg,
-        #f59e0b,
-        #d97706
-    );
-    width: 100%;
-    margin: 10px 0;
-    padding: 15px;
+/* DASHBOARD */
+
+.welcome-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin:30px 0 24px;
 }
 
-#holidayMessage {
-    font-weight: 700;
-    margin-top: 14px;
-    padding: 12px;
-    border-radius: 10px;
+.welcome h2{
+  margin:0;
+  font-size:29px;
+  color:#0f172a;
 }
 
-/* =========================================
-   ATTENDANCE SECTION HEADINGS
-   ========================================= */
-
-#attendancePanel > h3 {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 28px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
+.welcome p{
+  margin:8px 0 0;
+  color:var(--muted);
 }
 
-#attendancePanel > h3:first-of-type {
-    margin-top: 28px;
+.toolbar{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
 }
 
-/* =========================================
-   MANUAL BARCODE
-   ========================================= */
-
-#manualBarcode {
-    font-family: monospace;
-    letter-spacing: 1px;
-    font-size: 17px;
+.toolbar select{
+  width:auto;
+  min-width:190px;
+  margin:0;
+  background:white;
 }
 
-/* =========================================
-   ATTENDANCE RESULT
-   ========================================= */
-
-#result {
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    font-weight: 700;
-    line-height: 1.8;
-    font-size: 15px;
-    color: #334155;
+.toolbar button{
+  margin:0;
 }
 
-#summary {
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    font-family: "Segoe UI", Arial, sans-serif;
-    line-height: 1.8;
-    margin: 12px 0 0;
-    color: #334155;
-    font-size: 14px;
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  margin-bottom:28px;
 }
 
-/* =========================================
-   STATUS
-   ========================================= */
-
-.status {
-    font-weight: bold;
-    margin-top: 12px;
+.stat-card{
+  position:relative;
+  overflow:hidden;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:24px 26px;
+  min-height:190px;
+  box-shadow:0 8px 25px #0f172a06;
 }
 
-.hidden {
-    display: none !important;
+.stat-card:after{
+  content:"";
+  position:absolute;
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  right:-30px;
+  bottom:-45px;
+  background:var(--accent-light);
+  opacity:.7;
 }
 
-/* =========================================
-   BUTTON LAYOUT
-   ========================================= */
-
-#attendancePanel .center button {
-    margin: 7px;
+.stat-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:#64748b;
+  font-weight:600;
 }
 
-/* =========================================
-   RESULT HIGHLIGHT
-   ========================================= */
-
-#attendancePanel .result strong {
-    color: #0f172a;
-    font-size: 15px;
+.stat-icon{
+  width:48px;
+  height:48px;
+  border-radius:15px;
+  display:grid;
+  place-items:center;
+  background:var(--accent-light);
+  font-size:23px;
 }
 
-#attendancePanel .result:nth-last-of-type(1) {
-    background: linear-gradient(
-        135deg,
-        #f8fafc,
-        #eff6ff
-    );
+.stat-number{
+  font-size:42px;
+  font-weight:850;
+  color:#0f172a;
+  margin:28px 0 8px;
+  line-height:1;
 }
 
-/* =========================================
-   SCANNER ANIMATION
-   ========================================= */
-
-@keyframes scannerPulse {
-    0% {
-        box-shadow: 0 0 0 0 #14b8a650;
-    }
-
-    70% {
-        box-shadow: 0 0 0 10px #14b8a600;
-    }
-
-    100% {
-        box-shadow: 0 0 0 0 #14b8a600;
-    }
+.stat-caption{
+  color:var(--muted);
+  font-size:14px;
 }
 
-#startBtn:not(:disabled) {
-    animation: scannerPulse 2s infinite;
+.stat-blue{
+  --accent-light:#dbeafe;
 }
 
-/* =========================================
-   RESPONSIVE DESIGN
-   ========================================= */
-
-@media (max-width: 700px) {
-
-    body {
-        padding: 10px;
-    }
-
-    .container {
-        margin: 8px auto;
-    }
-
-    .container > h2 {
-        padding: 24px 20px 8px;
-        font-size: 25px;
-    }
-
-    .container > .subtitle {
-        padding: 0 20px 24px;
-        font-size: 13px;
-    }
-
-    #loginPanel,
-    #attendancePanel {
-        padding: 18px;
-        border-radius: 20px;
-    }
-
-    button {
-        margin: 4px 2px;
-        padding: 13px 15px;
-    }
-
-    #reader {
-        min-height: 210px;
-        border-radius: 16px;
-    }
-
-    #holidayPanel {
-        padding: 18px;
-    }
-
-    #attendancePanel .center {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    #attendancePanel .center button {
-        flex: 1;
-        min-width: 120px;
-    }
-
-    #loginBtn {
-        width: 100%;
-    }
-
-    input,
-    select {
-        font-size: 16px;
-    }
+.stat-green{
+  --accent-light:#dcfce7;
 }
 
-/* =========================================
-   LARGE SCREEN
-   ========================================= */
+.stat-red{
+  --accent-light:#fee2e2;
+}
 
-@media (min-width: 1100px) {
+.stat-orange{
+  --accent-light:#fef3c7;
+}
 
-    .container {
-        max-width: 1100px;
-    }
+/* MAIN CONTENT */
 
-    #attendancePanel {
-        padding: 35px;
-    }
+.main-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(320px,.9fr);
+  gap:24px;
+  align-items:start;
+}
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 8px 25px #0f172a06;
+  margin-bottom:24px;
+}
+
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:0 0 6px;
+  font-size:22px;
+  color:#0f172a;
+}
+
+.card-subtitle{
+  margin:0 0 20px;
+  color:var(--muted);
+}
+
+.title-icon{
+  width:54px;
+  height:54px;
+  border-radius:17px;
+  background:#dbeafe;
+  display:grid;
+  place-items:center;
+  font-size:25px;
+}
+
+/* BARCODE SCANNER */
+
+#reader{
+  width:100%;
+  margin:18px auto;
+  border-radius:20px;
+  overflow:hidden;
+  background:#020617;
+  border:2px solid #cbd5e1;
+  min-height:260px;
+  box-shadow:0 10px 30px #00000012;
+}
+
+#reader video{
+  border-radius:16px;
+}
+
+.scanner-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.manual-row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.manual-row input{
+  margin:0;
+  flex:1;
+}
+
+.manual-row button{
+  white-space:nowrap;
+}
+
+/* RESULT */
+
+.result{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+  margin:18px 0;
+  overflow-wrap:anywhere;
+  box-shadow:0 4px 12px #00000004;
+}
+
+#teacherInfo{
+  margin:8px 0 0;
+  font-weight:700;
+  color:#1d4ed8;
+  font-size:16px;
+}
+
+#result{
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  font-weight:700;
+  line-height:1.7;
+  font-size:15px;
+  color:#334155;
+}
+
+#summary{
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  font-family:inherit;
+  line-height:1.7;
+  margin:12px 0 0;
+  color:#334155;
+  font-size:14px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* LAST SCANNED */
+
+.last-scanned{
+  min-height:180px;
+  background:linear-gradient(135deg,#f8fafc,#eff6ff);
+  border-radius:20px;
+  padding:24px;
+  border:1px solid #dbeafe;
+}
+
+.last-scanned .student-name{
+  font-size:25px;
+  font-weight:800;
+  margin:14px 0;
+  color:#0f172a;
+}
+
+.scan-status{
+  display:inline-flex;
+  padding:7px 12px;
+  border-radius:30px;
+  background:#dcfce7;
+  color:#166534;
+  font-size:12px;
+  font-weight:800;
+}
+
+.scan-meta{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  color:#64748b;
+  font-size:14px;
+  margin-top:12px;
+}
+
+/* HOLIDAY PANEL */
+
+#holidayPanel{
+  background:linear-gradient(135deg,#fff7ed,#fffbeb);
+  border:1px solid #fed7aa;
+  border-radius:20px;
+  padding:24px;
+  margin:20px 0;
+}
+
+#holidayPanel h3{
+  color:#9a3412;
+  font-size:19px;
+  margin-top:0;
+}
+
+#holidayBtn{
+  background:#d97706;
+  width:100%;
+  margin:10px 0;
+  padding:15px;
+}
+
+#holidayMessage{
+  font-weight:700;
+  margin-top:14px;
+  padding:12px;
+  border-radius:10px;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  padding:24px;
+  color:#64748b;
+  font-size:13px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1050px){
+
+  .dashboard-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .main-grid{
+    grid-template-columns:1fr;
+  }
+
+  .school-header{
+    align-items:flex-start;
+  }
+
+  .header-right{
+    text-align:left;
+  }
+
+}
+
+@media(max-width:650px){
+
+  .container{
+    padding:12px;
+  }
+
+  .school-header{
+    padding:20px;
+    border-radius:18px;
+    flex-direction:column;
+  }
+
+  .brand{
+    align-items:flex-start;
+  }
+
+  .brand-mark{
+    width:54px;
+    height:54px;
+    border-radius:16px;
+  }
+
+  .brand h1{
+    font-size:23px;
+  }
+
+  .header-right{
+    text-align:left;
+  }
+
+  .welcome-row{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .welcome h2{
+    font-size:24px;
+  }
+
+  .toolbar{
+    width:100%;
+  }
+
+  .toolbar select{
+    flex:1;
+  }
+
+  .dashboard-grid{
+    gap:10px;
+  }
+
+  .stat-card{
+    padding:18px;
+    min-height:150px;
+    border-radius:17px;
+  }
+
+  .stat-number{
+    font-size:32px;
+    margin:20px 0 7px;
+  }
+
+  .stat-top{
+    font-size:13px;
+  }
+
+  .stat-icon{
+    width:40px;
+    height:40px;
+    font-size:19px;
+  }
+
+  .card{
+    padding:18px;
+    border-radius:19px;
+  }
+
+  .card-title{
+    font-size:19px;
+  }
+
+  .manual-row{
+    flex-direction:column;
+  }
+
+  .manual-row input,
+  .manual-row button{
+    width:100%;
+  }
+
+  #reader{
+    min-height:210px;
+  }
 
 }
 </style>
@@ -523,131 +645,428 @@ button:disabled {
 
 <div class="container">
 
-  <h2>CHAKIYA</h2>
-  <p class="subtitle">Class 9 Barcode Attendance System</p>
+<header class="school-header">
 
-  <!-- TEACHER LOGIN -->
-  <div id="loginPanel">
+  <div class="brand">
 
-    <h3>Teacher Login</h3>
+    <div class="brand-mark">U</div>
 
-    <input
-      id="teacherId"
-      placeholder="Enter Teacher ID"
-      autocomplete="username"
-    >
-
-    <input
-      id="teacherPin"
-      type="password"
-      inputmode="numeric"
-      placeholder="Enter PIN"
-      autocomplete="current-password"
-    >
-
-    <div class="center">
-      <button id="loginBtn" onclick="teacherLogin()">
-        Login
-      </button>
+    <div>
+      <h1>UHS CHAKIYA</h1>
+      <p>Chakiya Tarari • Bhojpur • Bihar</p>
+      <p>Barcode Student Attendance System</p>
     </div>
 
   </div>
 
-  <!-- ATTENDANCE PANEL -->
-  <div id="attendancePanel" class="hidden">
+  <div class="header-right">
 
-    <div class="result">
-      <strong>Logged in:</strong>
-      <p id="teacherInfo">Teacher</p>
+    <div class="session-pill">
+      Academic Session 2026–27
     </div>
-    
-<!-- HOLIDAY MANAGEMENT -->
-<div id="holidayPanel" class="result hidden">
 
-  <h3>📅 School Holiday Management</h3>
+    <div class="ready">
+      ● System Ready
+    </div>
 
-  <label for="holidayDate">Select Holiday Date</label>
-  <input type="date" id="holidayDate">
+  </div>
 
-  <label for="holidayReason">Holiday Reason</label>
+</header>
+
+
+<!-- LOGIN PANEL -->
+
+<section id="loginPanel">
+
+  <h3>🔐 Teacher Login</h3>
+
+  <label for="teacherId">Teacher ID</label>
+
   <input
-    type="text"
-    id="holidayReason"
-    placeholder="Example: Chhath Puja"
+    id="teacherId"
+    placeholder="Enter Teacher ID"
+    autocomplete="username"
   >
 
-  <button
-    id="holidayBtn"
-    type="button"
-    onclick="declareHoliday()"
-    style="background:#d97706;width:100%">
-    Declare Holiday
-  </button>
+  <label for="teacherPin">PIN</label>
 
-  <p id="holidayMessage"></p>
+  <input
+    id="teacherPin"
+    type="password"
+    inputmode="numeric"
+    placeholder="Enter PIN"
+    autocomplete="current-password"
+  >
 
-</div>
+  <div class="center">
 
-
-    <h3>Barcode Scanner</h3>
-
-    <div class="center">
-      <button id="startBtn" onclick="startScanner()">
-        Start Camera
-      </button>
-
-      <button id="stopBtn" onclick="stopScanner()">
-        Stop Camera
-      </button>
-    </div>
-
-    <div id="reader"></div>
-
-    <h3>Manual Barcode Entry</h3>
-
-    <input
-      id="manualBarcode"
-      placeholder="Enter Student ID / Barcode"
+    <button
+      id="loginBtn"
+      onclick="teacherLogin()"
     >
+      Login to Attendance Dashboard
+    </button>
 
-    <div class="center">
-      <button id="manualBtn" onclick="manualScan()">
-        Mark Attendance
-      </button>
+  </div>
+
+</section>
+
+
+<!-- ATTENDANCE DASHBOARD -->
+
+<div id="attendancePanel" class="hidden">
+
+  <div class="welcome-row">
+
+    <div class="welcome">
+
+      <h2>
+        Welcome,
+        <span id="welcomeTeacher">Admin Teacher</span>
+      </h2>
+
+      <p>Manage student attendance efficiently</p>
+
     </div>
 
-    <div class="center">
-      <button id="summaryBtn" onclick="loadSummary()">
-        Today's Summary
+    <div class="toolbar">
+
+      <select id="sectionSelect" aria-label="Select section">
+
+        <option value="A">
+          Section A – Girls
+        </option>
+
+        <option value="B">
+          Section B – Boys
+        </option>
+
+      </select>
+
+      <button
+        id="refreshBtn"
+        onclick="loadSummary()"
+      >
+        🔄 Refresh
       </button>
 
-      <button id="logoutBtn" onclick="teacherLogout()">
+      <button
+        id="logoutBtn"
+        onclick="teacherLogout()"
+      >
         Logout
       </button>
+
     </div>
 
-    <div class="result">
-      <strong>Attendance Result:</strong>
-      <p id="result">Ready to scan.</p>
+  </div>
+
+
+  <!-- STATISTICS -->
+
+  <div class="dashboard-grid">
+
+    <div class="stat-card stat-blue">
+
+      <div class="stat-top">
+        <span>Total Students</span>
+        <span class="stat-icon">👥</span>
+      </div>
+
+      <div class="stat-number" id="totalStudents">—</div>
+
+      <div class="stat-caption">
+        Registered students
+      </div>
+
     </div>
 
-    <div class="result">
-      <strong>Today's Summary:</strong>
-      <pre id="summary">Click Today's Summary.</pre>
+
+    <div class="stat-card stat-green">
+
+      <div class="stat-top">
+        <span>Present Today</span>
+        <span class="stat-icon">✓</span>
+      </div>
+
+      <div class="stat-number" id="presentToday">—</div>
+
+      <div class="stat-caption">
+        Attendance marked
+      </div>
+
+    </div>
+
+
+    <div class="stat-card stat-red">
+
+      <div class="stat-top">
+        <span>Absent Today</span>
+        <span class="stat-icon">✕</span>
+      </div>
+
+      <div class="stat-number" id="absentToday">—</div>
+
+      <div class="stat-caption">
+        Not yet present
+      </div>
+
+    </div>
+
+
+    <div class="stat-card stat-orange">
+
+      <div class="stat-top">
+        <span>Attendance Rate</span>
+        <span class="stat-icon">📊</span>
+      </div>
+
+      <div class="stat-number" id="attendanceRate">—</div>
+
+      <div class="stat-caption">
+        Today's attendance
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MAIN GRID -->
+
+  <div class="main-grid">
+
+
+    <!-- BARCODE SCANNER -->
+
+    <section class="card">
+
+      <div class="card-title">
+
+        <span class="title-icon">📷</span>
+
+        <div>
+
+          <div>Barcode Scanner</div>
+
+          <small style="color:#64748b;font-size:14px;font-weight:400">
+            Scan student ID card
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <div id="reader"></div>
+
+
+      <div class="scanner-actions">
+
+        <button
+          id="startBtn"
+          onclick="startScanner()"
+        >
+          ▶ Start Camera
+        </button>
+
+        <button
+          id="stopBtn"
+          onclick="stopScanner()"
+        >
+          ■ Stop Camera
+        </button>
+
+      </div>
+
+
+      <h3 style="margin:28px 0 12px;color:#0f172a">
+        Manual Barcode Entry
+      </h3>
+
+
+      <div class="manual-row">
+
+        <input
+          id="manualBarcode"
+          placeholder="Enter Student ID / Barcode"
+        >
+
+        <button
+          id="manualBtn"
+          onclick="manualScan()"
+        >
+          Mark Attendance
+        </button>
+
+      </div>
+
+
+      <div class="result">
+
+        <strong>Attendance Result</strong>
+
+        <p id="result">
+          Ready to scan.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div>
+
+
+      <!-- LAST SCANNED STUDENT -->
+
+      <section class="card">
+
+        <h3 class="card-title">
+          👤 Last Scanned Student
+        </h3>
+
+        <p class="card-subtitle">
+          Latest attendance transaction
+        </p>
+
+
+        <div class="last-scanned">
+
+          <span
+            id="scanBadge"
+            class="scan-status"
+          >
+            Waiting for scan
+          </span>
+
+
+          <div
+            class="student-name"
+            id="lastStudentName"
+          >
+            No student scanned yet
+          </div>
+
+
+          <div class="scan-meta">
+
+            <span>
+              Roll:
+              <strong id="lastRoll">—</strong>
+            </span>
+
+            <span>
+              Section:
+              <strong id="lastSection">—</strong>
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- TODAY'S SUMMARY -->
+
+      <section class="card">
+
+        <h3 class="card-title">
+          📊 Today's Summary
+        </h3>
+
+        <p class="card-subtitle">
+          Attendance report for selected section
+        </p>
+
+
+        <button
+          id="summaryBtn"
+          onclick="loadSummary()"
+        >
+          Load Today's Summary
+        </button>
+
+
+        <pre id="summary">
+Click Load Today's Summary.
+        </pre>
+
+      </section>
+
+
+      <!-- HOLIDAY MANAGEMENT -->
+
+      <div
+        id="holidayPanel"
+        class="result hidden"
+      >
+
+        <h3>
+          📅 School Holiday Management
+        </h3>
+
+
+        <label for="holidayDate">
+          Select Holiday Date
+        </label>
+
+        <input
+          type="date"
+          id="holidayDate"
+        >
+
+
+        <label for="holidayReason">
+          Holiday Reason
+        </label>
+
+        <input
+          type="text"
+          id="holidayReason"
+          placeholder="Example: Chhath Puja"
+        >
+
+
+        <button
+          id="holidayBtn"
+          type="button"
+          onclick="declareHoliday()"
+        >
+          Declare Holiday
+        </button>
+
+
+        <p id="holidayMessage"></p>
+
+      </div>
+
     </div>
 
   </div>
 
 </div>
+
+</div>
+
+
+<footer>
+  © UHS Chakiya Tarari, Bhojpur, Bihar • Barcode Attendance Management System
+</footer>
+
 
 <script>
 
-// ========================================
-// CONFIGURATION
-// ========================================
+/* ========================================
+   CONFIGURATION
+======================================== */
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbxW7D449J0tM9hyki-Xy8fIYNx9ho7xXkXwHFmGKxpwpbuj-JCbBXcO150Udzod8nK7/exec";
+
 
 let sessionToken = null;
 let teacherData = null;
@@ -659,114 +1078,138 @@ let submitting = false;
 let lastBarcode = "";
 let lastScanTime = 0;
 
-// Shared audio context
 let audioContext = null;
 
 
-// ========================================
-// API REQUEST
-// ========================================
+/* ========================================
+   API REQUEST
+======================================== */
 
-async function apiRequest(action, payload = {}) {
+async function apiRequest(action,payload={}){
 
-  const response = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
+  const response = await fetch(API_URL,{
+    method:"POST",
+    headers:{
+      "Content-Type":"text/plain;charset=utf-8"
     },
-    body: JSON.stringify({
+    body:JSON.stringify({
       action,
       ...payload
     })
   });
 
-  if (!response.ok) {
-    throw new Error("Server connection failed. HTTP " + response.status);
+  if(!response.ok){
+    throw new Error(
+      "Server connection failed. HTTP " +
+      response.status
+    );
   }
 
   return await response.json();
 }
 
 
-// ========================================
-// AUDIO UNLOCK
-// ========================================
+/* ========================================
+   AUDIO UNLOCK
+======================================== */
 
-async function unlockAudio() {
+async function unlockAudio(){
 
-  try {
+  try{
 
     const AudioContextClass =
-      window.AudioContext || window.webkitAudioContext;
+      window.AudioContext ||
+      window.webkitAudioContext;
 
-    if (!AudioContextClass) {
-      console.log("AudioContext is not supported.");
+    if(!AudioContextClass){
       return;
     }
 
-    if (!audioContext) {
-      audioContext = new AudioContextClass();
+    if(!audioContext){
+      audioContext =
+        new AudioContextClass();
     }
 
-    if (audioContext.state === "suspended") {
+    if(audioContext.state==="suspended"){
       await audioContext.resume();
     }
 
-    // Silent sound to unlock browser audio
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
+    const oscillator =
+      audioContext.createOscillator();
 
-    gain.gain.value = 0;
+    const gain =
+      audioContext.createGain();
+
+    gain.gain.value=0;
 
     oscillator.connect(gain);
     gain.connect(audioContext.destination);
 
     oscillator.start();
-    oscillator.stop(audioContext.currentTime + 0.02);
+    oscillator.stop(
+      audioContext.currentTime+0.02
+    );
 
-  } catch (error) {
-    console.log("Audio unlock failed:", error);
+  }catch(error){
+
+    console.log("Audio unlock failed:",error);
+
   }
+
 }
 
-// ========================================
-// VOICE ANNOUNCEMENT
-// ========================================
 
-function speakPresent(studentName) {
-  if (!("speechSynthesis" in window)) return;
+/* ========================================
+   VOICE ANNOUNCEMENT
+======================================== */
+
+function speakPresent(studentName){
+
+  if(!("speechSynthesis" in window)){
+    return;
+  }
 
   window.speechSynthesis.cancel();
 
-  const message = new SpeechSynthesisUtterance(
-    "Present Sir. " + studentName
-  );
+  const message =
+    new SpeechSynthesisUtterance(
+      "Present Sir. "+studentName
+    );
 
-  message.lang = "en-IN";
-  message.rate = 1;
-  message.pitch = 1;
-  message.volume = 1;
+  message.lang="en-IN";
+  message.rate=1;
+  message.pitch=1;
+  message.volume=1;
 
   window.speechSynthesis.speak(message);
+
 }
-// ========================================
-// SUCCESS BEEP + VIBRATION
-// ========================================
 
-function playSuccessBeep() {
 
-  try {
+/* ========================================
+   SUCCESS BEEP
+======================================== */
 
-    if (audioContext && audioContext.state === "running") {
+function playSuccessBeep(){
 
-      const oscillator = audioContext.createOscillator();
-      const gain = audioContext.createGain();
+  try{
+
+    if(
+      audioContext &&
+      audioContext.state==="running"
+    ){
+
+      const oscillator =
+        audioContext.createOscillator();
+
+      const gain =
+        audioContext.createGain();
 
       oscillator.connect(gain);
       gain.connect(audioContext.destination);
 
-      oscillator.type = "sine";
-      oscillator.frequency.value = 1100;
+      oscillator.type="sine";
+      oscillator.frequency.value=1100;
 
       gain.gain.setValueAtTime(
         0.4,
@@ -775,279 +1218,267 @@ function playSuccessBeep() {
 
       gain.gain.exponentialRampToValueAtTime(
         0.001,
-        audioContext.currentTime + 0.3
+        audioContext.currentTime+0.3
       );
 
       oscillator.start();
 
       oscillator.stop(
-        audioContext.currentTime + 0.3
+        audioContext.currentTime+0.3
       );
 
     }
 
-  } catch (error) {
-    console.log("Beep sound unavailable:", error);
+  }catch(error){
+
+    console.log("Beep unavailable:",error);
+
   }
 
-  // Mobile vibration
-  try {
-    if ("vibrate" in navigator) {
+  try{
+
+    if("vibrate" in navigator){
       navigator.vibrate(200);
     }
-  } catch (error) {
-    console.log("Vibration unavailable:", error);
+
+  }catch(error){
+
+    console.log("Vibration unavailable:",error);
+
   }
+
+}
+
+
+/* ========================================
+   RESULT MESSAGE
+======================================== */
+
+function showResult(message){
+
+  document.getElementById("result")
+    .textContent=message;
+
 }
 
 
-// ========================================
-// RESULT MESSAGE
-// ========================================
+/* ========================================
+   HOLIDAY MANAGEMENT
+======================================== */
 
-function showResult(message) {
+function setupHolidayPanel(){
 
-  document.getElementById("result").textContent = message;
+  const panel =
+    document.getElementById("holidayPanel");
 
-}
-  
-/************ HOLIDAY MANAGEMENT ************/
+  if(
+    teacherData &&
+    teacherData.role==="Admin"
+  ){
 
-function setupHolidayPanel() {
-
-  const panel = document.getElementById("holidayPanel");
-
-  // Only show the feature to Admin.
-  if (teacherData && teacherData.role === "Admin") {
     panel.classList.remove("hidden");
-  } else {
+
+  }else{
+
     panel.classList.add("hidden");
+
   }
 
-  // Set today's date as the default date.
-  const today = new Date();
+  const today=new Date();
 
   document.getElementById("holidayDate").value =
-    today.getFullYear() + "-" +
-    String(today.getMonth() + 1).padStart(2, "0") + "-" +
-    String(today.getDate()).padStart(2, "0");
+    today.getFullYear()+"-"+
+    String(today.getMonth()+1).padStart(2,"0")+"-"+
+    String(today.getDate()).padStart(2,"0");
+
 }
 
 
-async function declareHoliday() {
+async function declareHoliday(){
 
-  if (!sessionToken) {
+  if(!sessionToken){
     alert("Please login first.");
     return;
   }
 
-  if (!teacherData || teacherData.role !== "Admin") {
-    alert("Only Admin can declare a school holiday.");
+  if(
+    !teacherData ||
+    teacherData.role!=="Admin"
+  ){
+
+    alert(
+      "Only Admin can declare a school holiday."
+    );
+
     return;
+
   }
 
-  const date = document.getElementById("holidayDate").value;
-  const reason = document.getElementById("holidayReason").value.trim();
+  const date =
+    document.getElementById("holidayDate").value;
 
-  const button = document.getElementById("holidayBtn");
-  const message = document.getElementById("holidayMessage");
+  const reason =
+    document.getElementById("holidayReason")
+      .value.trim();
 
-  if (!date) {
-    message.textContent = "Please select a date.";
+  const button =
+    document.getElementById("holidayBtn");
+
+  const message =
+    document.getElementById("holidayMessage");
+
+
+  if(!date){
+
+    message.textContent=
+      "Please select a date.";
+
     return;
+
   }
 
-  if (!reason) {
-    message.textContent = "Please enter the holiday reason.";
+  if(!reason){
+
+    message.textContent=
+      "Please enter the holiday reason.";
+
     return;
+
   }
 
-  if (!confirm(
-    "Declare " + reason + " as a school holiday on " + date + "?"
-  )) {
+
+  if(!confirm(
+    "Declare "+reason+
+    " as a school holiday on "+date+"?"
+  )){
+
     return;
+
   }
 
-  button.disabled = true;
-  button.textContent = "Declaring...";
-  message.textContent = "Please wait...";
 
-  try {
+  button.disabled=true;
+  button.textContent="Declaring...";
+  message.textContent="Please wait...";
 
-    const response = await apiRequest("declareHoliday", {
-      token: sessionToken,
-      date: date,
-      reason: reason
-    });
 
-    if (!response.success) {
-      throw new Error(response.message || "Could not declare holiday.");
+  try{
+
+    const response =
+      await apiRequest("declareHoliday",{
+        token:sessionToken,
+        date:date,
+        reason:reason
+      });
+
+    if(!response.success){
+
+      throw new Error(
+        response.message ||
+        "Could not declare holiday."
+      );
+
     }
 
-    const data = response.data || {};
+    const data=response.data || {};
 
-    message.textContent =
-      "✓ " + (data.message || "Holiday declared successfully.");
+    message.textContent=
+      "✓ "+
+      (data.message ||
+      "Holiday declared successfully.");
 
-    message.style.color = "#15803d";
+    message.style.color="#15803d";
 
-    document.getElementById("holidayReason").value = "";
+    document.getElementById("holidayReason")
+      .value="";
 
-  } catch (error) {
 
-    message.textContent = "Error: " + error.message;
-    message.style.color = "#dc2626";
+  }catch(error){
 
-  } finally {
+    message.textContent=
+      "Error: "+error.message;
 
-    button.disabled = false;
-    button.textContent = "Declare Holiday";
+    message.style.color="#dc2626";
+
+  }finally{
+
+    button.disabled=false;
+    button.textContent="Declare Holiday";
 
   }
-}
 
-  
-/************ HOLIDAY MANAGEMENT ************/
-
-function setupHolidayPanel() {
-
-  const panel = document.getElementById("holidayPanel");
-
-  // Only show the feature to Admin.
-  if (teacherData && teacherData.role === "Admin") {
-    panel.classList.remove("hidden");
-  } else {
-    panel.classList.add("hidden");
-  }
-
-  // Set today's date as the default date.
-  const today = new Date();
-
-  document.getElementById("holidayDate").value =
-    today.getFullYear() + "-" +
-    String(today.getMonth() + 1).padStart(2, "0") + "-" +
-    String(today.getDate()).padStart(2, "0");
 }
 
 
-async function declareHoliday() {
+/* ========================================
+   TEACHER LOGIN
+======================================== */
 
-  if (!sessionToken) {
-    alert("Please login first.");
-    return;
-  }
-
-  if (!teacherData || teacherData.role !== "Admin") {
-    alert("Only Admin can declare a school holiday.");
-    return;
-  }
-
-  const date = document.getElementById("holidayDate").value;
-  const reason = document.getElementById("holidayReason").value.trim();
-
-  const button = document.getElementById("holidayBtn");
-  const message = document.getElementById("holidayMessage");
-
-  if (!date) {
-    message.textContent = "Please select a date.";
-    return;
-  }
-
-  if (!reason) {
-    message.textContent = "Please enter the holiday reason.";
-    return;
-  }
-
-  if (!confirm(
-    "Declare " + reason + " as a school holiday on " + date + "?"
-  )) {
-    return;
-  }
-
-  button.disabled = true;
-  button.textContent = "Declaring...";
-  message.textContent = "Please wait...";
-
-  try {
-
-    const response = await apiRequest("declareHoliday", {
-      token: sessionToken,
-      date: date,
-      reason: reason
-    });
-
-    if (!response.success) {
-      throw new Error(response.message || "Could not declare holiday.");
-    }
-
-    const data = response.data || {};
-
-    message.textContent =
-      "✓ " + (data.message || "Holiday declared successfully.");
-
-    message.style.color = "#15803d";
-
-    document.getElementById("holidayReason").value = "";
-
-  } catch (error) {
-
-    message.textContent = "Error: " + error.message;
-    message.style.color = "#dc2626";
-
-  } finally {
-
-    button.disabled = false;
-    button.textContent = "Declare Holiday";
-
-  }
-}
-
-
-
-// ========================================
-// TEACHER LOGIN
-// ========================================
-
-async function teacherLogin() {
+async function teacherLogin(){
 
   const teacherId =
-    document.getElementById("teacherId").value.trim();
+    document.getElementById("teacherId")
+      .value.trim();
 
   const pin =
-    document.getElementById("teacherPin").value.trim();
+    document.getElementById("teacherPin")
+      .value.trim();
 
-  if (!teacherId || !pin) {
-    alert("Please enter Teacher ID and PIN.");
+
+  if(!teacherId || !pin){
+
+    alert(
+      "Please enter Teacher ID and PIN."
+    );
+
     return;
+
   }
 
-  const btn = document.getElementById("loginBtn");
 
-  btn.disabled = true;
-  btn.textContent = "Logging in...";
+  const btn =
+    document.getElementById("loginBtn");
 
-  try {
+  btn.disabled=true;
+  btn.textContent="Logging in...";
 
-    const response = await apiRequest("login", {
-      teacherId: teacherId,
-      pin: pin
-    });
 
-    if (!response.success) {
-      throw new Error(response.message || "Login failed.");
+  try{
+
+    const response =
+      await apiRequest("login",{
+        teacherId:teacherId,
+        pin:pin
+      });
+
+
+    if(!response.success){
+
+      throw new Error(
+        response.message ||
+        "Login failed."
+      );
+
     }
 
-    const data = response.data;
 
-    if (!data || !data.token) {
+    const data=response.data;
+
+
+    if(!data || !data.token){
+
       throw new Error(
         "Login response did not contain a session token."
       );
+
     }
 
-    sessionToken = data.token;
-    teacherData = data.teacher || {};
+
+    sessionToken=data.token;
+    teacherData=data.teacher || {};
+
     setupHolidayPanel();
+
 
     document.getElementById("loginPanel")
       .classList.add("hidden");
@@ -1055,124 +1486,192 @@ async function teacherLogin() {
     document.getElementById("attendancePanel")
       .classList.remove("hidden");
 
-    document.getElementById("teacherInfo").textContent =
+
+    const loggedTeacher =
       teacherData.teacherName ||
       teacherData.name ||
       teacherId;
 
-    showResult("Login successful. Ready to scan.");
 
-  } catch (error) {
+    document.getElementById("teacherInfo")
+      .textContent=loggedTeacher;
 
-    alert("Login error: " + error.message);
+    document.getElementById("welcomeTeacher")
+      .textContent=loggedTeacher;
 
-  } finally {
 
-    btn.disabled = false;
-    btn.textContent = "Login";
+    const assigned =
+      teacherData.assignedSection ||
+      teacherData.section;
+
+
+    if(assigned){
+
+      document.getElementById("sectionSelect")
+        .value=String(assigned).toUpperCase();
+
+    }
+
+
+    showResult(
+      "Login successful. Ready to scan."
+    );
+
+    loadSummary();
+
+
+  }catch(error){
+
+    alert(
+      "Login error: "+error.message
+    );
+
+  }finally{
+
+    btn.disabled=false;
+    btn.textContent="Login";
 
   }
+
 }
 
 
-// ========================================
-// START CAMERA SCANNER
-// ========================================
+/* ========================================
+   START CAMERA SCANNER
+======================================== */
 
-async function startScanner() {
+async function startScanner(){
 
-  if (!sessionToken) {
+  if(!sessionToken){
+
     alert("Please login first.");
     return;
+
   }
 
-  if (!window.Html5Qrcode) {
+  if(!window.Html5Qrcode){
+
     alert("Scanner library failed to load.");
     return;
+
   }
 
-  if (scanning) {
+  if(scanning){
     return;
   }
 
-  try {
 
-    // Unlock audio directly from Start Camera click
+  try{
+
     await unlockAudio();
 
-    if (!scanner) {
 
-      scanner = new Html5Qrcode("reader", {
+    if(!scanner){
 
-        formatsToSupport: [
-          Html5QrcodeSupportedFormats.CODE_128,
-          Html5QrcodeSupportedFormats.CODE_39,
-          Html5QrcodeSupportedFormats.EAN_13,
-          Html5QrcodeSupportedFormats.QR_CODE
-        ],
-
-        verbose: false
-
-      });
+      scanner=new Html5Qrcode(
+        "reader",
+        {
+          formatsToSupport:[
+            Html5QrcodeSupportedFormats.CODE_128,
+            Html5QrcodeSupportedFormats.CODE_39,
+            Html5QrcodeSupportedFormats.EAN_13,
+            Html5QrcodeSupportedFormats.QR_CODE
+          ],
+          verbose:false
+        }
+      );
 
     }
 
-    const cameras = await Html5Qrcode.getCameras();
 
-    if (!cameras || cameras.length === 0) {
-      throw new Error("No camera detected.");
+    const cameras =
+      await Html5Qrcode.getCameras();
+
+
+    if(!cameras || cameras.length===0){
+
+      throw new Error(
+        "No camera detected."
+      );
+
     }
 
-    const camera = cameras.find(c =>
-      /back|rear|environment/i.test(c.label)
-    ) || cameras[0];
+
+    const camera =
+      cameras.find(c=>
+        /back|rear|environment/i.test(c.label)
+      ) || cameras[0];
+
 
     await scanner.start(
 
       camera.id,
 
       {
-    fps: 20,
 
-    qrbox: function(viewfinderWidth, viewfinderHeight) {
-        return {
-            width: Math.floor(viewfinderWidth * 0.95),
-            height: Math.min(
-                140,
-                Math.floor(viewfinderHeight * 0.35)
+        fps:20,
+
+        qrbox:function(
+          viewfinderWidth,
+          viewfinderHeight
+        ){
+
+          return{
+
+            width:Math.floor(
+              viewfinderWidth*0.95
+            ),
+
+            height:Math.min(
+              140,
+              Math.floor(
+                viewfinderHeight*0.35
+              )
             )
-        };
-    },
 
-    aspectRatio: 1.777,
+          };
 
-    videoConstraints: {
-        facingMode: "environment",
-        width: { ideal: 1280 },
-        height: { ideal: 720 }
-    }
-},
-      decodedText => {
+        },
+
+        aspectRatio:1.777,
+
+        videoConstraints:{
+          facingMode:"environment",
+          width:{ideal:1280},
+          height:{ideal:720}
+        }
+
+      },
+
+      decodedText=>{
         processBarcode(decodedText);
       },
 
-      () => {}
+      ()=>{}
 
     );
 
-    scanning = true;
 
-    document.getElementById("startBtn").disabled = true;
+    scanning=true;
 
-    showResult("Camera started. Scan a student barcode.");
+    document.getElementById("startBtn")
+      .disabled=true;
 
-  } catch (error) {
+    showResult(
+      "Camera started. Scan a student barcode."
+    );
 
-    scanning = false;
 
-    document.getElementById("startBtn").disabled = false;
+  }catch(error){
 
-    alert("Camera error: " + error.message);
+    scanning=false;
+
+    document.getElementById("startBtn")
+      .disabled=false;
+
+    alert(
+      "Camera error: "+error.message
+    );
 
     console.error(error);
 
@@ -1181,96 +1680,139 @@ async function startScanner() {
 }
 
 
-// ========================================
-// STOP CAMERA
-// ========================================
+/* ========================================
+   STOP CAMERA
+======================================== */
 
-async function stopScanner() {
+async function stopScanner(){
 
-  try {
+  try{
 
-    if (scanner && scanning) {
+    if(scanner && scanning){
 
       await scanner.stop();
 
-      scanning = false;
+      scanning=false;
 
     }
 
-  } catch (error) {
+  }catch(error){
 
-    console.error("Camera stop error:", error);
+    console.error(
+      "Camera stop error:",
+      error
+    );
 
   }
 
-  document.getElementById("startBtn").disabled = false;
+  document.getElementById("startBtn")
+    .disabled=false;
 
 }
 
 
-// ========================================
-// PROCESS BARCODE
-// ========================================
+/* ========================================
+   PROCESS BARCODE
+======================================== */
 
-async function processBarcode(barcode) {
+async function processBarcode(barcode){
 
-  barcode = String(barcode).trim();
+  barcode=String(barcode).trim();
 
-  if (!barcode || !sessionToken || submitting) {
+
+  if(
+    !barcode ||
+    !sessionToken ||
+    submitting
+  ){
+
     return;
+
   }
 
-  const now = Date.now();
 
-  // Prevent repeated camera reads of same barcode
-  if (
-    barcode === lastBarcode &&
-    now - lastScanTime < 4000
-  ) {
+  const now=Date.now();
+
+
+  if(
+    barcode===lastBarcode &&
+    now-lastScanTime<4000
+  ){
+
     return;
+
   }
 
-  lastBarcode = barcode;
-  lastScanTime = now;
 
-  submitting = true;
+  lastBarcode=barcode;
+  lastScanTime=now;
 
-  const manualBtn = document.getElementById("manualBtn");
+  submitting=true;
 
-  manualBtn.disabled = true;
 
-  showResult("Submitting attendance for " + barcode + "...");
+  const manualBtn =
+    document.getElementById("manualBtn");
 
-  try {
+  manualBtn.disabled=true;
 
-    const response = await apiRequest("mark", {
-  token: sessionToken,
-  barcode: barcode
-});
-    if (!response.success) {
+
+  showResult(
+    "Submitting attendance for "+
+    barcode+"..."
+  );
+
+
+  try{
+
+
+    const response =
+      await apiRequest("mark",{
+        token:sessionToken,
+        barcode:barcode
+      });
+
+
+    if(!response.success){
+
       throw new Error(
-        response.message || "Attendance failed."
+        response.message ||
+        "Attendance failed."
       );
+
     }
 
-    const data = response.data || {};
 
-    if (data.success === false) {
+    const data=response.data || {};
+
+
+    if(data.success===false){
+
       throw new Error(
-        data.message || "Attendance not recorded."
+        data.message ||
+        "Attendance not recorded."
       );
+
     }
 
- // Successful attendance: voice and vibration
-const studentName =
-  data.studentName || data.name || "Student";
 
-if (!data.duplicate) {
-  speakPresent(studentName);
-  if ("vibrate" in navigator) {
-    navigator.vibrate(100);
-  }
-}
+    const studentName =
+      data.studentName ||
+      data.name ||
+      "Student";
+
+
+    if(!data.duplicate){
+
+      speakPresent(studentName);
+
+      if("vibrate" in navigator){
+
+        navigator.vibrate(100);
+
+      }
+
+    }
+
 
     const rollNo =
       data.rollNo || "";
@@ -1279,153 +1821,426 @@ if (!data.duplicate) {
       data.section || "";
 
     const duplicate =
-      data.duplicate === true;
+      data.duplicate===true;
 
-    if (duplicate) {
+
+    document.getElementById(
+      "lastStudentName"
+    ).textContent=studentName;
+
+
+    document.getElementById(
+      "lastRoll"
+    ).textContent=rollNo || "—";
+
+
+    document.getElementById(
+      "lastSection"
+    ).textContent=section || "—";
+
+
+    document.getElementById(
+      "scanBadge"
+    ).textContent=
+      duplicate
+      ? "Already marked"
+      : "Present successfully";
+
+
+    document.getElementById(
+      "scanBadge"
+    ).style.background=
+      duplicate
+      ? "#fef3c7"
+      : "#dcfce7";
+
+
+    document.getElementById(
+      "scanBadge"
+    ).style.color=
+      duplicate
+      ? "#92400e"
+      : "#166534";
+
+
+    if(duplicate){
 
       showResult(
-        "ALREADY MARKED\n\n" +
-        "Student: " + studentName + "\n" +
-        "Roll No: " + rollNo + "\n" +
-        "Section: " + section
+
+        "ALREADY MARKED\n\n"+
+        "Student: "+studentName+"\n"+
+        "Roll No: "+rollNo+"\n"+
+        "Section: "+section
+
       );
 
-    } else {
+    }else{
 
       showResult(
-        "ATTENDANCE SUBMITTED SUCCESSFULLY!\n\n" +
-        "Student: " + studentName + "\n" +
-        "Roll No: " + rollNo + "\n" +
-        "Section: " + section
+
+        "ATTENDANCE SUBMITTED SUCCESSFULLY!\n\n"+
+        "Student: "+studentName+"\n"+
+        "Roll No: "+rollNo+"\n"+
+        "Section: "+section
+
       );
 
     }
 
-    // Clear manual barcode field
-    document.getElementById("manualBarcode").value = "";
 
-  } catch (error) {
+    document.getElementById(
+      "manualBarcode"
+    ).value="";
 
-    showResult("ERROR: " + error.message);
 
-    console.error("Attendance submission error:", error);
+    // Refresh statistics after successful scan
+    loadSummary();
 
-  } finally {
 
-    submitting = false;
-    manualBtn.disabled = false;
+  }catch(error){
+
+    showResult(
+      "ERROR: "+error.message
+    );
+
+    console.error(
+      "Attendance submission error:",
+      error
+    );
+
+
+  }finally{
+
+    submitting=false;
+
+    manualBtn.disabled=false;
 
   }
 
 }
 
 
-// ========================================
-// MANUAL BARCODE ENTRY
-// ========================================
+/* ========================================
+   MANUAL BARCODE ENTRY
+======================================== */
 
-function manualScan() {
+function manualScan(){
 
   const value =
     document.getElementById("manualBarcode")
       .value.trim();
 
-  if (!value) {
-    alert("Please enter a barcode.");
+
+  if(!value){
+
+    alert(
+      "Please enter a barcode."
+    );
+
     return;
+
   }
+
 
   processBarcode(value);
 
 }
 
 
-// ========================================
-// TODAY'S ATTENDANCE SUMMARY
-// ========================================
+/* ========================================
+   TODAY'S ATTENDANCE SUMMARY
+======================================== */
 
-async function loadSummary() {
+async function loadSummary(){
 
-  if (!sessionToken) {
+  if(!sessionToken){
     return;
   }
 
+
   const section =
+    document.getElementById("sectionSelect")
+      .value ||
     teacherData.assignedSection ||
     teacherData.section ||
     "A";
 
-  document.getElementById("summary").textContent =
-    "Loading...";
 
-  try {
+  document.getElementById("summary")
+    .textContent="Loading...";
 
-    const response = await apiRequest("summary", {
-      token: sessionToken,
-      section: section
-    });
 
-    if (!response.success) {
+  try{
+
+
+    const response =
+      await apiRequest("summary",{
+        token:sessionToken,
+        section:section
+      });
+
+
+    if(!response.success){
+
       throw new Error(
-        response.message || "Could not load summary."
+        response.message ||
+        "Could not load summary."
       );
+
     }
 
-    document.getElementById("summary").textContent =
-      JSON.stringify(response.data, null, 2);
 
-  } catch (error) {
+    const d=response.data || {};
 
-    document.getElementById("summary").textContent =
-      "Error: " + error.message;
+
+    document.getElementById("summary")
+      .textContent=
+      JSON.stringify(d,null,2);
+
+
+    const pick=(...keys)=>{
+
+      for(const key of keys){
+
+        if(
+          d[key]!==undefined &&
+          d[key]!==null
+        ){
+
+          return d[key];
+
+        }
+
+      }
+
+      return null;
+
+    };
+
+
+    const total=pick(
+      "totalStudents",
+      "total",
+      "students",
+      "studentCount"
+    );
+
+
+    const present=pick(
+      "present",
+      "presentToday",
+      "presentCount"
+    );
+
+
+    const absent=pick(
+      "absent",
+      "absentToday",
+      "absentCount"
+    );
+
+
+    const rate=pick(
+      "attendanceRate",
+      "percentage",
+      "rate"
+    );
+
+
+    if(total!==null){
+
+      document.getElementById(
+        "totalStudents"
+      ).textContent=total;
+
+    }
+
+
+    if(present!==null){
+
+      document.getElementById(
+        "presentToday"
+      ).textContent=present;
+
+    }
+
+
+    if(absent!==null){
+
+      document.getElementById(
+        "absentToday"
+      ).textContent=absent;
+
+    }
+
+
+    if(rate!==null){
+
+      document.getElementById(
+        "attendanceRate"
+      ).textContent=
+      String(rate).includes("%")
+      ? rate
+      : rate+"%";
+
+    }else if(
+      total!==null &&
+      present!==null &&
+      Number(total)>0
+    ){
+
+      document.getElementById(
+        "attendanceRate"
+      ).textContent=
+      Math.round(
+        Number(present)/
+        Number(total)*100
+      )+"%";
+
+    }
+
+
+  }catch(error){
+
+    document.getElementById("summary")
+      .textContent=
+      "Error: "+error.message;
 
   }
 
 }
 
 
-// ========================================
-// TEACHER LOGOUT
-// ========================================
+/* ========================================
+   TEACHER LOGOUT
+======================================== */
 
-async function teacherLogout() {
+async function teacherLogout(){
 
   await stopScanner();
 
-  try {
 
-    await apiRequest("logout", {
-      token: sessionToken
+  try{
+
+    await apiRequest("logout",{
+      token:sessionToken
     });
 
-  } catch (error) {
+  }catch(error){
 
-    console.error("Logout error:", error);
+    console.error(
+      "Logout error:",
+      error
+    );
 
   }
 
-  sessionToken = null;
-  teacherData = null;
 
-  lastBarcode = "";
-  lastScanTime = 0;
+  sessionToken=null;
+  teacherData=null;
 
-  document.getElementById("attendancePanel")
-    .classList.add("hidden");
+  lastBarcode="";
+  lastScanTime=0;
 
-  document.getElementById("loginPanel")
-    .classList.remove("hidden");
 
-  document.getElementById("teacherPin").value = "";
+  document.getElementById(
+    "attendancePanel"
+  ).classList.add("hidden");
 
-  document.getElementById("teacherId").value = "";
 
-  document.getElementById("summary").textContent =
-    "Click Today's Summary.";
+  document.getElementById(
+    "loginPanel"
+  ).classList.remove("hidden");
+
+
+  document.getElementById(
+    "teacherPin"
+  ).value="";
+
+
+  document.getElementById(
+    "teacherId"
+  ).value="";
+
+
+  document.getElementById(
+    "summary"
+  ).textContent=
+  "Click Load Today's Summary.";
+
+
+  document.getElementById(
+    "lastStudentName"
+  ).textContent=
+  "No student scanned yet";
+
+
+  document.getElementById(
+    "lastRoll"
+  ).textContent="—";
+
+
+  document.getElementById(
+    "lastSection"
+  ).textContent="—";
+
+
+  document.getElementById(
+    "scanBadge"
+  ).textContent="Waiting for scan";
+
+
+  [
+    "totalStudents",
+    "presentToday",
+    "absentToday",
+    "attendanceRate"
+  ].forEach(id=>{
+
+    document.getElementById(id)
+      .textContent="—";
+
+  });
+
 
   showResult("Logged out.");
 
 }
+
+
+/* ========================================
+   ENTER KEY LOGIN
+======================================== */
+
+document.getElementById("teacherPin")
+  .addEventListener("keydown",function(event){
+
+    if(event.key==="Enter"){
+      teacherLogin();
+    }
+
+  });
+
+
+document.getElementById("manualBarcode")
+  .addEventListener("keydown",function(event){
+
+    if(event.key==="Enter"){
+      manualScan();
+    }
+
+  });
+
+
+document.getElementById("sectionSelect")
+  .addEventListener("change",function(){
+
+    if(sessionToken){
+      loadSummary();
+    }
+
+  });
+
 
 </script>
 
