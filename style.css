@@ -4231,3 +4231,67 @@ body {
         scroll-behavior: auto !important;
     }
 }
+/* OFFICIALS HEADER */
+.header-officials {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+.official-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.official-photo {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #d4af37;
+}
+
+.official-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #0b5d4b;
+    line-height: 1.2;
+    max-width: 100px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+    .header-officials {
+        position: static !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin: 0;
+        order: 3;
+    }
+
+    .official-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .official-photo {
+        width: 48px;
+        height: 48px;
+        border-width: 2px;
+    }
+
+    .official-name {
+        font-size: 8px;
+        max-width: 55px;
+        line-height: 1.1;
+        text-align: center;
+    }
+}
