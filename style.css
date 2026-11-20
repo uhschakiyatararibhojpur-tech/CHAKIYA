@@ -4231,35 +4231,25 @@ body {
         scroll-behavior: auto !important;
     }
 }
-.header-officials {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-}
+@media (max-width: 768px) {
+    .header-officials {
+        position: static;
+        transform: none;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 15px;
+    }
 
-.minister-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 6px;
-    width: 180px;
-}
+    .official-card {
+        width: 110px;
+    }
 
-.minister-header-photo {
-    width: 75px;
-    height: 75px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid #d4af37;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-}
+    .official-photo {
+        width: 60px;
+        height: 60px;
+    }
 
-.minister-header span {
-    font-size: 13px;
-    font-weight: 700;
-    color: #075b4d;
-    line-height: 1.4;
+    .official-name {
+        font-size: 10px;
+    }
 }
