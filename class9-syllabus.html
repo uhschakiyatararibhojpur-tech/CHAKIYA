@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 9 Syllabus Tracker | UHS Chakiya</title>
+
+<style>
+:root{
+  --primary:#075985;
+  --primary-dark:#0c4a6e;
+  --bg:#f1f5f9;
+  --white:#ffffff;
+  --green:#16a34a;
+  --yellow:#d97706;
+  --gray:#64748b;
+  --red:#dc2626;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:#1e293b;
+}
+
+header{
+  background:linear-gradient(135deg,#075985,#0e7490);
+  color:white;
+  padding:22px 15px;
+  text-align:center;
+}
+
+header h1{
+  font-size:24px;
+  margin-bottom:7px;
+}
+
+header p{
+  font-size:14px;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:white;
+  border-radius:15px;
+  padding:20px;
+  box-shadow:0 4px 15px rgba(0,0,0,.07);
+  margin-bottom:20px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.login-box{
+  max-width:420px;
+  margin:30px auto;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  font-size:16px;
+}
+
+button{
+  border:none;
+  padding:12px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:bold;
+}
+
+.primary-btn{
+  background:var(--primary);
+  color:white;
+}
+
+.primary-btn:hover{
+  background:var(--primary-dark);
+}
+
+.logout-btn{
+  background:#dc2626;
+  color:white;
+}
+
+.status{
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+  display:inline-block;
+}
+
+.not-started{
+  background:#e2e8f0;
+  color:#475569;
+}
+
+.in-progress{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+.completed{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.subject-card{
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:15px;
+}
+
+.subject-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.progress-bar{
+  height:12px;
+  background:#e2e8f0;
+  border-radius:20px;
+  overflow:hidden;
+  margin:10px 0;
+}
+
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,#16a34a,#22c55e);
+  transition:width .4s;
+}
+
+.chapter{
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  padding:14px;
+  margin:10px 0;
+}
+
+.chapter-title{
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.chapter-controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.chapter-controls select{
+  margin:0;
+}
+
+.remarks{
+  grid-column:1/-1;
+}
+
+.update-btn{
+  background:#16a34a;
+  color:white;
+}
+
+.small{
+  color:#64748b;
+  font-size:13px;
+}
+
+#message{
+  padding:12px;
+  border-radius:8px;
+  margin:10px 0;
+  display:none;
+}
+
+.success{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.error{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:15px 0;
+}
+
+.stat{
+  background:#f8fafc;
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:25px;
+  color:var(--primary);
+}
+
+@media(max-width:600px){
+  header h1{
+    font-size:20px;
+  }
+
+  .container{
+    padding:12px;
+  }
+
+  .card{
+    padding:15px;
+  }
+
+  .chapter-controls{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>📚 कक्षा 9 पाठ्यक्रम प्रगति</h1>
+  <p>UHS Chakiya Tarari Bhojpur</p>
+  <p>Class 9 Syllabus Tracking System</p>
+</header>
+
+<div class="container">
+
+  <!-- PUBLIC SECTION -->
+  <div class="card">
+    <h2>📊 सार्वजनिक पाठ्यक्रम प्रगति</h2>
+    <p class="small">
+      विद्यार्थी एवं अभिभावक सभी विषयों का पाठ्यक्रम पूरा होने की स्थिति देख सकते हैं।
+    </p>
+
+    <div id="publicStats" class="stats"></div>
+
+    <div id="publicSubjects">
+      <p>Loading syllabus...</p>
+    </div>
+  </div>
+
+  <!-- LOGIN SECTION -->
+  <div id="loginSection" class="card login-box">
+    <h2>👨‍🏫 शिक्षक लॉगिन</h2>
+
+    <input type="text" id="username"
+           placeholder="Teacher Username">
+
+    <input type="password" id="password"
+           placeholder="Password">
+
+    <button class="primary-btn"
+            style="width:100%"
+            onclick="loginTeacher()">
+      🔐 Login
+    </button>
+
+    <div id="loginMessage"></div>
+  </div>
+
+  <!-- TEACHER DASHBOARD -->
+  <div id="teacherDashboard" class="hidden">
+
+    <div class="card">
+      <div class="subject-header">
+        <div>
+          <h2>👨‍🏫 Teacher Dashboard</h2>
+          <p id="teacherName" class="small"></p>
+        </div>
+
+        <button class="logout-btn" onclick="logoutTeacher()">
+          Logout
+        </button>
+      </div>
+
+      <div id="teacherSubjects"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbyrBAbUv3kKtKEzu0hvIxWCth7DBRrVqhtD20IlqSynUiaGdRSwwdy55Vwx0dv1OtZMPQ/exec";
+
+let sessionToken = "";
+let teacherData = null;
+let syllabusData = null;
+
+
+/* =========================
+   API REQUEST
+========================= */
+
+async function apiGet(action){
+
+  const response = await fetch(
+    API_URL + "?action=" + encodeURIComponent(action)
+  );
+
+  return await response.json();
+}
+
+
+async function apiPost(data){
+
+  const response = await fetch(API_URL,{
+    method:"POST",
+    headers:{
+      "Content-Type":"text/plain;charset=utf-8"
+    },
+    body:JSON.stringify(data)
+  });
+
+  return await response.json();
+}
+
+
+/* =========================
+   PUBLIC SYLLABUS
+========================= */
+
+async function loadPublicData(){
+
+  try{
+
+    const response = await apiGet("public");
+
+    if(!response.success){
+      document.getElementById("publicSubjects").innerHTML =
+      "<p>पाठ्यक्रम डेटा उपलब्ध नहीं है।</p>";
+      return;
+    }
+
+    syllabusData = response;
+
+    renderPublicSubjects(response);
+
+  }catch(error){
+
+    document.getElementById("publicSubjects").innerHTML =
+    "<p>डेटा लोड नहीं हो सका। कृपया बाद में पुनः प्रयास करें।</p>";
+
+  }
+
+}
+
+
+function renderPublicSubjects(data){
+
+  const subjects =
+  data.subjects || [];
+
+  let totalChapters = 0;
+  let completedChapters = 0;
+
+  subjects.forEach(subject=>{
+
+    const chapters =
+    subject.chapters || [];
+
+    totalChapters += chapters.length;
+
+    chapters.forEach(chapter=>{
+
+      if(chapter.status === "Completed"){
+        completedChapters++;
+      }
+
+    });
+
+  });
+
+  const percentage =
+  totalChapters ?
+  Math.round(completedChapters/totalChapters*100) : 0;
+
+  document.getElementById("publicStats").innerHTML = `
+    <div class="stat">
+      <strong>${subjects.length}</strong>
+      <span>Subjects</span>
+    </div>
+
+    <div class="stat">
+      <strong>${completedChapters}/${totalChapters}</strong>
+      <span>Completed Chapters</span>
+    </div>
+
+    <div class="stat">
+      <strong>${percentage}%</strong>
+      <span>Overall Progress</span>
+    </div>
+  `;
+
+  let html = "";
+
+  subjects.forEach(subject=>{
+
+    const chapters =
+    subject.chapters || [];
+
+    const completed =
+    chapters.filter(c=>c.status==="Completed").length;
+
+    const progress =
+    chapters.length ?
+    Math.round(completed/chapters.length*100) : 0;
+
+    html += `
+      <div class="subject-card">
+
+        <div class="subject-header">
+          <h3>${subject.subject}</h3>
+          <strong>${progress}%</strong>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill"
+               style="width:${progress}%"></div>
+        </div>
+
+        <p class="small">
+          ${completed} / ${chapters.length} Chapters Completed
+        </p>
+
+        <details>
+          <summary style="cursor:pointer;padding:10px">
+            📖 अध्याय सूची देखें
+          </summary>
+
+          <div style="margin-top:10px">
+
+            ${chapters.map(chapter=>`
+
+              <div class="chapter">
+
+                <div class="chapter-title">
+                  ${chapter.chapterNo || ""}.
+                  ${chapter.chapterName}
+                </div>
+
+                <span class="status
+                  ${chapter.status==="Completed" ?
+                    "completed" :
+                    chapter.status==="In Progress" ?
+                    "in-progress" :
+                    "not-started"}">
+
+                  ${chapter.status || "Not Started"}
+
+                </span>
+
+                ${chapter.remarks ?
+                  `<p class="small" style="margin-top:8px">
+                    📝 ${chapter.remarks}
+                   </p>` : ""}
+
+              </div>
+
+            `).join("")}
+
+          </div>
+        </details>
+
+      </div>
+    `;
+
+  });
+
+  document.getElementById("publicSubjects").innerHTML =
+  html || "<p>अभी पाठ्यक्रम उपलब्ध नहीं है।</p>";
+
+}
+
+
+/* =========================
+   TEACHER LOGIN
+========================= */
+
+async function loginTeacher(){
+
+  const username =
+  document.getElementById("username").value.trim();
+
+  const password =
+  document.getElementById("password").value;
+
+  if(!username || !password){
+
+    showLoginMessage(
+      "Username और Password दोनों भरें।",
+      false
+    );
+
+    return;
+
+  }
+
+  showLoginMessage("Login हो रहा है...",true);
+
+  try{
+
+    const response = await apiPost({
+      action:"login",
+      username:username,
+      password:password
+    });
+
+    if(!response.success){
+
+      showLoginMessage(
+        response.message || "Login failed",
+        false
+      );
+
+      return;
+
+    }
+
+    sessionToken =
+    response.token ||
+    response.sessionToken ||
+    response.session ||
+    "";
+
+    teacherData =
+    response.teacher ||
+    response.data ||
+    response;
+
+    document.getElementById("loginSection")
+      .classList.add("hidden");
+
+    document.getElementById("teacherDashboard")
+      .classList.remove("hidden");
+
+    document.getElementById("teacherName").innerHTML =
+    "Welcome, " +
+    (teacherData.teacherName ||
+     teacherData.name ||
+     teacherData.username ||
+     username);
+
+    renderTeacherDashboard();
+
+  }catch(error){
+
+    showLoginMessage(
+      "Server connection error. कृपया पुनः प्रयास करें।",
+      false
+    );
+
+  }
+
+}
+
+
+function showLoginMessage(message,success){
+
+  const element =
+  document.getElementById("loginMessage");
+
+  element.style.display="block";
+
+  element.className =
+  success ? "success" : "error";
+
+  element.innerHTML = message;
+
+}
+
+
+/* =========================
+   TEACHER DASHBOARD
+========================= */
+
+function renderTeacherDashboard(){
+
+  if(!syllabusData){
+    loadPublicData().then(renderTeacherDashboard);
+    return;
+  }
+
+  const subjects =
+  syllabusData.subjects || [];
+
+  let html = "";
+
+  subjects.forEach(subject=>{
+
+    const chapters =
+    subject.chapters || [];
+
+    html += `
+      <div class="subject-card">
+
+        <h3>📚 ${subject.subject}</h3>
+
+        <div class="progress-bar">
+          <div class="progress-fill"
+               id="progress-${subject.subjectID}"
+               style="width:0%">
+          </div>
+        </div>
+
+        <div id="chapters-${subject.subjectID}">
+
+          ${chapters.map(chapter=>`
+
+            <div class="chapter">
+
+              <div class="chapter-title">
+                ${chapter.chapterNo || ""}.
+                ${chapter.chapterName}
+              </div>
+
+              <div class="chapter-controls">
+
+                <select id="status-${chapter.chapterID}">
+
+                  <option value="Not Started"
+                    ${chapter.status==="Not Started" ?
+                    "selected":""}>
+                    ⚪ Not Started
+                  </option>
+
+                  <option value="In Progress"
+                    ${chapter.status==="In Progress" ?
+                    "selected":""}>
+                    🟡 In Progress
+                  </option>
+
+                  <option value="Completed"
+                    ${chapter.status==="Completed" ?
+                    "selected":""}>
+                    🟢 Completed
+                  </option>
+
+                </select>
+
+                <input type="text"
+                       class="remarks"
+                       id="remarks-${chapter.chapterID}"
+                       placeholder="Remarks / टिप्पणी"
+                       value="${chapter.remarks || ""}">
+
+                <button class="update-btn"
+                        onclick="updateChapter(
+                          '${chapter.chapterID}',
+                          '${subject.subjectID}'
+                        )">
+                  💾 Update
+                </button>
+
+              </div>
+
+            </div>
+
+          `).join("")}
+
+        </div>
+
+      </div>
+    `;
+
+  });
+
+  document.getElementById("teacherSubjects").innerHTML =
+  html;
+
+}
+
+
+/* =========================
+   UPDATE CHAPTER
+========================= */
+
+async function updateChapter(chapterID,subjectID){
+
+  const status =
+  document.getElementById("status-"+chapterID).value;
+
+  const remarks =
+  document.getElementById("remarks-"+chapterID).value;
+
+  if(!sessionToken){
+
+    alert("Session expired. Please login again.");
+
+    return;
+
+  }
+
+  try{
+
+    const response = await apiPost({
+
+      action:"update",
+
+      token:sessionToken,
+
+      chapterID:chapterID,
+
+      subjectID:subjectID,
+
+      status:status,
+
+      remarks:remarks
+
+    });
+
+    if(response.success){
+
+      alert("✅ Syllabus updated successfully!");
+
+      await loadPublicData();
+
+      renderTeacherDashboard();
+
+    }else{
+
+      alert(
+        "❌ Update failed: "+
+        (response.message || "Unknown error")
+      );
+
+    }
+
+  }catch(error){
+
+    alert(
+      "Server error. Please try again."
+    );
+
+  }
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function logoutTeacher(){
+
+  try{
+
+    await apiPost({
+      action:"logout",
+      token:sessionToken
+    });
+
+  }catch(error){}
+
+  sessionToken="";
+  teacherData=null;
+
+  document.getElementById("teacherDashboard")
+    .classList.add("hidden");
+
+  document.getElementById("loginSection")
+    .classList.remove("hidden");
+
+  document.getElementById("username").value="";
+  document.getElementById("password").value="";
+
+}
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+loadPublicData();
+
+</script>
+
+</body>
+</html>
