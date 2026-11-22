@@ -119,6 +119,36 @@
                 </a>
             </div>
         </div>
+        <!-- TRACK SYLLABUS DROPDOWN -->
+<div class="nav-dropdown" id="syllabusDropdown">
+
+    <button type="button"
+            class="dropdown-toggle"
+            id="syllabusToggle"
+            aria-expanded="false"
+            aria-controls="syllabusMenu">
+
+        Track Syllabus <span>▾</span>
+
+    </button>
+
+    <div class="dropdown-menu" id="syllabusMenu">
+
+        <a href="class9-syllabus.html"
+           class="dropdown-option">
+            📚 Class 9
+        </a>
+
+        <a href="class10-syllabus.html"
+           class="dropdown-option">
+            📚 Class 10
+        </a>
+
+    </div>
+
+</div>
+
+<a href="about.html">About</a>
 
         <a href="about.html">About</a>
 
@@ -1019,6 +1049,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- ROTATING EARTH -->
 <script type="module" src="earth-background.js"></script>
+<!-- TRACK SYLLABUS DROPDOWN -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
+    const dropdown =
+        document.getElementById("syllabusDropdown");
+
+    const toggle =
+        document.getElementById("syllabusToggle");
+
+    if (!dropdown || !toggle) return;
+
+    toggle.addEventListener("click", function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const isOpen =
+            dropdown.classList.toggle("open");
+
+        toggle.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+        );
+
+    });
+
+    document.addEventListener("click", function (event) {
+
+        if (!dropdown.contains(event.target)) {
+
+            dropdown.classList.remove("open");
+
+            toggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    });
+
+});
+</script>
 </body>
 </html>
