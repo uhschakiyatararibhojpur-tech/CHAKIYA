@@ -6,247 +6,50 @@
 <title>Class 9 Syllabus Tracker | UHS Chakiya</title>
 
 <style>
-:root{
-  --primary:#075985;
-  --primary-dark:#0c4a6e;
-  --bg:#f1f5f9;
-  --white:#ffffff;
-  --green:#16a34a;
-  --yellow:#d97706;
-  --gray:#64748b;
-  --red:#dc2626;
-}
+:root{--navy:#0f172a;--blue:#075985;--blue2:#0e7490;--bg:#f1f5f9;--green:#059669;--amber:#d97706;--text:#1e293b;--muted:#64748b;--line:#e2e8f0;--shadow:0 12px 35px rgba(15,23,42,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+header{background:linear-gradient(135deg,#0f172a,#075985 55%,#0e7490);color:white;padding:28px 18px}
+header h1{font-size:clamp(22px,4vw,32px);margin-bottom:5px}header p{font-size:14px;color:#dbeafe}
+.container{max-width:1150px;margin:auto;padding:24px 16px}.card{background:white;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);margin-bottom:22px}.hidden{display:none!important}
+.login-box{max-width:430px;margin:30px auto}input,select,textarea{width:100%;padding:13px 14px;margin:8px 0;border:1px solid #cbd5e1;border-radius:12px;font-size:16px;background:white;color:var(--text);outline:none}input:focus,select:focus{border-color:#0284c7;box-shadow:0 0 0 3px rgba(2,132,199,.12)}
+button{border:0;padding:12px 18px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:700;transition:.2s}button:hover{transform:translateY(-1px);filter:brightness(.97)}.primary-btn{background:linear-gradient(135deg,#075985,#0284c7);color:white}.logout-btn{background:#fee2e2;color:#991b1b}
+.status{padding:6px 11px;border-radius:999px;font-size:12px;font-weight:800;display:inline-flex}.not-started{background:#e2e8f0;color:#475569}.in-progress{background:#fef3c7;color:#92400e}.completed{background:#dcfce7;color:#166534}
+.subject-card{border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px;background:white}.subject-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.progress-bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:10px 0}.progress-fill{height:100%;background:linear-gradient(90deg,#059669,#34d399);transition:width .4s}
+.chapter{border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0;background:#f8fafc}.chapter-title{font-weight:750;margin-bottom:10px;font-size:15px}.chapter-controls{display:grid;grid-template-columns:minmax(160px,.8fr) minmax(200px,1.4fr);gap:10px;align-items:center}.chapter-controls select,.chapter-controls input{margin:0}
+.update-btn{background:var(--green);color:white}.small{color:var(--muted);font-size:13px}#message,#loginMessage{padding:12px;border-radius:10px;margin:12px 0;display:none}.success{background:#dcfce7;color:#166534}.error{background:#fee2e2;color:#991b1b}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.stat{background:linear-gradient(135deg,#f8fafc,#eff6ff);border:1px solid var(--line);padding:17px;border-radius:14px;text-align:center}.stat strong{display:block;font-size:25px;color:var(--blue);margin-bottom:3px}
+.teacher-hero{background:linear-gradient(135deg,#0f172a,#075985);color:white;border-radius:18px;padding:22px;margin-bottom:18px}.teacher-hero p{color:#cbd5e1}.dashboard-title{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.subject-picker{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:18px}.subject-picker label{font-weight:700;display:block;margin-bottom:5px}
+.chapter-list{margin-top:16px}.save-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#ecfdf5;border:1px solid #a7f3d0;padding:16px;border-radius:16px;margin-top:18px}.save-all-btn{background:linear-gradient(135deg,#059669,#10b981);color:white;min-width:210px}.save-all-btn:disabled{opacity:.6;cursor:not-allowed}
+.subject-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.summary-pill{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}.summary-pill strong{display:block;font-size:20px}
+details summary{cursor:pointer;padding:12px 4px;font-weight:700;color:#075985}footer{text-align:center;color:var(--muted);padding:12px 10px 30px;font-size:13px}
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+.student-hero{background:linear-gradient(135deg,#082f49,#0369a1 60%,#0891b2);color:white;border-radius:20px;padding:24px;margin-bottom:22px;position:relative;overflow:hidden}
+.student-hero:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.09);right:-65px;top:-90px}
+.student-hero h2{font-size:clamp(22px,4vw,30px);margin-bottom:6px;position:relative;z-index:1}
+.student-hero p{color:#dbeafe;position:relative;z-index:1}
+.overall-progress{display:flex;align-items:center;gap:22px;margin-top:20px;position:relative;z-index:1}
+.progress-ring{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#34d399 var(--progress),rgba(255,255,255,.22) 0);flex-shrink:0}
+.progress-ring-inner{width:86px;height:86px;border-radius:50%;background:#075985;display:grid;place-items:center;text-align:center;font-size:24px;font-weight:900}
+.progress-ring-inner small{display:block;font-size:10px;font-weight:600;color:#dbeafe}
+.student-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.student-stat{background:white;border:1px solid var(--line);border-radius:16px;padding:16px;text-align:center;box-shadow:0 4px 12px rgba(15,23,42,.04)}
+.student-stat strong{display:block;font-size:clamp(20px,3vw,28px);color:#075985}
+.student-stat span{font-size:12px;color:var(--muted)}
+.public-subject-card{border:1px solid var(--line);border-radius:18px;padding:18px;background:white;margin:14px 0;box-shadow:0 5px 16px rgba(15,23,42,.04)}
+.public-subject-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.subject-percent{font-size:24px;font-weight:900;color:#075985}
+.public-progress{height:12px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:12px 0}
+.public-progress-fill{height:100%;background:linear-gradient(90deg,#0284c7,#34d399);border-radius:99px}
+.progress-caption{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.chapter-status-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.public-chapter{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:13px;margin:9px 0}
+.student-legend{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+@media(max-width:650px){.student-hero{padding:18px}.overall-progress{gap:14px}.progress-ring{width:94px;height:94px}.progress-ring-inner{width:72px;height:72px;font-size:20px}.student-stat-grid{grid-template-columns:1fr 1fr}.student-stat:last-child{grid-column:span 2}.public-subject-card{padding:14px}}
 
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:#1e293b;
-}
-
-header{
-  background:linear-gradient(135deg,#075985,#0e7490);
-  color:white;
-  padding:22px 15px;
-  text-align:center;
-}
-
-header h1{
-  font-size:24px;
-  margin-bottom:7px;
-}
-
-header p{
-  font-size:14px;
-}
-
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
-
-.card{
-  background:white;
-  border-radius:15px;
-  padding:20px;
-  box-shadow:0 4px 15px rgba(0,0,0,.07);
-  margin-bottom:20px;
-}
-
-.hidden{
-  display:none!important;
-}
-
-.login-box{
-  max-width:420px;
-  margin:30px auto;
-}
-
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  margin:8px 0;
-  border:1px solid #cbd5e1;
-  border-radius:8px;
-  font-size:16px;
-}
-
-button{
-  border:none;
-  padding:12px 18px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:15px;
-  font-weight:bold;
-}
-
-.primary-btn{
-  background:var(--primary);
-  color:white;
-}
-
-.primary-btn:hover{
-  background:var(--primary-dark);
-}
-
-.logout-btn{
-  background:#dc2626;
-  color:white;
-}
-
-.status{
-  padding:5px 10px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:bold;
-  display:inline-block;
-}
-
-.not-started{
-  background:#e2e8f0;
-  color:#475569;
-}
-
-.in-progress{
-  background:#fef3c7;
-  color:#92400e;
-}
-
-.completed{
-  background:#dcfce7;
-  color:#166534;
-}
-
-.subject-card{
-  border:1px solid #e2e8f0;
-  border-radius:12px;
-  padding:16px;
-  margin-bottom:15px;
-}
-
-.subject-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:12px;
-}
-
-.progress-bar{
-  height:12px;
-  background:#e2e8f0;
-  border-radius:20px;
-  overflow:hidden;
-  margin:10px 0;
-}
-
-.progress-fill{
-  height:100%;
-  background:linear-gradient(90deg,#16a34a,#22c55e);
-  transition:width .4s;
-}
-
-.chapter{
-  border:1px solid #e2e8f0;
-  border-radius:10px;
-  padding:14px;
-  margin:10px 0;
-}
-
-.chapter-title{
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.chapter-controls{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.chapter-controls select{
-  margin:0;
-}
-
-.remarks{
-  grid-column:1/-1;
-}
-
-.update-btn{
-  background:#16a34a;
-  color:white;
-}
-
-.small{
-  color:#64748b;
-  font-size:13px;
-}
-
-#message{
-  padding:12px;
-  border-radius:8px;
-  margin:10px 0;
-  display:none;
-}
-
-.success{
-  background:#dcfce7;
-  color:#166534;
-}
-
-.error{
-  background:#fee2e2;
-  color:#991b1b;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin:15px 0;
-}
-
-.stat{
-  background:#f8fafc;
-  padding:15px;
-  border-radius:10px;
-  text-align:center;
-}
-
-.stat strong{
-  display:block;
-  font-size:25px;
-  color:var(--primary);
-}
-
-@media(max-width:600px){
-  header h1{
-    font-size:20px;
-  }
-
-  .container{
-    padding:12px;
-  }
-
-  .card{
-    padding:15px;
-  }
-
-  .chapter-controls{
-    grid-template-columns:1fr;
-  }
-
-  .stats{
-    grid-template-columns:1fr;
-  }
-}
+@media(max-width:650px){header{padding:22px 15px}.container{padding:14px 10px}.card{padding:16px;border-radius:16px}.stats,.subject-summary{grid-template-columns:1fr 1fr}.chapter-controls{grid-template-columns:1fr}.save-all-btn{width:100%}.teacher-hero{padding:18px}.subject-card{padding:14px}}
 </style>
 </head>
 
@@ -262,12 +65,12 @@ button{
 
   <!-- PUBLIC SECTION -->
   <div class="card">
-    <h2>📊 सार्वजनिक पाठ्यक्रम प्रगति</h2>
-    <p class="small">
-      विद्यार्थी एवं अभिभावक सभी विषयों का पाठ्यक्रम पूरा होने की स्थिति देख सकते हैं।
-    </p>
-
-    <div id="publicStats" class="stats"></div>
+    <div class="student-hero">
+      <h2>🎓 विद्यार्थी पाठ्यक्रम डैशबोर्ड</h2>
+      <p>अपनी कक्षा 9 के सभी विषयों की प्रगति प्रतिशत में देखें।</p>
+      <div id="studentOverallHero"></div>
+    </div>
+    <div id="publicStats" class="student-stat-grid"></div>
 
     <div id="publicSubjects">
       <p>Loading syllabus...</p>
@@ -293,24 +96,22 @@ button{
     <div id="loginMessage"></div>
   </div>
 
-  <!-- TEACHER DASHBOARD -->
+  <!-- PROFESSIONAL TEACHER DASHBOARD -->
   <div id="teacherDashboard" class="hidden">
-
     <div class="card">
-      <div class="subject-header">
-        <div>
-          <h2>👨‍🏫 Teacher Dashboard</h2>
-          <p id="teacherName" class="small"></p>
+      <div class="teacher-hero">
+        <div class="dashboard-title">
+          <div><h2>👨‍🏫 Teacher Dashboard</h2><p id="teacherName">Welcome</p></div>
+          <button class="logout-btn" onclick="logoutTeacher()">🚪 Logout</button>
         </div>
-
-        <button class="logout-btn" onclick="logoutTeacher()">
-          Logout
-        </button>
       </div>
-
-      <div id="teacherSubjects"></div>
+      <div class="subject-picker">
+        <label for="teacherSubjectSelect">📚 Select Subject</label>
+        <select id="teacherSubjectSelect" onchange="renderSelectedSubject()"><option value="">-- Choose a subject --</option></select>
+        <p class="small">Choose a subject to manage only its chapters.</p>
+      </div>
+      <div id="teacherSubjectContent"></div>
     </div>
-
   </div>
 
 </div>
@@ -385,130 +186,88 @@ async function loadPublicData(){
 
 function renderPublicSubjects(data){
 
-  const subjects =
-  data.subjects || [];
-
+  const subjects = data.subjects || [];
   let totalChapters = 0;
   let completedChapters = 0;
+  let inProgressChapters = 0;
 
-  subjects.forEach(subject=>{
-
-    const chapters =
-    subject.chapters || [];
-
+  subjects.forEach(subject => {
+    const chapters = subject.chapters || [];
     totalChapters += chapters.length;
-
-    chapters.forEach(chapter=>{
-
-      if(chapter.status === "Completed"){
-        completedChapters++;
-      }
-
-    });
-
+    completedChapters += chapters.filter(c => c.status === "Completed").length;
+    inProgressChapters += chapters.filter(c => c.status === "In Progress").length;
   });
 
-  const percentage =
-  totalChapters ?
-  Math.round(completedChapters/totalChapters*100) : 0;
+  const pendingChapters = totalChapters - completedChapters - inProgressChapters;
+  const percentage = totalChapters ? Math.round(completedChapters / totalChapters * 100) : 0;
+
+  document.getElementById("studentOverallHero").innerHTML = `
+    <div class="overall-progress">
+      <div class="progress-ring" style="--progress:${percentage}%">
+        <div class="progress-ring-inner">${percentage}%<small>पूर्ण</small></div>
+      </div>
+      <div>
+        <h3 style="font-size:20px;margin-bottom:5px">पूरी कक्षा की प्रगति</h3>
+        <p>${completedChapters} में से ${totalChapters} अध्याय पूर्ण</p>
+        <p style="margin-top:5px">📈 पाठ्यक्रम पूरा होने की स्थिति</p>
+      </div>
+    </div>`;
 
   document.getElementById("publicStats").innerHTML = `
-    <div class="stat">
-      <strong>${subjects.length}</strong>
-      <span>Subjects</span>
-    </div>
-
-    <div class="stat">
-      <strong>${completedChapters}/${totalChapters}</strong>
-      <span>Completed Chapters</span>
-    </div>
-
-    <div class="stat">
-      <strong>${percentage}%</strong>
-      <span>Overall Progress</span>
-    </div>
+    <div class="student-stat"><strong>${subjects.length}</strong><span>📚 कुल विषय</span></div>
+    <div class="student-stat"><strong>${completedChapters}</strong><span>✅ पूर्ण अध्याय</span></div>
+    <div class="student-stat"><strong>${inProgressChapters}</strong><span>🟡 जारी अध्याय</span></div>
+    <div class="student-stat"><strong>${pendingChapters}</strong><span>⚪ बाकी अध्याय</span></div>
+    <div class="student-stat"><strong>${totalChapters}</strong><span>📖 कुल अध्याय</span></div>
+    <div class="student-stat"><strong>${percentage}%</strong><span>🏆 कुल प्रगति</span></div>
   `;
 
-  let html = "";
+  let html = `<div class="student-legend">
+    <span class="status completed">🟢 पूर्ण</span>
+    <span class="status in-progress">🟡 जारी</span>
+    <span class="status not-started">⚪ शुरू नहीं</span>
+  </div>`;
 
-  subjects.forEach(subject=>{
-
-    const chapters =
-    subject.chapters || [];
-
-    const completed =
-    chapters.filter(c=>c.status==="Completed").length;
-
-    const progress =
-    chapters.length ?
-    Math.round(completed/chapters.length*100) : 0;
+  subjects.forEach(subject => {
+    const chapters = subject.chapters || [];
+    const completed = chapters.filter(c => c.status === "Completed").length;
+    const inProgress = chapters.filter(c => c.status === "In Progress").length;
+    const pending = chapters.length - completed - inProgress;
+    const progress = chapters.length ? Math.round(completed / chapters.length * 100) : 0;
 
     html += `
-      <div class="subject-card">
-
-        <div class="subject-header">
-          <h3>${subject.subject}</h3>
-          <strong>${progress}%</strong>
+      <div class="public-subject-card">
+        <div class="public-subject-top">
+          <div><h3>📘 ${subject.subject}</h3><p class="small">${completed}/${chapters.length} अध्याय पूर्ण</p></div>
+          <div class="subject-percent">${progress}%</div>
         </div>
-
-        <div class="progress-bar">
-          <div class="progress-fill"
-               style="width:${progress}%"></div>
+        <div class="public-progress"><div class="public-progress-fill" style="width:${progress}%"></div></div>
+        <div class="progress-caption">
+          <span>✅ ${completed} पूर्ण</span>
+          <span>🟡 ${inProgress} जारी</span>
+          <span>⚪ ${pending} बाकी</span>
         </div>
-
-        <p class="small">
-          ${completed} / ${chapters.length} Chapters Completed
-        </p>
-
         <details>
-          <summary style="cursor:pointer;padding:10px">
-            📖 अध्याय सूची देखें
-          </summary>
-
-          <div style="margin-top:10px">
-
-            ${chapters.map(chapter=>`
-
-              <div class="chapter">
-
-                <div class="chapter-title">
-                  ${chapter.chapterNo || ""}.
-                  ${chapter.chapterName}
+          <summary>📖 अध्याय सूची और स्थिति देखें</summary>
+          <div style="margin-top:12px">
+            ${chapters.map(chapter => `
+              <div class="public-chapter">
+                <div class="chapter-status-row">
+                  <strong>${chapter.chapterNo || ""}. ${chapter.chapterName}</strong>
+                  <span class="status ${chapter.status==="Completed"?"completed":chapter.status==="In Progress"?"in-progress":"not-started"}">
+                    ${chapter.status==="Completed"?"🟢 पूर्ण":chapter.status==="In Progress"?"🟡 जारी":"⚪ शुरू नहीं"}
+                  </span>
                 </div>
-
-                <span class="status
-                  ${chapter.status==="Completed" ?
-                    "completed" :
-                    chapter.status==="In Progress" ?
-                    "in-progress" :
-                    "not-started"}">
-
-                  ${chapter.status || "Not Started"}
-
-                </span>
-
-                ${chapter.remarks ?
-                  `<p class="small" style="margin-top:8px">
-                    📝 ${chapter.remarks}
-                   </p>` : ""}
-
+                ${chapter.remarks ? `<p class="small" style="margin-top:8px">📝 ${chapter.remarks}</p>` : ""}
               </div>
-
             `).join("")}
-
           </div>
         </details>
-
-      </div>
-    `;
-
+      </div>`;
   });
 
-  document.getElementById("publicSubjects").innerHTML =
-  html || "<p>अभी पाठ्यक्रम उपलब्ध नहीं है।</p>";
-
+  document.getElementById("publicSubjects").innerHTML = html || "<p>अभी पाठ्यक्रम उपलब्ध नहीं है।</p>";
 }
-
 
 /* =========================
    TEACHER LOGIN
@@ -608,171 +367,93 @@ function showLoginMessage(message,success){
 
 
 /* =========================
-   TEACHER DASHBOARD
+   SUBJECT-BASED TEACHER DASHBOARD
 ========================= */
 
 function renderTeacherDashboard(){
-
   if(!syllabusData){
     loadPublicData().then(renderTeacherDashboard);
     return;
   }
-
-  const subjects =
-  syllabusData.subjects || [];
-
-  let html = "";
-
-  subjects.forEach(subject=>{
-
-    const chapters =
-    subject.chapters || [];
-
-    html += `
-      <div class="subject-card">
-
-        <h3>📚 ${subject.subject}</h3>
-
-        <div class="progress-bar">
-          <div class="progress-fill"
-               id="progress-${subject.subjectID}"
-               style="width:0%">
-          </div>
-        </div>
-
-        <div id="chapters-${subject.subjectID}">
-
-          ${chapters.map(chapter=>`
-
-            <div class="chapter">
-
-              <div class="chapter-title">
-                ${chapter.chapterNo || ""}.
-                ${chapter.chapterName}
-              </div>
-
-              <div class="chapter-controls">
-
-                <select id="status-${chapter.chapterID}">
-
-                  <option value="Not Started"
-                    ${chapter.status==="Not Started" ?
-                    "selected":""}>
-                    ⚪ Not Started
-                  </option>
-
-                  <option value="In Progress"
-                    ${chapter.status==="In Progress" ?
-                    "selected":""}>
-                    🟡 In Progress
-                  </option>
-
-                  <option value="Completed"
-                    ${chapter.status==="Completed" ?
-                    "selected":""}>
-                    🟢 Completed
-                  </option>
-
-                </select>
-
-                <input type="text"
-                       class="remarks"
-                       id="remarks-${chapter.chapterID}"
-                       placeholder="Remarks / टिप्पणी"
-                       value="${chapter.remarks || ""}">
-
-                <button class="update-btn"
-                        onclick="updateChapter(
-                          '${chapter.chapterID}',
-                          '${subject.subjectID}'
-                        )">
-                  💾 Update
-                </button>
-
-              </div>
-
-            </div>
-
-          `).join("")}
-
-        </div>
-
-      </div>
-    `;
-
-  });
-
-  document.getElementById("teacherSubjects").innerHTML =
-  html;
-
+  const subjects = syllabusData.subjects || [];
+  const select = document.getElementById("teacherSubjectSelect");
+  select.innerHTML = '<option value="">-- Choose a subject --</option>' +
+    subjects.map(s => `<option value="${s.subjectID}">${s.subject}</option>`).join("");
+  document.getElementById("teacherSubjectContent").innerHTML = `
+    <div class="card" style="text-align:center;background:#f8fafc">
+      <h3>📚 Select a subject to begin</h3><p class="small">Chapter status and remarks will appear here.</p>
+    </div>`;
 }
 
-
-/* =========================
-   UPDATE CHAPTER
-========================= */
-
-async function updateChapter(chapterID,subjectID){
-
-  const status =
-  document.getElementById("status-"+chapterID).value;
-
-  const remarks =
-  document.getElementById("remarks-"+chapterID).value;
-
-  if(!sessionToken){
-
-    alert("Session expired. Please login again.");
-
+function renderSelectedSubject(){
+  const subjectID = document.getElementById("teacherSubjectSelect").value;
+  const subject = (syllabusData.subjects || []).find(s => String(s.subjectID) === String(subjectID));
+  const target = document.getElementById("teacherSubjectContent");
+  if(!subject){
+    target.innerHTML = `<div class="card" style="text-align:center;background:#f8fafc"><h3>📚 Select a subject to begin</h3><p class="small">Chapter status and remarks will appear here.</p></div>`;
     return;
-
   }
-
-  try{
-
-    const response = await apiPost({
-
-      action:"update",
-
-      token:sessionToken,
-
-      chapterID:chapterID,
-
-      subjectID:subjectID,
-
-      status:status,
-
-      remarks:remarks
-
-    });
-
-    if(response.success){
-
-      alert("✅ Syllabus updated successfully!");
-
-      await loadPublicData();
-
-      renderTeacherDashboard();
-
-    }else{
-
-      alert(
-        "❌ Update failed: "+
-        (response.message || "Unknown error")
-      );
-
-    }
-
-  }catch(error){
-
-    alert(
-      "Server error. Please try again."
-    );
-
-  }
-
+  const chapters = subject.chapters || [];
+  const completed = chapters.filter(c => c.status === "Completed").length;
+  const inProgress = chapters.filter(c => c.status === "In Progress").length;
+  const pending = chapters.length - completed - inProgress;
+  const pct = chapters.length ? Math.round(completed / chapters.length * 100) : 0;
+  target.innerHTML = `
+    <div class="subject-card">
+      <div class="subject-header"><div><h2>📖 ${subject.subject}</h2><p class="small">Manage chapter-wise syllabus progress</p></div><span class="status completed">${pct}% Completed</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="subject-summary">
+        <div class="summary-pill"><strong>${completed}</strong><span class="small">Completed</span></div>
+        <div class="summary-pill"><strong>${inProgress}</strong><span class="small">In Progress</span></div>
+        <div class="summary-pill"><strong>${pending}</strong><span class="small">Not Started</span></div>
+      </div>
+      <div class="chapter-list">
+        ${chapters.map(chapter => `
+          <div class="chapter">
+            <div class="chapter-title">${chapter.chapterNo || ""}. ${chapter.chapterName}</div>
+            <div class="chapter-controls">
+              <select id="status-${chapter.chapterID}">
+                <option value="Not Started" ${chapter.status==="Not Started"?"selected":""}>⚪ Not Started</option>
+                <option value="In Progress" ${chapter.status==="In Progress"?"selected":""}>🟡 In Progress</option>
+                <option value="Completed" ${chapter.status==="Completed"?"selected":""}>🟢 Completed</option>
+              </select>
+              <input type="text" id="remarks-${chapter.chapterID}" placeholder="Remarks / टिप्पणी" value="${(chapter.remarks || "").replace(/"/g,"&quot;")}">
+            </div>
+          </div>`).join("")}
+      </div>
+      <div class="save-bar"><div><strong>💾 Save subject updates</strong><p class="small">All chapter changes for this subject will be saved.</p></div><button class="save-all-btn" id="saveSubjectBtn" onclick="updateSelectedSubject('${subject.subjectID}')">💾 Update Selected Subject</button></div>
+      <div id="subjectSaveMessage"></div>
+    </div>`;
 }
 
+async function updateSelectedSubject(subjectID){
+  if(!sessionToken){alert("Session expired. Please login again.");return;}
+  const subject = (syllabusData.subjects || []).find(s => String(s.subjectID) === String(subjectID));
+  if(!subject)return;
+  const chapters = subject.chapters || [];
+  const button = document.getElementById("saveSubjectBtn");
+  const message = document.getElementById("subjectSaveMessage");
+  button.disabled = true;button.textContent = "⏳ Saving changes...";
+  message.style.display = "block";message.className = "success";message.textContent = "Please wait. Saving chapter updates...";
+  try{
+    for(const chapter of chapters){
+      const status = document.getElementById("status-" + chapter.chapterID).value;
+      const remarks = document.getElementById("remarks-" + chapter.chapterID).value;
+      const response = await apiPost({action:"update",token:sessionToken,chapterID:chapter.chapterID,subjectID:subjectID,status:status,remarks:remarks});
+      if(!response.success)throw new Error(response.message || "Update failed");
+    }
+    await loadPublicData();
+    document.getElementById("teacherSubjectSelect").value = subjectID;
+    renderSelectedSubject();
+    const msg = document.getElementById("subjectSaveMessage");
+    msg.style.display = "block";msg.className = "success";msg.textContent = "✅ सभी अध्यायों की प्रगति सफलतापूर्वक अपडेट हो गई!";
+  }catch(error){
+    message.className = "error";message.textContent = "❌ अपडेट नहीं हो सका: " + (error.message || "कृपया पुनः प्रयास करें।");
+  }finally{
+    const btn = document.getElementById("saveSubjectBtn");
+    if(btn){btn.disabled=false;btn.textContent="💾 Update Selected Subject";}
+  }
+}
 
 /* =========================
    LOGOUT
