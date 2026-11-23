@@ -9,7 +9,6 @@
 <script src="https://unpkg.com/html5-qrcode"></script>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -75,6 +74,15 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    opacity: 0.9;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .primary {
     background: #2563eb;
     color: white;
@@ -93,10 +101,6 @@ button {
 .secondary {
     background: #64748b;
     color: white;
-}
-
-button:hover {
-    opacity: 0.9;
 }
 
 .dashboard {
@@ -140,6 +144,7 @@ button:hover {
 
 #reader video {
     border-radius: 12px;
+    object-fit: cover;
 }
 
 .student-result {
@@ -161,6 +166,7 @@ button:hover {
     border-radius: 10px;
     margin-top: 15px;
     font-weight: bold;
+    overflow-wrap: anywhere;
 }
 
 .present {
@@ -176,6 +182,21 @@ button:hover {
 .error {
     background: #fee2e2;
     color: #991b1b;
+}
+
+.info {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.status-box {
+    padding: 12px;
+    background: #e0f2fe;
+    color: #075985;
+    border-radius: 10px;
+    margin-top: 12px;
+    font-size: 14px;
+    overflow-wrap: anywhere;
 }
 
 table {
@@ -209,6 +230,10 @@ th {
     margin-bottom: 15px;
 }
 
+#connectionStatus {
+    margin-bottom: 15px;
+}
+
 @media(max-width:768px) {
 
     .dashboard {
@@ -231,19 +256,22 @@ th {
         font-size: 20px;
     }
 
-}
+    .stat strong {
+        font-size: 25px;
+    }
 
+    button {
+        padding: 12px 15px;
+    }
+}
 </style>
 </head>
 
 <body>
 
 <header class="header">
-
     <h1>📷 UHS CHAKIYA TARARI</h1>
-
     <p>Class 10 Barcode Attendance System</p>
-
 </header>
 
 <div class="container">
@@ -279,7 +307,7 @@ th {
 
     <div class="actions">
 
-        <button class="success" onclick="startCamera()">
+        <button class="success" id="startCameraButton" onclick="startCamera()">
             📷 Start Camera
         </button>
 
@@ -297,6 +325,9 @@ th {
 
     </div>
 
+    <div id="connectionStatus" class="status-box">
+        Backend connection pending...
+    </div>
 
     <!-- STATS -->
 
@@ -324,7 +355,6 @@ th {
 
     </div>
 
-
     <!-- SCANNER -->
 
     <div class="scanner-layout">
@@ -335,12 +365,15 @@ th {
 
             <div id="reader"></div>
 
+            <div id="scannerStatus" class="status-box">
+                Camera is stopped.
+            </div>
+
             <p style="text-align:center">
-                Point the camera at the student's barcode.
+                Point the camera at the student's Code 128 barcode.
             </p>
 
         </div>
-
 
         <!-- RESULT -->
 
@@ -351,14 +384,12 @@ th {
             <h2>Ready to Scan</h2>
 
             <p>
-                Student details will appear here
-                after scanning the barcode.
+                Student details will appear here after scanning.
             </p>
 
         </div>
 
     </div>
-
 
     <!-- TODAY ATTENDANCE -->
 
@@ -371,7 +402,6 @@ th {
             <table>
 
                 <thead>
-
                     <tr>
                         <th>Roll</th>
                         <th>Name</th>
@@ -379,11 +409,9 @@ th {
                         <th>Time</th>
                         <th>Status</th>
                     </tr>
-
                 </thead>
 
                 <tbody id="attendanceTable">
-
                 </tbody>
 
             </table>
@@ -412,13 +440,15 @@ let scanner = null;
 
 let scanning = false;
 
+let processingScan = false;
+
 let lastBarcode = "";
 
 let lastScanTime = 0;
 
 
 /****************************************************
- * JSONP API
+ * API CONNECTION - JSONP
  ****************************************************/
 
 function callAPI(action, params = {}) {
@@ -426,8 +456,10 @@ function callAPI(action, params = {}) {
     return new Promise((resolve, reject) => {
 
         const callbackName =
-            "callback_" + Date.now() + "_" +
-            Math.floor(Math.random() * 100000);
+            "callback_" +
+            Date.now() +
+            "_" +
+            Math.floor(Math.random() * 1000000);
 
         const script = document.createElement("script");
 
@@ -438,7 +470,30 @@ function callAPI(action, params = {}) {
             ...params
         });
 
+        let completed = false;
+
+        const timeout = setTimeout(() => {
+
+            if (completed) return;
+
+            completed = true;
+
+            delete window[callbackName];
+
+            script.remove();
+
+            reject(new Error("API request timed out"));
+
+        }, 15000);
+
+
         window[callbackName] = function(response) {
+
+            if (completed) return;
+
+            completed = true;
+
+            clearTimeout(timeout);
 
             resolve(response);
 
@@ -448,15 +503,23 @@ function callAPI(action, params = {}) {
 
         };
 
+
         script.onerror = function() {
 
-            reject(new Error("API connection failed"));
+            if (completed) return;
+
+            completed = true;
+
+            clearTimeout(timeout);
 
             delete window[callbackName];
 
             script.remove();
 
+            reject(new Error("API connection failed"));
+
         };
+
 
         script.src = API_URL + "?" + query.toString();
 
@@ -478,13 +541,16 @@ async function login() {
 
     if (!pin) {
 
-        showLoginMessage("Please enter Teacher PIN.", "error");
+        showLoginMessage(
+            "Please enter Teacher PIN.",
+            "error"
+        );
 
         return;
 
     }
 
-    showLoginMessage("Logging in...", "");
+    showLoginMessage("Connecting to server...", "info");
 
     try {
 
@@ -492,9 +558,14 @@ async function login() {
             pin: pin
         });
 
-        if (!response.success) {
+        console.log("LOGIN RESPONSE:", response);
 
-            showLoginMessage(response.message, "error");
+        if (!response || !response.success) {
+
+            showLoginMessage(
+                response?.message || "Login failed.",
+                "error"
+            );
 
             return;
 
@@ -508,14 +579,19 @@ async function login() {
         document.getElementById("dashboardSection")
             .classList.remove("hidden");
 
+        document.getElementById("connectionStatus")
+            .innerHTML = "🟢 Connected to Google Apps Script backend.";
+
         refreshData();
 
     }
 
     catch(error) {
 
+        console.error("LOGIN ERROR:", error);
+
         showLoginMessage(
-            "Connection error. Please try again.",
+            "Backend connection failed: " + error.message,
             "error"
         );
 
@@ -540,46 +616,102 @@ async function startCamera() {
 
     if (scanning) return;
 
+    if (typeof Html5Qrcode === "undefined") {
+
+        showScannerStatus(
+            "Scanner library failed to load. Check internet connection.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const startButton =
+        document.getElementById("startCameraButton");
+
+    startButton.disabled = true;
+
+    showScannerStatus("Starting camera...", "info");
+
     try {
 
         scanner = new Html5Qrcode("reader");
 
-        scanning = true;
+        const config = {
+
+            fps: 15,
+
+            qrbox: function(viewfinderWidth, viewfinderHeight) {
+
+                const width = Math.min(
+                    viewfinderWidth * 0.85,
+                    350
+                );
+
+                const height = Math.min(
+                    viewfinderHeight * 0.35,
+                    180
+                );
+
+                return {
+                    width: width,
+                    height: height
+                };
+
+            },
+
+            formatsToSupport: [
+                Html5QrcodeSupportedFormats.CODE_128,
+                Html5QrcodeSupportedFormats.CODE_39,
+                Html5QrcodeSupportedFormats.EAN_13,
+                Html5QrcodeSupportedFormats.EAN_8,
+                Html5QrcodeSupportedFormats.QR_CODE
+            ],
+
+            rememberLastUsedCamera: true,
+
+            showTorchButtonIfSupported: true
+
+        };
+
 
         await scanner.start(
 
             { facingMode: "environment" },
 
-            {
-                fps: 10,
-
-                qrbox: {
-                    width: 280,
-                    height: 150
-                },
-
-                formatsToSupport: [
-                    Html5QrcodeSupportedFormats.CODE_128
-                ]
-
-            },
+            config,
 
             onBarcodeDetected,
 
-            function() {}
+            function(errorMessage) {
+                // Normal scanning errors are ignored.
+            }
 
+        );
+
+
+        scanning = true;
+
+        startButton.disabled = false;
+
+        showScannerStatus(
+            "🟢 Camera is active. Point at the barcode.",
+            "present"
         );
 
     }
 
     catch(error) {
 
+        console.error("CAMERA ERROR:", error);
+
         scanning = false;
 
-        showResult(
-            "Camera Error",
-            "📷",
-            "Camera could not start. Allow camera permission and use HTTPS.",
+        startButton.disabled = false;
+
+        showScannerStatus(
+            "Camera could not start: " + error.message,
             "error"
         );
 
@@ -587,6 +719,10 @@ async function startCamera() {
 
 }
 
+
+/****************************************************
+ * STOP CAMERA
+ ****************************************************/
 
 async function stopCamera() {
 
@@ -596,15 +732,31 @@ async function stopCamera() {
 
             await scanner.stop();
 
-            scanner.clear();
+            await scanner.clear();
 
         }
 
-        catch(error) {}
+        catch(error) {
+
+            console.log("Camera stop:", error);
+
+        }
 
     }
 
+    scanner = null;
+
     scanning = false;
+
+    processingScan = false;
+
+    document.getElementById("startCameraButton")
+        .disabled = false;
+
+    showScannerStatus(
+        "Camera stopped.",
+        "info"
+    );
 
 }
 
@@ -613,25 +765,38 @@ async function stopCamera() {
  * BARCODE DETECTION
  ****************************************************/
 
-async function onBarcodeDetected(barcode) {
+async function onBarcodeDetected(decodedText, decodedResult) {
+
+    const barcode = String(decodedText || "").trim();
+
+    if (!barcode) return;
 
     const now = Date.now();
 
-    barcode = String(barcode).trim();
+    // Prevent repeated scans
+    if (processingScan) return;
 
-    // Prevent repeated rapid scanning
     if (
         barcode === lastBarcode &&
-        now - lastScanTime < 4000
+        now - lastScanTime < 5000
     ) {
 
         return;
 
     }
 
+    processingScan = true;
+
     lastBarcode = barcode;
 
     lastScanTime = now;
+
+    console.log("BARCODE DETECTED:", barcode);
+
+    showScannerStatus(
+        "Barcode detected: " + barcode,
+        "info"
+    );
 
     await markAttendance(barcode);
 
@@ -645,10 +810,14 @@ async function onBarcodeDetected(barcode) {
 async function markAttendance(barcode) {
 
     showResult(
-        "Scanning...",
+        "Barcode Detected",
         "🔍",
-        "Checking student barcode...",
-        ""
+        `
+        <strong>Student ID:</strong><br>
+        ${escapeHTML(barcode)}<br><br>
+        Checking Google Sheets...
+        `,
+        "info"
     );
 
     try {
@@ -661,12 +830,21 @@ async function markAttendance(barcode) {
 
         });
 
-        if (!response.success) {
+        console.log("SCAN API RESPONSE:", response);
+
+
+        if (!response || !response.success) {
 
             showResult(
                 "Scan Failed",
                 "❌",
-                response.message,
+                response?.message ||
+                "Backend did not return a successful response.",
+                "error"
+            );
+
+            showScannerStatus(
+                "Backend returned an error.",
                 "error"
             );
 
@@ -674,7 +852,9 @@ async function markAttendance(barcode) {
 
         }
 
-        const student = response.student;
+
+        const student = response.student || {};
+
 
         if (response.duplicate) {
 
@@ -685,13 +865,15 @@ async function markAttendance(barcode) {
                 "⚠️",
 
                 `
-                <h3>${student.studentName}</h3>
+                <h3>${escapeHTML(student.studentName || "Student")}</h3>
 
-                <p>Roll No: ${student.rollNo}</p>
+                <p><strong>Student ID:</strong> ${escapeHTML(barcode)}</p>
 
-                <p>Section: ${student.section}</p>
+                <p><strong>Roll No:</strong> ${escapeHTML(student.rollNo || "")}</p>
 
-                <p>${response.message}</p>
+                <p><strong>Section:</strong> ${escapeHTML(student.section || "")}</p>
+
+                <p>${escapeHTML(response.message || "Attendance already recorded.")}</p>
                 `,
 
                 "duplicate"
@@ -704,20 +886,22 @@ async function markAttendance(barcode) {
 
             showResult(
 
-                "Attendance Marked",
+                "ATTENDANCE MARKED",
 
                 "✅",
 
                 `
-                <h2>${student.studentName}</h2>
+                <h2>${escapeHTML(student.studentName || "Student")}</h2>
 
-                <p><strong>Roll No:</strong> ${student.rollNo}</p>
+                <p><strong>Student ID:</strong> ${escapeHTML(barcode)}</p>
 
-                <p><strong>Section:</strong> ${student.section}</p>
+                <p><strong>Roll No:</strong> ${escapeHTML(student.rollNo || "")}</p>
 
-                <p><strong>Time:</strong> ${response.scanTime}</p>
+                <p><strong>Section:</strong> ${escapeHTML(student.section || "")}</p>
 
-                <p>Attendance marked successfully!</p>
+                <p><strong>Time:</strong> ${escapeHTML(response.scanTime || "")}</p>
+
+                <h3>✅ Attendance marked successfully!</h3>
                 `,
 
                 "present"
@@ -726,18 +910,47 @@ async function markAttendance(barcode) {
 
         }
 
-        refreshData();
+
+        showScannerStatus(
+            "Successfully processed: " + barcode,
+            "present"
+        );
+
+
+        await refreshData();
 
     }
 
     catch(error) {
 
+        console.error("ATTENDANCE API ERROR:", error);
+
         showResult(
-            "Error",
+            "Backend Connection Error",
             "❌",
-            "Unable to connect to attendance server.",
+            `
+            <strong>Barcode:</strong> ${escapeHTML(barcode)}<br><br>
+            ${escapeHTML(error.message)}<br><br>
+            Please check your Google Apps Script deployment.
+            `,
             "error"
         );
+
+        showScannerStatus(
+            "Could not connect to Google Apps Script.",
+            "error"
+        );
+
+    }
+
+    finally {
+
+        // Allow next barcode after processing
+        setTimeout(function() {
+
+            processingScan = false;
+
+        }, 2000);
 
     }
 
@@ -765,6 +978,30 @@ function showResult(title, icon, message, type) {
 }
 
 
+function showScannerStatus(message, type) {
+
+    document.getElementById("scannerStatus").innerHTML =
+        `<div class="result-message ${type}">${message}</div>`;
+
+}
+
+
+/****************************************************
+ * SAFE HTML
+ ****************************************************/
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
 /****************************************************
  * REFRESH DASHBOARD
  ****************************************************/
@@ -779,21 +1016,25 @@ async function refreshData() {
 
         });
 
-        if (summary.success) {
+        console.log("SUMMARY RESPONSE:", summary);
+
+
+        if (summary && summary.success) {
 
             document.getElementById("totalStudents")
-                .textContent = summary.totalStudents;
+                .textContent = summary.totalStudents ?? 0;
 
             document.getElementById("presentToday")
-                .textContent = summary.present;
+                .textContent = summary.present ?? 0;
 
             document.getElementById("absentToday")
-                .textContent = summary.absent;
+                .textContent = summary.absent ?? 0;
 
             document.getElementById("percentage")
-                .textContent = summary.percentage + "%";
+                .textContent = (summary.percentage ?? 0) + "%";
 
         }
+
 
         const attendance = await callAPI("attendance", {
 
@@ -801,9 +1042,12 @@ async function refreshData() {
 
         });
 
-        if (attendance.success) {
+        console.log("ATTENDANCE RESPONSE:", attendance);
 
-            renderAttendance(attendance.attendance);
+
+        if (attendance && attendance.success) {
+
+            renderAttendance(attendance.attendance || []);
 
         }
 
@@ -811,7 +1055,11 @@ async function refreshData() {
 
     catch(error) {
 
-        console.error(error);
+        console.error("REFRESH ERROR:", error);
+
+        document.getElementById("connectionStatus")
+            .innerHTML =
+            "🔴 Backend error: " + escapeHTML(error.message);
 
     }
 
@@ -845,13 +1093,13 @@ function renderAttendance(data) {
 
         <tr>
 
-            <td>${student.rollNo}</td>
+            <td>${escapeHTML(student.rollNo)}</td>
 
-            <td>${student.studentName}</td>
+            <td>${escapeHTML(student.studentName)}</td>
 
-            <td>${student.section}</td>
+            <td>${escapeHTML(student.section)}</td>
 
-            <td>${student.scanTime}</td>
+            <td>${escapeHTML(student.scanTime)}</td>
 
             <td>
                 <span style="
@@ -861,7 +1109,7 @@ function renderAttendance(data) {
                     border-radius:20px;
                     font-weight:bold;
                 ">
-                    ${student.status}
+                    ${escapeHTML(student.status)}
                 </span>
             </td>
 
@@ -882,11 +1130,21 @@ async function logout() {
 
     if (teacherToken) {
 
-        callAPI("logout", {
+        try {
 
-            token: teacherToken
+            await callAPI("logout", {
 
-        });
+                token: teacherToken
+
+            });
+
+        }
+
+        catch(error) {
+
+            console.log("Logout API:", error);
+
+        }
 
     }
 
@@ -899,6 +1157,8 @@ async function logout() {
         .classList.remove("hidden");
 
     document.getElementById("teacherPIN").value = "";
+
+    document.getElementById("loginMessage").innerHTML = "";
 
 }
 
