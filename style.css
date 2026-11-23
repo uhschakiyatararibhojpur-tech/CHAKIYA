@@ -4307,3 +4307,15 @@ body {
     }
 
 }
+/* ADMIT CARD DROPDOWN */
+#admitCardDropdown {
+    position: relative;
+}
+
+#admitCardMenu {
+    display: none;
+}
+
+#admitCardDropdown.active #admitCardMenu {
+    display: block;
+}
