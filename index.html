@@ -1124,43 +1124,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
-    <!-- YOUR EXISTING WEBSITE CODE -->
-
-
-<!-- ADMIT CARD DROPDOWN JAVASCRIPT -->
+    
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    const admitCardDropdown = document.getElementById("admitCardDropdown");
-    const admitCardToggle = document.getElementById("admitCardToggle");
-    const admitCardMenu = document.getElementById("admitCardMenu");
+    const dropdown = document.getElementById("admitCardDropdown");
+    const toggle = document.getElementById("admitCardToggle");
+    const menu = document.getElementById("admitCardMenu");
 
-    if (admitCardDropdown && admitCardToggle && admitCardMenu) {
+    if (!dropdown || !toggle || !menu) return;
 
-        admitCardToggle.addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
+    toggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
 
-            admitCardDropdown.classList.toggle("active");
+        dropdown.classList.toggle("open");
 
-            const isOpen = admitCardDropdown.classList.contains("active");
+        const isOpen = dropdown.classList.contains("open");
 
-            admitCardToggle.setAttribute("aria-expanded", isOpen);
-        });
+        toggle.setAttribute("aria-expanded", isOpen);
+    });
 
-        document.addEventListener("click", function (event) {
-            if (!admitCardDropdown.contains(event.target)) {
-                admitCardDropdown.classList.remove("active");
-                admitCardToggle.setAttribute("aria-expanded", "false");
-            }
-        });
+    menu.addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
 
-    }
+    document.addEventListener("click", function (e) {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+        }
+    });
 
 });
 </script>
 
-</body>
-</html>
 </body>
 </html>
