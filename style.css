@@ -4307,15 +4307,47 @@ body {
     }
 
 }
-/* ADMIT CARD DROPDOWN */
+/* ADMIT CARD DROPDOWN - DESKTOP & MOBILE */
 #admitCardDropdown {
     position: relative;
 }
 
 #admitCardMenu {
     display: none;
+    position: absolute;
+    z-index: 9999;
 }
 
 #admitCardDropdown.active #admitCardMenu {
     display: block;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+
+    #admitCardDropdown {
+        width: 100%;
+    }
+
+    #admitCardToggle {
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    #admitCardMenu {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    #admitCardDropdown.active #admitCardMenu {
+        display: block;
+    }
+
+    #admitCardMenu .dropdown-option {
+        display: block;
+        width: 100%;
+        padding: 12px 15px;
+    }
 }
