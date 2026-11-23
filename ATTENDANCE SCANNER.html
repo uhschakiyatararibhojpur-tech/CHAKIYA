@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UHS CHAKIYA Attendance Scanner</title>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #123c69;
+}
+
+.header {
+    background: linear-gradient(135deg, #123c69, #0f766e);
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.header p {
+    margin: 8px 0 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.login-box {
+    max-width: 450px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    margin: 12px 0;
+}
+
+button {
+    border: none;
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.primary {
+    background: #2563eb;
+    color: white;
+}
+
+.success {
+    background: #0f766e;
+    color: white;
+}
+
+.danger {
+    background: #dc2626;
+    color: white;
+}
+
+.secondary {
+    background: #64748b;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+}
+
+.stat h3 {
+    margin: 0;
+    color: #64748b;
+    font-size: 15px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 30px;
+    margin-top: 10px;
+    color: #0f766e;
+}
+
+.scanner-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+#reader {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#reader video {
+    border-radius: 12px;
+}
+
+.student-result {
+    text-align: center;
+    padding: 30px 15px;
+    min-height: 300px;
+}
+
+.student-result h2 {
+    color: #123c69;
+}
+
+.result-icon {
+    font-size: 65px;
+}
+
+.result-message {
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.present {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.duplicate {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    background: #123c69;
+    color: white;
+}
+
+.attendance-table {
+    overflow-x: auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+@media(max-width:768px) {
+
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .scanner-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <h1>📷 UHS CHAKIYA TARARI</h1>
+
+    <p>Class 10 Barcode Attendance System</p>
+
+</header>
+
+<div class="container">
+
+<!-- LOGIN -->
+
+<div id="loginSection" class="card login-box">
+
+    <div style="font-size:60px">🔐</div>
+
+    <h2>Teacher Login</h2>
+
+    <p>Enter Teacher PIN to access Attendance Scanner</p>
+
+    <input
+        type="password"
+        id="teacherPIN"
+        placeholder="Enter Teacher PIN"
+        maxlength="10">
+
+    <button class="primary" onclick="login()">
+        Login
+    </button>
+
+    <div id="loginMessage"></div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div id="dashboardSection" class="hidden">
+
+    <div class="actions">
+
+        <button class="success" onclick="startCamera()">
+            📷 Start Camera
+        </button>
+
+        <button class="danger" onclick="stopCamera()">
+            ⏹ Stop Camera
+        </button>
+
+        <button class="primary" onclick="refreshData()">
+            🔄 Refresh
+        </button>
+
+        <button class="secondary" onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="dashboard">
+
+        <div class="stat">
+            <h3>Total Students</h3>
+            <strong id="totalStudents">0</strong>
+        </div>
+
+        <div class="stat">
+            <h3>Present Today</h3>
+            <strong id="presentToday">0</strong>
+        </div>
+
+        <div class="stat">
+            <h3>Absent Today</h3>
+            <strong id="absentToday">0</strong>
+        </div>
+
+        <div class="stat">
+            <h3>Attendance</h3>
+            <strong id="percentage">0%</strong>
+        </div>
+
+    </div>
+
+
+    <!-- SCANNER -->
+
+    <div class="scanner-layout">
+
+        <div class="card">
+
+            <h2>📷 Barcode Scanner</h2>
+
+            <div id="reader"></div>
+
+            <p style="text-align:center">
+                Point the camera at the student's barcode.
+            </p>
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        <div class="card student-result" id="resultBox">
+
+            <div class="result-icon">🎫</div>
+
+            <h2>Ready to Scan</h2>
+
+            <p>
+                Student details will appear here
+                after scanning the barcode.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- TODAY ATTENDANCE -->
+
+    <div class="card">
+
+        <h2>📊 Today's Scanned Students</h2>
+
+        <div class="attendance-table">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Roll</th>
+                        <th>Name</th>
+                        <th>Section</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="attendanceTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/****************************************************
+ * CONFIGURATION
+ ****************************************************/
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbyBuEqnJMVXfWdoq6esSfTAmn43rYWDZS7ViSb9P7tdGo4sT7DTfpUStnr8Q5UR3NZI/exec";
+
+let teacherToken = "";
+
+let scanner = null;
+
+let scanning = false;
+
+let lastBarcode = "";
+
+let lastScanTime = 0;
+
+
+/****************************************************
+ * JSONP API
+ ****************************************************/
+
+function callAPI(action, params = {}) {
+
+    return new Promise((resolve, reject) => {
+
+        const callbackName =
+            "callback_" + Date.now() + "_" +
+            Math.floor(Math.random() * 100000);
+
+        const script = document.createElement("script");
+
+        const query = new URLSearchParams({
+            api: "1",
+            action: action,
+            callback: callbackName,
+            ...params
+        });
+
+        window[callbackName] = function(response) {
+
+            resolve(response);
+
+            delete window[callbackName];
+
+            script.remove();
+
+        };
+
+        script.onerror = function() {
+
+            reject(new Error("API connection failed"));
+
+            delete window[callbackName];
+
+            script.remove();
+
+        };
+
+        script.src = API_URL + "?" + query.toString();
+
+        document.body.appendChild(script);
+
+    });
+
+}
+
+
+/****************************************************
+ * LOGIN
+ ****************************************************/
+
+async function login() {
+
+    const pin =
+        document.getElementById("teacherPIN").value.trim();
+
+    if (!pin) {
+
+        showLoginMessage("Please enter Teacher PIN.", "error");
+
+        return;
+
+    }
+
+    showLoginMessage("Logging in...", "");
+
+    try {
+
+        const response = await callAPI("login", {
+            pin: pin
+        });
+
+        if (!response.success) {
+
+            showLoginMessage(response.message, "error");
+
+            return;
+
+        }
+
+        teacherToken = response.token;
+
+        document.getElementById("loginSection")
+            .classList.add("hidden");
+
+        document.getElementById("dashboardSection")
+            .classList.remove("hidden");
+
+        refreshData();
+
+    }
+
+    catch(error) {
+
+        showLoginMessage(
+            "Connection error. Please try again.",
+            "error"
+        );
+
+    }
+
+}
+
+
+function showLoginMessage(message, type) {
+
+    document.getElementById("loginMessage").innerHTML =
+        `<div class="result-message ${type}">${message}</div>`;
+
+}
+
+
+/****************************************************
+ * CAMERA
+ ****************************************************/
+
+async function startCamera() {
+
+    if (scanning) return;
+
+    try {
+
+        scanner = new Html5Qrcode("reader");
+
+        scanning = true;
+
+        await scanner.start(
+
+            { facingMode: "environment" },
+
+            {
+                fps: 10,
+
+                qrbox: {
+                    width: 280,
+                    height: 150
+                },
+
+                formatsToSupport: [
+                    Html5QrcodeSupportedFormats.CODE_128
+                ]
+
+            },
+
+            onBarcodeDetected,
+
+            function() {}
+
+        );
+
+    }
+
+    catch(error) {
+
+        scanning = false;
+
+        showResult(
+            "Camera Error",
+            "📷",
+            "Camera could not start. Allow camera permission and use HTTPS.",
+            "error"
+        );
+
+    }
+
+}
+
+
+async function stopCamera() {
+
+    if (scanner && scanning) {
+
+        try {
+
+            await scanner.stop();
+
+            scanner.clear();
+
+        }
+
+        catch(error) {}
+
+    }
+
+    scanning = false;
+
+}
+
+
+/****************************************************
+ * BARCODE DETECTION
+ ****************************************************/
+
+async function onBarcodeDetected(barcode) {
+
+    const now = Date.now();
+
+    barcode = String(barcode).trim();
+
+    // Prevent repeated rapid scanning
+    if (
+        barcode === lastBarcode &&
+        now - lastScanTime < 4000
+    ) {
+
+        return;
+
+    }
+
+    lastBarcode = barcode;
+
+    lastScanTime = now;
+
+    await markAttendance(barcode);
+
+}
+
+
+/****************************************************
+ * MARK ATTENDANCE
+ ****************************************************/
+
+async function markAttendance(barcode) {
+
+    showResult(
+        "Scanning...",
+        "🔍",
+        "Checking student barcode...",
+        ""
+    );
+
+    try {
+
+        const response = await callAPI("scan", {
+
+            token: teacherToken,
+
+            barcode: barcode
+
+        });
+
+        if (!response.success) {
+
+            showResult(
+                "Scan Failed",
+                "❌",
+                response.message,
+                "error"
+            );
+
+            return;
+
+        }
+
+        const student = response.student;
+
+        if (response.duplicate) {
+
+            showResult(
+
+                "Already Present",
+
+                "⚠️",
+
+                `
+                <h3>${student.studentName}</h3>
+
+                <p>Roll No: ${student.rollNo}</p>
+
+                <p>Section: ${student.section}</p>
+
+                <p>${response.message}</p>
+                `,
+
+                "duplicate"
+
+            );
+
+        }
+
+        else {
+
+            showResult(
+
+                "Attendance Marked",
+
+                "✅",
+
+                `
+                <h2>${student.studentName}</h2>
+
+                <p><strong>Roll No:</strong> ${student.rollNo}</p>
+
+                <p><strong>Section:</strong> ${student.section}</p>
+
+                <p><strong>Time:</strong> ${response.scanTime}</p>
+
+                <p>Attendance marked successfully!</p>
+                `,
+
+                "present"
+
+            );
+
+        }
+
+        refreshData();
+
+    }
+
+    catch(error) {
+
+        showResult(
+            "Error",
+            "❌",
+            "Unable to connect to attendance server.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/****************************************************
+ * RESULT DISPLAY
+ ****************************************************/
+
+function showResult(title, icon, message, type) {
+
+    document.getElementById("resultBox").innerHTML = `
+
+        <div class="result-icon">${icon}</div>
+
+        <h2>${title}</h2>
+
+        <div class="result-message ${type}">
+            ${message}
+        </div>
+
+    `;
+
+}
+
+
+/****************************************************
+ * REFRESH DASHBOARD
+ ****************************************************/
+
+async function refreshData() {
+
+    try {
+
+        const summary = await callAPI("summary", {
+
+            token: teacherToken
+
+        });
+
+        if (summary.success) {
+
+            document.getElementById("totalStudents")
+                .textContent = summary.totalStudents;
+
+            document.getElementById("presentToday")
+                .textContent = summary.present;
+
+            document.getElementById("absentToday")
+                .textContent = summary.absent;
+
+            document.getElementById("percentage")
+                .textContent = summary.percentage + "%";
+
+        }
+
+        const attendance = await callAPI("attendance", {
+
+            token: teacherToken
+
+        });
+
+        if (attendance.success) {
+
+            renderAttendance(attendance.attendance);
+
+        }
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+    }
+
+}
+
+
+/****************************************************
+ * ATTENDANCE TABLE
+ ****************************************************/
+
+function renderAttendance(data) {
+
+    const table =
+        document.getElementById("attendanceTable");
+
+    if (!data || data.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="5" style="text-align:center">
+                    No students scanned today.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+    table.innerHTML = data.map(student => `
+
+        <tr>
+
+            <td>${student.rollNo}</td>
+
+            <td>${student.studentName}</td>
+
+            <td>${student.section}</td>
+
+            <td>${student.scanTime}</td>
+
+            <td>
+                <span style="
+                    background:#dcfce7;
+                    color:#166534;
+                    padding:5px 10px;
+                    border-radius:20px;
+                    font-weight:bold;
+                ">
+                    ${student.status}
+                </span>
+            </td>
+
+        </tr>
+
+    `).join("");
+
+}
+
+
+/****************************************************
+ * LOGOUT
+ ****************************************************/
+
+async function logout() {
+
+    await stopCamera();
+
+    if (teacherToken) {
+
+        callAPI("logout", {
+
+            token: teacherToken
+
+        });
+
+    }
+
+    teacherToken = "";
+
+    document.getElementById("dashboardSection")
+        .classList.add("hidden");
+
+    document.getElementById("loginSection")
+        .classList.remove("hidden");
+
+    document.getElementById("teacherPIN").value = "";
+
+}
+
+
+/****************************************************
+ * ENTER KEY LOGIN
+ ****************************************************/
+
+document.getElementById("teacherPIN")
+    .addEventListener("keypress", function(event) {
+
+        if (event.key === "Enter") {
+
+            login();
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
