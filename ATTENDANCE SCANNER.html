@@ -804,6 +804,26 @@ async function onBarcodeDetected(decodedText, decodedResult) {
 
 
 /****************************************************
+ * LOUD STUDENT VOICE ANNOUNCEMENT
+ ****************************************************/
+function speakStudentName(name, message = "Present") {
+    if (!("speechSynthesis" in window)) {
+        console.log("Speech synthesis is not supported by this browser.");
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const speech = new SpeechSynthesisUtterance(`${name}, ${message}`);
+    speech.lang = "en-IN";
+    speech.rate = 0.85;
+    speech.pitch = 1.0;
+    speech.volume = 1.0;
+
+    window.speechSynthesis.speak(speech);
+}
+
+/****************************************************
  * MARK ATTENDANCE
  ****************************************************/
 
@@ -858,6 +878,8 @@ async function markAttendance(barcode) {
 
         if (response.duplicate) {
 
+            speakStudentName(student.studentName || "Student", "Already Present");
+
             showResult(
 
                 "Already Present",
@@ -883,6 +905,8 @@ async function markAttendance(barcode) {
         }
 
         else {
+
+            speakStudentName(student.studentName || "Student", "Present");
 
             showResult(
 
