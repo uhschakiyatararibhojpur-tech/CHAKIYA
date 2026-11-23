@@ -4307,7 +4307,7 @@ body {
     }
 
 }
-/* ADMIT CARD DROPDOWN - DESKTOP & MOBILE */
+/* ADMIT CARD DROPDOWN */
 #admitCardDropdown {
     position: relative;
 }
@@ -4318,7 +4318,7 @@ body {
     z-index: 9999;
 }
 
-#admitCardDropdown.active #admitCardMenu {
+#admitCardDropdown.open #admitCardMenu {
     display: block;
 }
 
@@ -4336,18 +4336,13 @@ body {
     }
 
     #admitCardMenu {
-        position: static;
+        position: static !important;
         width: 100%;
         box-shadow: none;
+        display: none;
     }
 
-    #admitCardDropdown.active #admitCardMenu {
-        display: block;
-    }
-
-    #admitCardMenu .dropdown-option {
-        display: block;
-        width: 100%;
-        padding: 12px 15px;
+    #admitCardDropdown.open #admitCardMenu {
+        display: block !important;
     }
 }
