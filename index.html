@@ -1124,5 +1124,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
+    <!-- YOUR EXISTING WEBSITE CODE -->
+
+
+<!-- ADMIT CARD DROPDOWN JAVASCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const admitCardDropdown = document.getElementById("admitCardDropdown");
+    const admitCardToggle = document.getElementById("admitCardToggle");
+    const admitCardMenu = document.getElementById("admitCardMenu");
+
+    if (admitCardDropdown && admitCardToggle && admitCardMenu) {
+
+        admitCardToggle.addEventListener("click", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            admitCardDropdown.classList.toggle("active");
+
+            const isOpen = admitCardDropdown.classList.contains("active");
+
+            admitCardToggle.setAttribute("aria-expanded", isOpen);
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!admitCardDropdown.contains(event.target)) {
+                admitCardDropdown.classList.remove("active");
+                admitCardToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+
+    }
+
+});
+</script>
+
+</body>
+</html>
 </body>
 </html>
